@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
   const{allBuilds} = useContext(Context)
   const{checkLoginStatus} = useContext(Context)
   const history = useHistory()
-
+  const{loggedInStatus} = useContext(Context)
 
 
 
@@ -49,7 +49,8 @@ import { useHistory } from 'react-router-dom';
  
 
     return(
-    
+    <>
+    {(loggedInStatus === "LOGGED_IN") ?
       <div className="pcbuilds_container">
 
         <div className="row">
@@ -102,7 +103,9 @@ import { useHistory } from 'react-router-dom';
 
 
       </div>
-      
+      : 
+      history.push("/")}
+      </>
     )
   }
 

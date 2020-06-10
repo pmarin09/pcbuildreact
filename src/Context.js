@@ -114,6 +114,7 @@ function ContextProvider({children}){
       .then(response => {
         handleLogout();
       })
+      
       .catch(error => {
         console.log("logout error", error);
       });
