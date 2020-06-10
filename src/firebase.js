@@ -3,9 +3,7 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCBuGC11DWvhXQi5wLbgEGCyZeYKIRcWEw",
-    authDomain: "pcbuildapp-4d1ae.firebaseapp.com",
-    databaseURL: "https://pcbuildapp-4d1ae.firebaseio.com",
+ 
     projectId: "pcbuildapp-4d1ae",
     storageBucket: "pcbuildapp-4d1ae.appspot.com",
     messagingSenderId: "556054400743",
