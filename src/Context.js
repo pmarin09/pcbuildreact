@@ -50,6 +50,14 @@ function ContextProvider({children}){
         console.log(buildposts)
     },[])
 
+    const [parts, setParts]=useState([])
+    const partsUrl = "http://localhost:3000/parts.json"
+    useEffect(()=>{
+        fetch(partsUrl)
+        .then (res => res.json())
+        .then (data => setParts(data))
+        console.log(parts)
+    },[])
     
 
     function addToFavorites(newItem){
@@ -135,6 +143,7 @@ function ContextProvider({children}){
                 discussions,
                 posts,
                 buildposts,
+                parts,
                 addToFavorites,
                 removeFromFavorites,
                 emptyFavorites,

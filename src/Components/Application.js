@@ -2,13 +2,8 @@ import React, { useState, useEffect } from "react";
 import {Switch, Route} from "react-router-dom";
 import Favorites from "./Build/Favorites"
 import PcBuilds from "./Build/PcBuilds"
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
-import PasswordReset from "./PasswordReset";
 import ProfilePage from "./ProfilePage";
 import Main from "./Main";
-import Home from "./Home";
-import Dashboard from "./Dashboard";
 import BuildDetail from "./Build/BuildDetail"
 import Discussions from "./Discussion/Discussions"
 import DiscussionDetail from "./Discussion/DiscussionDetail"
@@ -31,7 +26,6 @@ function Application() {
       <Route path= "/favorites"> <Favorites/></Route>
       <Route path = "/signIn"> <Login/> </Route>
       <Route path = "/register"> <Registration/> </Route>
-      <Route path = "/passwordReset"> <PasswordReset/> </Route>
       <Route path = "/profile"> <ProfilePage/> </Route>
       <Route path = "/builds/:buildId"> <BuildDetail/> </Route>
       <Route exact path = "/forum/"> <Forum/> </Route>

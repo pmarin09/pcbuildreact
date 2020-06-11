@@ -21,8 +21,8 @@ function Image({img}) {
 
     const thisBuildPosts = buildposts.filter(build => build.pcbuild_id === img.id)
     const buildpostcount = thisBuildPosts.length
-    
-  
+    const parts = img.parts.map(part => part.description)
+  console.log(parts)
     return (
             <div className="col-md-4" ref = {ref}>
               <div className="card mb-4 shadow-sm">
@@ -30,8 +30,9 @@ function Image({img}) {
               
                 <div className="card-body">
                 <p className="card-text">
-                <em><small><Link to={`/builds/${img.id}`}><i class="ri-message-2-line"></i></Link>{buildpostcount}</small></em>
+                <em><small><Link to={`/builds/${img.id}`}><i className="ri-message-2-line"></i></Link>{buildpostcount}</small></em>
                 <div>{favoriteIcon()}</div>
+                <div>{parts}</div>
                 </p>
                   <p className="card-text">
                   <em><small>Uploaded <TimeAgo datetime={img.created_at}/> by {img.username}</small></em>

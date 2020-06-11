@@ -5,10 +5,17 @@ import { useHistory } from 'react-router-dom';
   const[pcbuilds, setPcbuilds]=useState([])
   const{user} = useContext(Context)
   const{allBuilds} = useContext(Context)
+  const{parts} = useContext(Context)
   const{checkLoginStatus} = useContext(Context)
-  const history = useHistory()
   const{loggedInStatus} = useContext(Context)
+  const history = useHistory()
+  
+  const RamParts = parts.filter(part => part.id === 1)
 
+  const RamDescription = RamParts.map(part => (
+    <option value = {part.id}>{part.description}</option>))
+   
+  console.log(RamDescription)
 
 
   function createBuild(e) {
@@ -27,45 +34,28 @@ import { useHistory } from 'react-router-dom';
     checkLoginStatus()
   },[])
 
-
-  function handleFileInputChange(event) {
-    let body = new FormData()
-    body.append('pcbuilds[attachment]', event.target.files[0] )
-    fetch(
-      `http://localhost:3000/pcbuilds.json`,
-      {
-        method: 'post',
-        body: body
-      }
-    )
-    .then((response) => response.json())
-    .then((pcbuild) => {
-      pcbuilds.unshift(pcbuild)
-      setPcbuilds(pcbuilds)
- 
-    })
-  }
-
- 
-
     return(
     <>
     {(loggedInStatus === "LOGGED_IN") ?
-      <div className="pcbuilds_container">
-
-        <div className="row">
-          <div className="col">
-            <form onSubmit={createBuild} id="newPcbuild">
-              <div className="form-group" >
-                <label htmlFor="file_upload">Upload Your PC Build</label>
-                <input type="file" 
+    <section className = "section">
+    <div className = "article-container">
+      <div className="request">
+      <h2 className="title is-5 has-text-grey-light">Create a New Build</h2>
+      <section className="forms text-center border border-light p-5">
+        <form className="form" onSubmit={createBuild} id="newPcbuild">
+          <div className="form-row mb-4">
+            
+            <div className="col">
+              Image:
+              <input type="file" 
                 className="dropzone"
                 id="file_upload" 
                 name="attachment"
                 required
                 multiple
                  />
-                <input
+            
+            <input
                   type="text"
                   name="user_id"
                   value={user.id}
@@ -81,28 +71,29 @@ import { useHistory } from 'react-router-dom';
                   required
                   style={{display: "none"}}
                 />
-                <input
-              type="submit"
-              value="Create Build"
-              className="button is-link"
-              />
-              </div>
-            </form>
+            
+            <div> RAM Module:
+              <select
+                type="select"
+                name="part_id"
+                className="form-control"
+              >
+                {RamDescription}
+              </select>
+      
+            </div>
           </div>
-        </div>
-
-        {allBuilds.map((pcbuildRow, rowIndex) =>
-          <div key={`pcbuild_row_${rowIndex}`} className="row">
-            {allBuilds.map((pcbuild, columnIndex) =>
-              <div key={`pcbuild_row_${rowIndex}_col_${columnIndex}`} className="col-sm-9">
-                <img data-id={pcbuild.id} src={`http://localhost:3000/${pcbuild.attachment_url}`} />
-              </div>
-            )}
           </div>
-        )}
-
-
-      </div>
+          <input
+            type="submit"
+            value="Create Build"
+            className="button is-link"
+          />
+        </form>
+      </section>
+    </div>
+    </div>
+  </section>
       : 
       history.push("/")}
       </>
