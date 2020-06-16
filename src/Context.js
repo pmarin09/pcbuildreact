@@ -58,6 +58,15 @@ function ContextProvider({children}){
         .then (data => setParts(data))
         console.log(parts)
     },[])
+
+    const [likes, setLikes]=useState([])
+    const likesUrl = "http://localhost:3000/likes.json"
+    useEffect(()=>{
+        fetch(likesUrl)
+        .then (res => res.json())
+        .then (data => setLikes(data))
+        console.log(likes)
+    },[])
     
 
     function addToFavorites(newItem){
@@ -144,6 +153,7 @@ function ContextProvider({children}){
                 posts,
                 buildposts,
                 parts,
+                likes,
                 addToFavorites,
                 removeFromFavorites,
                 emptyFavorites,

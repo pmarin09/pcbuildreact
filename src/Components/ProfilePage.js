@@ -1,15 +1,48 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import { Context } from "../Context";
 import 'bootstrap/dist/css/bootstrap.css';
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import { useHistory } from 'react-router-dom';
+import axios from "axios";
 function ProfilePage (){
 
 const {user}=useContext(Context)
 const{loggedInStatus} = useContext(Context)
 const history = useHistory()
+const{handleSuccessfulAuth} = useContext(Context)
+const [username, setUsername] = useState("")
+const [email, setEmail] = useState("")
+const [password,setPassword] = useState("")
+const [password_confirmation, setPasswordConfirmation] = useState("")
 
+
+function handleSubmit(event) {
+
+    axios
+      .patch(
+        `http://localhost:3000/users/${user.id}`,
+        {
+          user: {
+            username: username,
+            email: email,
+            password: password,
+            password_confirmation: password_confirmation
+          }
+        },
+        { withCredentials: true }
+      )
+      .then(response => {
+        if (response.data.status === "updated") {
+          handleSuccessfulAuth(response.data);
+        }
+        history.push("/")
+      })
+      .catch(error => {
+        console.log("registration error", error);
+      });
+    event.preventDefault();
+  }
   
 
   return (
@@ -63,7 +96,7 @@ const history = useHistory()
         <div className="tab-content">
           <div className="tab-pane active" id="home">
               <hr></hr>
-                <form className="form" action="##" method="post" id="registrationForm">
+                <form className="form" action="##" onSubmit= {handleSubmit} id="updateForm">
                     <div className="form-group">
                         
                         <div className="col-xs-6">
@@ -97,7 +130,7 @@ const history = useHistory()
                         
                         <div className="col-xs-6">
                           <label for="password2"><h4>Verify</h4></label>
-                            <input type="password" className="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2."/>
+                            <input type="password" className="form-control" name="password_confirmation" id="password_confirmation" placeholder="password2" title="enter your password2."/>
                         </div>
                     </div>
                     <div className="form-group">
@@ -110,152 +143,7 @@ const history = useHistory()
               </form>
             
             <hr></hr>
-            
            </div>
-           <div className="tab-pane" id="messages">
-             
-             <h2></h2>
-             
-             <hr></hr>
-                <form className="form" action="##" method="post" id="registrationForm">
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                            <label for="first_name"><h4>First name</h4></label>
-                            <input type="text" className="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any."/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                          <label for="last_name"><h4>Last name</h4></label>
-                            <input type="text" className="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any."/>
-                        </div>
-                    </div>
-        
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                            <label for="phone"><h4>Phone</h4></label>
-                            <input type="text" className="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any."/>
-                        </div>
-                    </div>
-        
-                    <div className="form-group">
-                        <div className="col-xs-6">
-                           <label for="mobile"><h4>Mobile</h4></label>
-                            <input type="text" className="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any."/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                            <label for="email"><h4>Email</h4></label>
-                            <input type="email" className="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email."/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                            <label for="email"><h4>Location</h4></label>
-                            <input type="email" className="form-control" id="location" placeholder="somewhere" title="enter a location"/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                            <label for="password"><h4>Password</h4></label>
-                            <input type="password" className="form-control" name="password" id="password" placeholder="password" title="enter your password."/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                          <label for="password2"><h4>Verify</h4></label>
-                            <input type="password" className="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2."/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                         <div className="col-xs-12">
-                              <br></br>
-                              <button className="btn btn-lg btn-success" type="submit"><i className="glyphicon glyphicon-ok-sign"></i> Save</button>
-                               <button className="btn btn-lg" type="reset"><i className="glyphicon glyphicon-repeat"></i> Reset</button>
-                          </div>
-                    </div>
-              </form>
-             
-           </div>
-           <div className="tab-pane" id="settings">
-              
-               
-                <hr></hr>
-                <form className="form" action="##" method="post" id="registrationForm">
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                            <label for="first_name"><h4>First name</h4></label>
-                            <input type="text" className="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any."/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                          <label for="last_name"><h4>Last name</h4></label>
-                            <input type="text" className="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any."/>
-                        </div>
-                    </div>
-        
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                            <label for="phone"><h4>Phone</h4></label>
-                            <input type="text" className="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any."/>
-                        </div>
-                    </div>
-        
-                    <div className="form-group">
-                        <div className="col-xs-6">
-                           <label for="mobile"><h4>Mobile</h4></label>
-                            <input type="text" className="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any."/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                            <label for="email"><h4>Email</h4></label>
-                            <input type="email" className="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email."/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                            <label for="email"><h4>Location</h4></label>
-                            <input type="email" className="form-control" id="location" placeholder="somewhere" title="enter a location"/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                            <label for="password"><h4>Password</h4></label>
-                            <input type="password" className="form-control" name="password" id="password" placeholder="password" title="enter your password."/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        
-                        <div className="col-xs-6">
-                          <label for="password2"><h4>Verify</h4></label>
-                            <input type="password" className="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2."/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                         <div className="col-xs-12">
-                              <br></br>
-                              <button className="btn btn-lg btn-success pull-right" type="submit"><i className="glyphicon glyphicon-ok-sign"></i> Save</button>
-                               <button className="btn btn-lg" type="reset"><i className="glyphicon glyphicon-repeat"></i> Reset</button>
-                          </div>
-                    </div>
-              </form>
-            </div>
             </div>
         </div>
       </div>

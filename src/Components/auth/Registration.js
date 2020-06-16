@@ -9,11 +9,13 @@ function Registration (){
   const [password,setPassword] = useState("")
   const [password_confirmation, setPasswordConfirmation] = useState("")
   const history = useHistory()
+  
+  
   function handleSubmit(event) {
 
     axios
       .post(
-        "http://localhost:3000/registrations",
+        "http://localhost:3000/registrations/",
         {
           user: {
             username: username,

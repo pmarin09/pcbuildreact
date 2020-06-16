@@ -91,7 +91,8 @@ import { useHistory } from 'react-router-dom';
               <select
                 type="select"
                 name="part_id"
-                className="dropdown">
+                className="dropdown"
+                id = "mobo">
               {Mobo}
               </select>
         </td>
@@ -100,6 +101,7 @@ import { useHistory } from 'react-router-dom';
                   type="text"
                   name="price"
                   className="price"
+                  id="moboprice"
                   required
                 />
         </td>
