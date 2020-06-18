@@ -1,26 +1,18 @@
 import React, {useContext} from "react"
 import {Context} from "../../Context"
-import { useHistory, useParams, Link } from 'react-router-dom';
+import { useHistory, useParams} from 'react-router-dom';
 
 function EditDiscussion(){
 
-  const {forums} = useContext(Context)
+  const {forums, discussions} = useContext(Context)
   const history = useHistory()
-  const{discussions} = useContext(Context)
   const {discussionId} = useParams()
-  const thisDiscussion = discussions.filter(discussion => 
-    discussion.id.toString() === discussionId)
-  const thisDiscussionTitle = thisDiscussion.map(discussion => 
-    discussion.title
-    )
-  const thisDiscussionDescription = thisDiscussion.map(discussion => 
-    discussion.description
-    )
-    const forumData = forums.map(forum => (
-      <option value = {forum.id}>{forum.title}</option>
-   ))
+  const thisDiscussion = discussions.filter(discussion => discussion.id.toString() === discussionId)
+  const thisDiscussionTitle = thisDiscussion.map(discussion => discussion.title)
+  const thisDiscussionDescription = thisDiscussion.map(discussion => discussion.description)
+  const forumData = forums.map(forum => (<option value = {forum.id}>{forum.title}</option>))
 
-    function editDiscussion(e) {
+  function editDiscussion(e) {
         const form = new FormData(document.getElementById("editDiscussion"));
         
         fetch("http://localhost:3000/discussions/" + discussionId + ".json", {
@@ -31,8 +23,8 @@ function EditDiscussion(){
          
          history.push(`/discussions`)
 
-      }
-     function deleteDiscussion(e) {
+  }
+  function deleteDiscussion(e) {
       const form = new FormData(document.getElementById("deleteDiscussion"));
       
       fetch("http://localhost:3000/discussions/" + discussionId + ".json", {
@@ -43,7 +35,7 @@ function EditDiscussion(){
        
        history.push(`/discussions`)
        window.location.reload(false);
-    }
+  }
     
     return(
 <section className = "section">

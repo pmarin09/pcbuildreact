@@ -6,15 +6,10 @@ import TimeAgo from 'timeago-react';
 import { Button } from 'react-bulma-components';
 
 function DiscussionDetail() {
-    const{discussions} = useContext(Context)
-    const{posts} = useContext(Context)
-    const{user} = useContext(Context)
-    const{loggedInStatus} = useContext(Context)
+    const{discussions, posts, user, loggedInStatus} = useContext(Context)
     const {discussionId} = useParams()
     const thisDiscussion = discussions.find(discussion => discussion.id.toString() === discussionId)
     const thisPost = posts.find(post => post.discussion_id.toString() === discussionId)
-    
-    
     const showPosts =  posts.filter(post => post.discussion_id.toString() === discussionId).map(filteredPost => (
     
    <div className="box">

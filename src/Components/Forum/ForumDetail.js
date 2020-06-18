@@ -4,8 +4,7 @@ import {Context} from "../../Context"
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 function ForumDetail() {
-    const {forums} = useContext(Context)
-    const{discussions} = useContext(Context)
+    const {forums,discussions} = useContext(Context)
     const {forumId} = useParams()
     const thisForum = forums.find(forum => forum.id.toString() === forumId)
     const showDiscussions =  discussions.filter(discussion => discussion.forum_id.toString() === forumId).map(filteredDiscussion => (
@@ -44,8 +43,6 @@ function ForumDetail() {
       </article>
       </div>
    ))
-
-
     return (
 <section className = "section">
     <div className = "container">

@@ -3,11 +3,7 @@ import {Context} from "../../Context"
 import { useHistory } from 'react-router-dom';
   function PcBuilds(){
   const[pcbuilds, setPcbuilds]=useState([])
-  const{user} = useContext(Context)
-  const{allBuilds} = useContext(Context)
-  const{parts} = useContext(Context)
-  const{checkLoginStatus} = useContext(Context)
-  const{loggedInStatus} = useContext(Context)
+  const{user, allBuilds, parts, checkLoginStatus, loggedInStatus} = useContext(Context)
   const history = useHistory()
   
   const Mobo = parts.map(part => part.part_type === "Mobo" ? (<option value = {part.id}>{part.description}</option>): "")
@@ -53,7 +49,7 @@ import { useHistory } from 'react-router-dom';
               <input type="file" 
                 className="dropzone"
                 id="file_upload" 
-                name="attachment"
+                name="attachment[]"
                 required
                 multiple
                  />
@@ -90,7 +86,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[Mobo][id]"
                 className="dropdown"
                 id = "mobo">
               {Mobo}
@@ -99,7 +95,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[Mobo][price]"
                   className="price"
                   id="moboprice"
                   required
@@ -112,7 +108,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[CPU][id]"
                 className="dropdown">
               {CPU}
               </select>
@@ -120,7 +116,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[CPU][price]"
                   className="price"
                   required
                 />
@@ -132,7 +128,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[CPUCooler][id]"
                 className="dropdown">
               {CPUCooler}
               </select>
@@ -140,7 +136,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[CPUCooler][price]"
                   className="price"
                   required
                 />
@@ -152,7 +148,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[GPU][id]"
                 className="dropdown">
               {GPU}
               </select>
@@ -160,7 +156,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[GPU][price]"
                   className="price"
                   required
                 />
@@ -172,7 +168,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[RAM][id]"
                 className="dropdown">
               {RAM}
               </select>
@@ -180,7 +176,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[RAM][price]"
                   className="price"
                   required
                 />
@@ -192,7 +188,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[HD][id]"
                 className="dropdown">
               {HD}
               </select>
@@ -200,7 +196,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[HD][price]"
                   className="price"
                   required
                 />
@@ -212,7 +208,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[HD][id]"
                 className="dropdown">
               {HD}
               </select>
@@ -220,7 +216,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[HD][price]"
                   className="price"
                   required
                 />
@@ -232,7 +228,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[Case][id]"
                 className="dropdown">
               {Case}
               </select>
@@ -240,7 +236,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[Case][price]"
                   className="price"
                   required
                 />
@@ -252,7 +248,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[PWS][id]"
                 className="dropdown">
               {PWS}
               </select>
@@ -260,7 +256,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[PWS][price]"
                   className="price"
                   required
                 />
@@ -272,7 +268,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[Monitor][id]"
                 className="dropdown">
               {Monitor}
               </select>
@@ -280,7 +276,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[Monitor][price]"
                   className="price"
                   required
                 />
@@ -292,7 +288,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[Keyboard][id]"
                 className="dropdown">
               {Keyboard}
               </select>
@@ -300,7 +296,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[Keyboard][price]"
                   className="price"
                   required
                 />
@@ -312,7 +308,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[Mouse][id]"
                 className="dropdown">
               {Mouse}
               </select>
@@ -320,7 +316,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[Mouse][price]"
                   className="price"
                   required
                 />
@@ -332,7 +328,7 @@ import { useHistory } from 'react-router-dom';
         <td>
               <select
                 type="select"
-                name="part_id"
+                name="part_id[Headset][id]"
                 className="dropdown">
               {Headset}
               </select>
@@ -340,7 +336,7 @@ import { useHistory } from 'react-router-dom';
         <td>
                 <input
                   type="text"
-                  name="price"
+                  name="part_id[Headset][price]"
                   className="price"
                   required
                 />

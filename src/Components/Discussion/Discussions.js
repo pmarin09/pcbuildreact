@@ -7,10 +7,7 @@ import TimeAgo from 'timeago-react';
 
 
 function Discussions(){
-    const {discussions} = useContext(Context)
-    const {forums} = useContext(Context)
-    const{user} = useContext(Context)
-    const{loggedInStatus} = useContext(Context)
+    const {forums, discussions, user, loggedInStatus} = useContext(Context)
     const forumsData = forums.map(forum => (
         <h3 className = "forumSideBar" key={forum.id}>
             <p ><Link to={`/forum/${forum.id}`}>{forum.title}</Link></p>
@@ -45,8 +42,6 @@ function Discussions(){
         e.preventDefault();
         alert("A new Forum has been created");
       }
-
-      
 
     return(
  <section className = "section">

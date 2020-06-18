@@ -2,12 +2,11 @@ import React, {useContext,useState,useEffect} from "react"
 import {Context} from "../../Context"
 import { useHistory } from 'react-router-dom';
 function NewDiscussion(){
-  const{user} = useContext(Context)
-  const{checkLoginStatus} = useContext(Context)
-  const {forums} = useContext(Context)
+  const{forums, user, checkLoginStatus} = useContext(Context)
   const history = useHistory()
-
-    function createDiscussion(e) {
+  const forumData = forums.map(forum => (<option value = {forum.id}>{forum.title}</option>))
+  
+  function createDiscussion(e) {
         const form = new FormData(document.getElementById("newDiscussion"));
         
         fetch("http://localhost:3000/discussions.json", {
@@ -17,15 +16,10 @@ function NewDiscussion(){
         e.preventDefault();
         history.push(`/discussions`)
         window.location.reload(false);
-      }
-      const forumData = forums.map(forum => (
-        <option value = {forum.id}>{forum.title}</option>
-     ))
- 
+  }
    useEffect(()=>{
     checkLoginStatus()
   },[])
-
 
     return(
 <section className = "section">

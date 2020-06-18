@@ -6,7 +6,6 @@ import {Link} from "react-router-dom"
 function FavoriteBuild({item}) {
     const [hovered, ref] = useHover()
     const {removeFromFavorites} = useContext(Context)
-
     const iconClassName = hovered ? "ri-delete-bin-fill" : "ri-delete-bin-line"
 
     return (

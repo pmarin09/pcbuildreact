@@ -4,17 +4,27 @@ import {Context} from "../../Context"
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import PcBuilds from "./PcBuilds";
-
+import Carousel from 'react-bootstrap/Carousel'
 
 function BuildDetail(img) {
-    const{allBuilds} = useContext(Context)
+    const{allBuilds, user, loggedInStatus, buildposts} = useContext(Context)
     const {buildId} = useParams()
-    const{user} = useContext(Context)
-    const{loggedInStatus} = useContext(Context)
-    const{buildposts} = useContext(Context)
     const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
-    const thisBuildImage= thisBuild.map(image => image.attachment_url)
-
+    const thisBuildImage = thisBuild.map(a => {
+      return a.attachment_url.map(b =>
+            <Carousel.Item>
+            <img src = {`http://localhost:3000/${b}`} width=  "400px" height= "400px"></img>
+            </Carousel.Item>
+        )})
+    const thisBuildParts = thisBuild.map(a => {
+        return  a.parts.map(b =>
+            <tr>
+              <td>{b.part_type}</td>
+              <td>{b.description}</td>
+              <td>${a.pcbuild_parts.map(c => c.part_id === b.id? c.price : "")}</td>
+            </tr>
+            )
+          })
     const showBuildposts =  buildposts.filter(buildpost => buildpost.pcbuild_id.toString() === buildId).map(filteredPost => (
     
         <div className="box">
@@ -58,8 +68,12 @@ function BuildDetail(img) {
            </div>
            
         ))
-   
-    function createBuildPost(e) {
+  const pcbuildParts = thisBuild.map(a => {return   a.pcbuild_parts.map(b=>b.price)})
+  const pcbuildPrices = Object.values(pcbuildParts).reduce((acc,price) => {return  price},0)
+  const pcbuildTotalCost = Object.values(pcbuildPrices).reduce((acc, price)=>{return acc + price},0)
+  
+
+  function createBuildPost(e) {
      
         const form = new FormData(document.getElementById("newBuildPost"));
         
@@ -70,54 +84,39 @@ function BuildDetail(img) {
         e.preventDefault();
         window.location.reload(false);
       }
-
-    
+     
     return (
         <>
         <div>
-            <div className= "build-img"><img src={`http://localhost:3000/${thisBuildImage}`}width="500px" /></div>
-          
+            <div className= "build-img">
+                <Carousel>
+                    {thisBuildImage}
+                </Carousel>
+              </div>
+          <hr></hr>
            <div className="table-wrapper">
            
             <div className="table-title">
                 <div className="row">
-                    {/* <div className="col-sm-8"><h2>{thisBuild.name}</h2></div> */}
+                    <div className="col-sm-8"><h2>Total Build Price: ${pcbuildTotalCost}</h2></div>
                 </div>
             </div>
+
+       
             <table className="table table-bordered">
                 <thead>
                     <tr>
                         <th>Specs</th>
                         <th>Description</th>
+                        <th>Price</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Processor</td>
-                        {/* <td>{thisBuild.processor}</td> */}
-                    </tr>
-                    <tr>
-                        <td>Memory</td>
-                        {/* <td>{thisBuild.memory}</td> */}
-                    </tr>
-                    <tr>
-                        <td>Graphics Card</td>
-                        {/* <td>{thisBuild.graphics}</td> */}
-                    </tr>  
-                    <tr>
-                        <td>Video Memory</td>
-                        {/* <td>{thisBuild.videoMemory}</td> */}
-                    </tr>
-                    <tr>
-                        <td>Motherboard Chipset</td>
-                        {/* <td>{thisBuild.motherboard}</td> */}
-                    </tr>
-                    <tr>
-                        <td>Price</td>
-                        {/* <td>${thisBuild.price}</td> */}
-                    </tr>    
+                  {thisBuildParts}
                 </tbody>
             </table>
+            <h2 className="title is-5 has-text-grey-light">Build Description</h2>
+            <div>{thisBuild.map(build => build.comments)}</div>
             {showBuildposts}
         </div>
         </div>
