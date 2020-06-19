@@ -154,6 +154,7 @@ function ContextProvider({children}){
                 buildposts,
                 parts,
                 likes,
+                setLikes,
                 addToFavorites,
                 removeFromFavorites,
                 emptyFavorites,

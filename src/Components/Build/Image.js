@@ -1,4 +1,4 @@
-import React, {useContext} from "react"
+import React, {useContext,useEffect} from "react"
 import {Context} from "../../Context"
 import useHover from "../../hooks/useHover"
 import PropTypes from "prop-types"
@@ -8,7 +8,7 @@ import TimeAgo from 'timeago-react';
 
 function Image({img}) {
     const [hovered, ref] = useHover()
-    const {addToFavorites,removeFromFavorites,favoriteBuilds,buildposts, likes, user, loggedInStatus} = useContext(Context)
+    const {addToFavorites,removeFromFavorites,favoriteBuilds,buildposts, likes, setLikes, user, loggedInStatus} = useContext(Context)
     const history = useHistory()
     const thisBuildPosts = buildposts.filter(build => build.pcbuild_id === img.id)
     const buildpostcount = thisBuildPosts.length
@@ -16,31 +16,35 @@ function Image({img}) {
     const buildlikecount = thisBuildLikes.length
     const parts = img.parts.map(part => part.part_type === "Mobo"? part.description: "")
     
-  console.log(user.id)
+
   function deleteLike() {
+
+    
       likes.filter(like => like.user_id === user.id && like.pcbuild_id === img.id).map(filteredLike => (
-                   (e) => { 
-                    fetch("http://localhost:3000/likes/" + filteredLike.id + ".json", {
+                   
+                    fetch(`http://localhost:3000/pcbuilds/${img.id}/likes/${filteredLike.id}.json`, {
                       method: "DELETE",
                     })
-                   e.preventDefault();
-                    window.location.reload();
-                  }
+                    ,fetch(`http://localhost:3000/pcbuilds/${img.id}/likes.json`)
+                    .then (res => res.json())
+                    .then (data => setLikes(data))
+                  
                   ))
   }
 function createLike() {
     
-  const input = {user_id: user.id}
+  const form = new FormData(document.getElementById("newLike"));
   
     fetch(`http://localhost:3000/pcbuilds/${img.id}/likes.json`, {
       method: "POST",
-      body: JSON.stringify(input)
-    });
-    //  e.preventDefault();
-    // window.location.reload(false);
-  
+      body: form,
+    })
+    fetch(`http://localhost:3000/pcbuilds/${img.id}/likes.json`)
+    .then (res => res.json())
+    .then (data => setLikes(data))
+    console.log(likes)
+   
  }
-  
 function favoriteIcon(){
     const alreadyInFavorites = favoriteBuilds.some(item => item.id === img.id)
     if(alreadyInFavorites){
@@ -50,15 +54,15 @@ function favoriteIcon(){
 
     }
 }
-
 function LikeIcon(){
     const alreadyInLikes = likes.some(like => like.user_id === user.id && like.pcbuild_id === img.id)
+    
     if(alreadyInLikes){
         return <i className="ri-thumb-up-fill" onClick= {() => deleteLike()}></i>
-    }else if(hovered){
-        return <i className="ri-thumb-up-line" onClick={createLike}></i>
+    }else {
+        return <i className="ri-thumb-up-line" onClick={()=> createLike()}></i>
     }
-    console.log(alreadyInLikes)
+    
 }
 
     return (
@@ -83,6 +87,14 @@ function LikeIcon(){
                   </div>
             </div>
           </div>
+          <form className="form" onSubmit={createLike} id="newLike" style={{display: "none"}}>
+                <input
+                  value= {user.id}
+                  name="user_id"
+                  style={{display: "none"}}
+                  required
+                />
+          </form>
       </div>
     )
 }
