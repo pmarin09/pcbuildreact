@@ -1,4 +1,4 @@
-import React, {useContext,useEffect} from "react"
+import React, {useContext,useEffect,useState} from "react"
 import {Context} from "../../Context"
 import useHover from "../../hooks/useHover"
 import PropTypes from "prop-types"
@@ -15,20 +15,14 @@ function Image({img}) {
     const thisBuildLikes = likes.filter(like => like.pcbuild_id === img.id)
     const buildlikecount = thisBuildLikes.length
     const parts = img.parts.map(part => part.part_type === "Mobo"? part.description: "")
-    
+    const [active,setActive] = useState(false)
 
   function deleteLike() {
-
-    
       likes.filter(like => like.user_id === user.id && like.pcbuild_id === img.id).map(filteredLike => (
                    
                     fetch(`http://localhost:3000/pcbuilds/${img.id}/likes/${filteredLike.id}.json`, {
                       method: "DELETE",
                     })
-                    ,fetch(`http://localhost:3000/pcbuilds/${img.id}/likes.json`)
-                    .then (res => res.json())
-                    .then (data => setLikes(data))
-                  
                   ))
   }
 function createLike() {
@@ -39,12 +33,16 @@ function createLike() {
       method: "POST",
       body: form,
     })
-    fetch(`http://localhost:3000/pcbuilds/${img.id}/likes.json`)
-    .then (res => res.json())
-    .then (data => setLikes(data))
-    console.log(likes)
-   
+ 
+    
  }
+ function updateLikes(){
+  setTimeout(() => {fetch(`http://localhost:3000/likes.json`)
+  .then (res => res.json())
+  .then (data => setLikes(data))
+  },50)
+ }
+
 function favoriteIcon(){
     const alreadyInFavorites = favoriteBuilds.some(item => item.id === img.id)
     if(alreadyInFavorites){
@@ -58,9 +56,9 @@ function LikeIcon(){
     const alreadyInLikes = likes.some(like => like.user_id === user.id && like.pcbuild_id === img.id)
     
     if(alreadyInLikes){
-        return <i className="ri-thumb-up-fill" onClick= {() => deleteLike()}></i>
+        return <i className="ri-thumb-up-fill" onClick= {() => {deleteLike(); updateLikes();}}></i>
     }else {
-        return <i className="ri-thumb-up-line" onClick={()=> createLike()}></i>
+        return <i className="ri-thumb-up-line" onClick={()=> {createLike(); updateLikes();}}></i>
     }
     
 }
