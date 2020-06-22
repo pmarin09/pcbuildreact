@@ -2,8 +2,8 @@ import React, {useState,useContext, useEffect} from 'react'
 import {Context} from "../../Context"
 import { useHistory } from 'react-router-dom';
   function PcBuilds(){
-  const[pcbuilds, setPcbuilds]=useState([])
-  const{user, allBuilds, parts, checkLoginStatus, loggedInStatus} = useContext(Context)
+  
+  const{user, parts, checkLoginStatus, loggedInStatus} = useContext(Context)
   const history = useHistory()
   
   const Mobo = parts.map(part => part.part_type === "Mobo" ? (<option value = {part.id}>{part.description}</option>): "")
@@ -70,7 +70,7 @@ import { useHistory } from 'react-router-dom';
                   required
                   style={{display: "none"}}
                 />
-      <table class="table table-hover">
+      <table className="table table-hover">
     <thead>
       <tr>
         <th>Icon</th>

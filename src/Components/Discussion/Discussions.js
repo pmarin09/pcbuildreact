@@ -15,7 +15,7 @@ function Discussions(){
         ))
     const discussionsData = discussions.map(discussion => (
             <>
-            <h3 className="title is-5"><Gravatar email="g-email@example.com" /> <Link to={`/discussions/${discussion.id}`}>{discussion.title}</Link></h3>
+            <h3 className="title is-5">{discussion.user.attachment_url ? <img src = {`http://localhost:3000/${discussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={discussion.user.email}  className = "discussion-avatar"/>} <Link to={`/discussions/${discussion.id}`}>{discussion.title}</Link></h3>
                  <div className="content"> {discussion.description}
                      <p><em><small>Posted <TimeAgo datetime={discussion.created_at}/> by {discussion.username} on {
                          forums.map(forum => forum.id === discussion.forum_id ? <Link to={`/forum/${forum.id}`}>{forum.title}</Link> : "")

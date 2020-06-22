@@ -71,7 +71,7 @@ function LikeIcon(){
                 <p className="card-text">
                 <em><small><Link to={`/builds/${img.id}`}><i className="ri-message-2-line"></i></Link>{buildpostcount}</small></em>
                 <div>{favoriteIcon()}</div>
-                <em><small>{buildlikecount} Likes</small></em>
+                <em><small>{buildlikecount} {buildlikecount === 1 ? "Like" : "Likes"}</small></em>
               <div>{LikeIcon()}</div> 
                 <div>{parts}</div>
                 </p>

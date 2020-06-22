@@ -16,7 +16,7 @@ function DiscussionDetail() {
       <article className="media">
           <div className="media-left">
           <figure className="image is-48x48">
-          <Gravatar email="1000-email@example.com" />
+          {filteredPost.user.attachment_url ? <img src = {`http://localhost:3000/${filteredPost.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredPost.user.email}  className = "discussion-avatar"/>}
           </figure>
           </div>
           <div className="media-content" id= "post-content">

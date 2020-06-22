@@ -7,44 +7,54 @@ import { useHistory } from 'react-router-dom';
 import axios from "axios";
 function ProfilePage (){
 
-const {user}=useContext(Context)
-const{loggedInStatus} = useContext(Context)
+const {user, loggedInStatus,handleSuccessfulAuth,allBuilds}=useContext(Context)
 const history = useHistory()
-const{handleSuccessfulAuth} = useContext(Context)
 const [username, setUsername] = useState("")
 const [email, setEmail] = useState("")
 const [password,setPassword] = useState("")
 const [password_confirmation, setPasswordConfirmation] = useState("")
 
 
-function handleSubmit(event) {
+// function handleSubmit(event) {
 
-    axios
-      .patch(
-        `http://localhost:3000/users/${user.id}`,
-        {
-          user: {
-            username: username,
-            email: email,
-            password: password,
-            password_confirmation: password_confirmation
-          }
-        },
-        { withCredentials: true }
-      )
-      .then(response => {
-        if (response.data.status === "updated") {
-          handleSuccessfulAuth(response.data);
-        }
-        history.push("/")
-      })
-      .catch(error => {
-        console.log("registration error", error);
-      });
-    event.preventDefault();
+//     axios
+//       .patch(
+//         `http://localhost:3000/users/${user.id}`,
+//         {
+//           user: {
+//             username: username,
+//             email: email,
+//             password: password,
+//             password_confirmation: password_confirmation
+//           }
+//         },
+//         { withCredentials: true }
+//       )
+//       .then(response => {
+//         if (response.data.status === "updated") {
+//           handleSuccessfulAuth(response.data);
+//         }
+//         history.push("/")
+//       })
+//       .catch(error => {
+//         console.log("registration error", error);
+//       });
+//     event.preventDefault();
+//   }
+
+
+  function uploadAvatar(e) {
+    const form = new FormData(document.getElementById("newAvatar"));
+
+    fetch(`http://localhost:3000/users/${user.id}`, {
+      method: "PATCH",
+      body: form,
+    });
+    e.preventDefault();
+    // window.location.reload(false);
   }
   
-
+console.log (user)
   return (
 <>
 
@@ -57,18 +67,30 @@ function handleSubmit(event) {
 <div className="container bootstrap snippet">
   <div className="row">
     <div className="col-sm-10"><h1>{user.username}</h1></div>
-    <div className="col-sm-2"><Gravatar email="e-991email@example.com" size={100} className="img-avatar"/></div>
+    <div className="col-sm-2">{user.attachment_url ? <img src = {`http://localhost:3000/${user.attachment_url}`}  className="img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
   </div>
   <div className="row">
     <div className="col-sm-3">
 
     <div className="text-center">
-    <Gravatar email="e-991email@example.com" size={150} className="img-avatar"/>
+    {user.attachment_url ? <img src = {`http://localhost:3000/${user.attachment_url}`}  className="img-avatar"/> : <Gravatar email="1000-email@example.com"  className="img-avatar"/> }
       <hr></hr>
-      <small>Upload a different photo...</small>
-      <input type="file" className="text-center center-block file-upload"/>
+      <small>Upload your avatar...</small>
+      <form onSubmit={uploadAvatar} id="newAvatar">
+      <input 
+      type="file" 
+      id= "file_upload" 
+      name= "attachment" 
+      className="text-center center-block file-upload"/>
+      <hr></hr>
+      <input
+            type="submit"
+            value="Upload Avatar"
+            className="button is-link"
+          />
+      </form>
     </div><hr></hr>
-
+  
              
         <div className="panel panel-default">
           <div className="panel-heading">Member since: <TimeAgo datetime={user.created_at}/> <i className="fa fa-link fa-1x"></i></div>
@@ -78,10 +100,10 @@ function handleSubmit(event) {
         
         <ul className="list-group">
           <li className="list-group-item text-muted">Activity <i className="fa fa-dashboard fa-1x"></i></li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Builds</strong></span> 125</li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Likes</strong></span> 13</li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Discussions</strong></span> 37</li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Posts</strong></span> 78</li>
+          <li className="list-group-item text-right"><span className="pull-left"><strong>Builds</strong></span> {user.pcbuilds.length}</li>
+          <li className="list-group-item text-right"><span className="pull-left"><strong>Likes</strong></span> </li>
+          <li className="list-group-item text-right"><span className="pull-left"><strong>Discussions</strong></span> </li>
+          <li className="list-group-item text-right"><span className="pull-left"><strong>Posts</strong></span></li>
         </ul> 
              
         <div className="panel panel-default">
@@ -96,7 +118,7 @@ function handleSubmit(event) {
         <div className="tab-content">
           <div className="tab-pane active" id="home">
               <hr></hr>
-                <form className="form" action="##" onSubmit= {handleSubmit} id="updateForm">
+                <form className="form" action="##"  id="updateForm">
                     <div className="form-group">
                         
                         <div className="col-xs-6">

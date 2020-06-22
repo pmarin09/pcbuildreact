@@ -15,7 +15,7 @@ function Registration (){
 
     axios
       .post(
-        "http://localhost:3000/registrations/",
+        "http://localhost:3000/users/",
         {
           user: {
             username: username,
