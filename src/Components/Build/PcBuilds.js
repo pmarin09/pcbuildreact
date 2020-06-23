@@ -1,6 +1,19 @@
-import React, {useState,useContext, useEffect} from 'react'
+import React, {useContext, useEffect} from 'react'
 import {Context} from "../../Context"
 import { useHistory } from 'react-router-dom';
+import mobo from "../../icons/mobo.png"
+import cpu from "../../icons/cpu.png"
+import gpu from "../../icons/gpu.png"
+import cpucooler from "../../icons/cpucooler.png"
+import ram from "../../icons/ram.png"
+import hdd from "../../icons/hdd.png"
+import pws from "../../icons/pws.png"
+import monitor from "../../icons/monitor.png"
+import keyboard from "../../icons/keyboard.png"
+import mouse from "../../icons/mouse.png"
+import headset from "../../icons/headset.png"
+import pccase from "../../icons/pccase.png"
+
   function PcBuilds(){
   
   const{user, parts, checkLoginStatus, loggedInStatus} = useContext(Context)
@@ -81,7 +94,7 @@ import { useHistory } from 'react-router-dom';
     </thead>
     <tbody>
     <tr>
-        <td>MOBO ICON</td>
+        <td><img src={mobo} className="build-icon"/></td>
         <td>Motherboard</td> 
         <td>
               <select
@@ -103,7 +116,7 @@ import { useHistory } from 'react-router-dom';
         </td>
       </tr>
       <tr>
-        <td>CPU ICON</td>
+        <td><img src={cpu} className="build-icon" /></td>
         <td>CPU</td> 
         <td>
               <select
@@ -123,7 +136,7 @@ import { useHistory } from 'react-router-dom';
         </td>
       </tr>
       <tr>
-        <td>Cooler ICON</td>
+        <td><img src={cpucooler} className="build-icon"/></td>
         <td>CPU Cooler</td> 
         <td>
               <select
@@ -143,7 +156,7 @@ import { useHistory } from 'react-router-dom';
         </td>
       </tr>
       <tr>
-        <td>GPU ICON</td>
+        <td><img src={gpu} className="build-icon"/></td>
         <td>Video Card</td> 
         <td>
               <select
@@ -163,7 +176,7 @@ import { useHistory } from 'react-router-dom';
         </td>
       </tr>
       <tr>
-        <td>RAM ICON</td>
+        <td><img src={ram} className="build-icon"/></td>
         <td>RAM</td> 
         <td>
               <select
@@ -183,7 +196,7 @@ import { useHistory } from 'react-router-dom';
         </td>
       </tr>
       <tr>
-        <td>HD ICON</td>
+        <td><img src={hdd} className="build-icon" /></td>
         <td>Hard Drive 1</td> 
         <td>
               <select
@@ -203,7 +216,7 @@ import { useHistory } from 'react-router-dom';
         </td>
       </tr>
       <tr>
-        <td>HD ICON</td>
+        <td><img src={hdd} className="build-icon" /></td>
         <td>Hard Drive 2</td> 
         <td>
               <select
@@ -223,7 +236,7 @@ import { useHistory } from 'react-router-dom';
         </td>
       </tr>
       <tr>
-        <td>Case Icon</td>
+        <td><img src={pccase} className="build-icon"/></td>
         <td>Case</td> 
         <td>
               <select
@@ -243,7 +256,7 @@ import { useHistory } from 'react-router-dom';
         </td>
       </tr>
       <tr>
-        <td>PWS ICON</td>
+        <td><img src={pws} className="build-icon"/></td>
         <td>Power Supply</td> 
         <td>
               <select
@@ -263,7 +276,7 @@ import { useHistory } from 'react-router-dom';
         </td>
       </tr>
       <tr>
-        <td>Monitor ICON</td>
+        <td><img src={monitor} className="build-icon"/></td>
         <td>Monitor</td> 
         <td>
               <select
@@ -283,7 +296,7 @@ import { useHistory } from 'react-router-dom';
         </td>
       </tr>
       <tr>
-        <td>Keyboard ICON</td>
+        <td><img src={keyboard} className="build-icon"/></td>
         <td>Keyboard</td> 
         <td>
               <select
@@ -303,7 +316,7 @@ import { useHistory } from 'react-router-dom';
         </td>
       </tr>
       <tr>
-        <td>Mouse ICON</td>
+        <td><img src={mouse} className="build-icon" /></td>
         <td>Mouse</td> 
         <td>
               <select
@@ -323,7 +336,7 @@ import { useHistory } from 'react-router-dom';
         </td>
       </tr>
       <tr>
-        <td>Headset ICON</td>
+        <td><img src={headset} className="build-icon" /></td>
         <td>Headset</td> 
         <td>
               <select

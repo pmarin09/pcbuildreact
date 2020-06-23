@@ -4,7 +4,7 @@ import {Context} from "../../Context"
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 function ForumDetail() {
-    const {forums,discussions} = useContext(Context)
+    const {forums,discussions,user, loggedInStatus} = useContext(Context)
     const {forumId} = useParams()
     const thisForum = forums.find(forum => forum.id.toString() === forumId)
     const showDiscussions =  discussions.filter(discussion => discussion.forum_id.toString() === forumId).map(filteredDiscussion => (
@@ -12,7 +12,7 @@ function ForumDetail() {
       <article className="media">
           <div className="media-left">
           <figure className="image is-48x48">
-          <Gravatar email="1000-email@example.com" />
+          {filteredDiscussion.user.attachment_url ? <img src = {`http://localhost:3000/${filteredDiscussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredDiscussion.user.email}  className = "discussion-avatar"/>}
           </figure>
           </div>
           <div className="media-content">
@@ -20,14 +20,13 @@ function ForumDetail() {
           <div className="content">
            {filteredDiscussion.description}
            <hr></hr>
-           <p><em><small>Posted <TimeAgo datetime={filteredDiscussion.created_at}/> on {forums.title}
-               by 
+           <p><em><small>Posted <TimeAgo datetime={filteredDiscussion.created_at}/> on {thisForum.title}  by {filteredDiscussion.user.username}
                </small>
                 </em>
                 </p>
             </div>
             
-          {/* Authentication */}
+            {(user.id === filteredDiscussion.user_id && loggedInStatus === "LOGGED_IN") ?
           <nav className="level is-mobile">
               <div className="level-left">
               <Link to={`/editDiscussion/${filteredDiscussion.id}`} style={{textDecoration: "none"}}>
@@ -39,6 +38,8 @@ function ForumDetail() {
               </a>
               </div>
           </nav>
+          :
+          ""}
           </div>
       </article>
       </div>
