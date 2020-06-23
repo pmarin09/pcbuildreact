@@ -21,7 +21,9 @@ function Registration (){
             username: username,
             email: email,
             password: password,
-            password_confirmation: password_confirmation
+            password_confirmation: password_confirmation,
+            first_name: null,
+            last_name: null
           }
         },
         { withCredentials: true }

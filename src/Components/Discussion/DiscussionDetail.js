@@ -1,9 +1,10 @@
-import React, {useContext, useEffect} from "react"
+import React, {useContext, useState} from "react"
 import {useParams, Link} from "react-router-dom"
 import {Context} from "../../Context"
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import { Button } from 'react-bulma-components';
+import Pagination from '../../Pagination';
 
 function DiscussionDetail() {
     const{discussions, posts, user, loggedInStatus} = useContext(Context)
@@ -66,7 +67,17 @@ function DiscussionDetail() {
         window.location.reload(false);
       }
 
-   
+    //PAGINATION 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(10);
+ 
+   // Get current posts
+   const indexOfLastPost = currentPage * postsPerPage;
+   const indexOfFirstPost = indexOfLastPost - postsPerPage;
+   const currentPosts = showPosts.slice(indexOfFirstPost, indexOfLastPost);
+ 
+   // Change page
+   const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
 <section className = "section">
@@ -94,7 +105,12 @@ function DiscussionDetail() {
                          
                         </div>
                     </div>
-                    {showPosts}
+                    {currentPosts}
+                    <Pagination
+                            elementsPerPage={postsPerPage}
+                            totalElements={showPosts.length}
+                            paginate={paginate}
+                        />
                 </>
                 : "Loading..."}
             </div>

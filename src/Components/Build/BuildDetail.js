@@ -1,11 +1,10 @@
-import React, {useContext} from "react"
+import React, {useContext,useState} from "react"
 import {useParams, Link} from "react-router-dom"
 import {Context} from "../../Context"
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
-import PcBuilds from "./PcBuilds";
 import Carousel from 'react-bootstrap/Carousel'
-
+import Pagination from '../../Pagination';
 function BuildDetail(img) {
     const{allBuilds, user, loggedInStatus, buildposts} = useContext(Context)
     const {buildId} = useParams()
@@ -84,6 +83,19 @@ function BuildDetail(img) {
         e.preventDefault();
         window.location.reload(false);
       }
+
+
+       //PAGINATION 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [buildpostsPerPage] = useState(10);
+ 
+   // Get current posts
+   const indexOfLastBuildPost = currentPage * buildpostsPerPage;
+   const indexOfFirstBuildPost = indexOfLastBuildPost - buildpostsPerPage;
+   const currentBuildPosts = showBuildposts.slice(indexOfFirstBuildPost, indexOfLastBuildPost);
+ 
+   // Change page
+   const paginate = pageNumber => setCurrentPage(pageNumber);
      
     return (
         <>
@@ -117,7 +129,13 @@ function BuildDetail(img) {
             </table>
             <h2 className="title is-5 has-text-grey-light">Build Description</h2>
             <div>{thisBuild.map(build => build.comments)}</div>
-            {showBuildposts}
+            {currentBuildPosts}
+
+            <Pagination
+              elementsPerPage={buildpostsPerPage}
+              totalElements={showBuildposts.length}
+              paginate={paginate}
+                        />
         </div>
         </div>
        

@@ -4,57 +4,39 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import { useHistory } from 'react-router-dom';
-import axios from "axios";
+
 function ProfilePage (){
 
-const {user, loggedInStatus,handleSuccessfulAuth,allBuilds}=useContext(Context)
+const {user, loggedInStatus}=useContext(Context)
 const history = useHistory()
 const [username, setUsername] = useState("")
 const [email, setEmail] = useState("")
 const [password,setPassword] = useState("")
 const [password_confirmation, setPasswordConfirmation] = useState("")
 
-
-// function handleSubmit(event) {
-
-//     axios
-//       .patch(
-//         `http://localhost:3000/users/${user.id}`,
-//         {
-//           user: {
-//             username: username,
-//             email: email,
-//             password: password,
-//             password_confirmation: password_confirmation
-//           }
-//         },
-//         { withCredentials: true }
-//       )
-//       .then(response => {
-//         if (response.data.status === "updated") {
-//           handleSuccessfulAuth(response.data);
-//         }
-//         history.push("/")
-//       })
-//       .catch(error => {
-//         console.log("registration error", error);
-//       });
-//     event.preventDefault();
-//   }
-
-
-  function uploadAvatar(e) {
-    const form = new FormData(document.getElementById("newAvatar"));
+function updateProfileInfo(e) {
+    const form = new FormData(document.getElementById("profileInfo"));
 
     fetch(`http://localhost:3000/users/${user.id}`, {
       method: "PATCH",
       body: form,
     });
     e.preventDefault();
-    // window.location.reload(false);
+     window.location.reload(false);
+     history.push("/profile")
+}
+  function uploadAvatar(e) {
+      const form = new FormData(document.getElementById("newAvatar"));
+
+      fetch(`http://localhost:3000/users/${user.id}`, {
+        method: "PATCH",
+        body: form,
+      });
+      e.preventDefault();
+      window.location.reload(false);
   }
   
-console.log (user)
+
   return (
 <>
 
@@ -118,19 +100,32 @@ console.log (user)
         <div className="tab-content">
           <div className="tab-pane active" id="home">
               <hr></hr>
-                <form className="form" action="##"  id="updateForm">
+                <form className="form" onSubmit={updateProfileInfo}  id="profileInfo">
                     <div className="form-group">
                         
                         <div className="col-xs-6">
                             <label for="first_name"><h4>First name</h4></label>
-                            <input type="text" className="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any."/>
+                            <input 
+                            type="text" 
+                            className="form-control" 
+                            name="first_name" 
+                            id="first_name" 
+                            defaultValue={user.first_name}
+                            placeholder={user.first_name} 
+                            title="enter your first name..."/>
                         </div>
                     </div>
                     <div className="form-group">
                         
                         <div className="col-xs-6">
                           <label for="last_name"><h4>Last name</h4></label>
-                            <input type="text" className="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any."/>
+                            <input type="text" 
+                            className="form-control" 
+                            name="last_name" 
+                            id="last_name" 
+                            defaultValue={user.last_name}
+                            placeholder={user.last_name} 
+                            title="enter your last name if any..."/>
                         </div>
                     </div>
         
@@ -138,21 +133,38 @@ console.log (user)
                         
                         <div className="col-xs-6">
                             <label for="email"><h4>Email</h4></label>
-                            <input type="email" className="form-control" name="email" id="email" placeholder={user.email} title="enter your email."/>
+                            <input type="email" 
+                            className="form-control" 
+                            name="email" 
+                            id="email" 
+                            defaultValue= {user.email}
+                            placeholder={user.email} 
+                            title="enter your email."/>
                         </div>
                     </div>
                     <div className="form-group">
                         
                         <div className="col-xs-6">
                             <label for="password"><h4>Password</h4></label>
-                            <input type="password" className="form-control" name="password" id="password" placeholder="password" title="enter your password."/>
+                            <input type="password" 
+                            className="form-control" 
+                            name="password" 
+                            id="password" 
+                            placeholder="password" 
+                            title="enter your password."/>
                         </div>
                     </div>
                     <div className="form-group">
                         
                         <div className="col-xs-6">
                           <label for="password2"><h4>Verify</h4></label>
-                            <input type="password" className="form-control" name="password_confirmation" id="password_confirmation" placeholder="password2" title="enter your password2."/>
+                            <input 
+                            type="password" 
+                            className="form-control" 
+                            name="password_confirmation" 
+                            id="password_confirmation" 
+                            placeholder="password2" 
+                            title="enter your password2."/>
                         </div>
                     </div>
                     <div className="form-group">

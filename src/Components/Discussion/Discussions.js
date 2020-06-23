@@ -1,10 +1,10 @@
-import React, {useContext} from "react"
+import React, {useContext,useState} from "react"
 import{Context} from "../../Context"
 import {Link} from "react-router-dom"
 import { Button } from 'react-bulma-components';
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
-
+import Pagination from '../../Pagination';
 
 function Discussions(){
     const {forums, discussions, user, loggedInStatus} = useContext(Context)
@@ -43,6 +43,18 @@ function Discussions(){
         alert("A new Forum has been created");
       }
 
+ //PAGINATION 
+   const [currentPage, setCurrentPage] = useState(1);
+   const [discussionsPerPage] = useState(5);
+
+  // Get current posts
+  const indexOfLastDiscussion = currentPage * discussionsPerPage;
+  const indexOfFirstDiscussion = indexOfLastDiscussion - discussionsPerPage;
+  const currentDiscussions = discussionsData.slice(indexOfFirstDiscussion, indexOfLastDiscussion);
+
+  // Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
     return(
  <section className = "section">
     <div className = "container">
@@ -53,7 +65,12 @@ function Discussions(){
                         <div className="columns bb-not-last pv10">
                         
                         <div className="column is-8">
-                                    {discussionsData}  
+                        {currentDiscussions}  
+                        <Pagination
+                            elementsPerPage={discussionsPerPage}
+                            totalElements={discussionsData.length}
+                            paginate={paginate}
+                        />
                         </div>
                     </div>
                     </div>
