@@ -2,7 +2,8 @@ import React, { useContext,useState } from "react";
 import { Link, useHistory} from "react-router-dom";
 import {Context} from "../../Context"
 import axios from "axios"
-
+import mail from "../../icons/mail.png"
+import pw from "../../icons/pw.png"
 function Login (props){
   const{handleSuccessfulAuth} = useContext(Context)
   const{user} = useContext(Context)
@@ -42,16 +43,12 @@ function Login (props){
   return (
 
 <div className="top">
-    <div className="mt-8">
       <h1 className="text-3xl mb-2 text-center font-bold">Sign In</h1>
-      <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
-
-        <div className="card bg-light">
-<article className="card-body mx-auto" style={{maxWidth: 400}}>
-	<form onSubmit={handleSubmit}>
+<article className="card-body mx-auto" style={{maxWidth: 400, height:350}}>
+	<form className="sign-in" onSubmit={handleSubmit}>
     <div className="form-group input-group">
     	<div className="input-group-prepend">
-		    <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
+		    <span className="input-group-text"> <img src ={mail}/> </span>
 		 </div>
         <input 
             name="userEmail" 
@@ -65,7 +62,7 @@ function Login (props){
     
     <div className="form-group input-group">
     	<div className="input-group-prepend">
-		    <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
+		    <span className="input-group-text"> <img src ={pw}/>  </span>
 		</div>
         <input 
             className="form-control" 
@@ -93,9 +90,9 @@ function Login (props){
           </Link>                                                              
     </form>
     </article>
-    </div> 
-</div>
-</div>
+   
+
+
 </div>
     );
   } else {

@@ -2,6 +2,10 @@ import React, { useState,useContext} from "react";
 import axios from "axios";
 import { Link, useHistory} from "react-router-dom";
 import {Context} from "../../Context"
+import mail from "../../icons/mail.png"
+import pw from "../../icons/pw.png"
+import displayname from "../../icons/displayname.png"
+
 function Registration (){
   const{handleSuccessfulAuth} = useContext(Context)
   const [username, setUsername] = useState("")
@@ -42,8 +46,7 @@ function Registration (){
 
 
     return (
-      <div className="mt-8">
-  <div className="card bg-light">
+  <div className="top">
   <article className="card-body mx-auto" style={{maxWidth: 400}}>
   <h4 className="card-title mt-3 text-center">Create Account</h4>
   <p className="text-center">Join our PC Build community!</p>
@@ -51,7 +54,7 @@ function Registration (){
   <form onSubmit={handleSubmit}>
   <div className="form-group input-group">
     <div className="input-group-prepend">
-        <span className="input-group-text"> <i className="fa fa-user"></i> </span>
+        <span className="input-group-text"> <img src ={displayname}/> </span>
      </div>
         <input 
             name="username" 
@@ -63,7 +66,7 @@ function Registration (){
     </div>
     <div className="form-group input-group">
       <div className="input-group-prepend">
-        <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
+        <span className="input-group-text"> <img src ={mail}/> </span>
      </div>
         <input 
             name="email" 
@@ -77,7 +80,7 @@ function Registration (){
     
     <div className="form-group input-group">
       <div className="input-group-prepend">
-        <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
+        <span className="input-group-text"> <img src ={pw}/> </span>
     </div>
         <input 
             className="form-control" 
@@ -91,7 +94,7 @@ function Registration (){
 
     <div className="form-group input-group">
       <div className="input-group-prepend">
-        <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
+        <span className="input-group-text"> <img src ={pw}/> </span>
     </div>
               <input 
             className="form-control" 
@@ -113,8 +116,7 @@ function Registration (){
     <Link to="/signin">Sign in here</Link>{" "} </p>                                                                 
   </form>
   </article>
-  </div> 
-  </div>
+ </div>
  
        
     );

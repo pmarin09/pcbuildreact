@@ -14,7 +14,7 @@ function Image({img}) {
     const buildpostcount = thisBuildPosts.length
     const thisBuildLikes = likes.filter(like => like.pcbuild_id === img.id)
     const buildlikecount = thisBuildLikes.length
-    const parts = img.parts.map(part => part.part_type === "Mobo"? part.description: "")
+    const parts = img.parts.map(part => (part.part_type === "CPU") ? part.description: "")
     const [active,setActive] = useState(false)
 
   function deleteLike() {
@@ -69,12 +69,14 @@ function LikeIcon(){
       <div className="col-md-4" ref = {ref}>
           <div className="card mb-4 shadow-sm">
               <img src={`http://localhost:3000/${img.attachment_url}`} className= "card-img-top"/>
+              <div className= "grid-container">
+              <div className= "comments-icon"><Link to={`/builds/${img.id}`}><i className="ri-message-2-line"></i></Link> <em><small>{buildpostcount}</small></em></div>
+              <div className= "grid-item">{LikeIcon()} 
+                 <em><small> {buildlikecount} {buildlikecount === 1 ? "like" : "likes"}</small></em></div>
+              </div>
             <div className="card-body">
                 <p className="card-text">
-                <em><small><Link to={`/builds/${img.id}`}><i className="ri-message-2-line"></i></Link>{buildpostcount}</small></em>
                 <div>{favoriteIcon()}</div>
-                <em><small>{buildlikecount} {buildlikecount === 1 ? "Like" : "Likes"}</small></em>
-              <div>{LikeIcon()}</div> 
                 <div>{parts}</div>
                 </p>
                   <p className="card-text">
@@ -82,7 +84,7 @@ function LikeIcon(){
                   </p>
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">
-                      <Link to={`/builds/${img.id}`}><button type="button" className="btn btn-sm btn-outline-secondary">View</button></Link>
+                      <Link to={`/builds/${img.id}`}><button type="button" className="btn btn-sm btn-outline-primary">View</button></Link>
                     </div>
                   </div>
             </div>

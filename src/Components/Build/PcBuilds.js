@@ -357,7 +357,7 @@ import pccase from "../../icons/pccase.png"
       </tr>
     </tbody>
   </table>
-    <div className="textarea"> Comments
+    <div className="textarea"> Build Description
                 <input
                   type="text"
                   name="comments"
