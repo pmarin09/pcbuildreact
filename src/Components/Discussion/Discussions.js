@@ -5,7 +5,7 @@ import { Button } from 'react-bulma-components';
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import Pagination from '../../Pagination';
-
+import comment from '../../icons/comment.png'
 function Discussions(){
     const {forums, discussions, user, loggedInStatus} = useContext(Context)
     const forumsData = forums.map(forum => (
@@ -14,24 +14,25 @@ function Discussions(){
         </h3>
         ))
     const discussionsData = discussions.map(discussion => (
-            <>
-            <h3 className="title is-5">{discussion.user.attachment_url ? <img src = {`http://localhost:3000/${discussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={discussion.user.email}  className = "discussion-avatar"/>} <Link to={`/discussions/${discussion.id}`}>{discussion.title}</Link></h3>
-                 <div className="content"> {discussion.description}
-                     <p><em><small>Posted <TimeAgo datetime={discussion.created_at}/> by {discussion.username} on {
+        <div className= "discussions-grid">
+           <div style={{margin: "auto"}}> {discussion.user.attachment_url ? <img src = {`http://localhost:3000/${discussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={discussion.user.email}  className = "discussion-avatar"/>} </div>
+                  <div className= "discussions-title"><Link to={`/discussions/${discussion.id}`} style={{float: "left"}}>{discussion.title} - {discussion.description} </Link><hr className="hr-discussions-bottom"></hr> </div>
+                     <p className= "posted"><em><small>Posted <TimeAgo datetime={discussion.created_at}/> by {discussion.username} on {
                          forums.map(forum => forum.id === discussion.forum_id ? <Link to={`/forum/${forum.id}`}>{forum.title}</Link> : "")
                      }
+                      {(user.id === discussion.user_id && loggedInStatus === "LOGGED_IN") ? 
+                        <Link to={`/editDiscussion/${discussion.id}`} style={{textDecoration: "none"}}>
+                        <i className="ri-pencil-fill"></i>
+                        </Link>
+                        :
+                        ""}
                     </small>
                      </em>
                      </p>
-                 </div>
-                 {(user.id === discussion.user_id && loggedInStatus === "LOGGED_IN") ? 
-        <Link to={`/editDiscussion/${discussion.id}`} style={{textDecoration: "none"}}>
-        <i className="ri-pencil-fill"></i>
-        </Link>
-                :
-                ""}
-                 <hr></hr>
-             </>
+
+                     <div className = "post-count"><Link to={`/discussions/${discussion.id}`} style={{float: "left"}}><img src={comment}/> {discussion.posts.length} </Link></div>
+       </div>
+            
         ))
     function createDiscussion(e) {
         const form = new FormData(document.getElementById("newDiscussion"));
@@ -56,42 +57,81 @@ function Discussions(){
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return(
- <section className = "section">
-    <div className = "container">
-        <div className="columns">
-            <div className="column is-8">
-                <h3 className="title is-5 has-text-grey-light">Latest Discussions</h3>
-                    <div className="discussions">
-                        <div className="columns bb-not-last pv10">
+//  <section className = "section">
+//     <div className = "container">
+//         <div className="columns">
+//             <div className="column is-8">
+//                 <h3 className="title is-5 has-text-grey-light">Latest Discussions</h3>
+//                     <div className="discussions">
+//                         <div className="columns bb-not-last pv10">
                         
-                        <div className="column is-8">
-                        {currentDiscussions}  
+//                         <div className="column is-8">
+//                         {currentDiscussions}  
+                        // <Pagination
+                        //     elementsPerPage={discussionsPerPage}
+                        //     totalElements={discussionsData.length}
+                        //     paginate={paginate}
+                        // />
+//                         </div>
+//                     </div>
+//                     </div>
+//                 </div>
+            
+//         <div className="column is-2 ">
+        
+        // <Link to="/newDiscussion" style={{textDecoration: "none"}}>
+        //     <Button color = "primary" className="button is-primary is-rounded">
+        //     New Discussion
+        //     </Button>
+        // </Link>
+//                 <ul className="box">
+//                 <h3 className="title is-5 has-text-grey-light">Forums</h3>
+//                     <li>{forumsData}  </li>
+//                 </ul>
+//             <br/>
+//             </div>
+//     </div>
+// </div>
+// </section>
+
+
+
+<section className="forms text-center border border-light p-5">
+        <table className="table table-hover">
+            <thead>
+            <tr>
+                <th className= "all-forums">All Forums</th>
+                <th className= "all-discussions">Discussions</th>
+                <th className = "all-posts">Date Posted</th>
+                <th className = "all-posts">Posts</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <ul className="box">
+                <td><Link to="/newDiscussion" style={{textDecoration: "none"}}>
+                        <Button color = "primary" className="new-discussion-btn">
+                            New Discussion
+                        </Button>
+                    </Link>
+                    {forumsData} 
+               </td>
+            </ul>
+                <td> {currentDiscussions}</td>
+                
+            </tr>
+            
+            </tbody>
+           
+            
+        </table>
                         <Pagination
                             elementsPerPage={discussionsPerPage}
                             totalElements={discussionsData.length}
                             paginate={paginate}
                         />
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            
-        <div className="column is-2 ">
-        
-        <Link to="/newDiscussion" style={{textDecoration: "none"}}>
-            <Button color = "primary" className="button is-primary is-rounded">
-            New Discussion
-            </Button>
-        </Link>
-                <ul className="box">
-                <h3 className="title is-5 has-text-grey-light">Forums</h3>
-                    <li>{forumsData}  </li>
-                </ul>
-            <br/>
-            </div>
-    </div>
-</div>
 </section>
+
         )
 }
 
