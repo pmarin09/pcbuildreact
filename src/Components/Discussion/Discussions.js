@@ -16,18 +16,19 @@ function Discussions(){
     const discussionsData = discussions.map(discussion => (
         <div className= "discussions-grid">
            <div style={{margin: "auto"}}> {discussion.user.attachment_url ? <img src = {`http://localhost:3000/${discussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={discussion.user.email}  className = "discussion-avatar"/>} </div>
-                  <div className= "discussions-title"><Link to={`/discussions/${discussion.id}`} style={{float: "left"}}>{discussion.title} - {discussion.description} </Link><hr className="hr-discussions-bottom"></hr> </div>
-                     <p className= "posted"><em><small>Posted <TimeAgo datetime={discussion.created_at}/> by {discussion.username} on {
-                         forums.map(forum => forum.id === discussion.forum_id ? <Link to={`/forum/${forum.id}`}>{forum.title}</Link> : "")
-                     }
-                      {(user.id === discussion.user_id && loggedInStatus === "LOGGED_IN") ? 
+                  <div className= "discussions-title"><Link to={`/discussions/${discussion.id}`} style={{float: "left"}}>{discussion.title} - {discussion.description} </Link> {(user.id === discussion.user_id && loggedInStatus === "LOGGED_IN") ? 
                         <Link to={`/editDiscussion/${discussion.id}`} style={{textDecoration: "none"}}>
-                        <i className="ri-pencil-fill"></i>
+                                <i className="ri-pencil-fill" style={{float: "left"}}></i>
                         </Link>
                         :
-                        ""}
+                        ""}<hr className="hr-discussions-bottom"></hr> </div>
+                     <p className= "posted"><em><small>Posted <TimeAgo datetime={discussion.created_at}/> by {discussion.username} on {
+                         forums.map(forum => forum.id === discussion.forum_id ? <Link to={`/forum/${forum.id}`}>{forum.title} </Link> : "")
+                     }
+                       <hr className="hr-discussions-top"></hr> 
                     </small>
                      </em>
+                     
                      </p>
 
                      <div className = "post-count"><Link to={`/discussions/${discussion.id}`} style={{float: "left"}}><img src={comment}/> {discussion.posts.length} </Link></div>
@@ -46,7 +47,7 @@ function Discussions(){
 
  //PAGINATION 
    const [currentPage, setCurrentPage] = useState(1);
-   const [discussionsPerPage] = useState(5);
+   const [discussionsPerPage] = useState(10);
 
   // Get current posts
   const indexOfLastDiscussion = currentPage * discussionsPerPage;
@@ -57,44 +58,6 @@ function Discussions(){
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return(
-//  <section className = "section">
-//     <div className = "container">
-//         <div className="columns">
-//             <div className="column is-8">
-//                 <h3 className="title is-5 has-text-grey-light">Latest Discussions</h3>
-//                     <div className="discussions">
-//                         <div className="columns bb-not-last pv10">
-                        
-//                         <div className="column is-8">
-//                         {currentDiscussions}  
-                        // <Pagination
-                        //     elementsPerPage={discussionsPerPage}
-                        //     totalElements={discussionsData.length}
-                        //     paginate={paginate}
-                        // />
-//                         </div>
-//                     </div>
-//                     </div>
-//                 </div>
-            
-//         <div className="column is-2 ">
-        
-        // <Link to="/newDiscussion" style={{textDecoration: "none"}}>
-        //     <Button color = "primary" className="button is-primary is-rounded">
-        //     New Discussion
-        //     </Button>
-        // </Link>
-//                 <ul className="box">
-//                 <h3 className="title is-5 has-text-grey-light">Forums</h3>
-//                     <li>{forumsData}  </li>
-//                 </ul>
-//             <br/>
-//             </div>
-//     </div>
-// </div>
-// </section>
-
-
 
 <section className="forms text-center border border-light p-5">
         <table className="table table-hover">
