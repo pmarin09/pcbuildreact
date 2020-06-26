@@ -12,7 +12,8 @@ function Login (props){
   const[password, setPassword] = useState("") 
   const history = useHistory()
  console.log(loggedInStatus)
-  function handleSubmit(event) {
+  
+ function handleSubmit(event) {
     axios
       .post(
         "http://localhost:3000/sessions",
