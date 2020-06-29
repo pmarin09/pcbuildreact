@@ -6,6 +6,7 @@ import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import Pagination from '../../Pagination';
 import comment from '../../icons/comment.png'
+
 function Discussions(){
     const {forums, discussions, user, loggedInStatus} = useContext(Context)
     const forumsData = forums.map(forum => (
@@ -16,7 +17,7 @@ function Discussions(){
     const discussionsData = discussions.map(discussion => (
         <div className= "discussions-grid">
            <div style={{margin: "auto"}}> {discussion.user.attachment_url ? <img src = {`http://localhost:3000/${discussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={discussion.user.email}  className = "discussion-avatar"/>} </div>
-                  <div className= "discussions-title"><Link to={`/discussions/${discussion.id}`} style={{float: "left"}}>{discussion.title} - {discussion.description} </Link> {(user.id === discussion.user_id && loggedInStatus === "LOGGED_IN") ? 
+                  <div className= "discussions-title"><Link to={`/discussions/${discussion.id}`} style={{float: "left"}}><strong style={{fontSize: "15px"}}>{discussion.title}</strong> -    {discussion.description} </Link> {(user.id === discussion.user_id && loggedInStatus === "LOGGED_IN") ? 
                         <Link to={`/editDiscussion/${discussion.id}`} style={{textDecoration: "none"}}>
                                 <i className="ri-pencil-fill" style={{float: "left"}}></i>
                         </Link>

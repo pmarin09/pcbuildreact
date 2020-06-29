@@ -20,7 +20,7 @@ function ForumDetail() {
     const showDiscussions =  discussions.filter(discussion => discussion.forum_id.toString() === forumId).map(filteredDiscussion => (
         <div className= "discussions-grid">
         <div style={{margin: "auto"}}> {filteredDiscussion.user.attachment_url ? <img src = {`http://localhost:3000/${filteredDiscussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredDiscussion.user.email}  className = "discussion-avatar"/>} </div>
-               <div className= "discussions-title"><Link to={`/discussions/${filteredDiscussion.id}`} style={{float: "left"}}>{filteredDiscussion.title} - {filteredDiscussion.description} </Link> {(user.id === filteredDiscussion.user_id && loggedInStatus === "LOGGED_IN") ? 
+               <div className= "discussions-title"><Link to={`/discussions/${filteredDiscussion.id}`} style={{float: "left"}}><strong style={{fontSize: "15px"}}>{filteredDiscussion.title}</strong> - {filteredDiscussion.description} </Link> {(user.id === filteredDiscussion.user_id && loggedInStatus === "LOGGED_IN") ? 
                      <Link to={`/editDiscussion/${filteredDiscussion.id}`} style={{textDecoration: "none"}}>
                              <i className="ri-pencil-fill" style={{float: "left"}}></i>
                      </Link>

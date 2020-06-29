@@ -8,16 +8,22 @@ import TimeAgo from 'timeago-react';
 
 function Image({img}) {
     const [hovered, ref] = useHover()
-    const {addToFavorites,removeFromFavorites,favoriteBuilds,buildposts, likes, setLikes, user, loggedInStatus} = useContext(Context)
+    const {buildposts, likes, updateLikes, favorites, updateFavorites, user, loggedInStatus} = useContext(Context)
     const history = useHistory()
     const thisBuildPosts = buildposts.filter(build => build.pcbuild_id === img.id)
     const buildpostcount = thisBuildPosts.length
     const thisBuildLikes = likes.filter(like => like.pcbuild_id === img.id)
     const buildlikecount = thisBuildLikes.length
     const parts = img.parts.map(part => (part.part_type === "CPU") ? part.description: "")
-    const [active,setActive] = useState(false)
 
-  function deleteLike() {
+    function createLike() {
+      const form = new FormData(document.getElementById("newLike"));
+        fetch(`http://localhost:3000/pcbuilds/${img.id}/likes.json`, {
+          method: "POST",
+          body: form,
+        })
+     }
+    function deleteLike() {
       likes.filter(like => like.user_id === user.id && like.pcbuild_id === img.id).map(filteredLike => (
                    
                     fetch(`http://localhost:3000/pcbuilds/${img.id}/likes/${filteredLike.id}.json`, {
@@ -25,30 +31,26 @@ function Image({img}) {
                     })
                   ))
   }
-function createLike() {
-    
-  const form = new FormData(document.getElementById("newLike"));
-  
-    fetch(`http://localhost:3000/pcbuilds/${img.id}/likes.json`, {
-      method: "POST",
-      body: form,
-    })
- 
-    
- }
- function updateLikes(){
-  setTimeout(() => {fetch(`http://localhost:3000/likes.json`)
-  .then (res => res.json())
-  .then (data => setLikes(data))
-  },50)
- }
-
+    function createFavorite() {
+      const form = new FormData(document.getElementById("newFavorite"));
+      fetch(`http://localhost:3000/pcbuilds/${img.id}/favorites.json`, {
+        method: "POST",
+        body: form,
+      })
+  }
+   function deleteFavorite() {
+    favorites.filter(favorite => favorite.user_id === user.id && favorite.pcbuild_id === img.id).map(filteredFavorite => (
+      fetch(`http://localhost:3000/pcbuilds/${img.id}/favorites/${filteredFavorite.id}.json`, {
+        method: "DELETE",
+      })
+      ))
+}
 function favoriteIcon(){
-    const alreadyInFavorites = favoriteBuilds.some(item => item.id === img.id)
+    const alreadyInFavorites = favorites.some(favorite => favorite.user_id === user.id && favorite.pcbuild_id === img.id)
     if(alreadyInFavorites){
-        return <i className="ri-bookmark-2-fill" onClick= {() => removeFromFavorites(img.id)}></i>
-    }else if(hovered){
-        return <i className="ri-bookmark-2-line" onClick={() => addToFavorites(img)}></i>
+        return <i className="ri-bookmark-2-fill" onClick= {() => {deleteFavorite(); updateFavorites();}}></i>
+    }else {
+        return <i className="ri-bookmark-2-line" onClick={()=> {createFavorite(); updateFavorites();}}></i>
 
     }
 }
@@ -62,21 +64,19 @@ function LikeIcon(){
     }
     
 }
-
-
-
+console.log(loggedInStatus)
     return (
       <div className="col-md-4" ref = {ref}>
           <div className="card mb-4 shadow-sm">
               <img src={`http://localhost:3000/${img.attachment_url}`} className= "card-img-top"/>
               <div className= "grid-container">
               <div className= "comments-icon"><Link to={`/builds/${img.id}`}><i className="ri-message-2-line"></i></Link> <em><small>{buildpostcount}</small></em></div>
-              <div className= "grid-item">{LikeIcon()} 
+              <div className= "grid-item">{ loggedInStatus === "LOGGED_IN" ? LikeIcon(): ""} 
                  <em><small> {buildlikecount} {buildlikecount === 1 ? "like" : "likes"}</small></em></div>
               </div>
             <div className="card-body">
                 <p className="card-text">
-                <div>{favoriteIcon()}</div>
+                <div>{ loggedInStatus === "LOGGED_IN" ? favoriteIcon(): ""}</div>
                 <div>{parts}</div>
                 </p>
                   <p className="card-text">
@@ -90,6 +90,15 @@ function LikeIcon(){
             </div>
           </div>
           <form className="form" onSubmit={createLike} id="newLike" style={{display: "none"}}>
+                <input
+                  value= {user.id}
+                  name="user_id"
+                  style={{display: "none"}}
+                  required
+                />
+          </form>
+
+          <form className="form" onSubmit={createFavorite} id="newFavorite" style={{display: "none"}}>
                 <input
                   value= {user.id}
                   name="user_id"

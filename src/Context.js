@@ -67,25 +67,36 @@ function ContextProvider({children}){
         .then (data => setLikes(data))
         console.log(likes)
     },[])
+
+    function updateLikes(){
+      setTimeout(() => {fetch(`http://localhost:3000/likes.json`)
+      .then (res => res.json())
+      .then (data => setLikes(data))
+      },50)
+     }
+
+    const [favorites, setFavorites]=useState([])
+    const favoritesUrl = "http://localhost:3000/favorites.json"
+    useEffect(()=>{
+        fetch(favoritesUrl)
+        .then (res => res.json())
+        .then (data => setFavorites(data))
+        console.log(favorites)
+    },[])
+
+    function updateFavorites(){
+      setTimeout(() => {fetch(`http://localhost:3000/favorites.json`)
+      .then (res => res.json())
+      .then (data => setFavorites(data))
+      },50)
+      }
     
-
-    function addToFavorites(newItem){
-        setFavoriteBuilds(prevItems => [...prevItems, newItem]) 
-    }
-    function removeFromFavorites(id){
-        setFavoriteBuilds(prevItems => prevItems.filter(item => item.id !== id)) 
-    }
-    function emptyFavorites(){
-        setFavoriteBuilds([]) 
-    }
-
+    
     const[loggedInStatus, setLoggedInStatus]=useState("NOT_LOGGED_IN")
     const[user, setUser]=useState({})
     const[email, setEmail] = useState("")
     const[password, setPassword] = useState("")
     const history = useHistory()
-  
-  
   
     function checkLoginStatus() {
     axios
@@ -147,6 +158,7 @@ function ContextProvider({children}){
 
             <Context.Provider value = {{
                 allBuilds,
+                setAllBuilds,
                 favoriteBuilds,
                 forums, 
                 discussions,
@@ -155,9 +167,11 @@ function ContextProvider({children}){
                 parts,
                 likes,
                 setLikes,
-                addToFavorites,
-                removeFromFavorites,
-                emptyFavorites,
+                updateLikes,
+                favorites,
+                favoritesUrl,
+                setFavorites,
+                updateFavorites,
                 loggedInStatus,
                 user,
                 checkLoginStatus,

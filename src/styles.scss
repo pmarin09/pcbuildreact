@@ -400,13 +400,13 @@ width: 24px !important;
 
 .navbar-start {
   display:grid !important;
-  grid-template-columns: 180px 180px 180px 180px 1304px;
+  grid-template-columns: 180px 180px 180px 180px 180px 1304px;
 
 }
 
 .navbar-loggedout-start {
   display:grid !important;
-  grid-template-columns: 180px 180px 180px 1304px;
+  grid-template-columns: 180px 180px 180px 180px 1304px;
 
 }
 .navbar-item{
@@ -415,12 +415,13 @@ width: 24px !important;
   width: 180px;
 }
 
-a.navbar-item.is-active{
-  background-color: rgb(31,44,52);
+
+ .navbar-link:hover, a.navbar-item.is-active, a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
+  background-color: rgb(22, 26, 31) !important;
 }
 
 .navbar-link.is-active, a.navbar-item.is-active{
-  background-color: rgb(31,44,52);
+  background-color: rgb(45, 48, 49);
   color:white !important;
 }
 
@@ -461,7 +462,7 @@ a.navbar-item.is-active{
   transition: all .2s ease-in-out;
 }
 .profile-div{
- margin-left:850px;
+ margin-left:650px;
 }
 .logout-span{
   margin-left: 10px;
@@ -480,4 +481,8 @@ a.navbar-item.is-active{
 .header-sign-in{
   justify-content: flex-start;
   margin-left: 50px;
+}
+
+.py-5{
+  padding-top: 1rem !important;
 }

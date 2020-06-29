@@ -4,6 +4,7 @@ import Favorites from "./Build/Favorites"
 import PcBuilds from "./Build/PcBuilds"
 import ProfilePage from "./ProfilePage";
 import Main from "./Main";
+import AllBuilds from "./Build/AllBuilds"
 import BuildDetail from "./Build/BuildDetail"
 import Discussions from "./Discussion/Discussions"
 import DiscussionDetail from "./Discussion/DiscussionDetail"
@@ -23,6 +24,7 @@ function Application() {
      
       <Switch>
       <Route exact path = "/"> <Main/> </Route>
+      <Route path= "/allbuilds"> <AllBuilds/></Route>
       <Route path= "/favorites"> <Favorites/></Route>
       <Route path = "/signIn"> <Login/> </Route>
       <Route path = "/register"> <Registration/> </Route>
