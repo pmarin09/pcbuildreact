@@ -27,7 +27,6 @@ function DiscussionDetail() {
            <p><em><small>Posted <TimeAgo datetime={filteredPost.created_at}/>  by {filteredPost.username}</small>
                 </em>
                 </p>
-                
           </div>
           {(user.id === filteredPost.user_id && loggedInStatus === "LOGGED_IN") ?
           <nav className="level is-mobile">

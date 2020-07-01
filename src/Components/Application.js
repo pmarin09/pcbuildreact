@@ -16,6 +16,8 @@ import Forum from "./Forum/Forum"
 import ForumDetail from "./Forum/ForumDetail"
 import Login from "./auth/Login"
 import Registration from "./auth/Registration"
+import ForgotPassword from "./auth/ForgotPassword"
+import ResetPassword from "./auth/ResetPassword"
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 
 function Application() {
@@ -28,6 +30,8 @@ function Application() {
       <Route path= "/favorites"> <Favorites/></Route>
       <Route path = "/signIn"> <Login/> </Route>
       <Route path = "/register"> <Registration/> </Route>
+      <Route path = "/forgotPassword"> <ForgotPassword/> </Route>
+      <Route path = "/resetPassword"> <ResetPassword/> </Route>
       <Route path = "/profile"> <ProfilePage/> </Route>
       <Route path = "/builds/:buildId"> <BuildDetail/> </Route>
       <Route exact path = "/forum/"> <Forum/> </Route>

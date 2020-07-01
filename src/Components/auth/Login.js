@@ -86,7 +86,7 @@ function Login (props){
             Sign up here
           </Link>{" "}</p>  
           <br />{" "}
-          <Link to="passwordReset" className="text-blue-500 hover:text-blue-600">
+          <Link to="forgotPassword" className="text-blue-500 hover:text-blue-600">
             Forgot Password?
           </Link>                                                              
     </form>

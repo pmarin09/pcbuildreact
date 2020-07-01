@@ -10,6 +10,7 @@ import create from "../icons/create.png"
 import favorite from "../icons/favorite.png"
 import logout from "../icons/logout.png"
 import register from "../icons/register.png"
+import createbuild from "../icons/createbuild.png"
 import axios from "axios"
 
 function Header(){
@@ -85,7 +86,7 @@ if(loggedInStatus === "LOGGED_IN"){
               </a>
               <a className="navbar-item bd-navbar-item-documentation  is-active">
                     <span className="icon has-text-primary">
-                    <img src={create}/>
+                    <img src={createbuild}/>
                     </span>
                     <Link to="/pcbuilds" style={{textDecoration: "none"}}><span className="is-hidden-touch is-hidden-widescreen"> Create Build</span></Link>
                     <Link to="/pcbuilds" style={{textDecoration: "none"}}><span className="is-hidden-desktop-only"> Create Build</span></Link>
@@ -166,7 +167,9 @@ if(loggedInStatus === "LOGGED_IN"){
                             value={password}
                             id="userPassword"
                             onChange = {e => setPassword(e.target.value)}/>
+                            <small><Link to = "/forgotPassword"> Forgot Password? </Link></small>
                     </div>
+                    
                     <div>
                         <button 
                         type="submit" 
@@ -175,6 +178,7 @@ if(loggedInStatus === "LOGGED_IN"){
                         </button>                          
                       </div>
                   </div>
+                  <div></div>
                 </form>
         </div>
       </div>

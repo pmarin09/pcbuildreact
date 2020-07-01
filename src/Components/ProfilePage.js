@@ -171,7 +171,6 @@ function updateProfileInfo(e) {
                          <div className="col-xs-12">
                               <br></br>
                               <button className="btn btn-lg btn-success" type="submit"><i className="glyphicon glyphicon-ok-sign"></i> Save</button>
-                               <button className="btn btn-lg" type="reset"><i className="glyphicon glyphicon-repeat"></i> Reset</button>
                           </div>
                     </div>
               </form>
