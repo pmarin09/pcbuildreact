@@ -3,6 +3,7 @@ import Image from "./Build/Image"
 import styles from "../styles.scss"
 import {Context} from "../Context"
 import Pagination from "../Pagination"
+import Header from "./Header"
 function Main(){
   const{allBuilds} = useContext(Context)
   const imageElements = allBuilds.map((img,i) => (
@@ -23,9 +24,7 @@ const paginate = pageNumber => setCurrentPage(pageNumber);
 
 
     return (
-    <main role="main">
-     
-      <div className = "album py-5 bg-light">
+      <div className = "album bg-light">
       <div className="jumbotron">
         <div className="container">
           <h1 className="jumbotron-heading">Featured Builds</h1>
@@ -46,7 +45,6 @@ const paginate = pageNumber => setCurrentPage(pageNumber);
           </div>  
         </div>
       </div>
-    </main>
     )
 }
 
