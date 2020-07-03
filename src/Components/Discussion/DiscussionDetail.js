@@ -13,7 +13,7 @@ function DiscussionDetail() {
     const thisPost = posts.find(post => post.discussion_id.toString() === discussionId)
     const showPosts =  posts.filter(post => post.discussion_id.toString() === discussionId).map(filteredPost => (
     
-   <div className="box">
+   <div className="posts-box">
       <article className="media">
           <div className="media-left">
           <figure className="image is-48x48">

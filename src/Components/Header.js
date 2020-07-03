@@ -48,14 +48,18 @@ function handleSubmit(event) {
   event.preventDefault();
 }
 
-function myFunction() {
-  var x = document.getElementById("pc-nav");
-  if (x.className === "pcnavbar-start") {
-    x.className += " responsive";
-  } else {
-    x.className = "pcnavbar-start";
-  }
+const x = document.getElementById("pc-nav");
+function toggleNavMenu() {
+  // Toggle between adding / removing the responsive class from the menu
+  x.classList.toggle("responsive");
 }
+
+// We get all the a elements with class "nav-item", and attach a click
+// listener to them which removes the responsive class from myTopNav element.
+const theLinks = document.querySelectorAll(".pcnavbar-item");
+theLinks.forEach(link => link.addEventListener("click", ()=>{
+  x.classList.remove("responsive");
+}))
 
 if(loggedInStatus === "LOGGED_IN"){
     return (
@@ -102,7 +106,7 @@ if(loggedInStatus === "LOGGED_IN"){
                     <span className="logout-span"><Link onClick={() => handleLogoutClick()} style={{textDecoration: "none"}}><img src={logout}/> <em><small>Logout</small></em></Link></span>
                     </a>
                     
-              <a href="javascript:void(0);" className="icon" onClick={myFunction}>
+              <a href="javascript:void(0);" className="icon" onClick={toggleNavMenu}>
               <i class="ri-menu-line ri-xl"></i>
               </a>
         </div>
@@ -119,12 +123,14 @@ if(loggedInStatus === "LOGGED_IN"){
                 <img className="header-icon"  src= {headerImage}/> 
                 <strong className= "app-title">PC Build App</strong>
               <div className="pcnavbar-start" id="pc-nav">
+              
               <a className="pcnavbar-item">
                     <Link to="/" style={{textDecoration: "none"}}>
                       <span className="pcnavbar-icon"><img src={home}/></span>
                       <span className="pcnavbar-text" > Home</span>
                     </Link>
               </a>
+              
               <a className="pcnavbar-item">
                     <Link to="/allbuilds" style={{textDecoration: "none"}}>
                       <span className="pcnavbar-icon"><img src={create}/></span>
@@ -150,6 +156,7 @@ if(loggedInStatus === "LOGGED_IN"){
                       <span className="pcnavbar-text">Log In</span>
                     </Link>
               </a>
+              
                <a className="login-div">
                 <form className="header-sign-in" onSubmit={handleSubmit}>
                   <div className="header-login-form">
@@ -184,16 +191,15 @@ if(loggedInStatus === "LOGGED_IN"){
                   </div>
                   <div></div>
                 </form>
-
                 </a>
-                <a href="javascript:void(0);" className="icon" onClick={myFunction}>
+                <a href="javascript:void(0);" className="icon" onClick={toggleNavMenu}>
               <i className="ri-menu-line ri-xl"></i>
               </a>
+                
             </div>
             
           </div>
       
-    
     )
       }
 }

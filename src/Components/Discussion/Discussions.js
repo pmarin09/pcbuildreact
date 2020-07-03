@@ -66,13 +66,13 @@ function Discussions(){
             <tr>
                 <th className= "all-forums">All Forums</th>
                 <th className= "all-discussions">Discussions</th>
-                <th className = "all-posts">Date Posted</th>
+                <th className = "date-posted">Date Posted</th>
                 <th className = "all-posts">Posts</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-            <ul className="box">
+            <ul className="allforums-box">
                 <td><Link to="/newDiscussion" style={{textDecoration: "none"}}>
                         <Button color = "primary" className="new-discussion-btn">
                             New Discussion
@@ -81,7 +81,7 @@ function Discussions(){
                     {forumsData} 
                </td>
             </ul>
-                <td> {currentDiscussions}</td>
+                <td className= "discussions-td"> {currentDiscussions}</td>
                 
             </tr>
             

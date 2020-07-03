@@ -55,7 +55,7 @@ import pccase from "../../icons/pccase.png"
     <section className = "section">
       <h2 className="title is-5 has-text-grey-light">Create a New Build</h2>
 
-<section className="forms text-center border border-light p-5">
+<section className="create-build-form">
   <form className="form" onSubmit={createBuild} id="newPcbuild">
   <div className="col">
               Image:
@@ -87,16 +87,16 @@ import pccase from "../../icons/pccase.png"
     <thead>
       <tr>
         <th>Icon</th>
-        <th>Component</th>
-        <th>Description</th>
-        <th>Price</th>
+        <th className = "component">Component</th>
+        <th className = "component-description">Description</th>
+        <th className = "component-price">Price</th>
       </tr>
     </thead>
     <tbody>
     <tr>
         <td><img src={mobo} className="build-icon"/></td>
-        <td>Motherboard</td> 
-        <td>
+        <td className = "component">Motherboard</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[Mobo][id]"
@@ -105,7 +105,7 @@ import pccase from "../../icons/pccase.png"
               {Mobo}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[Mobo][price]"
@@ -117,8 +117,8 @@ import pccase from "../../icons/pccase.png"
       </tr>
       <tr>
         <td><img src={cpu} className="build-icon" /></td>
-        <td>CPU</td> 
-        <td>
+        <td className = "component">CPU</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[CPU][id]"
@@ -126,7 +126,7 @@ import pccase from "../../icons/pccase.png"
               {CPU}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[CPU][price]"
@@ -137,8 +137,8 @@ import pccase from "../../icons/pccase.png"
       </tr>
       <tr>
         <td><img src={cpucooler} className="build-icon"/></td>
-        <td>CPU Cooler</td> 
-        <td>
+        <td className = "component">CPU Cooler</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[CPUCooler][id]"
@@ -146,7 +146,7 @@ import pccase from "../../icons/pccase.png"
               {CPUCooler}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[CPUCooler][price]"
@@ -157,8 +157,8 @@ import pccase from "../../icons/pccase.png"
       </tr>
       <tr>
         <td><img src={gpu} className="build-icon"/></td>
-        <td>Video Card</td> 
-        <td>
+        <td className = "component">Video Card</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[GPU][id]"
@@ -166,7 +166,7 @@ import pccase from "../../icons/pccase.png"
               {GPU}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[GPU][price]"
@@ -177,8 +177,8 @@ import pccase from "../../icons/pccase.png"
       </tr>
       <tr>
         <td><img src={ram} className="build-icon"/></td>
-        <td>RAM</td> 
-        <td>
+        <td className = "component">RAM</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[RAM][id]"
@@ -186,7 +186,7 @@ import pccase from "../../icons/pccase.png"
               {RAM}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[RAM][price]"
@@ -197,8 +197,8 @@ import pccase from "../../icons/pccase.png"
       </tr>
       <tr>
         <td><img src={hdd} className="build-icon" /></td>
-        <td>Hard Drive 1</td> 
-        <td>
+        <td className = "component">Hard Drive 1</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[HD][id]"
@@ -206,7 +206,7 @@ import pccase from "../../icons/pccase.png"
               {HD}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[HD][price]"
@@ -217,8 +217,8 @@ import pccase from "../../icons/pccase.png"
       </tr>
       <tr>
         <td><img src={hdd} className="build-icon" /></td>
-        <td>Hard Drive 2</td> 
-        <td>
+        <td className = "component">Hard Drive 2</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[HD][id]"
@@ -226,7 +226,7 @@ import pccase from "../../icons/pccase.png"
               {HD}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[HD][price]"
@@ -237,8 +237,8 @@ import pccase from "../../icons/pccase.png"
       </tr>
       <tr>
         <td><img src={pccase} className="build-icon"/></td>
-        <td>Case</td> 
-        <td>
+        <td className = "component">Case</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[Case][id]"
@@ -246,7 +246,7 @@ import pccase from "../../icons/pccase.png"
               {Case}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[Case][price]"
@@ -257,8 +257,8 @@ import pccase from "../../icons/pccase.png"
       </tr>
       <tr>
         <td><img src={pws} className="build-icon"/></td>
-        <td>Power Supply</td> 
-        <td>
+        <td className = "component">Power Supply</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[PWS][id]"
@@ -266,7 +266,7 @@ import pccase from "../../icons/pccase.png"
               {PWS}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[PWS][price]"
@@ -277,8 +277,8 @@ import pccase from "../../icons/pccase.png"
       </tr>
       <tr>
         <td><img src={monitor} className="build-icon"/></td>
-        <td>Monitor</td> 
-        <td>
+        <td className = "component">Monitor</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[Monitor][id]"
@@ -286,7 +286,7 @@ import pccase from "../../icons/pccase.png"
               {Monitor}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[Monitor][price]"
@@ -297,8 +297,8 @@ import pccase from "../../icons/pccase.png"
       </tr>
       <tr>
         <td><img src={keyboard} className="build-icon"/></td>
-        <td>Keyboard</td> 
-        <td>
+        <td className = "component">Keyboard</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[Keyboard][id]"
@@ -306,7 +306,7 @@ import pccase from "../../icons/pccase.png"
               {Keyboard}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[Keyboard][price]"
@@ -317,8 +317,8 @@ import pccase from "../../icons/pccase.png"
       </tr>
       <tr>
         <td><img src={mouse} className="build-icon" /></td>
-        <td>Mouse</td> 
-        <td>
+        <td className = "component">Mouse</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[Mouse][id]"
@@ -326,7 +326,7 @@ import pccase from "../../icons/pccase.png"
               {Mouse}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[Mouse][price]"
@@ -337,8 +337,8 @@ import pccase from "../../icons/pccase.png"
       </tr>
       <tr>
         <td><img src={headset} className="build-icon" /></td>
-        <td>Headset</td> 
-        <td>
+        <td className = "component">Headset</td> 
+        <td className = "component-description">
               <select
                 type="select"
                 name="part_id[Headset][id]"
@@ -346,7 +346,7 @@ import pccase from "../../icons/pccase.png"
               {Headset}
               </select>
         </td>
-        <td>
+        <td className = "component-price">
                 <input
                   type="text"
                   name="part_id[Headset][price]"

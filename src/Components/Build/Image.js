@@ -69,11 +69,13 @@ console.log(loggedInStatus)
       <div className="col-md-4" ref = {ref}>
           <div className="card mb-4 shadow-sm">
               <img src={`http://localhost:3000/${img.attachment_url}`} className= "card-img-top"/>
-              <div className= "grid-container">
-              <div className= "comments-icon"><Link to={`/builds/${img.id}`}><i className="ri-message-2-line"></i></Link> <em><small>{buildpostcount}</small></em></div>
-              <div className= "grid-item">{ loggedInStatus === "LOGGED_IN" ? LikeIcon(): ""} 
+              <div>
+              <div className= "comments-icon"><Link to={`/builds/${img.id}`}><i className="ri-message-2-line"></i></Link> <em><small>{buildpostcount}</small></em>
+              <div className= "like-icon">{ loggedInStatus === "LOGGED_IN" ? LikeIcon(): ""} 
                  <em><small> {buildlikecount} {buildlikecount === 1 ? "like" : "likes"}</small></em></div>
               </div>
+              </div>
+              
             <div className="card-body">
                 <p className="card-text">
                 <div>{ loggedInStatus === "LOGGED_IN" ? favoriteIcon(): ""}</div>
