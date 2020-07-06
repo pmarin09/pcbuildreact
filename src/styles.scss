@@ -329,11 +329,12 @@ div{
 
 .table td:not([align]) {
   text-align: center !important;
+  width: auto !important;
 }
 
 .price{
     display: block;
-    width: 30%;
+    width: 15%;
     height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
     font-size: 1rem;
@@ -646,8 +647,9 @@ background-color:rgb(30,37,45);
     margin-top: 20px;
    }
 
-   .component-price{
-     width:25%;
+   .part-price{
+     width: 50px !important;
+     margin: 0px !important;
      padding-top:10px !important;
      padding-right: 0px !important;
      padding-left: 0px !important;
@@ -655,7 +657,7 @@ background-color:rgb(30,37,45);
    }
 
    .component-description{
-    width:75%;
+    
     padding-right: 0px !important;
     padding-left: 5px !important;
   }
