@@ -9,10 +9,7 @@ function ProfilePage (){
 
 const {user, loggedInStatus}=useContext(Context)
 const history = useHistory()
-const [username, setUsername] = useState("")
-const [email, setEmail] = useState("")
-const [password,setPassword] = useState("")
-const [password_confirmation, setPasswordConfirmation] = useState("")
+
 
 function updateProfileInfo(e) {
     const form = new FormData(document.getElementById("profileInfo"));

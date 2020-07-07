@@ -199,29 +199,9 @@ import Select from 'react-select'
       </tr>
       <tr>
         <td><img src={hdd} className="build-icon" /></td>
-        <td className = "component">Hard Drive 1</td> 
+        <td className = "component">Hard Drive</td> 
         <td className = "component-description">
              <Select 
-              name="part_id[HD][id]"
-              required
-              options= {HD}
-              placeholder="Select or type..."
-              />
-        </td>
-        <td className = "component-price">
-                <input
-                  type="text"
-                  name="part_id[HD][price]"
-                  className="price"
-                  required
-                />
-        </td>
-      </tr>
-      <tr>
-        <td><img src={hdd} className="build-icon" /></td>
-        <td className = "component">Hard Drive 2</td> 
-        <td className = "component-description">
-              <Select 
               name="part_id[HD][id]"
               required
               options= {HD}

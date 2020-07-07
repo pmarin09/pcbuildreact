@@ -23,14 +23,14 @@ function Discussions(){
                         </Link>
                         :
                         ""}<hr className="hr-discussions-bottom"></hr> </div>
-                     <p className= "posted"><em><small>Posted <TimeAgo datetime={discussion.created_at}/> by {discussion.username} on {
+                     <div className= "posted"><em><small>Posted <TimeAgo datetime={discussion.created_at}/> by {discussion.username} on {
                          forums.map(forum => forum.id === discussion.forum_id ? <Link to={`/forum/${forum.id}`}>{forum.title} </Link> : "")
                      }
                        <hr className="hr-discussions-top"></hr> 
                     </small>
                      </em>
                      
-                     </p>
+                     </div>
 
                      <div className = "post-count"><Link to={`/discussions/${discussion.id}`} style={{float: "left"}}><img src={comment}/> {discussion.posts.length} </Link></div>
        </div>
@@ -72,15 +72,15 @@ function Discussions(){
             </thead>
             <tbody>
             <tr>
-            <ul className="allforums-box">
-                <td><Link to="/newDiscussion" style={{textDecoration: "none"}}>
+            <div className="allforums-box">
+                <div><Link to="/newDiscussion" style={{textDecoration: "none"}}>
                         <Button color = "primary" className="new-discussion-btn">
                             New Discussion
                         </Button>
                     </Link>
                     {forumsData} 
-               </td>
-            </ul>
+               </div>
+            </div>
                 <td className= "discussions-td"> {currentDiscussions}</td>
                 
             </tr>

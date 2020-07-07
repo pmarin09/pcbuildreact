@@ -10,7 +10,6 @@ import comment from '../../icons/comment.png'
 function ForumDetail() {
     const {forums,discussions,user, loggedInStatus} = useContext(Context)
     const {forumId} = useParams()
-    const thisForum = forums.find(forum => forum.id.toString() === forumId)
     const forumsData = forums.map(forum => (
         <h3 className = "forumSideBar" key={forum.id}>
             <p ><Link to={`/forum/${forum.id}`}>{forum.title}</Link></p>

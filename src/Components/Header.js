@@ -157,7 +157,7 @@ if(loggedInStatus === "LOGGED_IN"){
                     </Link>
               </a>
               
-               <a className="login-div">
+               <div className="login-div">
                 <form className="header-sign-in" onSubmit={handleSubmit}>
                   <div className="header-login-form">
                       <div>
@@ -191,7 +191,7 @@ if(loggedInStatus === "LOGGED_IN"){
                   </div>
                   <div></div>
                 </form>
-                </a>
+                </div>
                 <a href="javascript:void(0);" className="icon" onClick={toggleNavMenu}>
               <i className="ri-menu-line ri-xl"></i>
               </a>

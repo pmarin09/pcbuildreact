@@ -77,10 +77,10 @@ console.log(loggedInStatus)
               </div>
               
             <div className="card-body">
-                <p className="card-text">
+                <div className="card-text">
                 <div>{ loggedInStatus === "LOGGED_IN" ? favoriteIcon(): ""}</div>
                 <div>{parts}</div>
-                </p>
+                </div>
                   <p className="card-text">
                   <em><small>Uploaded <TimeAgo datetime={img.created_at}/> by {img.username}</small></em>
                   </p>

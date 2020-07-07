@@ -10,7 +10,6 @@ function DiscussionDetail() {
     const{discussions, posts, user, loggedInStatus} = useContext(Context)
     const {discussionId} = useParams()
     const thisDiscussion = discussions.find(discussion => discussion.id.toString() === discussionId)
-    const thisPost = posts.find(post => post.discussion_id.toString() === discussionId)
     const showPosts =  posts.filter(post => post.discussion_id.toString() === discussionId).map(filteredPost => (
     
    <div className="posts-box">
