@@ -1,4 +1,4 @@
-import React, {useContext,useEffect,useState} from "react"
+import React, {useContext} from "react"
 import {Context} from "../../Context"
 import useHover from "../../hooks/useHover"
 import PropTypes from "prop-types"
@@ -64,7 +64,7 @@ function LikeIcon(){
     }
     
 }
-console.log(loggedInStatus)
+
     return (
       <div className="col-md-4" ref = {ref}>
           <div className="card mb-4 shadow-sm">

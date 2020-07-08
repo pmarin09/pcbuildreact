@@ -118,9 +118,9 @@ function BuildDetail(img) {
             <table className="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Specs</th>
-                        <th>Description</th>
-                        <th>Price</th>
+                        <th className="build-detail-th">Specs</th>
+                        <th className="build-detail-th">Description</th>
+                        <th className="build-detail-th">Price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -147,7 +147,7 @@ function BuildDetail(img) {
   <h2 className="title is-5 has-text-grey-light">What do you think of this Build?</h2>
     <div className="form-row mb-4">
       <div className="textarea">
-        <input
+        <textarea
           type="text"
           name="content"
           className="description"

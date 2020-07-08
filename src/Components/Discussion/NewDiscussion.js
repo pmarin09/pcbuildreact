@@ -40,8 +40,8 @@ function NewDiscussion(){
               
               <div className="textarea" rows="15">
                Description:
-                <input
-                  type="text"
+                <textarea
+                  type="textarea"
                   name="description"
                   className="description"
                   required

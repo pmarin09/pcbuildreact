@@ -1,7 +1,7 @@
-import React,{useContext,useEffect} from "react"
+import React,{useContext,useEffect,useState} from "react"
 import {Context} from "../../Context"
 import FavoriteBuild from "./FavoriteBuild"
-
+import Pagination from '../../Pagination';
 function Favorites() {
     const {allBuilds,setAllBuilds,user} = useContext(Context)
     const favoriteBuilds = allBuilds.filter(build => build.favorites.some(favorite => favorite.pcbuild_id === build.id && favorite.user_id === user.id)? build : "" )
@@ -15,14 +15,30 @@ function Favorites() {
         .then (data => setAllBuilds(data))
     },[])
 
+      //PAGINATION 
+      const [currentPage, setCurrentPage] = useState(1);
+      const [favoriteBuildsPerPage] = useState(10);
+   
+     // Get current posts
+     const indexOfLastFavorite = currentPage * favoriteBuildsPerPage;
+     const indexOfFirstFavorite = indexOfLastFavorite - favoriteBuildsPerPage;
+     const currentFavorites = FavoriteItemElements.slice(indexOfFirstFavorite, indexOfLastFavorite);
+   
+     // Change page
+     const paginate = pageNumber => setCurrentPage(pageNumber);
     return (
-        <main className="cart-page">
-            <h1>My Favorite Builds</h1>
-            
+        <main className="top">
              {favoriteBuilds.length > 0 ? "": <p>You have not selected any favorite builds...</p> }   
              <div className="row mb-2">
-                {FavoriteItemElements}
+                {currentFavorites}
                 </div>
+                
+                <Pagination
+                            elementsPerPage={favoriteBuildsPerPage}
+                            totalElements={favoriteBuilds.length}
+                            paginate={paginate}
+                            className="favorites-pagination"
+                        />
         </main>
     )
 }

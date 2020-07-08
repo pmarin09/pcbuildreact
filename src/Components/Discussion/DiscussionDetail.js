@@ -125,7 +125,7 @@ function DiscussionDetail() {
         
             <div className="form-row mb-4">
               <div className="textarea">
-                <input
+                <textarea
                   type="text"
                   name="content"
                   className="description"

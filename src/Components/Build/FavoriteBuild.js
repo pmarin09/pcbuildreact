@@ -3,31 +3,53 @@ import {Context} from "../../Context"
 import useHover from "../../hooks/useHover"
 import PropTypes from "prop-types"
 import {Link} from "react-router-dom"
-
+import TimeAgo from 'timeago-react';
 function FavoriteBuild({item}) {
- 
-
+    const {loggedInStatus,user,favorites,updateFavorites} = useContext(Context)
+    const favoriteBuildParts = item.parts.map(b =>
+            <tr>
+              <td className="fav-td">{b.part_type}</td>
+              <td>{b.description}</td>
+            </tr>
+            )
+        
+             function deleteFavorite() {
+              favorites.filter(favorite => favorite.user_id === user.id && favorite.pcbuild_id === item.id).map(filteredFavorite => (
+                fetch(`http://localhost:3000/pcbuilds/${item.id}/favorites/${filteredFavorite.id}.json`, {
+                  method: "DELETE",
+                })
+                
+                ))
+                window.location.reload(false);
+          }
+          function removefavoriteIcon(){
+                  return <i className="ri-close-fill ri-2x" onClick= {() => {deleteFavorite(); updateFavorites();}}></i>
+          }
+    
+          
     return (
-            <div className="col-md-6">
-                    <div className="card flex-md-row mb-4 box-shadow h-md-250">
-                        <div className="card-body d-flex flex-column align-items-start">
-                            <strong className="d-inline-block mb-2 text-primary">PC Build App</strong>
-                                <h3 className="mb-0">
-                                    <a className="text-dark" href="#">{item.name}</a>
-                                </h3>
-                                    <div className="mb-1 text-muted">Gaming</div>
-                                        <p className="card-text mb-auto">{item.description}</p>
-                                        <Link to={`/builds/${item.id}`}><button type="button" className="btn btn-sm btn-outline-secondary">View full Specs</button></Link>
-                        </div>
-                                        {/* <i 
-                                        className={iconClassName}
-                                        onClick= {() => removeFromFavorites(item.id)}
-                                        ref={ref}
-                                        ></i> */}
-                                    <img src={`http://localhost:3000/${item.attachment_url}`} width="500px" />
+          <div className= "container">
+                <div className="favorites-card">
+                <div className="row no-gutters">
+                <div className="col-md-4">
+                
+                <img src={`http://localhost:3000/${item.attachment_url}`} width="400px" className="favorites-card-img" alt="..."/>
+                
+                </div>
+                <div className="col-md-8">
+                    <div className="favorites-card-body">
+                    <div className= "removeFavoriteIcon">{ loggedInStatus === "LOGGED_IN" ? removefavoriteIcon(): ""}</div>
+                    <h5 className="card-title">{item.description}</h5>
+                    <p className="card-text">{favoriteBuildParts}</p>
+                    <Link to={`/builds/${item.id}`}><button type="button" className="btn btn-sm btn-outline-danger">View Details</button></Link>
+                    <p className="card-text"><small className="text-muted"> Build created <TimeAgo datetime={item.created_at}/> by {item.username}</small></p>
+                    
                     </div>
-            </div>
-            
+                    
+                </div>
+                </div>
+                </div>
+           </div>
     )
 }
 
