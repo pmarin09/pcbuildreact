@@ -16,14 +16,14 @@ function Discussions(){
         ))
     const discussionsData = discussions.map(discussion => (
         <div className= "discussions-grid">
-           <div style={{margin: "auto"}}> {discussion.user.attachment_url ? <img src = {`http://localhost:3000/${discussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={discussion.user.email}  className = "discussion-avatar"/>} </div>
+           <div style={{margin: "auto"}}> <Link to={`/profile/${discussion.user_id}`}>{discussion.user.attachment_url ? <img src = {`http://localhost:3000/${discussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={discussion.user.email}  className = "discussion-avatar"/>} </Link></div>
                   <div className= "discussions-title"><Link to={`/discussions/${discussion.id}`} style={{float: "left"}}><strong style={{fontSize: "15px"}}>{discussion.title}</strong> -    {discussion.description} </Link> {(user.id === discussion.user_id && loggedInStatus === "LOGGED_IN") ? 
                         <Link to={`/editDiscussion/${discussion.id}`} style={{textDecoration: "none"}}>
                                 <i className="ri-pencil-fill" style={{float: "left"}}></i>
                         </Link>
                         :
                         ""}<hr className="hr-discussions-bottom"></hr> </div>
-                     <div className= "posted"><em><small>Posted <TimeAgo datetime={discussion.created_at}/> by {discussion.username} on {
+                     <div className= "posted"><em><small>Posted <TimeAgo datetime={discussion.created_at}/> by  <Link to={`/profile/${discussion.user_id}`}> {discussion.username} </Link> on {
                          forums.map(forum => forum.id === discussion.forum_id ? <Link to={`/forum/${forum.id}`}>{forum.title} </Link> : "")
                      }
                        <hr className="hr-discussions-top"></hr> 
@@ -61,7 +61,7 @@ function Discussions(){
     return(
 
 <section className="forms text-center border border-light p-5">
-        <table className="table table-hover">
+        <table className="discssions-table">
             <thead>
             <tr>
                 <th className= "all-forums">All Forums</th>

@@ -99,7 +99,7 @@ if(loggedInStatus === "LOGGED_IN"){
                     </Link>
               </a>
                     <a className="profile-div">
-                    <Link to="/profile">
+                    <Link to={`/profile/${user.id}`}>
                     {user.attachment_url ? <img src = {`http://localhost:3000/${user.attachment_url}`}  className="profile-avatar"/> : <Gravatar email="1000-email@example.com" /> }
                     <span> <em><small>{user.username}</small></em></span>
                     </Link>
@@ -107,7 +107,7 @@ if(loggedInStatus === "LOGGED_IN"){
                     </a>
                     
               <a href="javascript:void(0);" className="icon" onClick={toggleNavMenu}>
-              <i class="ri-menu-line ri-xl"></i>
+              <i className="ri-menu-line ri-xl"></i>
               </a>
         </div>
 

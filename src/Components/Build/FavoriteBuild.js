@@ -42,7 +42,7 @@ function FavoriteBuild({item}) {
                     <h5 className="card-title">{item.description}</h5>
                     <p className="card-text">{favoriteBuildParts}</p>
                     <Link to={`/builds/${item.id}`}><button type="button" className="btn btn-sm btn-outline-danger">View Details</button></Link>
-                    <p className="card-text"><small className="text-muted"> Build created <TimeAgo datetime={item.created_at}/> by {item.username}</small></p>
+                    <p className="card-text"><small className="text-muted"> Build created <TimeAgo datetime={item.created_at}/> by <Link to={`/profile/${item.user_id}`}>{item.username}</Link> </small></p>
                     
                     </div>
                     

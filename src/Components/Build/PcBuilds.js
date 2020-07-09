@@ -85,7 +85,7 @@ import Select from 'react-select'
                   required
                   style={{display: "none"}}
                 />
-      <table className="table table-hover">
+      <table className="create-build-table">
     <thead>
       <tr>
         <th>Icon</th>

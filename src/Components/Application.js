@@ -32,7 +32,8 @@ function Application() {
       <Route path = "/register"> <Registration/> </Route>
       <Route path = "/forgotPassword"> <ForgotPassword/> </Route>
       <Route path = "/resetPassword"> <ResetPassword/> </Route>
-      <Route path = "/profile"> <ProfilePage/> </Route>
+      <Route exact path = "/profile"> <ProfilePage/> </Route>
+      <Route path = "/profile/:userId"> <ProfilePage/> </Route>
       <Route path = "/builds/:buildId"> <BuildDetail/> </Route>
       <Route exact path = "/forum/"> <Forum/> </Route>
       <Route path = "/forum/:forumId"> <ForumDetail/> </Route>

@@ -82,7 +82,7 @@ function LikeIcon(){
                 <div>{parts}</div>
                 </div>
                   <p className="card-text">
-                  <em><small>Uploaded <TimeAgo datetime={img.created_at}/> by {img.username}</small></em>
+                  <em><small>Uploaded <TimeAgo datetime={img.created_at}/> by <Link to={`/profile/${img.user_id}`}> {img.username} </Link></small></em>
                   </p>
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">

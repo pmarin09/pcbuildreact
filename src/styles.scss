@@ -105,8 +105,6 @@
     padding: 25px 0px 50px 0px;
   }
 
-  
-
   .table-wrapper{
       max-width: 50%;
       margin:auto;
@@ -175,6 +173,41 @@
 
   .all-forums{
     width:160px;
+  }
+
+  .discussions-table{
+    margin-bottom: 1.5rem;
+    background-color: #fff;
+    color: #363636;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .create-build-table{
+    margin-bottom: 1.5rem;
+    background-color: #fff;
+    color: #363636;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .create-build-table th:not([align]) {
+    text-align: center !important;
+  }
+  
+  .create-build-table td:not([align]) {
+    text-align: center !important;
+  }
+
+  .create-build-table td, .create-build-table th {
+    border: solid #dbdbdb;
+    border-width: 0 0 1px;
+    padding: .5em .75em;
+    vertical-align: middle;
+  }
+
+  .part-price td{
+    width:100px !important;
   }
 
   .new-discussion-btn{
@@ -333,7 +366,7 @@
 }
 
 div{
-  //  border: solid black 1px;
+    border: solid black 1px;
 }
 
 .table th:not([align]) {
@@ -434,7 +467,7 @@ width: 24px !important;
   // display:grid !important;
   // grid-template-columns: 180px 180px 180px 180px 180px 1304px;
   float: left;
-  display: block;
+  display: inline-flex;
   color: #f2f2f2;
   text-align: center;
   padding-top: 7px;
@@ -442,7 +475,7 @@ width: 24px !important;
   margin:auto;
   text-decoration: none;
   font-size: 17px;
-  width:170px;
+  vertical-align: middle;
   background-color:rgb(30,37,45) !important;
 }
 
@@ -472,7 +505,7 @@ background-color:rgb(30,37,45);
 .pcnavbar-item{
   margin: auto;
   border: solid rgb(39,49,59) 0.5px;
-  // width: 200px;
+  width: 170px;
 }
 
 .pcnavbar-icon{
@@ -510,6 +543,17 @@ background-color:rgb(30,37,45);
   -webkit-transition: all .2s ease-in-out;
   -o-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
+}
+
+.profile-container{
+  background: rgb(48, 52, 59) !important;
+  color: white;
+  border-radius: 10px;
+  flex-grow: 1;
+  margin: 0 auto;
+  position: relative;
+  width: auto;
+  padding: 20px;
 }
 
 .profile-div{

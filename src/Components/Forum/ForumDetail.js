@@ -18,14 +18,14 @@ function ForumDetail() {
  
     const showDiscussions =  discussions.filter(discussion => discussion.forum_id.toString() === forumId).map(filteredDiscussion => (
         <div className= "discussions-grid">
-        <div style={{margin: "auto"}}> {filteredDiscussion.user.attachment_url ? <img src = {`http://localhost:3000/${filteredDiscussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredDiscussion.user.email}  className = "discussion-avatar"/>} </div>
+        <div style={{margin: "auto"}}><Link to={`/profile/${filteredDiscussion.user_id}`}> {filteredDiscussion.user.attachment_url ? <img src = {`http://localhost:3000/${filteredDiscussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredDiscussion.user.email}  className = "discussion-avatar"/>} </Link></div>
                <div className= "discussions-title"><Link to={`/discussions/${filteredDiscussion.id}`} style={{float: "left"}}><strong style={{fontSize: "15px"}}>{filteredDiscussion.title}</strong> - {filteredDiscussion.description} </Link> {(user.id === filteredDiscussion.user_id && loggedInStatus === "LOGGED_IN") ? 
                      <Link to={`/editDiscussion/${filteredDiscussion.id}`} style={{textDecoration: "none"}}>
                              <i className="ri-pencil-fill" style={{float: "left"}}></i>
                      </Link>
                      :
                      ""}<hr className="hr-discussions-bottom"></hr> </div>
-                  <p className= "posted"><em><small>Posted <TimeAgo datetime={filteredDiscussion.created_at}/> by {filteredDiscussion.username} on {
+                  <p className= "posted"><em><small>Posted <TimeAgo datetime={filteredDiscussion.created_at}/> by <Link to={`/profile/${filteredDiscussion.user_id}`}>{filteredDiscussion.username} </Link> on {
                       forums.map(forum => forum.id === filteredDiscussion.forum_id ? <Link to={`/forum/${forum.id}`}>{forum.title} </Link> : "")
                   }
                     <hr className="hr-discussions-top"></hr> 
@@ -54,7 +54,7 @@ function ForumDetail() {
 
 
 <section className="forms text-center border border-light p-5">
-<table className="table table-hover">
+<table className="discssions-table">
     <thead>
     <tr>
         <th className= "all-forums">All Forums</th>

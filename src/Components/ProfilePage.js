@@ -1,15 +1,16 @@
-import React, { useContext,useState } from "react";
+import React, { useContext, useEffect} from "react";
 import { Context } from "../Context";
 import 'bootstrap/dist/css/bootstrap.css';
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
-import { useHistory } from 'react-router-dom';
+import { useHistory,useParams } from 'react-router-dom';
 
 function ProfilePage (){
 
-const {user, loggedInStatus}=useContext(Context)
+const {user,loggedInStatus,users}=useContext(Context)
 const history = useHistory()
-
+const {userId} = useParams()
+const profileUser = users.filter(user => user.id.toString() === userId)
 
 function updateProfileInfo(e) {
     const form = new FormData(document.getElementById("profileInfo"));
@@ -33,13 +34,11 @@ function updateProfileInfo(e) {
       window.location.reload(false);
   }
   
-
+ 
   return (
 <>
 
-
-
-{(loggedInStatus === "LOGGED_IN") ?
+{(loggedInStatus === "LOGGED_IN" && user.id === userId) ?
 <div>
 <hr></hr>
 
@@ -79,18 +78,13 @@ function updateProfileInfo(e) {
         
         <ul className="list-group">
           <li className="list-group-item text-muted">Activity <i className="fa fa-dashboard fa-1x"></i></li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Builds</strong></span> {user.pcbuilds.length}</li>
+          <li className="list-group-item text-right"><span className="pull-left"><strong>Builds</strong></span>  </li>
           <li className="list-group-item text-right"><span className="pull-left"><strong>Likes</strong></span> </li>
           <li className="list-group-item text-right"><span className="pull-left"><strong>Discussions</strong></span> </li>
           <li className="list-group-item text-right"><span className="pull-left"><strong>Posts</strong></span></li>
         </ul> 
              
-        <div className="panel panel-default">
-          <div className="panel-heading">Social Media</div>
-          <div className="panel-body">
-            <i className="fa fa-facebook fa-2x"></i> <i className="fa fa-github fa-2x"></i> <i className="fa fa-twitter fa-2x"></i> <i className="fa fa-pinterest fa-2x"></i> <i className="fa fa-google-plus fa-2x"></i>
-          </div>
-        </div>
+     
         
       </div>
     <div className="col-sm-9">
@@ -179,11 +173,47 @@ function updateProfileInfo(e) {
       </div>
   </div>
   </div>
-  : 
-  history.push("/")}
   
-  </>                                             
-  ) 
-};
+  : 
 
+<div>
+  
+<hr></hr>
+{profileUser.map(profileUserData => 
+<div className="profile container">
+  <div className="row">
+    
+    <div className="col-sm-10"><h1>{profileUserData.username}</h1></div>
+    <div className="col-sm-2">{profileUserData.attachment_url ? <img src = {`http://localhost:3000/${profileUserData.attachment_url}`}  className="img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
+  </div>
+  <div className="row">
+    <div className="col-sm-3">
+
+    <div className="text-center">
+    {profileUserData.attachment_url ? <img src = {`http://localhost:3000/${profileUserData.attachment_url}`}  className="img-avatar"/> : <Gravatar email="1000-email@example.com"  className="img-avatar"/> }
+      <hr></hr>
+    </div><hr></hr>
+  
+             
+        <div className="panel panel-default">
+          <div className="panel-heading">Member since: <TimeAgo datetime={profileUserData.created_at}/> <i className="fa fa-link fa-1x"></i></div>
+          <div className="panel-body"><a href="http://bootnipets.com"></a></div>
+        </div>
+        
+        
+        <ul className="list-group">
+          <li className="list-group-item text-muted">Activity <i className="fa fa-dashboard fa-1x"></i></li>
+          <li className="list-group-item text-right"><span className="pull-left"><strong>Builds</strong></span>  </li>
+          <li className="list-group-item text-right"><span className="pull-left"><strong>Likes</strong></span> </li>
+          <li className="list-group-item text-right"><span className="pull-left"><strong>Discussions</strong></span> </li>
+          <li className="list-group-item text-right"><span className="pull-left"><strong>Posts</strong></span></li>
+        </ul> 
+         </div>
+      </div>
+    </div>
+    )}
+  </div>
+    }
+ </>
+)}
 export default ProfilePage;

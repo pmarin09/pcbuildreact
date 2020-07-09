@@ -5,7 +5,18 @@ import { useHistory } from 'react-router-dom';
 const Context  = React.createContext()
 
 function ContextProvider({children}){
-    const [allBuilds, setAllBuilds] = useState([])
+    
+  const [users, setUsers]=useState([])
+  const usersUrl = "http://localhost:3000/users.json"
+  useEffect(()=>{
+      fetch(usersUrl)
+      .then (res => res.json())
+      .then (data => setUsers(data))
+      console.log(users)
+  },[])
+  
+  
+  const [allBuilds, setAllBuilds] = useState([])
     const [favoriteBuilds, setFavoriteBuilds] = useState([])
 
     useEffect(()=>{
@@ -174,6 +185,7 @@ function ContextProvider({children}){
                 updateFavorites,
                 loggedInStatus,
                 user,
+                users,
                 checkLoginStatus,
                 handleLogout,
                 handleLogoutClick,
