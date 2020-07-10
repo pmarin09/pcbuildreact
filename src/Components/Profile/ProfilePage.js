@@ -1,10 +1,10 @@
 import React, { useContext, useEffect} from "react";
-import { Context } from "../Context";
+import { Context } from "../../Context";
 import 'bootstrap/dist/css/bootstrap.css';
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import { useHistory,useParams } from 'react-router-dom';
-
+import MyBuilds from "./MyBuilds"
 function ProfilePage (){
 
 const {user,loggedInStatus,users}=useContext(Context)
@@ -13,39 +13,45 @@ const {userId} = useParams()
 const profileUser = users.filter(user => user.id.toString() === userId)
 
 function updateProfileInfo(e) {
-    const form = new FormData(document.getElementById("profileInfo"));
+  const form = new FormData(document.getElementById("profileInfo"));
+
+  fetch(`http://localhost:3000/users/${user.id}`, {
+    method: "PATCH",
+    body: form,
+  });
+  e.preventDefault();
+   window.location.reload(false);
+   history.push("/profile")
+}
+function uploadAvatar(e) {
+    const form = new FormData(document.getElementById("newAvatar"));
 
     fetch(`http://localhost:3000/users/${user.id}`, {
       method: "PATCH",
       body: form,
     });
     e.preventDefault();
-     window.location.reload(false);
-     history.push("/profile")
+    window.location.reload(false);
 }
-  function uploadAvatar(e) {
-      const form = new FormData(document.getElementById("newAvatar"));
 
-      fetch(`http://localhost:3000/users/${user.id}`, {
-        method: "PATCH",
-        body: form,
-      });
-      e.preventDefault();
-      window.location.reload(false);
-  }
-  
- 
   return (
 <>
 
 {(loggedInStatus === "LOGGED_IN" && user.id === userId) ?
+
 <div>
+
 <hr></hr>
 
 <div className="container bootstrap snippet">
   <div className="row">
-    <div className="col-sm-10"><h1>{user.username}</h1></div>
-    <div className="col-sm-2">{user.attachment_url ? <img src = {`http://localhost:3000/${user.attachment_url}`}  className="img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
+    <div className="col-sm-3">{user.attachment_url ? <img src = {`http://localhost:3000/${user.attachment_url}`}  className="img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
+    <div className="col-sm-9"><h1>{user.username}</h1>
+    <div className="row">
+      TEST
+      </div>
+    
+    </div>
   </div>
   <div className="row">
     <div className="col-sm-3">
@@ -173,25 +179,35 @@ function updateProfileInfo(e) {
       </div>
   </div>
   </div>
-  
   : 
 
 <div>
   
 <hr></hr>
 {profileUser.map(profileUserData => 
-<div className="profile container">
+<div className="profile-container">
   <div className="row">
-    
-    <div className="col-sm-10"><h1>{profileUserData.username}</h1></div>
-    <div className="col-sm-2">{profileUserData.attachment_url ? <img src = {`http://localhost:3000/${profileUserData.attachment_url}`}  className="img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
+     <div className="col-xs-3 col-sm-3" >{profileUserData.attachment_url ? <img src = {`http://localhost:3000/${profileUserData.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
+    <div className="col-sm-9"><h1 className="profile-username">{profileUserData.username}</h1>
+    <div className="profile-stats-row">
+          <div className="col-md-3"> 10 </div>
+          <div className="col-md-3"> 20 </div>
+          <div className="col-md-3"> 5 </div>
+          <div className="col-md-3"> 40 </div>
+        </div>
+      <div className="profile-statslabel-row">
+          <div className="col-md-3"> Builds </div>
+          <div className="col-md-3"> Likes </div>
+          <div className="col-md-3"> Favorites </div>
+          <div className="col-md-3"> Posts </div>
+        </div>
+    </div>
   </div>
   <div className="row">
     <div className="col-sm-3">
-
+      
     <div className="text-center">
-    {profileUserData.attachment_url ? <img src = {`http://localhost:3000/${profileUserData.attachment_url}`}  className="img-avatar"/> : <Gravatar email="1000-email@example.com"  className="img-avatar"/> }
-      <hr></hr>
+      
     </div><hr></hr>
   
              
@@ -209,6 +225,9 @@ function updateProfileInfo(e) {
           <li className="list-group-item text-right"><span className="pull-left"><strong>Posts</strong></span></li>
         </ul> 
          </div>
+         <div className="col-sm-9">
+         <MyBuilds />
+          </div>
       </div>
     </div>
     )}

@@ -15,7 +15,7 @@ function ContextProvider({children}){
       console.log(users)
   },[])
   
-  
+
   const [allBuilds, setAllBuilds] = useState([])
     const [favoriteBuilds, setFavoriteBuilds] = useState([])
 
@@ -168,6 +168,8 @@ function ContextProvider({children}){
     return(
 
             <Context.Provider value = {{
+                users,
+                user,
                 allBuilds,
                 setAllBuilds,
                 favoriteBuilds,
@@ -184,8 +186,6 @@ function ContextProvider({children}){
                 setFavorites,
                 updateFavorites,
                 loggedInStatus,
-                user,
-                users,
                 checkLoginStatus,
                 handleLogout,
                 handleLogoutClick,

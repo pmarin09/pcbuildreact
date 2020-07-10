@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {Switch, Route} from "react-router-dom";
 import Favorites from "./Build/Favorites"
 import PcBuilds from "./Build/PcBuilds"
-import ProfilePage from "./ProfilePage";
+import ProfilePage from "./Profile/ProfilePage";
 import Main from "./Main";
 import AllBuilds from "./Build/AllBuilds"
 import BuildDetail from "./Build/BuildDetail"
