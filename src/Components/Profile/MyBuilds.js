@@ -6,7 +6,7 @@ import TimeAgo from 'timeago-react';
 function MyBuilds() {
     
     
-    const {loggedInStatus,allBuilds, user,favorites,updateFavorites} = useContext(Context)
+    const {allBuilds} = useContext(Context)
     const {userId} = useParams()
     const myBuilds = allBuilds.filter(build => build.user_id.toString() === userId)
     

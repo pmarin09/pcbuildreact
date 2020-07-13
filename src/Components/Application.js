@@ -3,6 +3,7 @@ import {Switch, Route} from "react-router-dom";
 import Favorites from "./Build/Favorites"
 import PcBuilds from "./Build/PcBuilds"
 import ProfilePage from "./Profile/ProfilePage";
+import EditProfile from "./Profile/EditProfile";
 import Main from "./Main";
 import AllBuilds from "./Build/AllBuilds"
 import BuildDetail from "./Build/BuildDetail"
@@ -33,7 +34,8 @@ function Application() {
       <Route path = "/forgotPassword"> <ForgotPassword/> </Route>
       <Route path = "/resetPassword"> <ResetPassword/> </Route>
       <Route exact path = "/profile"> <ProfilePage/> </Route>
-      <Route path = "/profile/:userId"> <ProfilePage/> </Route>
+      <Route exact path = "/profile/:userId"> <ProfilePage/> </Route>
+      <Route path = "/profile/edit/:userId"> <EditProfile/> </Route>
       <Route path = "/builds/:buildId"> <BuildDetail/> </Route>
       <Route exact path = "/forum/"> <Forum/> </Route>
       <Route path = "/forum/:forumId"> <ForumDetail/> </Route>
