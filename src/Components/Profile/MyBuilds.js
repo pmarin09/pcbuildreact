@@ -6,7 +6,7 @@ import TimeAgo from 'timeago-react';
 function MyBuilds() {
     
     
-    const {allBuilds} = useContext(Context)
+    const {allBuilds,user, loggedInStatus} = useContext(Context)
     const {userId} = useParams()
     const myBuilds = allBuilds.filter(build => build.user_id.toString() === userId)
     
@@ -29,6 +29,13 @@ function MyBuilds() {
                     <h5 className="card-title">{filteredBuild.description}</h5>
                     <p className="card-text"></p>
                     <Link to={`/builds/${filteredBuild.id}`}><button type="button" className="btn btn-sm btn-outline-danger">View Details</button></Link>
+                   
+                    {(user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") ? 
+                        <Link to={`/pcbuilds/edit/${filteredBuild.id}`} style={{textDecoration: "none"}}>
+                             <span><button class="btn btn-sm btn-warning" style={{marginLeft: "20px"}}>Edit Build</button></span>
+                        </Link>
+                        :
+                        ""}
                     <p className="card-text"><small className="text-muted"> Build created <TimeAgo datetime={filteredBuild.created_at}/> by <Link to={`/profile/${filteredBuild.user_id}`}>{filteredBuild.username}</Link> </small></p>
                     
                     </div>

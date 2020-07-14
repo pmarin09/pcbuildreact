@@ -33,7 +33,7 @@ import Select from 'react-select'
   const Mouse = (parts.filter(part => part.part_type === "Mouse")).map(a=>{return {value: a.id,label: a.description}})
   const Headset = (parts.filter(part => part.part_type === "Headset")).map(a=>{return {value: a.id,label: a.description}})
  
-  console.log(Mobo)
+  
 
   function createBuild(e) {
     const form = new FormData(document.getElementById("newPcbuild"));

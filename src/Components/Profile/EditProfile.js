@@ -9,9 +9,14 @@ import { useHistory,useParams } from 'react-router-dom';
 
 function EditProfile (){
 
-const {user,users}=useContext(Context)
+const {user,loggedInStatus,users,allBuilds,posts,discussions,favorites}=useContext(Context)
 const history = useHistory()
 const {userId} = useParams()
+const myBuilds = allBuilds.filter(build => build.user_id.toString() === userId)
+const myPosts = posts.filter(post => post.user_id.toString() === userId)
+const myLikes = myBuilds.map(build => build.likes).reduce((acc, likes) => acc +likes.length,0)
+const myDiscussions = discussions.filter(discussion => discussion.user_id.toString() === userId)
+const myFavorites = favorites.filter(favorite => favorite.user_id.toString() === userId)
 const profileUser = users.filter(user => user.id.toString() === userId)
 
 function updateProfileInfo(e) {
@@ -37,7 +42,8 @@ function uploadAvatar(e) {
 }
 
   return (
-
+    <>
+    {(user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") ? 
 <div>
   
 <hr></hr>
@@ -47,17 +53,19 @@ function uploadAvatar(e) {
      <div className="col-xs-3 col-sm-3" >{profileUserData.attachment_url ? <img src = {`http://localhost:3000/${profileUserData.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
     <div className="col-sm-9"><h1 className="profile-username">{profileUserData.username}</h1>
     <div className="profile-stats-row">
-          <div className="col-md-3"> 10 </div>
-          <div className="col-md-3"> 20 </div>
-          <div className="col-md-3"> 5 </div>
-          <div className="col-md-3"> 40 </div>
-        </div>
+            <div className="col-md-2"> {profileUserData.pcbuilds.length} </div>
+            <div className="col-md-2"> {myLikes} </div>
+            <div className="col-md-2"> {myFavorites.length} </div>
+            <div className="col-md-2"> {myDiscussions.length}</div>
+            <div className="col-md-2"> {myPosts.length} </div>
+      </div>
       <div className="profile-statslabel-row">
-          <div className="col-md-3"> Builds </div>
-          <div className="col-md-3"> Likes </div>
-          <div className="col-md-3"> Favorites </div>
-          <div className="col-md-3"> Posts </div>
-        </div>
+            <div className="col-md-2"> {profileUserData.pcbuilds.length > 1 ? "Builds": "Build"} </div>
+            <div className="col-md-2"> {myLikes > 1 || myLikes === 0? "Likes": "Like"} </div>
+            <div className="col-md-2"> {myFavorites.length > 1 || myFavorites.length === 0 ? "Favorites" : "Favorite"}  </div>
+            <div className="col-md-2"> {myDiscussions.length > 1 || myDiscussions.length === 0? "Discussions" : "Discussion"} </div>
+            <div className="col-md-2"> {myPosts.length > 1 || myPosts.length === 0 ? "Posts" : "Post"} </div>
+      </div>
     </div>
   </div>
   <div className="row">
@@ -83,17 +91,20 @@ function uploadAvatar(e) {
                     />
                 </form>
                 <hr></hr>
-          <div className="panel-heading">Member since: <TimeAgo datetime={profileUserData.created_at}/> <i className="fa fa-link fa-1x"></i></div>
+          <div className="panel-heading">Member since: 
+          <p> {new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "2-digit"
+        }).format(new Date(profileUserData.created_at))}</p> <i className="fa fa-link fa-1x"></i></div>
           <div className="panel-body"><a href="http://bootnipets.com"></a></div>
         </div>
                  
         
         <ul className="list-group">
-          <li className="list-group-item text-muted">Activity <i className="fa fa-dashboard fa-1x"></i></li>
+          <li className="list-group-item text-muted">Info <i className="fa fa-dashboard fa-1x"></i></li>
           <li className="list-group-item text-right"><span className="pull-left"><strong>Builds</strong></span>  </li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Likes</strong></span> </li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Discussions</strong></span> </li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Posts</strong></span></li>
+
         </ul> 
          </div>
          <div className="col-sm-9">
@@ -176,8 +187,10 @@ function uploadAvatar(e) {
     </div>
     )}
   </div>
-    
-
+    :
+    "You are not authorized to access this page.."}
+</>
   )}
+
 
 export default EditProfile;
