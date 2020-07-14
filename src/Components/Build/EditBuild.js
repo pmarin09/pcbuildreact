@@ -3,17 +3,23 @@ import { Context } from "../../Context";
 import 'bootstrap/dist/css/bootstrap.css';
 import Gravatar from 'react-gravatar'
 import { useHistory,useParams } from 'react-router-dom';
-
-
+import mobo from "../../icons/mobo.png"
+import Select from 'react-select'
 
 function EditBuild (){
 
-const {user,users,allBuilds,loggedInStatus}=useContext(Context)
+const {user,users,parts,allBuilds,checkLoginStatus,posts,loggedInStatus}=useContext(Context)
 const history = useHistory()
 const {buildId} = useParams()
 const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
-// const Mobo = (thisBuild.parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: a.description}})
-// const CPU = (thisBuild.parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: a.description}})
+const thisBuildImages = thisBuild.map(a => {
+  return a.attachment_url.map(b =>
+        <td><img src = {`http://localhost:3000/${b}`} className="build-edit-images"/></td>
+    )})
+ const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: a.description}})
+
+
+ // const CPU = (thisBuild.parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: a.description}})
 // const CPUCooler = (thisBuild.parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label: a.description}})
 // const GPU = (thisBuild.parts.filter(part => part.part_type === "GPU")).map(a=>{return {value: a.id,label: a.description}})
 // const RAM = (thisBuild.parts.filter(part => part.part_type === "RAM")).map(a=>{return {value: a.id,label: a.description}})
@@ -25,31 +31,57 @@ const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
 // const Mouse = (thisBuild.parts.filter(part => part.part_type === "Mouse")).map(a=>{return {value: a.id,label: a.description}})
 // const Headset = (thisBuild.parts.filter(part => part.part_type === "Headset")).map(a=>{return {value: a.id,label: a.description}})
 
-console.log(thisBuild)
+console.log(thisBuildImages)
 
-  return (
-    <>
-    {/* {(user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") ?  */}
+  
+
+
+function updateBuild(e) {
+  const form = new FormData(document.getElementById("updatePcbuild"));
+
+  fetch("http://localhost:3000/pcbuilds.json", {
+    method: "PATCH",
+    body: form,
+  });
+  e.preventDefault();
+  // history.push(`/pcbuilds`)
+  window.location.reload(false);
+}
+
+useEffect(()=>{
+  checkLoginStatus()
+},[])
+
+
+
+
+
+
+
+
+return (
+    
+   
 <div>
   
 <hr></hr>
 {thisBuild.map(build => 
 <div className="profile-container">
   <div className="row">
-     <div className="col-xs-3 col-sm-3" >{build.attachment_url ? <img src = {`http://localhost:3000/${build.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
-    <div className="col-sm-9"><h1 className="profile-username">{build.username}</h1>
+     <div className="col-xs-3 col-sm-3" >{build.attachment_url ? <img src = {`http://localhost:3000/${build.attachment_url}`}  className="build-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
+    <div className="col-sm-9"><h1 className="profile-username">{build.id}</h1>
     <div className="profile-stats-row">
           <div className="col-md-3"> {build.attachment_url.length} </div>
           <div className="col-md-3"> {build.likes.length} </div>
           <div className="col-md-3"> {build.favorites.length}</div>
-          <div className="col-md-3"> 0</div>
+          <div className="col-md-3"> {build.buildposts.length}</div>
         </div>
       <div className="profile-statslabel-row">
           
           <div className="col-md-3"> Images </div>
           <div className="col-md-3"> Likes </div>
           <div className="col-md-3"> Favorites </div>
-          <div className="col-md-3"> Posts </div>
+          <div className="col-md-3"> Comments </div>
         </div>
     </div>
   </div>
@@ -83,15 +115,87 @@ console.log(thisBuild)
         </ul> 
          </div>
          <div className="col-sm-9">
-      
+
+           <div className= "build-card-body">
+            {thisBuildImages}
+            </div>
+         
+  <form className="form" onSubmit={updateBuild} id="updatePcbuild">
+  <div className="col">
+              Image:
+              <input type="file" 
+                className="dropzone"
+                id="file_upload" 
+                name="attachment[]"
+                required
+                multiple
+                 />
+      </div>
+                <input
+                  type="text"
+                  name="user_id"
+                  value={user.id}
+                  className="description"
+                  required
+                  style={{display: "none"}}
+                />
+                <input
+                  type="text"
+                  name="username"
+                  value={user.username}
+                  className="description"
+                  required
+                  style={{display: "none"}}
+                />
+      <table className="create-build-table">
+    <thead>
+      <tr>
+        <th>Icon</th>
+        <th className = "component">Component</th>
+        <th className = "component-description">Description</th>
+        <th className = "hola">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><img src={mobo} className="build-icon"/></td>
+        <td className = "component">Motherboard</td> 
+        <td className = "component-description">
+              <Select 
+              name="pcbuildpart_id[Mobo][id]"
+              required
+              options= {Mobo}
+              className= "component-description"
+              placeholder={thisBuild.filter(build => build.pcbuild_parts.id)}
+              /> 
+        </td>
+        <td className = "part-price">
+                <input
+                  type="text"
+                  name="part_id[Mobo][price]"
+                  className="price"
+                  id="moboprice"
+                  required
+                />
+        </td>
+        </tr>
+
+        <input
+            type="submit"
+            value="Update Build"
+            className="button is-link"
+          />
+          </tbody>
+          </table>
+    </form>
+
+
           </div>
       </div>
     </div>
     )}
   </div>
-    {/* : */}
-    {/* "You are not authorized to access this page.."} */}
-</>
+ 
   )}
 
 
