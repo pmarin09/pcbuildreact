@@ -33,12 +33,14 @@ function Favorites() {
                 {currentFavorites}
                 </div>
                 
+                {favoriteBuilds.length > 10 ? 
                 <Pagination
                             elementsPerPage={favoriteBuildsPerPage}
                             totalElements={favoriteBuilds.length}
                             paginate={paginate}
                             className="favorites-pagination"
                         />
+                :""}
         </main>
     )
 }

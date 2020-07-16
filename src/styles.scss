@@ -444,12 +444,13 @@ width: 24px !important;
   color:white;
 }
 .favorite-icon{
-  color:rgb(202, 176, 25);
+  color:rgb(124, 18, 18);
   height:24px;
 }
 
 .ri-money-dollar-circle-line{
   color:green !important;
+  margin-bottom:0.5px;
 }
 
 
@@ -878,6 +879,17 @@ margin-bottom: 10px;
  .pagination{
    justify-content: center !important;
  }
+
+ .page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: red !important;
+  background-color: rgb(36,38,39);
+  border: 1px solid #393a3b;
+}
 
 
 

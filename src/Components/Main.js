@@ -37,11 +37,11 @@ const paginate = pageNumber => setCurrentPage(pageNumber);
         <div className="container">
           <div className="row">
             {currentBuilds}
-            <Pagination
+            {imageElements.length > 9 ? <Pagination
               elementsPerPage={buildsPerPage}
               totalElements={imageElements.length}
               paginate={paginate}
-            />
+            /> : ""}
           </div>  
         </div>
       </div>

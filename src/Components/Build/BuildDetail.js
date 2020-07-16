@@ -130,12 +130,13 @@ function BuildDetail(img) {
             <h2 className="title is-5 has-text-grey-light">Build Description</h2>
             <div>{thisBuild.map(build => build.comments)}</div>
             {currentBuildPosts}
-
+            
+            {showBuildposts.length > 10 ?
             <Pagination
               elementsPerPage={buildpostsPerPage}
               totalElements={showBuildposts.length}
               paginate={paginate}
-                        />
+                        /> : ""}
         </div>
         </div>
        

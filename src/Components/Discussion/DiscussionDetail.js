@@ -67,7 +67,7 @@ function DiscussionDetail() {
 
     //PAGINATION 
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(10);
+    const [postsPerPage] = useState(20);
  
    // Get current posts
    const indexOfLastPost = currentPage * postsPerPage;
@@ -104,11 +104,12 @@ function DiscussionDetail() {
                         </div>
                     </div>
                     {currentPosts}
-                    <Pagination
+                    {showPosts.length > 20 ? 
+                          <Pagination
                             elementsPerPage={postsPerPage}
                             totalElements={showPosts.length}
                             paginate={paginate}
-                        />
+                        /> : ""}
                 </>
                 : "Loading..."}
             </div>

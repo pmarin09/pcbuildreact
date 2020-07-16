@@ -87,13 +87,14 @@ function Discussions(){
             
             </tbody>
            
-            
         </table>
-                        <Pagination
-                            elementsPerPage={discussionsPerPage}
-                            totalElements={discussionsData.length}
-                            paginate={paginate}
-                        />
+        <hr></hr>
+        {discussionsData.length > 10 ? 
+            <Pagination
+            elementsPerPage={discussionsPerPage}
+            totalElements={discussionsData.length}
+            paginate={paginate}/> 
+        :""}
 </section>
 
         )
