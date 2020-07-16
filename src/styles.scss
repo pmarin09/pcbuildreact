@@ -441,6 +441,23 @@ width: 24px !important;
 .comments-icon{
   margin-left: 10px;
   margin-top: 8px;
+  color:white;
+}
+.favorite-icon{
+  color:rgb(153, 31, 31);
+}
+
+
+.ri-lg {
+    font-size: 24px !important;
+    line-height: 0.75em;
+    vertical-align: middle !important;
+}
+.main-card-hr{
+  border: none;
+  display: block;
+  height: 2px;
+  margin: 1rem 0;
 }
 
 .grid-container {
@@ -458,6 +475,12 @@ width: 24px !important;
   margin-right: 12px;
   margin-bottom: 5px;
   cursor: pointer;
+}
+
+.build-cost{
+    margin:auto;
+    color:white;
+    float:right;
 }
 
 .pcnavbar-start {

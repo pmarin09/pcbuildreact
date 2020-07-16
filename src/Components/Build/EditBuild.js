@@ -31,7 +31,7 @@ const thisBuildImages = thisBuild.map(a => {
 // const Mouse = (thisBuild.parts.filter(part => part.part_type === "Mouse")).map(a=>{return {value: a.id,label: a.description}})
 // const Headset = (thisBuild.parts.filter(part => part.part_type === "Headset")).map(a=>{return {value: a.id,label: a.description}})
 
-console.log(thisBuildImages)
+console.log(thisBuild.filter(build => build.pcbuild_parts))
 
   
 
@@ -39,24 +39,17 @@ console.log(thisBuildImages)
 function updateBuild(e) {
   const form = new FormData(document.getElementById("updatePcbuild"));
 
-  fetch("http://localhost:3000/pcbuilds.json", {
+  fetch(`http://localhost:3000/pcbuilds/${buildId}.json`, {
     method: "PATCH",
     body: form,
   });
   e.preventDefault();
   // history.push(`/pcbuilds`)
-  window.location.reload(false);
+  // window.location.reload(false);
 }
-
 useEffect(()=>{
   checkLoginStatus()
 },[])
-
-
-
-
-
-
 
 
 return (
@@ -69,7 +62,7 @@ return (
 <div className="profile-container">
   <div className="row">
      <div className="col-xs-3 col-sm-3" >{build.attachment_url ? <img src = {`http://localhost:3000/${build.attachment_url}`}  className="build-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
-    <div className="col-sm-9"><h1 className="profile-username">{build.id}</h1>
+    <div className="col-sm-9"><h1 className="profile-username"><small>Build Owner: {build.username}</small></h1>
     <div className="profile-stats-row">
           <div className="col-md-3"> {build.attachment_url.length} </div>
           <div className="col-md-3"> {build.likes.length} </div>
@@ -97,7 +90,7 @@ return (
                 
                 <hr></hr>
           <div className="panel-heading">Build Created: 
-          <p> {new Intl.DateTimeFormat("en-GB", {
+          <p> {new Intl.DateTimeFormat("en-US", {
           year: "numeric",
           month: "long",
           day: "2-digit"
@@ -108,10 +101,7 @@ return (
         
         <ul className="list-group">
           <li className="list-group-item text-muted">Activity <i className="fa fa-dashboard fa-1x"></i></li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Builds</strong></span>  </li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Likes</strong></span> </li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Discussions</strong></span> </li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Posts</strong></span></li>
+          
         </ul> 
          </div>
          <div className="col-sm-9">
@@ -127,7 +117,6 @@ return (
                 className="dropzone"
                 id="file_upload" 
                 name="attachment[]"
-                required
                 multiple
                  />
       </div>
@@ -166,7 +155,6 @@ return (
               required
               options= {Mobo}
               className= "component-description"
-              placeholder={thisBuild.filter(build => build.pcbuild_parts.id)}
               /> 
         </td>
         <td className = "part-price">
