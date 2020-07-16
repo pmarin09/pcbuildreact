@@ -5,8 +5,8 @@ import PropTypes from "prop-types"
 import styles from "../../styles.scss"
 import {Link,useHistory} from "react-router-dom"
 import TimeAgo from 'timeago-react';
-import dollar from "../../icons/dollar.png"
-import buildcomments from "../../icons/buildcomments.png"
+import dollar from "../../icons/dollarred.png"
+import buildcomments from "../../icons/buildcommentswhite.png"
 function Image({img}) {
     const [hovered, ref] = useHover()
     const {buildposts, likes, updateLikes, favorites, updateFavorites, user, loggedInStatus} = useContext(Context)
@@ -86,7 +86,7 @@ function LikeIcon(){
                 <div className="card-text">
                 <div className="favorite-icon">{ loggedInStatus === "LOGGED_IN" ? favoriteIcon(): ""} 
                 
-                <div className= "build-cost"><img src={dollar}/> Total Cost: ${pcbuildTotalCost}</div>
+                <div className= "build-cost"><i class="ri-money-dollar-circle-line ri-lg"></i> Total Cost: ${pcbuildTotalCost}</div>
                 
                 </div>
                 <hr className="main-card-hr"></hr>
