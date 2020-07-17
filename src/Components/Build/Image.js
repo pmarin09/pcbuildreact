@@ -16,6 +16,7 @@ function Image({img}) {
     const thisBuildLikes = likes.filter(like => like.pcbuild_id === img.id)
     const buildlikecount = thisBuildLikes.length
     const CPU = img.parts.map(part => (part.part_type === "CPU") ? part.description: "")
+    const Mobo = img.parts.map(part => (part.part_type === "Mobo") ? part.description: "")
     const GPU = img.parts.map(part => (part.part_type === "GPU") ? part.description: "")
     const pcbuildParts = img.pcbuild_parts.map(b=>b.price)
     const pcbuildTotalCost = pcbuildParts.reduce((acc,price) => {return  acc + price},0)
@@ -90,8 +91,9 @@ function LikeIcon(){
                 
                 </div>
                 <hr className="main-card-hr"></hr>
-                <div><small>{GPU}</small></div>
                 <div><small>{CPU}</small></div>
+                <div><small>{Mobo}</small></div>
+                <div><small>{GPU}</small></div>
                 <div>...</div>
                 </div>
                   <p className="card-text">

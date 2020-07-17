@@ -34,7 +34,6 @@ function Discussions(){
 
                      <div className = "post-count"><Link to={`/discussions/${discussion.id}`} style={{float: "left"}}><img src={comment}/> {discussion.posts.length} </Link></div>
        </div>
-            
         ))
     function createDiscussion(e) {
         const form = new FormData(document.getElementById("newDiscussion"));
@@ -58,10 +57,32 @@ function Discussions(){
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
+
+  
+  function toggleTheme() {
+    const x = document.getElementById("discussions-table");
+    const y = document.getElementById("allforums-box");
+    const z = document.getElementById("new-discussion-button")
+    x.classList.toggle("dark");
+    y.classList.toggle("dark");
+    z.classList.toggle("dark")
+  }
+//   const theLinks = document.querySelectorAll(".pcnavbar-item");
+//   theLinks.forEach(link => link.addEventListener("click", ()=>{
+//     x.classList.remove("responsive");
+//   }))  
+
+
     return(
 
 <section className="forms text-center border border-light p-5">
-        <table className="discssions-table">
+
+                        <label className="switch" style={{float: "right"}}>
+                         <input type="checkbox" onClick={toggleTheme}/>
+                        <span className="slider round"></span>
+                        </label>
+                    
+        <table className="discussions-table" id="discussions-table">
             <thead>
             <tr>
                 <th className= "all-forums">All Forums</th>
@@ -72,9 +93,9 @@ function Discussions(){
             </thead>
             <tbody>
             <tr>
-            <div className="allforums-box">
+            <div className="allforums-box" id="allforums-box">
                 <div><Link to="/newDiscussion" style={{textDecoration: "none"}}>
-                        <Button color = "primary" className="new-discussion-btn">
+                        <Button className="new-discussion-btn" id="new-discussion-button">
                             New Discussion
                         </Button>
                     </Link>
