@@ -17,9 +17,13 @@ import Select from 'react-select'
 
   function PcBuilds(){
   
-  const{user, parts, checkLoginStatus, loggedInStatus} = useContext(Context)
+  const{user, parts, checkLoginStatus,toggleTheme, checkThemeStatus, loggedInStatus} = useContext(Context)
   const history = useHistory()
-  
+  const themeLabel = <label className="switch" style={{float: "right"}}>
+  <input type="checkbox" onClick={toggleTheme} id="theme-checkbox"/>
+  <span className="slider round"></span>
+  </label> 
+
   const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: a.description}})
   const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: a.description}})
   const CPUCooler = (parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label: a.description}})
@@ -34,7 +38,6 @@ import Select from 'react-select'
   const Headset = (parts.filter(part => part.part_type === "Headset")).map(a=>{return {value: a.id,label: a.description}})
  
   
-
   function createBuild(e) {
     const form = new FormData(document.getElementById("newPcbuild"));
 
@@ -49,17 +52,24 @@ import Select from 'react-select'
 
   useEffect(()=>{
     checkLoginStatus()
+    checkThemeStatus()
   },[])
-
+  
     return(
     <>
+                       
     {(loggedInStatus === "LOGGED_IN") ?
+    
     <section className = "section">
       <h2 className="title is-5 has-text-grey-light">Create a New Build</h2>
-
-<section className="create-build-form">
+      
+      <section className="create-build-form" id="build-form">
+      
+      
   <form className="form" onSubmit={createBuild} id="newPcbuild">
+    
   <div className="col">
+  {themeLabel}
               Image:
               <input type="file" 
                 className="dropzone"
@@ -85,7 +95,7 @@ import Select from 'react-select'
                   required
                   style={{display: "none"}}
                 />
-      <table className="create-build-table">
+      <table className="create-build-table" id="create-build-table">
     <thead>
       <tr>
         <th>Icon</th>

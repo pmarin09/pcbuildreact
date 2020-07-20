@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react"
+import React, {useContext, useState,useEffect} from "react"
 import {useParams, Link} from "react-router-dom"
 import {Context} from "../../Context"
 import Gravatar from 'react-gravatar'
@@ -7,7 +7,7 @@ import { Button } from 'react-bulma-components';
 import Pagination from '../../Pagination';
 
 function DiscussionDetail() {
-    const{discussions, posts, user, loggedInStatus} = useContext(Context)
+    const{discussions, posts, user, toggleTheme, checkThemeStatus,loggedInStatus} = useContext(Context)
     const {discussionId} = useParams()
     const thisDiscussion = discussions.find(discussion => discussion.id.toString() === discussionId)
     const showPosts =  posts.filter(post => post.discussion_id.toString() === discussionId).map(filteredPost => (
@@ -53,6 +53,11 @@ function DiscussionDetail() {
       
    ))
 
+   useEffect(()=>{
+     checkThemeStatus()
+    },[])
+                        
+
     function createPost(e) {
      
         const form = new FormData(document.getElementById("newPost"));
@@ -81,7 +86,12 @@ function DiscussionDetail() {
 <section className = "section">
     <div className = "container">
         <div className = "columns">
-            <div className = "column is-9">
+            <div className = "column is-9" id ="posts-container">
+
+            <label className="switch" style={{float: "right"}} >
+                         <input type="checkbox" onClick={toggleTheme} id="theme-checkbox"/>
+                        <span className="slider round"></span>
+                        </label>
                 {thisDiscussion ? 
                 <>
                     <h1 className="title is-2 has-text-grey discussion-title">{thisDiscussion.title}</h1>
@@ -103,7 +113,9 @@ function DiscussionDetail() {
                          
                         </div>
                     </div>
+                    <div className="posts-content-box" id="posts-content-box">
                     {currentPosts}
+                    </div>
                     {showPosts.length > 20 ? 
                           <Pagination
                             elementsPerPage={postsPerPage}

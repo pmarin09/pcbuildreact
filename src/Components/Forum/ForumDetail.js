@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react"
+import React, {useContext, useState,useEffect} from "react"
 import {Link, useParams} from "react-router-dom"
 import {Context} from "../../Context"
 import Gravatar from 'react-gravatar'
@@ -8,7 +8,7 @@ import Pagination from '../../Pagination';
 import comment from '../../icons/comment.png'
 
 function ForumDetail() {
-    const {forums,discussions,user, loggedInStatus} = useContext(Context)
+    const {forums,discussions,user, loggedInStatus,toggleTheme,checkThemeStatus} = useContext(Context)
     const {forumId} = useParams()
     const forumsData = forums.map(forum => (
         <h3 className = "forumSideBar" key={forum.id}>
@@ -50,11 +50,20 @@ function ForumDetail() {
 
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
+  useEffect(()=>{
+    checkThemeStatus()
+    },[])
     return (
 
 
 <section className="forms text-center border border-light p-5">
-<table className="discssions-table">
+<label className="switch" style={{float: "right"}}>
+                         <input type="checkbox" onClick={toggleTheme} id="theme-checkbox"/>
+                        <span className="slider round"></span>
+                        </label>
+<table className="discussions-table" id="discussions-table">
     <thead>
     <tr>
         <th className= "all-forums">All Forums</th>
@@ -65,9 +74,9 @@ function ForumDetail() {
     </thead>
     <tbody>
     <tr>
-    <ul className="box">
+    <ul className="allforums-box" id="allforums-box">
         <td><Link to="/newDiscussion" style={{textDecoration: "none"}}>
-                <Button color = "primary" className="new-discussion-btn">
+                <Button color = "primary" className="new-discussion-btn" id="new-discussion-button">
                     New Discussion
                 </Button>
             </Link>
@@ -82,11 +91,12 @@ function ForumDetail() {
    
     
 </table>
+            {showDiscussions.length > 10 ? 
                 <Pagination
                     elementsPerPage={discussionsPerPage}
                     totalElements={showDiscussions.length}
                     paginate={paginate}
-                />
+                /> : ""}
 </section>
     )
 }

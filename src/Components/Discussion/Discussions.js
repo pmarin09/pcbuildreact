@@ -1,4 +1,4 @@
-import React, {useContext,useState} from "react"
+import React, {useContext,useState,useEffect} from "react"
 import{Context} from "../../Context"
 import {Link} from "react-router-dom"
 import { Button } from 'react-bulma-components';
@@ -8,7 +8,7 @@ import Pagination from '../../Pagination';
 import comment from '../../icons/comment.png'
 
 function Discussions(){
-    const {forums, discussions, user, loggedInStatus} = useContext(Context)
+    const {forums, discussions, user, loggedInStatus,toggleTheme,checkThemeStatus} = useContext(Context)
     const forumsData = forums.map(forum => (
         <h3 className = "forumSideBar" key={forum.id}>
             <p ><Link to={`/forum/${forum.id}`}>{forum.title}</Link></p>
@@ -58,27 +58,17 @@ function Discussions(){
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
 
-  
-  function toggleTheme() {
-    const x = document.getElementById("discussions-table");
-    const y = document.getElementById("allforums-box");
-    const z = document.getElementById("new-discussion-button")
-    x.classList.toggle("dark");
-    y.classList.toggle("dark");
-    z.classList.toggle("dark")
-  }
-//   const theLinks = document.querySelectorAll(".pcnavbar-item");
-//   theLinks.forEach(link => link.addEventListener("click", ()=>{
-//     x.classList.remove("responsive");
-//   }))  
 
+  useEffect(()=>{
+   checkThemeStatus()
+   },[])
 
     return(
 
 <section className="forms text-center border border-light p-5">
 
                         <label className="switch" style={{float: "right"}}>
-                         <input type="checkbox" onClick={toggleTheme}/>
+                         <input type="checkbox" onClick={toggleTheme} id="theme-checkbox"/>
                         <span className="slider round"></span>
                         </label>
                     

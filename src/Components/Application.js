@@ -46,12 +46,9 @@ function Application() {
       <Route  path = "/newdiscussion/"> <NewDiscussion/></Route>
       <Route  path = "/editdiscussion/:discussionId"> <EditDiscussion/></Route>
       <Route  path = "/:discussionId/editpost/:postId"> <EditPost/></Route>
-      
       <Route  path = "/editbuildpost/:buildpostId"> <EditBuildPost/></Route>
       </Switch>
         
-
-
   );
 }
 

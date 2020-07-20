@@ -5,7 +5,69 @@ import { useHistory } from 'react-router-dom';
 const Context  = React.createContext()
 
 function ContextProvider({children}){
-    
+
+  //LIGHT AND DARK THEME
+  const [theme, setTheme] = useState("light")
+  function toggleTheme(){
+    if(document.getElementById("theme-checkbox").checked === true){
+      setTheme("light")
+      console.log(theme)
+      addDarkTheme()
+     
+    } else if(document.getElementById("theme-checkbox").checked === false){
+        setTheme("dark")
+        console.log(theme)
+        removeDarkTheme()
+    }
+  }
+  function checkThemeStatus(){
+    if(theme === "dark"){
+      document.getElementById("theme-checkbox").checked = false
+      toggleTheme()
+    } else if (theme === "light"){
+      document.getElementById("theme-checkbox").checked = true
+      toggleTheme()
+    }
+  }
+  function addDarkTheme() {
+    const x = document.getElementById("discussions-table");
+    const y = document.getElementById("allforums-box");
+    const z = document.getElementById("new-discussion-button")
+    const p = document.getElementById("posts-container")
+    const b = document.getElementById("build-form")
+    const f = document.getElementById("create-build-table")
+    if (x) {
+      x.classList.add("dark");
+      y.classList.add("dark");
+      z.classList.add("dark");
+    }else if(p){
+      p.classList.add("dark")
+    }else if(f){
+      b.classList.add("dark")
+      f.classList.add("dark")
+    }
+  }
+  function removeDarkTheme() {
+    const x = document.getElementById("discussions-table");
+    const y = document.getElementById("allforums-box");
+    const z = document.getElementById("new-discussion-button")
+    const p = document.getElementById("posts-container")
+    const b = document.getElementById("build-form")
+    const f = document.getElementById("create-build-table")
+    if (x) {
+      x.classList.remove("dark");
+      y.classList.remove("dark");
+      z.classList.remove("dark");
+    }else if(p){
+      p.classList.remove("dark")
+    }else if(b){
+      b.classList.remove("dark")
+      f.classList.remove("dark")
+    }
+  }
+  /////
+
+
   const [users, setUsers]=useState([])
   const usersUrl = "http://localhost:3000/users.json"
   useEffect(()=>{
@@ -15,7 +77,6 @@ function ContextProvider({children}){
       console.log(users)
   },[])
   
-
   const [allBuilds, setAllBuilds] = useState([])
     const [favoriteBuilds, setFavoriteBuilds] = useState([])
 
@@ -168,6 +229,10 @@ function ContextProvider({children}){
     return(
 
             <Context.Provider value = {{
+                theme,
+                setTheme,
+                checkThemeStatus,
+                toggleTheme,
                 users,
                 user,
                 allBuilds,
