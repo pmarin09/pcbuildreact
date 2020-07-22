@@ -59,19 +59,26 @@ function Discussions(){
 
 
 
-  useEffect(()=>{
-   checkThemeStatus()
-   },[])
-
     return(
 
 <section className="forms text-center border border-light p-5">
 
-                        <label className="switch" style={{float: "right"}}>
-                         <input type="checkbox" onClick={toggleTheme} id="theme-checkbox"/>
+                        <form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
+                        <input 
+                         type="hidden"
+                         name="dark_theme"
+                         id="theme-checkbox-hidden"
+                         value={false}
+                         />
+                         <input 
+                         type="checkbox"
+                         name="dark_theme"
+                         id="theme-checkbox"
+                         value={true}
+                         />
                         <span className="slider round"></span>
-                        </label>
-                    
+                        </form>
+                        {checkThemeStatus()}
         <table className="discussions-table" id="discussions-table">
             <thead>
             <tr>

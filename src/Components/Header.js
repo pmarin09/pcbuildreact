@@ -50,12 +50,8 @@ function handleSubmit(event) {
 
 const x = document.getElementById("pc-nav");
 function toggleNavMenu() {
-  // Toggle between adding / removing the responsive class from the menu
   x.classList.toggle("responsive");
 }
-
-// We get all the a elements with class "nav-item", and attach a click
-// listener to them which removes the responsive class from myTopNav element.
 const theLinks = document.querySelectorAll(".pcnavbar-item");
 theLinks.forEach(link => link.addEventListener("click", ()=>{
   x.classList.remove("responsive");

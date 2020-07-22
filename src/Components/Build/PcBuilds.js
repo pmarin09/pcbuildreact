@@ -19,10 +19,21 @@ import Select from 'react-select'
   
   const{user, parts, checkLoginStatus,toggleTheme, checkThemeStatus, loggedInStatus} = useContext(Context)
   const history = useHistory()
-  const themeLabel = <label className="switch" style={{float: "right"}}>
-  <input type="checkbox" onClick={toggleTheme} id="theme-checkbox"/>
+  const themeLabel = <form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
+  <input 
+   type="hidden"
+   name="dark_theme"
+   id="theme-checkbox-hidden"
+   value={false}
+   />
+   <input 
+   type="checkbox"
+   name="dark_theme"
+   id="theme-checkbox"
+   value={true}
+   />
   <span className="slider round"></span>
-  </label> 
+  </form>
 
   const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: a.description}})
   const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: a.description}})

@@ -7,28 +7,41 @@ const Context  = React.createContext()
 function ContextProvider({children}){
 
   //LIGHT AND DARK THEME
+  
   const [theme, setTheme] = useState("light")
+
   function toggleTheme(){
-    if(document.getElementById("theme-checkbox").checked === true){
-      setTheme("light")
-      console.log(theme)
-      addDarkTheme()
-     
-    } else if(document.getElementById("theme-checkbox").checked === false){
-        setTheme("dark")
-        console.log(theme)
-        removeDarkTheme()
-    }
-  }
-  function checkThemeStatus(){
-    if(theme === "dark"){
-      document.getElementById("theme-checkbox").checked = false
-      toggleTheme()
-    } else if (theme === "light"){
+
+    if(document.getElementById("theme-checkbox").checked == false){
       document.getElementById("theme-checkbox").checked = true
-      toggleTheme()
+      setTheme("dark")
+      addDarkTheme()
+      document.getElementById('theme-checkbox-hidden').disabled = true;
+    } else if(document.getElementById("theme-checkbox").checked == true){
+      document.getElementById("theme-checkbox").checked = false 
+      setTheme("light")
+      removeDarkTheme()
+      document.getElementById('theme-checkbox-hidden').disabled = false;
+    }
+    sendDarkTheme()
+  }
+  function sendDarkTheme (){
+    const form = new FormData(document.getElementById("setDarkTheme"));
+  fetch(`http://localhost:3000/users/${user.id}`, {
+    method: "PATCH",
+    body:form
+  });
+}
+  function checkThemeStatus(){
+    if(user.dark_theme === true){
+      document.getElementById("theme-checkbox").checked = true
+      addDarkTheme()
+    } else if (user.dark_theme === false){
+      document.getElementById("theme-checkbox").checked = false
+      removeDarkTheme()
     }
   }
+
   function addDarkTheme() {
     const x = document.getElementById("discussions-table");
     const y = document.getElementById("allforums-box");

@@ -84,14 +84,27 @@ function DiscussionDetail() {
 
     return (
 <section className = "section">
+<form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
+                        <input 
+                         type="hidden"
+                         name="dark_theme"
+                         id="theme-checkbox-hidden"
+                         value={false}
+                         />
+                         <input 
+                         type="checkbox"
+                         name="dark_theme"
+                         id="theme-checkbox"
+                         value={true}
+                         />
+                        <span className="slider round"></span>
+              </form>
     <div className = "container">
         <div className = "columns">
             <div className = "column is-9" id ="posts-container">
 
-            <label className="switch" style={{float: "right"}} >
-                         <input type="checkbox" onClick={toggleTheme} id="theme-checkbox"/>
-                        <span className="slider round"></span>
-                        </label>
+          
+                        
                 {thisDiscussion ? 
                 <>
                     <h1 className="title is-2 has-text-grey discussion-title">{thisDiscussion.title}</h1>
@@ -182,6 +195,7 @@ function DiscussionDetail() {
           </div>
       :
       ""}
+      {checkThemeStatus()}
   </section>
     )
 }
