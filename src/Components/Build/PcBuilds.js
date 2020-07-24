@@ -66,6 +66,7 @@ import Select from 'react-select'
     checkThemeStatus()
   },[])
   
+  console.log(user.dark_theme)
     return(
     <>
                        
@@ -81,14 +82,7 @@ import Select from 'react-select'
     
   <div className="col">
   {themeLabel}
-              Image:
-              <input type="file" 
-                className="dropzone"
-                id="file_upload" 
-                name="attachment[]"
-                required
-                multiple
-                 />
+              
       </div>
                 <input
                   type="text"
@@ -106,6 +100,21 @@ import Select from 'react-select'
                   required
                   style={{display: "none"}}
                 />
+                <h2 className="build-name">Build Title:</h2>
+                 <input
+                  type="text"
+                  name="build_name"
+                  className="build-name-textbox"
+                />
+              <div>
+              <h2 className="build-images">Add build images:</h2>
+              <input type="file" 
+                className="build-images-dropzone"
+                id="file_upload" 
+                name="attachment[]"
+                required
+                multiple
+                 /></div>
       <table className="create-build-table" id="create-build-table">
     <thead>
       <tr>
@@ -361,8 +370,8 @@ import Select from 'react-select'
     </tbody>
   </table>
     <div className="textarea"> Build Description
-                <input
-                  type="text"
+                <textarea
+                  type="textarea"
                   name="comments"
                   className="description"
                   required

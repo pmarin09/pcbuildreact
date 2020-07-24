@@ -11,19 +11,22 @@ function ContextProvider({children}){
   const [theme, setTheme] = useState("light")
 
   function toggleTheme(){
-
-    if(document.getElementById("theme-checkbox").checked == false){
-      document.getElementById("theme-checkbox").checked = true
-      setTheme("dark")
+      const checkBox = document.getElementById("theme-checkbox")
+      const hiddenCheckBox = document.getElementById('theme-checkbox-hidden')
+    if(checkBox.checked == false){
       addDarkTheme()
-      document.getElementById('theme-checkbox-hidden').disabled = true;
-    } else if(document.getElementById("theme-checkbox").checked == true){
-      document.getElementById("theme-checkbox").checked = false 
-      setTheme("light")
+      hiddenCheckBox.disabled = true;
+      setTheme("dark")
+       checkBox.checked = true
+      
+    } else if(checkBox.checked == true){
       removeDarkTheme()
-      document.getElementById('theme-checkbox-hidden').disabled = false;
+      hiddenCheckBox.disabled = false;
+      setTheme("light")
+       checkBox.checked = false 
     }
     sendDarkTheme()
+    
   }
   function sendDarkTheme (){
     const form = new FormData(document.getElementById("setDarkTheme"));
@@ -31,8 +34,10 @@ function ContextProvider({children}){
     method: "PATCH",
     body:form
   });
+ 
 }
   function checkThemeStatus(){
+
     if(user.dark_theme === true){
       document.getElementById("theme-checkbox").checked = true
       addDarkTheme()
@@ -40,6 +45,7 @@ function ContextProvider({children}){
       document.getElementById("theme-checkbox").checked = false
       removeDarkTheme()
     }
+    
   }
 
   function addDarkTheme() {
@@ -247,6 +253,7 @@ function ContextProvider({children}){
                 checkThemeStatus,
                 toggleTheme,
                 users,
+                setUsers,
                 user,
                 allBuilds,
                 setAllBuilds,

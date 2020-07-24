@@ -28,20 +28,22 @@ console.log(myDiscussions)
   <div className="row">
      <div className="col-xs-3 col-sm-3" >{profileUserData.attachment_url ? <img src = {`http://localhost:3000/${profileUserData.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
     <div className="col-sm-9"><h1 className="profile-username">{profileUserData.username}</h1>
-      <div className="profile-stats-row">
+    <table className="profile-table">
+      <tr className="profile-stats-row">
             <div className="col-md-2"> {profileUserData.pcbuilds.length} </div>
             <div className="col-md-2"> {myLikes} </div>
             <div className="col-md-2"> {myFavorites.length} </div>
             <div className="col-md-2"> {myDiscussions.length}</div>
             <div className="col-md-2"> {myPosts.length} </div>
-      </div>
-      <div className="profile-statslabel-row">
+      </tr>
+      <tr className="profile-statslabel-row">
             <div className="col-md-2"> {profileUserData.pcbuilds.length > 1 ? "Builds": "Build"} </div>
             <div className="col-md-2"> {myLikes > 1 || myLikes === 0? "Likes": "Like"} </div>
             <div className="col-md-2"> {myFavorites.length > 1 || myFavorites.length === 0 ? "Favorites" : "Favorite"}  </div>
             <div className="col-md-2"> {myDiscussions.length > 1 || myDiscussions.length === 0? "Discussions" : "Discussion"} </div>
             <div className="col-md-2"> {myPosts.length > 1 || myPosts.length === 0 ? "Posts" : "Post"} </div>
-      </div>
+      </tr>
+      </table>
     </div>
   </div>
   <div className="row">

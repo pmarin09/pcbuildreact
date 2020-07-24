@@ -53,11 +53,9 @@ function DiscussionDetail() {
       
    ))
 
-   useEffect(()=>{
-     checkThemeStatus()
-    },[])
+   
                         
-
+console.log(user.dark_theme)
     function createPost(e) {
      
         const form = new FormData(document.getElementById("newPost"));
@@ -84,7 +82,13 @@ function DiscussionDetail() {
 
     return (
 <section className = "section">
-<form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
+
+    <div className = "container">
+  
+        <div className = "columns">
+   
+            <div className = "column is-9" id ="posts-container">
+            <form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
                         <input 
                          type="hidden"
                          name="dark_theme"
@@ -99,17 +103,13 @@ function DiscussionDetail() {
                          />
                         <span className="slider round"></span>
               </form>
-    <div className = "container">
-        <div className = "columns">
-            <div className = "column is-9" id ="posts-container">
-
           
                         
                 {thisDiscussion ? 
                 <>
                     <h1 className="title is-2 has-text-grey discussion-title">{thisDiscussion.title}</h1>
                     <div>{thisDiscussion.description}  </div>
-                  
+                   
                     <div className="level">
                         <div className="level-left"></div>
                             <div className="level-right">
@@ -135,6 +135,7 @@ function DiscussionDetail() {
                             totalElements={showPosts.length}
                             paginate={paginate}
                         /> : ""}
+                        {checkThemeStatus()}
                 </>
                 : "Loading..."}
             </div>
@@ -190,12 +191,11 @@ function DiscussionDetail() {
                 />
                  
             </div>
-           
           </form>
           </div>
       :
       ""}
-      {checkThemeStatus()}
+      
   </section>
     )
 }

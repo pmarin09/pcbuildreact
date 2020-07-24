@@ -8,7 +8,7 @@ import Pagination from '../../Pagination';
 import comment from '../../icons/comment.png'
 
 function Discussions(){
-    const {forums, discussions, user, loggedInStatus,toggleTheme,checkThemeStatus} = useContext(Context)
+    const {forums, discussions, user, loggedInStatus,toggleTheme,checkThemeStatus,setUsers} = useContext(Context)
     const forumsData = forums.map(forum => (
         <h3 className = "forumSideBar" key={forum.id}>
             <p ><Link to={`/forum/${forum.id}`}>{forum.title}</Link></p>
@@ -57,20 +57,23 @@ function Discussions(){
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
-
+  console.log(user.dark_theme)
+ 
 
     return(
 
 <section className="forms text-center border border-light p-5">
 
                         <form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
+                        
                         <input 
                          type="hidden"
                          name="dark_theme"
                          id="theme-checkbox-hidden"
                          value={false}
                          />
-                         <input 
+                         
+                          <input 
                          type="checkbox"
                          name="dark_theme"
                          id="theme-checkbox"
@@ -78,7 +81,7 @@ function Discussions(){
                          />
                         <span className="slider round"></span>
                         </form>
-                        {checkThemeStatus()}
+                       
         <table className="discussions-table" id="discussions-table">
             <thead>
             <tr>
@@ -104,7 +107,7 @@ function Discussions(){
             </tr>
             
             </tbody>
-           
+            
         </table>
         <hr></hr>
         {discussionsData.length > 10 ? 
@@ -112,7 +115,9 @@ function Discussions(){
             elementsPerPage={discussionsPerPage}
             totalElements={discussionsData.length}
             paginate={paginate}/> 
+            
         :""}
+       
 </section>
 
         )
