@@ -19,7 +19,7 @@ import Select from 'react-select'
 
 function EditBuild (){
 
-const {user,users,parts,allBuilds,checkLoginStatus,posts,loggedInStatus}=useContext(Context)
+const {user,parts,allBuilds,checkLoginStatus}=useContext(Context)
 const history = useHistory()
 const {buildId} = useParams()
 const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
@@ -75,9 +75,6 @@ const build_icons = {
   Headset: headset
 
 }
-  
-
-
 function updateBuild(e) {
   const form = new FormData(document.getElementById("updatePcbuild"));
 
@@ -86,16 +83,14 @@ function updateBuild(e) {
     body: form,
   });
   e.preventDefault();
-  // history.push(`/pcbuilds`)
-  // window.location.reload(false);
+ 
+  window.location.reload(false);
 }
 useEffect(()=>{
   checkLoginStatus()
 },[])
 
-
 return (
-    
    
 <div>
   
@@ -186,7 +181,7 @@ return (
         <th>Icon</th>
         <th className = "component">Component</th>
         <th className = "component-description">Description</th>
-        <th className = "hola">Price</th>
+        <th className = "component-price">Price</th>
       </tr>
     </thead>
     <tbody>
@@ -194,14 +189,14 @@ return (
       {pcbuild_parts.map(function(part) {
       return (
         <tr>
-        <td><img src={build_icons[part.part_type]} className="build-icon"/></td>
+        <td className = "edit-build-icon"><img src={build_icons[part.part_type]} className="build-icon"/></td>
         <td className = "component">{part.part_type}</td> 
         <td className = "component-description">
               <Select 
               name={"pcbuildpart_id[" + part.part_type + "][part_id]"}
               required
               options= {options[part.part_type]}
-              defaultValue={part.description}
+              placeholder={part.description}
               className= "component-description"
               /> 
         </td>
@@ -209,7 +204,7 @@ return (
                 <input
                   type="text"
                   name={"pcbuildpart_id[" + part.part_type + "][price]"}
-                  className="price"
+                  className="edit-build-price"
                   id="moboprice"
                   defaultValue={part.price}
                   required
@@ -226,11 +221,12 @@ return (
       )})}
         
 
-        <input
+       <div className= "update-build"> <input
             type="submit"
             value="Update Build"
             className="button is-link"
           />
+        </div>
           </tbody>
           </table>
     </form>

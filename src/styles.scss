@@ -574,9 +574,10 @@ div{
   width: auto !important;
 }
 
-.price{
+.create-build-price{
     display: block;
-    width: 15%;
+    width: 20%;
+    text-align:center;
     height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
     font-size: 1rem;
@@ -590,6 +591,38 @@ div{
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     height: 100%;
     margin: auto;
+}
+
+.edit-build-price{
+  display: block;
+  width: 55%;
+  text-align:center;
+  height: calc(1.5em + .75rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  height: 100%;
+  margin: auto;
+}
+
+.update-build{
+  width:10px;
+}
+
+.button.is-link {
+  background-color: #3273dc;
+  border-color: transparent;
+  color: #fff;
+  margin-left: 350px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .table td, .table th {
@@ -1019,6 +1052,10 @@ margin-bottom: 10px;
   margin-top: 0em;
 }
 
+
+.component-description{
+ width:400px;
+}
 .build-name-textbox{
   border-radius: 7px;
   width: 50%;
@@ -1207,16 +1244,45 @@ margin-bottom: 10px;
    .part-price{
      width: 50px !important;
      margin: 0px !important;
-     padding-top:10px !important;
      padding-right: 0px !important;
      padding-left: 0px !important;
      padding-bottom:5px !important;
    }
 
    .component-description{
-    
+    width:195px;
     padding-right: 0px !important;
     padding-left: 5px !important;
+  }
+  .edit-build-icon{
+    width:20px !important;
+  }
+
+  .edit-build-price{
+    display: block;
+    width: 85%;
+    text-align:center;
+    height: 38px ;
+    padding: .375rem .75rem;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin: auto;
+  }
+
+  .button.is-link {
+    background-color: #3273dc;
+    border-color: transparent;
+    color: #fff;
+    margin-left: 103px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
    .price{

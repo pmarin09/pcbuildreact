@@ -121,7 +121,7 @@ import Select from 'react-select'
         <th>Icon</th>
         <th className = "component">Component</th>
         <th className = "component-description">Description</th>
-        <th className = "hola">Price</th>
+        <th className = "component-price">Price</th>
       </tr>
     </thead>
     <tbody>
@@ -141,7 +141,7 @@ import Select from 'react-select'
                 <input
                   type="text"
                   name="part_id[Mobo][price]"
-                  className="price"
+                  className="create-build-price"
                   id="moboprice"
                   required
                 />
@@ -162,7 +162,7 @@ import Select from 'react-select'
                 <input
                   type="text"
                   name="part_id[CPU][price]"
-                  className="price"
+                  className="create-build-price"
                   required
                 />
         </td>
@@ -182,7 +182,7 @@ import Select from 'react-select'
                 <input
                   type="text"
                   name="part_id[CPUCooler][price]"
-                  className="price"
+                  className="create-build-price"
                   required
                 />
         </td>
@@ -202,7 +202,7 @@ import Select from 'react-select'
                 <input
                   type="text"
                   name="part_id[GPU][price]"
-                  className="price"
+                  className="create-build-price"
                   required
                 />
         </td>
@@ -222,7 +222,7 @@ import Select from 'react-select'
                 <input
                   type="text"
                   name="part_id[RAM][price]"
-                  className="price"
+                  className="create-build-price"
                   required
                 />
         </td>
@@ -242,7 +242,7 @@ import Select from 'react-select'
                 <input
                   type="text"
                   name="part_id[HD][price]"
-                  className="price"
+                  className="create-build-price"
                   required
                 />
         </td>
@@ -262,7 +262,7 @@ import Select from 'react-select'
                 <input
                   type="text"
                   name="part_id[Case][price]"
-                  className="price"
+                  className="create-build-price"
                   required
                 />
         </td>
@@ -282,7 +282,7 @@ import Select from 'react-select'
                 <input
                   type="text"
                   name="part_id[PWS][price]"
-                  className="price"
+                  className="create-build-price"
                   required
                 />
         </td>
@@ -302,7 +302,7 @@ import Select from 'react-select'
                 <input
                   type="text"
                   name="part_id[Monitor][price]"
-                  className="price"
+                  className="create-build-price"
                   required
                 />
         </td>
@@ -322,7 +322,7 @@ import Select from 'react-select'
                 <input
                   type="text"
                   name="part_id[Keyboard][price]"
-                  className="price"
+                  className="create-build-price"
                   required
                 />
         </td>
@@ -342,7 +342,7 @@ import Select from 'react-select'
                 <input
                   type="text"
                   name="part_id[Mouse][price]"
-                  className="price"
+                  className="create-build-price"
                   required
                 />
         </td>
@@ -362,7 +362,7 @@ import Select from 'react-select'
                 <input
                   type="text"
                   name="part_id[Headset][price]"
-                  className="price"
+                  className="create-build-price"
                   required
                 />
         </td>

@@ -5,6 +5,14 @@ import { useHistory } from 'react-router-dom';
 const Context  = React.createContext()
 
 function ContextProvider({children}){
+  const [allBuilds, setAllBuilds] = useState([])
+  const [favoriteBuilds, setFavoriteBuilds] = useState([])
+
+  useEffect(()=>{
+      fetch(`http://localhost:3000/pcbuilds.json`)
+      .then (res => res.json())
+      .then (data => setAllBuilds(data))
+  },[])
 
   //LIGHT AND DARK THEME
   
@@ -96,14 +104,7 @@ function ContextProvider({children}){
       console.log(users)
   },[])
   
-  const [allBuilds, setAllBuilds] = useState([])
-    const [favoriteBuilds, setFavoriteBuilds] = useState([])
 
-    useEffect(()=>{
-        fetch(`http://localhost:3000/pcbuilds.json`)
-        .then (res => res.json())
-        .then (data => setAllBuilds(data))
-    },[])
 
     const [forums, setForums]=useState([])
     const forumsUrl = "http://localhost:3000/forums.json"
@@ -149,6 +150,7 @@ function ContextProvider({children}){
         .then (data => setParts(data))
         console.log(parts)
     },[])
+
 
     const [likes, setLikes]=useState([])
     const likesUrl = "http://localhost:3000/likes.json"
