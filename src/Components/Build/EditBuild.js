@@ -224,7 +224,7 @@ return (
        <div className= "update-build"> <input
             type="submit"
             value="Update Build"
-            className="button is-link"
+            className="update-build-button"
           />
         </div>
           </tbody>

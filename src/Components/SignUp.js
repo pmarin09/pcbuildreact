@@ -47,8 +47,8 @@ const SignUp = () => {
 
 <div className="card bg-light">
 <article className="card-body mx-auto" style={{maxWidth: 400}}>
-	<h4 className="card-title mt-3 text-center">Create Account</h4>
-	<p className="text-center">Join our PC Build community!</p>
+	<h4 className="card-title mt-3">Create Account</h4>
+	<p className="text">Join our PC Build community!</p>
 	<p>
 	<button
           onClick={() => {

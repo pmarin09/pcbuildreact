@@ -23,7 +23,7 @@ const [email, setEmail] = useState("")
 }
 
     return (
-        <div className="top">
+        <div className="forgot-pw">
       <h1 className="text-3xl mb-2 text-center font-bold">Forgot Password?</h1>
         <article className="card-body mx-auto" style={{maxWidth: 350, height:150}}>
         <form onSubmit={forgotPassword} id= "forgotPassword">

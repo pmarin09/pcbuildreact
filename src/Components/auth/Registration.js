@@ -46,7 +46,7 @@ function Registration (){
 
 
     return (
-  <div className="top">
+  <div className="create-account">
   <article className="card-body mx-auto" style={{maxWidth: 400}}>
   <h4 className="card-title mt-3 text-center">Create Account</h4>
   <p className="text-center">Join our PC Build community!</p>

@@ -105,7 +105,7 @@ function uploadAvatar(e) {
         
         <ul className="list-group">
           <li className="list-group-item text-muted">Info <i className="fa fa-dashboard fa-1x"></i></li>
-          <li className="list-group-item text-right"><span className="pull-left"><strong>Builds</strong></span>  </li>
+          <li className="list-group-item text-right"><span className="pull-left"></span>  </li>
 
         </ul> 
          </div>

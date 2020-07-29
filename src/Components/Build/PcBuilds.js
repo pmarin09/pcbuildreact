@@ -73,7 +73,7 @@ import Select from 'react-select'
     {(loggedInStatus === "LOGGED_IN") ?
     
     <section className = "section">
-      <h2 className="title is-5 has-text-grey-light">Create a New Build</h2>
+    
       
       <section className="create-build-form" id="build-form">
       
@@ -81,6 +81,7 @@ import Select from 'react-select'
   <form className="form" onSubmit={createBuild} id="newPcbuild">
     
   <div className="col">
+  
   {themeLabel}
               
       </div>
@@ -387,6 +388,7 @@ import Select from 'react-select'
           />
 
 </form>
+
 </section> 
   </section>
       : 

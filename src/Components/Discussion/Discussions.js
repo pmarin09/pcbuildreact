@@ -8,7 +8,7 @@ import Pagination from '../../Pagination';
 import comment from '../../icons/comment.png'
 
 function Discussions(){
-    const {forums, discussions, user, loggedInStatus,toggleTheme,checkThemeStatus,setUsers} = useContext(Context)
+    const {forums, discussions, user, loggedInStatus,toggleTheme,checkThemeStatus} = useContext(Context)
     const forumsData = forums.map(forum => (
         <h3 className = "forumSideBar" key={forum.id}>
             <p ><Link to={`/forum/${forum.id}`}>{forum.title}</Link></p>
@@ -94,11 +94,11 @@ function Discussions(){
             <tbody>
             <tr>
             <div className="allforums-box" id="allforums-box">
-                <div><Link to="/newDiscussion" style={{textDecoration: "none"}}>
+                <div> { (loggedInStatus === "LOGGED_IN") ? <Link to="/newDiscussion" style={{textDecoration: "none"}}>
                         <Button className="new-discussion-btn" id="new-discussion-button">
                             New Discussion
                         </Button>
-                    </Link>
+                    </Link> :""}
                     {forumsData} 
                </div>
             </div>
@@ -117,7 +117,9 @@ function Discussions(){
             paginate={paginate}/> 
             
         :""}
-       
+       { (loggedInStatus === "LOGGED_IN") ?checkThemeStatus() :""}
+
+      
 </section>
 
         )

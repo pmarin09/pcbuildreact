@@ -195,7 +195,7 @@ console.log(user.dark_theme)
           </div>
       :
       ""}
-      
+      {checkThemeStatus()}
   </section>
     )
 }

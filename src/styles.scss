@@ -29,9 +29,12 @@
 
 .jumbotron{
   background: rgb(255, 255, 255) ;
+  background-image: url("icons/jumbotron.jpg");
+  background-repeat: no-repeat, repeat;
   text-align:center;
   border-radius: 0px !important;
 }
+
 
 .jumbotron-heading{
     color: white;
@@ -90,10 +93,17 @@
     border-color: red;
 }
 
-.top{
- margin-top: 20px;
+.create-account{
+ margin-top: 40px;
+ margin-bottom:100px;
  display:block;
 }
+
+.forgot-pw{
+  margin-top: 60px;
+  margin-bottom:300px;
+  display:block;
+ }
 
 .article-container {
     padding-top: 50px;
@@ -616,13 +626,33 @@ div{
   width:10px;
 }
 
-.button.is-link {
-  background-color: #3273dc;
+
+.update-build-button {
+  background-color: #3273dc !important;
   border-color: transparent;
   color: #fff;
   margin-left: 350px;
   margin-top: 10px;
   margin-bottom: 10px;
+  border-width: 1px;
+  cursor: pointer;
+  justify-content: center;
+  padding: calc(.5em - 1px) 1em;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-appearance: none;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  justify-content: flex-start;
+  line-height: 1.5;
+  padding: calc(.5em - 1px) calc(.75em - 1px);
+  position: relative;
+  vertical-align: top;
 }
 
 .table td, .table th {
@@ -652,8 +682,14 @@ background: linear-gradient(to bottom, #414345, #232526); /* W3C, IE 10+/ Edge, 
 }  
 
 footer{
-  height: 300px;
+  height: auto;
   background: rgb(40,42,45);
+  color:grey;
+}
+
+footer hr{
+  background-color: grey;
+
 }
 
 header {
@@ -975,7 +1011,7 @@ margin-bottom: 10px;
 }
 
 .text-center{
-  border: 1px solid rgb(131, 11, 11);
+  // border: 1px solid rgb(131, 11, 11);
   border-radius: 10px;
 }
 
@@ -1276,13 +1312,32 @@ margin-bottom: 10px;
     margin: auto;
   }
 
-  .button.is-link {
-    background-color: #3273dc;
+  .update-build-button {
+    background-color: #3273dc !important;
     border-color: transparent;
     color: #fff;
     margin-left: 103px;
     margin-top: 10px;
     margin-bottom: 10px;
+    border-width: 1px;
+    cursor: pointer;
+    justify-content: center;
+    padding: calc(.5em - 1px) 1em;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-appearance: none;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 2.5em;
+    justify-content: flex-start;
+    line-height: 1.5;
+    padding: calc(.5em - 1px) calc(.75em - 1px);
+    position: relative;
+    vertical-align: top;
   }
 
    .price{

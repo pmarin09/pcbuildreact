@@ -59,10 +59,22 @@ function ForumDetail() {
 
 
 <section className="forms text-center border border-light p-5">
-<label className="switch" style={{float: "right"}}>
-                         <input type="checkbox" onClick={toggleTheme} id="theme-checkbox"/>
+<form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
+                        <input 
+                         type="hidden"
+                         name="dark_theme"
+                         id="theme-checkbox-hidden"
+                         value={false}
+                         />
+                         <input 
+                         type="checkbox"
+                         name="dark_theme"
+                         id="theme-checkbox"
+                         value={true}
+                         />
                         <span className="slider round"></span>
-                        </label>
+              </form>
+          
 <table className="discussions-table" id="discussions-table">
     <thead>
     <tr>
@@ -75,11 +87,11 @@ function ForumDetail() {
     <tbody>
     <tr>
     <ul className="allforums-box" id="allforums-box">
-        <td><Link to="/newDiscussion" style={{textDecoration: "none"}}>
+        <td> { (loggedInStatus === "LOGGED_IN") ?<Link to="/newDiscussion" style={{textDecoration: "none"}}>
                 <Button color = "primary" className="new-discussion-btn" id="new-discussion-button">
                     New Discussion
                 </Button>
-            </Link>
+            </Link> : ""}
             {forumsData} 
        </td>
     </ul>
@@ -97,6 +109,7 @@ function ForumDetail() {
                     totalElements={showDiscussions.length}
                     paginate={paginate}
                 /> : ""}
+                {checkThemeStatus()}
 </section>
     )
 }

@@ -3,7 +3,8 @@ import Image from "./Build/Image"
 import styles from "../styles.scss"
 import {Context} from "../Context"
 import Pagination from "../Pagination"
-import Header from "./Header"
+import {Link} from "react-router-dom"
+import News from "../News"
 function Main(){
   const{allBuilds} = useContext(Context)
   const imageElements = allBuilds.map((img,i) => (
@@ -24,13 +25,14 @@ const paginate = pageNumber => setCurrentPage(pageNumber);
 
 
     return (
+      <>
       <div className = "album bg-light">
       <div className="jumbotron">
         <div className="container">
           <h1 className="jumbotron-heading">Featured Builds</h1>
-          <p className="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+          <p className="lead text-muted">Welcome to Power Builds! This is for all PC Builder enthusiasts.. </p>
           <p>
-            <a href="#" className="btn btn-primary my-2">View All Builds</a>
+          <Link to="/allbuilds" style={{textDecoration: "none"}}> <div className="btn btn-primary my-2">View All Builds</div></Link>
           </p>
         </div>
       </div>
@@ -43,9 +45,13 @@ const paginate = pageNumber => setCurrentPage(pageNumber);
               totalElements={imageElements.length}
               paginate={paginate}
             /> : ""}
+            
           </div>  
         </div>
+        
       </div>
+      {News()}
+      </>
     )
 }
 

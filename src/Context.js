@@ -5,14 +5,6 @@ import { useHistory } from 'react-router-dom';
 const Context  = React.createContext()
 
 function ContextProvider({children}){
-  const [allBuilds, setAllBuilds] = useState([])
-  const [favoriteBuilds, setFavoriteBuilds] = useState([])
-
-  useEffect(()=>{
-      fetch(`http://localhost:3000/pcbuilds.json`)
-      .then (res => res.json())
-      .then (data => setAllBuilds(data))
-  },[])
 
   //LIGHT AND DARK THEME
   
@@ -21,21 +13,24 @@ function ContextProvider({children}){
   function toggleTheme(){
       const checkBox = document.getElementById("theme-checkbox")
       const hiddenCheckBox = document.getElementById('theme-checkbox-hidden')
+      
     if(checkBox.checked == false){
-      addDarkTheme()
       hiddenCheckBox.disabled = true;
       setTheme("dark")
        checkBox.checked = true
+       addDarkTheme()
       
     } else if(checkBox.checked == true){
-      removeDarkTheme()
       hiddenCheckBox.disabled = false;
       setTheme("light")
        checkBox.checked = false 
+       removeDarkTheme()
     }
-    sendDarkTheme()
     
+    
+      sendDarkTheme()
   }
+
   function sendDarkTheme (){
     const form = new FormData(document.getElementById("setDarkTheme"));
   fetch(`http://localhost:3000/users/${user.id}`, {
@@ -44,17 +39,7 @@ function ContextProvider({children}){
   });
  
 }
-  function checkThemeStatus(){
-
-    if(user.dark_theme === true){
-      document.getElementById("theme-checkbox").checked = true
-      addDarkTheme()
-    } else if (user.dark_theme === false){
-      document.getElementById("theme-checkbox").checked = false
-      removeDarkTheme()
-    }
-    
-  }
+  
 
   function addDarkTheme() {
     const x = document.getElementById("discussions-table");
@@ -63,11 +48,14 @@ function ContextProvider({children}){
     const p = document.getElementById("posts-container")
     const b = document.getElementById("build-form")
     const f = document.getElementById("create-build-table")
-    if (x) {
+    if (x && loggedInStatus === "LOGGED_IN") {
       x.classList.add("dark");
       y.classList.add("dark");
       z.classList.add("dark");
-    }else if(p){
+    }else if(x) {
+      x.classList.add("dark");
+      y.classList.add("dark");
+    } else if(p){
       p.classList.add("dark")
     }else if(f){
       b.classList.add("dark")
@@ -81,19 +69,35 @@ function ContextProvider({children}){
     const p = document.getElementById("posts-container")
     const b = document.getElementById("build-form")
     const f = document.getElementById("create-build-table")
-    if (x) {
+    if (x && loggedInStatus === "LOGGED_IN") {
       x.classList.remove("dark");
       y.classList.remove("dark");
       z.classList.remove("dark");
-    }else if(p){
+    }else if(x) {
+      x.classList.remove("dark");
+      y.classList.remove("dark");
+    }
+    else if(p){
       p.classList.remove("dark")
     }else if(b){
       b.classList.remove("dark")
       f.classList.remove("dark")
     }
   }
-  /////
 
+  function checkThemeStatus(){
+ setTimeout( () =>{
+    if(user.dark_theme === true){
+      addDarkTheme()
+      document.getElementById("theme-checkbox").checked = true
+    } else if (user.dark_theme === false){
+      document.getElementById("theme-checkbox").checked = false
+      removeDarkTheme()
+    }else{
+      return false
+    }},500)
+  }
+  /////
 
   const [users, setUsers]=useState([])
   const usersUrl = "http://localhost:3000/users.json"
@@ -104,7 +108,14 @@ function ContextProvider({children}){
       console.log(users)
   },[])
   
+  const [allBuilds, setAllBuilds] = useState([])
+    const [favoriteBuilds, setFavoriteBuilds] = useState([])
 
+    useEffect(()=>{
+        fetch(`http://localhost:3000/pcbuilds.json`)
+        .then (res => res.json())
+        .then (data => setAllBuilds(data))
+    },[])
 
     const [forums, setForums]=useState([])
     const forumsUrl = "http://localhost:3000/forums.json"
