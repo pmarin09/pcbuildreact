@@ -8,6 +8,7 @@ import { useHistory,useParams } from 'react-router-dom';
 
 
 function EditProfile (){
+  
 
 const {user,loggedInStatus,users,allBuilds,posts,discussions,favorites}=useContext(Context)
 const history = useHistory()
