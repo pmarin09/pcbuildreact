@@ -3,7 +3,7 @@ import {useParams, Link} from "react-router-dom"
 import {Context} from "../../Context"
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
-import Carousel from 'react-bootstrap'
+import Carousel from 'react-bootstrap/Carousel'
 import Pagination from '../../Pagination';
 function BuildDetail(img) {
     const{allBuilds, user, loggedInStatus, buildposts} = useContext(Context)
