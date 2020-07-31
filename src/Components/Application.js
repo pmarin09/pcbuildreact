@@ -28,7 +28,7 @@ function Application() {
   return (
      
       <Switch>
-      <Route exact path = "/"> <Main/> </Route>
+      <Route exact path = "https://fpsbuilds-front-staging.herokuapp.com/"> <Main/> </Route>
       <Route path= "/allbuilds"> <AllBuilds/></Route>
       <Route  exact path = "/pcbuilds"> <PcBuilds/></Route>
       <Route  path = "/pcbuilds/edit/:buildId"> <EditBuild/></Route>

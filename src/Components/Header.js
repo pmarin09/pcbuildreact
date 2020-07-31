@@ -65,7 +65,7 @@ if(loggedInStatus === "LOGGED_IN"){
                   <strong className= "app-title">FPS Builds</strong>
               <div className="pcnavbar-start" id="pc-nav">
                 <a className="pcnavbar-item">
-                    <Link to="/" style={{textDecoration: "none"}}>
+                    <Link to="https://fpsbuilds-back-staging.herokuapp.com/" style={{textDecoration: "none"}}>
                       <span className="pcnavbar-icon"><img src={home}/></span>
                       <span className="pcnavbar-text" > Home</span>
                     </Link>
