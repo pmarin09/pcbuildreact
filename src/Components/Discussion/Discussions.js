@@ -16,7 +16,7 @@ function Discussions(){
         ))
     const discussionsData = discussions.map(discussion => (
         <div className= "discussions-grid">
-           <div style={{margin: "auto"}}> <Link to={`/profile/${discussion.user_id}`}>{discussion.user.attachment_url ? <img src = {`http://localhost:3000/${discussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={discussion.user.email}  className = "discussion-avatar"/>} </Link></div>
+           <div style={{margin: "auto"}}> <Link to={`/profile/${discussion.user_id}`}>{discussion.user.attachment_url ? <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${discussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={discussion.user.email}  className = "discussion-avatar"/>} </Link></div>
                   <div className= "discussions-title"><Link to={`/discussions/${discussion.id}`} style={{float: "left"}}><strong style={{fontSize: "15px"}}>{discussion.title}</strong> -    {discussion.description} </Link> {(user.id === discussion.user_id && loggedInStatus === "LOGGED_IN") ? 
                         <Link to={`/editDiscussion/${discussion.id}`} style={{textDecoration: "none"}}>
                                 <i className="ri-pencil-fill" style={{float: "left"}}></i>
@@ -37,7 +37,7 @@ function Discussions(){
         ))
     function createDiscussion(e) {
         const form = new FormData(document.getElementById("newDiscussion"));
-        fetch("http://localhost:3000/discussions.json", {
+        fetch("https://fpsbuilds-back-staging.herokuapp.com/discussions.json", {
           method: "POST",
           body: form,
         });

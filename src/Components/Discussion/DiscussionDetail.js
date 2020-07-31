@@ -16,7 +16,7 @@ function DiscussionDetail() {
       <article className="media">
           <div className="media-left">
           <figure className="image is-48x48">
-          {filteredPost.user.attachment_url ? <img src = {`http://localhost:3000/${filteredPost.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredPost.user.email}  className = "discussion-avatar"/>}
+          {filteredPost.user.attachment_url ? <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${filteredPost.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredPost.user.email}  className = "discussion-avatar"/>}
           </figure>
           </div>
           <div className="media-content" id= "post-content">
@@ -36,7 +36,7 @@ function DiscussionDetail() {
               </a>
               <a className="level-item">
                   <i className="ri-delete-bin-5-fill"onClick ={ (e) => { 
-                    fetch("http://localhost:3000/discussions/" + discussionId +"/posts/"+ filteredPost.id + ".json", {
+                    fetch("https://fpsbuilds-back-staging.herokuapp.com/discussions/" + discussionId +"/posts/"+ filteredPost.id + ".json", {
                       method: "DELETE",
                     })
                    e.preventDefault();
@@ -60,7 +60,7 @@ console.log(user.dark_theme)
      
         const form = new FormData(document.getElementById("newPost"));
         
-        fetch("http://localhost:3000/posts.json", {
+        fetch("https://fpsbuilds-back-staging.herokuapp.com/posts.json", {
           method: "POST",
           body: form,
         });

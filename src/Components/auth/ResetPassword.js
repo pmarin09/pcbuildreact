@@ -4,7 +4,7 @@ import pw from "../../icons/pw.png"
 import tokencode from "../../icons/token.png"
 function ResetPassword(){
 
-const baseURL = "http://localhost:3000/"
+const baseURL = "https://fpsbuilds-back-staging.herokuapp.com/"
 const [email, setEmail] = useState("")
 const [token, setToken] = useState("")
 const [password, setPassword] = useState("")

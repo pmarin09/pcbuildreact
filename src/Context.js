@@ -33,7 +33,7 @@ function ContextProvider({children}){
 
   function sendDarkTheme (){
     const form = new FormData(document.getElementById("setDarkTheme"));
-  fetch(`http://localhost:3000/users/${user.id}`, {
+  fetch(`https://fpsbuilds-back-staging.herokuapp.com/users/${user.id}`, {
     method: "PATCH",
     body:form
   });
@@ -100,7 +100,7 @@ function ContextProvider({children}){
   /////
 
   const [users, setUsers]=useState([])
-  const usersUrl = "http://localhost:3000/users.json"
+  const usersUrl = "https://fpsbuilds-back-staging.herokuapp.com/users.json"
   useEffect(()=>{
       fetch(usersUrl)
       .then (res => res.json())
@@ -112,13 +112,13 @@ function ContextProvider({children}){
     const [favoriteBuilds, setFavoriteBuilds] = useState([])
 
     useEffect(()=>{
-        fetch(`http://localhost:3000/pcbuilds.json`)
+        fetch(`https://fpsbuilds-back-staging.herokuapp.com/pcbuilds.json`)
         .then (res => res.json())
         .then (data => setAllBuilds(data))
     },[])
 
     const [forums, setForums]=useState([])
-    const forumsUrl = "http://localhost:3000/forums.json"
+    const forumsUrl = "https://fpsbuilds-back-staging.herokuapp.com/forums.json"
     useEffect(()=>{
         fetch(forumsUrl)
         .then (res => res.json())
@@ -127,7 +127,7 @@ function ContextProvider({children}){
     },[])
 
     const [discussions, setDiscussions]=useState([])
-    const disscusionsUrl = "http://localhost:3000/discussions.json"
+    const disscusionsUrl = "https://fpsbuilds-back-staging.herokuapp.com/discussions.json"
     useEffect(()=>{
         fetch(disscusionsUrl)
         .then (res => res.json())
@@ -136,7 +136,7 @@ function ContextProvider({children}){
     },[])
 
     const [posts, setPosts]=useState([])
-    const postsUrl = "http://localhost:3000/posts.json"
+    const postsUrl = "https://fpsbuilds-back-staging.herokuapp.com/posts.json"
     useEffect(()=>{
         fetch(postsUrl)
         .then (res => res.json())
@@ -145,7 +145,7 @@ function ContextProvider({children}){
     },[])
 
     const [buildposts, setBuildPosts]=useState([])
-    const buildpostsUrl = "http://localhost:3000/buildposts.json"
+    const buildpostsUrl = "https://fpsbuilds-back-staging.herokuapp.com/buildposts.json"
     useEffect(()=>{
         fetch(buildpostsUrl)
         .then (res => res.json())
@@ -154,7 +154,7 @@ function ContextProvider({children}){
     },[])
 
     const [parts, setParts]=useState([])
-    const partsUrl = "http://localhost:3000/parts.json"
+    const partsUrl = "https://fpsbuilds-back-staging.herokuapp.com/parts.json"
     useEffect(()=>{
         fetch(partsUrl)
         .then (res => res.json())
@@ -164,7 +164,7 @@ function ContextProvider({children}){
 
 
     const [likes, setLikes]=useState([])
-    const likesUrl = "http://localhost:3000/likes.json"
+    const likesUrl = "https://fpsbuilds-back-staging.herokuapp.com/likes.json"
     useEffect(()=>{
         fetch(likesUrl)
         .then (res => res.json())
@@ -173,14 +173,14 @@ function ContextProvider({children}){
     },[])
 
     function updateLikes(){
-      setTimeout(() => {fetch(`http://localhost:3000/likes.json`)
+      setTimeout(() => {fetch(`https://fpsbuilds-back-staging.herokuapp.com/likes.json`)
       .then (res => res.json())
       .then (data => setLikes(data))
       },50)
      }
 
     const [favorites, setFavorites]=useState([])
-    const favoritesUrl = "http://localhost:3000/favorites.json"
+    const favoritesUrl = "https://fpsbuilds-back-staging.herokuapp.com/favorites.json"
     useEffect(()=>{
         fetch(favoritesUrl)
         .then (res => res.json())
@@ -189,7 +189,7 @@ function ContextProvider({children}){
     },[])
 
     function updateFavorites(){
-      setTimeout(() => {fetch(`http://localhost:3000/favorites.json`)
+      setTimeout(() => {fetch(`https://fpsbuilds-back-staging.herokuapp.com/favorites.json`)
       .then (res => res.json())
       .then (data => setFavorites(data))
       },50)
@@ -204,7 +204,7 @@ function ContextProvider({children}){
   
     function checkLoginStatus() {
     axios
-      .get("http://localhost:3000/logged_in", { withCredentials: true })
+      .get("https://fpsbuilds-back-staging.herokuapp.com/logged_in", { withCredentials: true })
       .then(response => {
         if (
           response.data.logged_in &&
@@ -242,7 +242,7 @@ function ContextProvider({children}){
 
   function handleLogoutClick() {
     axios
-      .delete("http://localhost:3000/logout", { withCredentials: true })
+      .delete("https://fpsbuilds-back-staging.herokuapp.com/logout", { withCredentials: true })
       .then(response => {
         handleLogout();
       })

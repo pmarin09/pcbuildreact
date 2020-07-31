@@ -26,7 +26,7 @@ function Header(){
 function handleSubmit(event) {
   axios
     .post(
-      "http://localhost:3000/sessions",
+      "https://fpsbuilds-back-staging.herokuapp.com/sessions",
       {
         user: {
           email: email,
@@ -62,7 +62,7 @@ if(loggedInStatus === "LOGGED_IN"){
         
   <div className="pcbuildapp-navbar" id="pc-navbar">
                 <img className="header-icon"  src= {headerImage}/> 
-                  <strong className= "app-title">PC Build App</strong>
+                  <strong className= "app-title">FPS Builds</strong>
               <div className="pcnavbar-start" id="pc-nav">
                 <a className="pcnavbar-item">
                     <Link to="/" style={{textDecoration: "none"}}>
@@ -96,7 +96,7 @@ if(loggedInStatus === "LOGGED_IN"){
               </a>
                     <a className="profile-div">
                     <Link to={`/profile/${user.id}`}>
-                    {user.attachment_url ? <img src = {`http://localhost:3000/${user.attachment_url}`}  className="profile-avatar"/> : <Gravatar email="1000-email@example.com" /> }
+                    {user.attachment_url ? <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${user.attachment_url}`}  className="profile-avatar"/> : <Gravatar email="1000-email@example.com" /> }
                     <span> <em><small>{user.username}</small></em></span>
                     </Link>
                     <span className="logout-span"><Link onClick={() => handleLogoutClick()} style={{textDecoration: "none"}}><img src={logout}/> <em><small>Logout</small></em></Link></span>
@@ -117,7 +117,7 @@ if(loggedInStatus === "LOGGED_IN"){
        
           <div className="pcbuildapp-navbar" id="pc-navbar">
                 <img className="header-icon"  src= {headerImage}/> 
-                <strong className= "app-title">PC Build App</strong>
+                <strong className= "app-title">FPS Builds</strong>
               <div className="pcnavbar-start" id="pc-nav">
               
               <a className="pcnavbar-item">

@@ -22,7 +22,7 @@ const profileUser = users.filter(user => user.id.toString() === userId)
 function updateProfileInfo(e) {
   const form = new FormData(document.getElementById("profileInfo"));
 
-  fetch(`http://localhost:3000/users/${user.id}`, {
+  fetch(`https://fpsbuilds-back-staging.herokuapp.com/users/${user.id}`, {
     method: "PATCH",
     body: form,
   });
@@ -33,7 +33,7 @@ function updateProfileInfo(e) {
 function uploadAvatar(e) {
     const form = new FormData(document.getElementById("newAvatar"));
 
-    fetch(`http://localhost:3000/users/${user.id}`, {
+    fetch(`https://fpsbuilds-back-staging.herokuapp.com/users/${user.id}`, {
       method: "PATCH",
       body: form,
     });
@@ -50,7 +50,7 @@ function uploadAvatar(e) {
 {profileUser.map(profileUserData => 
 <div className="profile-container">
   <div className="row">
-     <div className="col-xs-3 col-sm-3" >{profileUserData.attachment_url ? <img src = {`http://localhost:3000/${profileUserData.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
+     <div className="col-xs-3 col-sm-3" >{profileUserData.attachment_url ? <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${profileUserData.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
     <div className="col-sm-9"><h1 className="profile-username">{profileUserData.username}</h1>
     <table className="profile-table">
     <tr className="profile-stats-row">

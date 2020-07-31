@@ -29,8 +29,8 @@ const paginate = pageNumber => setCurrentPage(pageNumber);
       <div className = "album bg-light">
       <div className="jumbotron">
         <div className="container">
-          <h1 className="jumbotron-heading">Featured Builds</h1>
-          <p className="lead text-muted">Welcome to Power Builds! This is for all PC Builder enthusiasts.. </p>
+          <h1 className="jumbotron-heading">FPS Builds</h1>
+          <p className="lead text-muted">Welcome to Power Builds! For all PC Builder enthusiasts... </p>
           <p>
           <Link to="/allbuilds" style={{textDecoration: "none"}}> <div className="btn btn-primary my-2">View All Builds</div></Link>
           </p>
@@ -50,7 +50,7 @@ const paginate = pageNumber => setCurrentPage(pageNumber);
         </div>
         
       </div>
-      {News()}
+      {/* {News()} */}
       </>
     )
 }

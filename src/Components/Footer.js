@@ -1,4 +1,5 @@
 import React from "react"
+import {Link} from "react-router-dom"
 import { Col, Container, Row, Footer } from 'mdbreact';
 import '@fortawesome/fontawesome-free/css/all.min.css'; 
 
@@ -12,37 +13,37 @@ function Footerpc(){
                 <Container className="text-left">
                     <Row>
                         <Col md="6">
-                            <h5 className="text mb-4 mt-3 font-weight-bold">Power Builds</h5>
-                            <p>Power Builds is for all pc enthusiasts who love creating new builds and sharing their experience with the rest of pc build fans..</p>
+                            <h5 className="text mb-4 mt-3 font-weight-bold">FPS Builds</h5>
+                            <p>FPS Builds is for all pc enthusiasts who love creating new builds and sharing their experience with the rest of pc build fans..</p>
                         </Col>
                         <hr className="clearfix w-100 d-md-none" />
                         <Col md="2">
                             <h5 className="text mb-4 mt-3 font-weight-bold">Navigation</h5>
                             <ul className="list-unstyled">
-                                <li><a href="#!">Home</a></li>
-                                <li><a href="#!">All Builds</a></li>
-                                <li><a href="#!">Forum</a></li>
-                                <li><a href="#!">Latest News</a></li>
-                                <li><a href="#!">About Us</a></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>Home</Link></li>
+                                <li><Link to="/allbuilds" style={{textDecoration: "none"}}>All Builds</Link></li>
+                                <li><Link to="/discussions" style={{textDecoration: "none"}}>Forum</Link></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>Latest News</Link></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>About Us</Link></li>
                             </ul>
                         </Col>
                         <hr className="clearfix w-100 d-md-none" />
                         <Col md="2">
                             <h5 className="text mb-4 mt-3 font-weight-bold">Company</h5>
                             <ul className="list-unstyled">
-                                <li><a href="#!">Privacy Policy</a></li>
-                                <li><a href="#!">Terms of Service</a></li>
-                                <li><a href="#!">Affiliate Disclosure</a></li>
-                                <li><a href="#!">Contact</a></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>Privacy Policy</Link></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>Terms of Service</Link></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>Affiliate Disclosure</Link></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>Contact</Link></li>
                             </ul>
                         </Col>
                         <hr className="clearfix w-100 d-md-none"></hr>
                         <Col md="2">
                             <h5 className="text mb-4 mt-3 font-weight-bold">Registration</h5>
                             <ul className="list-unstyled">
-                                <li><a href="#!">Sign Up</a></li>
-                                <li><a href="#!">Log In</a></li>
-                                <li><a href="#!">Forgot Password</a></li>
+                                <li><Link to="/register" style={{textDecoration: "none"}}>Sign Up</Link></li>
+                                <li><Link to="/signin" style={{textDecoration: "none"}}>Log In</Link></li>
+                                <li><Link to="/forgotPassword" style={{textDecoration: "none"}}>Forgot Password</Link></li>
                                 {/* <li><a href="#!">Link 4</a></li> */}
                             </ul>
                         </Col>
@@ -60,7 +61,7 @@ function Footerpc(){
                 </div>
                 <div className="footer-copyright text-center">
                     <Container fluid>
-                        &copy; {(new Date().getFullYear())}<a href="#"> Power Builds </a>
+                        &copy; {(new Date().getFullYear())}<a href="#"> FPS Builds </a>
                     </Container>
                 </div>
             </Footer>

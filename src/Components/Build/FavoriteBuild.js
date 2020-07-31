@@ -15,7 +15,7 @@ function FavoriteBuild({item}) {
         
              function deleteFavorite() {
               favorites.filter(favorite => favorite.user_id === user.id && favorite.pcbuild_id === item.id).map(filteredFavorite => (
-                fetch(`http://localhost:3000/pcbuilds/${item.id}/favorites/${filteredFavorite.id}.json`, {
+                fetch(`https://fpsbuilds-back-staging.herokuapp.com/pcbuilds/${item.id}/favorites/${filteredFavorite.id}.json`, {
                   method: "DELETE",
                 })
                 
@@ -33,7 +33,7 @@ function FavoriteBuild({item}) {
                 <div className="row no-gutters">
                 <div className="col-md-4">
                 
-                <img src={`http://localhost:3000/${item.attachment_url}`} width="400px" className="favorites-card-img" alt="..."/>
+                <img src={`https://fpsbuilds-back-staging.herokuapp.com/${item.attachment_url}`} width="400px" className="favorites-card-img" alt="..."/>
                 
                 </div>
                 <div className="col-md-8">

@@ -9,7 +9,7 @@ function NewDiscussion(){
   function createDiscussion(e) {
         const form = new FormData(document.getElementById("newDiscussion"));
         
-        fetch("http://localhost:3000/discussions.json", {
+        fetch("https://fpsbuilds-back-staging.herokuapp.com/discussions.json", {
           method: "POST",
           body: form,
         });

@@ -25,7 +25,7 @@ function Image({img}) {
 
     function createLike() {
       const form = new FormData(document.getElementById("newLike"));
-        fetch(`http://localhost:3000/pcbuilds/${img.id}/likes.json`, {
+        fetch(`https://fpsbuilds-back-staging.herokuapp.com/pcbuilds/${img.id}/likes.json`, {
           method: "POST",
           body: form,
         })
@@ -33,21 +33,21 @@ function Image({img}) {
     function deleteLike() {
       likes.filter(like => like.user_id === user.id && like.pcbuild_id === img.id).map(filteredLike => (
                    
-                    fetch(`http://localhost:3000/pcbuilds/${img.id}/likes/${filteredLike.id}.json`, {
+                    fetch(`https://fpsbuilds-back-staging.herokuapp.com/pcbuilds/${img.id}/likes/${filteredLike.id}.json`, {
                       method: "DELETE",
                     })
                   ))
   }
     function createFavorite() {
       const form = new FormData(document.getElementById("newFavorite"));
-      fetch(`http://localhost:3000/pcbuilds/${img.id}/favorites.json`, {
+      fetch(`https://fpsbuilds-back-staging.herokuapp.com/pcbuilds/${img.id}/favorites.json`, {
         method: "POST",
         body: form,
       })
   }
    function deleteFavorite() {
     favorites.filter(favorite => favorite.user_id === user.id && favorite.pcbuild_id === img.id).map(filteredFavorite => (
-      fetch(`http://localhost:3000/pcbuilds/${img.id}/favorites/${filteredFavorite.id}.json`, {
+      fetch(`https://fpsbuilds-back-staging.herokuapp.com/pcbuilds/${img.id}/favorites/${filteredFavorite.id}.json`, {
         method: "DELETE",
       })
       ))
@@ -75,7 +75,7 @@ function LikeIcon(){
     return (
       <div className="col-md-4" ref = {ref}>
           <div className="card mb-4 shadow-sm">
-              <img src={`http://localhost:3000/${img.attachment_url}`} className= "card-img-top"/>
+              <img src={`https://fpsbuilds-back-staging.herokuapp.com/${img.attachment_url}`} className= "card-img-top"/>
               <div>
               <div className= "comments-icon"><Link to={`/builds/${img.id}`}><img src={buildcomments}/> </Link> <em><small>{buildpostcount}</small></em>
               <div className= "like-icon">{ loggedInStatus === "LOGGED_IN" ? LikeIcon(): ""} 

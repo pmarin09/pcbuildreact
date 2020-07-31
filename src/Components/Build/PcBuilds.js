@@ -52,7 +52,7 @@ import Select from 'react-select'
   function createBuild(e) {
     const form = new FormData(document.getElementById("newPcbuild"));
 
-    fetch("http://localhost:3000/pcbuilds.json", {
+    fetch("https://fpsbuilds-back-staging.herokuapp.com/pcbuilds.json", {
       method: "POST",
       body: form,
     });

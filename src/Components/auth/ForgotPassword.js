@@ -3,7 +3,7 @@ import mail from "../../icons/mail.png"
 
 function ForgotPassword(){
 
-const baseURL = "http://localhost:3000/"
+const baseURL = "https://fpsbuilds-back-staging.herokuapp.com/"
 const [email, setEmail] = useState("")
 
   function forgotPassword(e) {

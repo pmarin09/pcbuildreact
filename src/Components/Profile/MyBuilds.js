@@ -21,7 +21,7 @@ function MyBuilds() {
                 <div className="row no-gutters">
                 <div className="col-md-4">
                 
-                <img src={`http://localhost:3000/${filteredBuild.attachment_url}`} width="400px" className="profile-card-img" alt="..."/>
+                <img src={`https://fpsbuilds-back-staging.herokuapp.com/${filteredBuild.attachment_url}`} width="400px" className="profile-card-img" alt="..."/>
                 
                 </div>
                 <div className="col-md-8">

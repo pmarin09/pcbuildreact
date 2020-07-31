@@ -15,7 +15,7 @@ function EditDiscussion(){
   function editDiscussion(e) {
         const form = new FormData(document.getElementById("editDiscussion"));
         
-        fetch("http://localhost:3000/discussions/" + discussionId + ".json", {
+        fetch("https://fpsbuilds-back-staging.herokuapp.com/discussions/" + discussionId + ".json", {
           method: "PATCH",
           body: form,
         });
@@ -27,7 +27,7 @@ function EditDiscussion(){
   function deleteDiscussion(e) {
       const form = new FormData(document.getElementById("deleteDiscussion"));
       
-      fetch("http://localhost:3000/discussions/" + discussionId + ".json", {
+      fetch("https://fpsbuilds-back-staging.herokuapp.com/discussions/" + discussionId + ".json", {
         method: "DELETE",
         body: form,
       });

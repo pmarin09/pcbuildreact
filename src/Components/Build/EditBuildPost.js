@@ -13,7 +13,7 @@ function EditBuildPost(){
     function EditBuildPost(e) {
         const form = new FormData(document.getElementById("editBuildPost"));
         
-        fetch("http://localhost:3000/buildposts/" + buildpostId + ".json", {
+        fetch("https://fpsbuilds-back-staging.herokuapp.com/buildposts/" + buildpostId + ".json", {
           method: "PATCH",
           body: form,
         });
@@ -26,7 +26,7 @@ function EditBuildPost(){
      function deleteBuildPost(e) {
       const form = new FormData(document.getElementById("deleteBuildPost"));
       
-      fetch("http://localhost:3000/buildposts/" + buildpostId + ".json", {
+      fetch("https://fpsbuilds-back-staging.herokuapp.com/buildposts/" + buildpostId + ".json", {
         method: "DELETE",
         body: form,
       });

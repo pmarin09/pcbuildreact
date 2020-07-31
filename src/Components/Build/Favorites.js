@@ -10,7 +10,7 @@ function Favorites() {
        ))
 
        useEffect(()=>{
-        fetch(`http://localhost:3000/pcbuilds.json`)
+        fetch(`https://fpsbuilds-back-staging.herokuapp.com/pcbuilds.json`)
         .then (res => res.json())
         .then (data => setAllBuilds(data))
     },[])

@@ -19,7 +19,7 @@ function Registration (){
 
     axios
       .post(
-        "http://localhost:3000/users/",
+        "https://fpsbuilds-back-staging.herokuapp.com/users/",
         {
           user: {
             username: username,

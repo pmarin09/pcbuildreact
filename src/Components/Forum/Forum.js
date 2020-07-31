@@ -4,7 +4,7 @@ function Forum(){
     function createForum(e) {
         const form = new FormData(document.getElementById("newForum"));
     
-        fetch("http://localhost:3000/forums.json", {
+        fetch("https://fpsbuilds-back-staging.herokuapp.com/forums.json", {
           method: "POST",
           body: form,
         });
