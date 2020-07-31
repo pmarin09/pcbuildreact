@@ -48,11 +48,13 @@ function handleSubmit(event) {
   event.preventDefault();
 }
 
-const x = document.getElementById("pc-nav");
+
 function toggleNavMenu() {
+  const x = document.getElementById("pc-nav");
   x.classList.toggle("responsive");
 }
 const theLinks = document.querySelectorAll(".pcnavbar-item");
+const x = document.getElementById("pc-nav");
 theLinks.forEach(link => link.addEventListener("click", ()=>{
   x.classList.remove("responsive");
 }))
@@ -102,7 +104,7 @@ if(loggedInStatus === "LOGGED_IN"){
                     <span className="logout-span"><Link onClick={() => handleLogoutClick()} style={{textDecoration: "none"}}><img src={logout}/> <em><small>Logout</small></em></Link></span>
                     </a>
                     
-              <a href="#" className="icon" onClick={toggleNavMenu}>
+              <a href="javascript: void(0)" className="icon" onClick={toggleNavMenu}>
               <i className="ri-menu-line ri-xl"></i>
               </a>
         </div>
@@ -188,7 +190,7 @@ if(loggedInStatus === "LOGGED_IN"){
                   <div></div>
                 </form>
                 </div>
-                <a href="#" className="icon" onClick={toggleNavMenu}>
+                <a href="javascript:void(0);" className="icon" onClick={toggleNavMenu}>
               <i className="ri-menu-line ri-xl"></i>
               </a>
                 
