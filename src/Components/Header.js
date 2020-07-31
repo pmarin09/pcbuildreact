@@ -102,7 +102,7 @@ if(loggedInStatus === "LOGGED_IN"){
                     <span className="logout-span"><Link onClick={() => handleLogoutClick()} style={{textDecoration: "none"}}><img src={logout}/> <em><small>Logout</small></em></Link></span>
                     </a>
                     
-              <a href="javascript:void(0);" className="icon" onClick={toggleNavMenu}>
+              <a href="#" className="icon" onClick={toggleNavMenu}>
               <i className="ri-menu-line ri-xl"></i>
               </a>
         </div>

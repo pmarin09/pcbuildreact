@@ -30,7 +30,7 @@ const paginate = pageNumber => setCurrentPage(pageNumber);
       <div className="jumbotron">
         <div className="container">
           <h1 className="jumbotron-heading">FPS Builds</h1>
-          <p className="lead text-muted">Welcome to Power Builds! For all PC Builder enthusiasts... </p>
+          <p className="lead text-muted">Welcome to FPS Builds! For all PC Builder enthusiasts... </p>
           <p>
           <Link to="/allbuilds" style={{textDecoration: "none"}}> <div className="btn btn-primary my-2">View All Builds</div></Link>
           </p>
