@@ -188,7 +188,7 @@ if(loggedInStatus === "LOGGED_IN"){
                   <div></div>
                 </form>
                 </div>
-                <a href="javascript:void(0);" className="icon" onClick={toggleNavMenu}>
+                <a href="#" className="icon" onClick={toggleNavMenu}>
               <i className="ri-menu-line ri-xl"></i>
               </a>
                 
