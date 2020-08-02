@@ -387,8 +387,9 @@ import Select from 'react-select'
           />
 
 </form>
-{ (loggedInStatus === "LOGGED_IN") ?checkThemeStatus() :""}
+
 </section> 
+{checkThemeStatus()}
   </section>
       : 
       history.push("/")}
