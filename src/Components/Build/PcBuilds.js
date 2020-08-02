@@ -63,10 +63,9 @@ import Select from 'react-select'
 
   useEffect(()=>{
     checkLoginStatus()
-    checkThemeStatus()
   },[])
   
-  console.log(user.dark_theme)
+
     return(
     <>
                        
@@ -388,7 +387,7 @@ import Select from 'react-select'
           />
 
 </form>
-
+{ (loggedInStatus === "LOGGED_IN") ?checkThemeStatus() :""}
 </section> 
   </section>
       : 
