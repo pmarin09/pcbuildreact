@@ -65,6 +65,7 @@ import Select from 'react-select'
     checkLoginStatus()
   },[])
   
+  console.log(loggedInStatus)
 
     return(
     <>
@@ -392,7 +393,7 @@ import Select from 'react-select'
 
   </section>
       : 
-      history.push("/")}
+      ""}
       </>
     )
   }
