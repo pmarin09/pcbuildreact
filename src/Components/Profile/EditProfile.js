@@ -51,7 +51,7 @@ function uploadAvatar(e) {
 {profileUser.map(profileUserData => 
 <div className="profile-container">
   <div className="row">
-     <div className="col-xs-3 col-sm-3" >{profileUserData.attachment_url ? <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${profileUserData.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
+     <div className="col-xs-3 col-sm-3" >{profileUserData.attachment_url ? <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${profileUserData.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email="1000-email@example.com" className="profile-img-avatar"/> }</div>
     <div className="col-sm-9"><h1 className="profile-username">{profileUserData.username}</h1>
     <table className="profile-table">
     <tr className="profile-stats-row">

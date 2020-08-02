@@ -98,7 +98,7 @@ if(loggedInStatus === "LOGGED_IN"){
               </a>
                     <a className="profile-div">
                     <Link to={`/profile/${user.id}`}>
-                    {user.attachment_url ? <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${user.attachment_url}`}  className="profile-avatar"/> : <Gravatar email="1000-email@example.com" /> }
+                    {user.attachment_url ? <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${user.attachment_url}`}  className="profile-avatar"/> : <Gravatar email="1000-email@example.com" className="profile-img-avatar" /> }
                     <span> <em><small>{user.username}</small></em></span>
                     </Link>
                     <span className="logout-span"><Link onClick={() => handleLogoutClick()} style={{textDecoration: "none"}}><img src={logout}/> <em><small>Logout</small></em></Link></span>
