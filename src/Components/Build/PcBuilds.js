@@ -389,7 +389,7 @@ import Select from 'react-select'
 </form>
 
 </section> 
-{checkThemeStatus()}
+
   </section>
       : 
       history.push("/")}
