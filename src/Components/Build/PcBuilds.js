@@ -61,10 +61,7 @@ import Select from 'react-select'
     window.location.reload(false);
   }
 
-  useEffect(()=>{
-    checkLoginStatus()
-  },[])
-  
+ 
   console.log(loggedInStatus)
 
     return(
@@ -399,5 +396,5 @@ import Select from 'react-select'
   }
 
 
-export default PcBuilds
+export default PcBuilds;
 
