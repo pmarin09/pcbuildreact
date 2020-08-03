@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 import {Link} from "react-router-dom"
 import TimeAgo from 'timeago-react';
 function FavoriteBuild({item}) {
-    const {loggedInStatus,user,favorites,updateFavorites} = useContext(Context)
+    const {loggedInStatus,user,favorites,updateFavorites,fpsbuildsurl} = useContext(Context)
     const favoriteBuildParts = item.parts.map(b =>
             <tr>
               <td className="fav-td">{b.part_type}</td>
@@ -15,7 +15,7 @@ function FavoriteBuild({item}) {
         
              function deleteFavorite() {
               favorites.filter(favorite => favorite.user_id === user.id && favorite.pcbuild_id === item.id).map(filteredFavorite => (
-                fetch(`https://fpsbuilds-back-staging.herokuapp.com/pcbuilds/${item.id}/favorites/${filteredFavorite.id}.json`, {
+                fetch(`${fpsbuildsurl}/pcbuilds/${item.id}/favorites/${filteredFavorite.id}.json`, {
                   method: "DELETE",
                 })
                 
@@ -33,7 +33,7 @@ function FavoriteBuild({item}) {
                 <div className="row no-gutters">
                 <div className="col-md-4">
                 
-                <img src={`https://fpsbuilds-back-staging.herokuapp.com/${item.attachment_url}`} width="400px" className="favorites-card-img" alt="..."/>
+                <img src={`${fpsbuildsurl}/${item.attachment_url}`} width="400px" className="favorites-card-img" alt="..."/>
                 
                 </div>
                 <div className="col-md-8">

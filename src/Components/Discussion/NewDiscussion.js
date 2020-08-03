@@ -2,14 +2,14 @@ import React, {useContext,useState,useEffect} from "react"
 import {Context} from "../../Context"
 import { useHistory } from 'react-router-dom';
 function NewDiscussion(){
-  const{forums, user, checkLoginStatus} = useContext(Context)
+  const{forums, user, checkLoginStatus,fpsbuildsurl} = useContext(Context)
   const history = useHistory()
   const forumData = forums.map(forum => (<option value = {forum.id}>{forum.title}</option>))
   
   function createDiscussion(e) {
         const form = new FormData(document.getElementById("newDiscussion"));
         
-        fetch("https://fpsbuilds-back-staging.herokuapp.com/discussions.json", {
+        fetch(`${fpsbuildsurl}/discussions.json`, {
           method: "POST",
           body: form,
         });

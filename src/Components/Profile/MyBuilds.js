@@ -6,7 +6,7 @@ import TimeAgo from 'timeago-react';
 function MyBuilds() {
     
     
-    const {allBuilds,user, loggedInStatus} = useContext(Context)
+    const {allBuilds,user, loggedInStatus,fpsbuildsurl} = useContext(Context)
     const {userId} = useParams()
     const myBuilds = allBuilds.filter(build => build.user_id.toString() === userId)
     
@@ -21,7 +21,7 @@ function MyBuilds() {
                 <div className="row no-gutters">
                 <div className="col-md-4">
                 
-                <img src={`https://fpsbuilds-back-staging.herokuapp.com/${filteredBuild.attachment_url}`} width="400px" className="profile-card-img" alt="..."/>
+                <img src={`${fpsbuildsurl}/${filteredBuild.attachment_url}`} width="400px" className="profile-card-img" alt="..."/>
                 
                 </div>
                 <div className="col-md-8">

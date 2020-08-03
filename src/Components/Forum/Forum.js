@@ -1,10 +1,13 @@
-import React from "react"
+import React, {useContext} from "react"
+import {Context} from "../../Context"
 
 function Forum(){
+
+  const{fpsbuildsurl} = useContext(Context)
     function createForum(e) {
         const form = new FormData(document.getElementById("newForum"));
     
-        fetch("https://fpsbuilds-back-staging.herokuapp.com/forums.json", {
+        fetch(`${fpsbuildsurl}/forums.json`, {
           method: "POST",
           body: form,
         });

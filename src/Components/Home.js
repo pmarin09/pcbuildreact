@@ -13,7 +13,7 @@ function Home(props){
 
   function handleLogoutClick() {
     axios
-      .delete("https://fpsbuilds-back-staging.herokuapp.com/logout", { withCredentials: true })
+      .delete(`${fpsbuildsurl}/logout`, { withCredentials: true })
       .then(response => {
         props.handleLogout();
       })

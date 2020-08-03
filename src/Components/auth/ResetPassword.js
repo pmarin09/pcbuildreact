@@ -1,10 +1,11 @@
-import React, { useState} from 'react';
+import React, { useState, useContext} from 'react';
 import mail from "../../icons/mail.png"
 import pw from "../../icons/pw.png"
 import tokencode from "../../icons/token.png"
+import {Context} from "../../Context"
 function ResetPassword(){
 
-const baseURL = "https://fpsbuilds-back-staging.herokuapp.com/"
+const{fpsbuildsurl} = useContext(Context)
 const [email, setEmail] = useState("")
 const [token, setToken] = useState("")
 const [password, setPassword] = useState("")
@@ -13,7 +14,7 @@ const [password_confirmation, setPasswordConfirmation] = useState("")
   function resetPassword(e) {
     const form = new FormData(document.getElementById("resetPassword"));
 
-    fetch(`${baseURL}/reset_password`, {
+    fetch(`${fpsbuildsurl}/reset_password`, {
      credentials: "include",
       method: "POST",
       body: form,

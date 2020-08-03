@@ -1,15 +1,15 @@
-import React, { useState} from 'react';
+import React, { useState,useContext} from 'react';
 import mail from "../../icons/mail.png"
-
+import {Context} from "../../Context"
 function ForgotPassword(){
 
-const baseURL = "https://fpsbuilds-back-staging.herokuapp.com/"
+const{fpsbuildsurl} = useContext(Context)
 const [email, setEmail] = useState("")
 
   function forgotPassword(e) {
     const form = new FormData(document.getElementById("forgotPassword"));
 
-    fetch(`${baseURL}/forgot_password`, {
+    fetch(`${fpsbuildsurl}/forgot_password`, {
      credentials: "include",
       method: "POST",
       body: form,

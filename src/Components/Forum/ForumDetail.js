@@ -8,7 +8,7 @@ import Pagination from '../../Pagination';
 import comment from '../../icons/comment.png'
 
 function ForumDetail() {
-    const {forums,discussions,user, loggedInStatus,toggleTheme,checkThemeStatus} = useContext(Context)
+    const {forums,discussions,user, loggedInStatus,toggleTheme,checkThemeStatus,fpsbuildsurl} = useContext(Context)
     const {forumId} = useParams()
     const forumsData = forums.map(forum => (
         <h3 className = "forumSideBar" key={forum.id}>
@@ -18,7 +18,7 @@ function ForumDetail() {
  
     const showDiscussions =  discussions.filter(discussion => discussion.forum_id.toString() === forumId).map(filteredDiscussion => (
         <div className= "discussions-grid">
-        <div style={{margin: "auto"}}><Link to={`/profile/${filteredDiscussion.user_id}`}> {filteredDiscussion.user.attachment_url ? <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${filteredDiscussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredDiscussion.user.email}  className = "discussion-avatar"/>} </Link></div>
+        <div style={{margin: "auto"}}><Link to={`/profile/${filteredDiscussion.user_id}`}> {filteredDiscussion.user.attachment_url ? <img src = {`${fpsbuildsurl}/${filteredDiscussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredDiscussion.user.email}  className = "discussion-avatar"/>} </Link></div>
                <div className= "discussions-title"><Link to={`/discussions/${filteredDiscussion.id}`} style={{float: "left"}}><strong style={{fontSize: "15px"}}>{filteredDiscussion.title}</strong> - {filteredDiscussion.description} </Link> {(user.id === filteredDiscussion.user_id && loggedInStatus === "LOGGED_IN") ? 
                      <Link to={`/editDiscussion/${filteredDiscussion.id}`} style={{textDecoration: "none"}}>
                              <i className="ri-pencil-fill" style={{float: "left"}}></i>

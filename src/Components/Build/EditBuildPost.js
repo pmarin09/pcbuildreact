@@ -4,7 +4,7 @@ import { useHistory, useParams} from 'react-router-dom';
 function EditBuildPost(){
   const history = useHistory()
   const {buildId} = useParams()
-  const{buildposts} = useContext(Context)
+  const{buildposts,fpsbuildsurl} = useContext(Context)
   const {buildpostId} = useParams()
   const thisBuildPost = buildposts.filter(post => post.id.toString() === buildpostId)
   const thisBuildPostContent = thisBuildPost.map(post => post.content)
@@ -13,7 +13,7 @@ function EditBuildPost(){
     function EditBuildPost(e) {
         const form = new FormData(document.getElementById("editBuildPost"));
         
-        fetch("https://fpsbuilds-back-staging.herokuapp.com/buildposts/" + buildpostId + ".json", {
+        fetch(`${fpsbuildsurl}/buildposts/` + buildpostId + ".json", {
           method: "PATCH",
           body: form,
         });
@@ -26,7 +26,7 @@ function EditBuildPost(){
      function deleteBuildPost(e) {
       const form = new FormData(document.getElementById("deleteBuildPost"));
       
-      fetch("https://fpsbuilds-back-staging.herokuapp.com/buildposts/" + buildpostId + ".json", {
+      fetch(`${fpsbuildsurl}/buildposts/` + buildpostId + ".json", {
         method: "DELETE",
         body: form,
       });

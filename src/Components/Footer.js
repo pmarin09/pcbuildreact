@@ -20,21 +20,21 @@ function Footerpc(){
                         <Col md="2">
                             <h5 className="text mb-4 mt-3 font-weight-bold">Navigation</h5>
                             <ul className="list-unstyled">
-                                <li><Link to="https://fpsbuilds-back-staging.herokuapp.com/" style={{textDecoration: "none"}}>Home</Link></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>Home</Link></li>
                                 <li><Link to="/allbuilds" style={{textDecoration: "none"}}>All Builds</Link></li>
                                 <li><Link to="/discussions" style={{textDecoration: "none"}}>Forum</Link></li>
-                                <li><Link to="https://fpsbuilds-back-staging.herokuapp.com/" style={{textDecoration: "none"}}>Latest News</Link></li>
-                                <li><Link to="https://fpsbuilds-back-staging.herokuapp.com/" style={{textDecoration: "none"}}>About Us</Link></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>Latest News</Link></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>About Us</Link></li>
                             </ul>
                         </Col>
                         <hr className="clearfix w-100 d-md-none" />
                         <Col md="2">
                             <h5 className="text mb-4 mt-3 font-weight-bold">Company</h5>
                             <ul className="list-unstyled">
-                                <li><Link to="https://fpsbuilds-back-staging.herokuapp.com/" style={{textDecoration: "none"}}>Privacy Policy</Link></li>
-                                <li><Link to="https://fpsbuilds-back-staging.herokuapp.com/" style={{textDecoration: "none"}}>Terms of Service</Link></li>
-                                <li><Link to="https://fpsbuilds-back-staging.herokuapp.com/" style={{textDecoration: "none"}}>Affiliate Disclosure</Link></li>
-                                <li><Link to="https://fpsbuilds-back-staging.herokuapp.com/" style={{textDecoration: "none"}}>Contact</Link></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>Privacy Policy</Link></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>Terms of Service</Link></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>Affiliate Disclosure</Link></li>
+                                <li><Link to="/" style={{textDecoration: "none"}}>Contact</Link></li>
                             </ul>
                         </Col>
                         <hr className="clearfix w-100 d-md-none"></hr>

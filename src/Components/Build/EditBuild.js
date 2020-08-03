@@ -19,14 +19,14 @@ import Select from 'react-select'
 
 function EditBuild (){
 
-const {user,parts,allBuilds,checkLoginStatus}=useContext(Context)
+const {user,parts,allBuilds,checkLoginStatus,fpsbuildsurl}=useContext(Context)
 const history = useHistory()
 const {buildId} = useParams()
 const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
 console.log(thisBuild)
 const thisBuildImages = thisBuild.map(a => {
   return a.attachment_url.map(b =>
-        <td><img src = {`https://fpsbuilds-back-staging.herokuapp.com/${b}`} className="build-edit-images"/></td>
+        <td><img src = {`${fpsbuildsurl}/${b}`} className="build-edit-images"/></td>
     )})
  const pcbuild_parts = (thisBuild[0].pcbuild_parts.map(pcbuild_part=>{return {id: pcbuild_part.id,description: pcbuild_part.part.description,part_type: pcbuild_part.part.part_type, price: pcbuild_part.price}}))
 
@@ -78,7 +78,7 @@ const build_icons = {
 function updateBuild(e) {
   const form = new FormData(document.getElementById("updatePcbuild"));
 
-  fetch(`https://fpsbuilds-back-staging.herokuapp.com/pcbuilds/${buildId}.json`, {
+  fetch(`${fpsbuildsurl}/pcbuilds/${buildId}.json`, {
     method: "PATCH",
     body: form,
   });
@@ -98,7 +98,7 @@ return (
 {thisBuild.map(build => 
 <div className="profile-container">
   <div className="row">
-     <div className="col-xs-3 col-sm-3" >{build.attachment_url ? <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${build.attachment_url}`}  className="build-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
+     <div className="col-xs-3 col-sm-3" >{build.attachment_url ? <img src = {`${fpsbuildsurl}/${build.attachment_url}`}  className="build-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
     <div className="col-sm-9"><h1 className="profile-username"><small>{build.build_name}</small></h1>
     <table className="profile-table">
     <tr className="profile-stats-row">

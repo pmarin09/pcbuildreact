@@ -4,7 +4,7 @@ import { useHistory, useParams} from 'react-router-dom';
 function EditPost(){
   const {discussions} = useContext(Context)
   const history = useHistory()
-  const{posts} = useContext(Context)
+  const{posts,fpsbuildsurl} = useContext(Context)
   const {discussionId} = useParams()
   const {postId} = useParams()
   const thisPost = posts.filter(post => post.id.toString() === postId)
@@ -14,7 +14,7 @@ function EditPost(){
     function EditPost(e) {
         const form = new FormData(document.getElementById("editPost"));
         
-        fetch("https://fpsbuilds-back-staging.herokuapp.com/discussions/" + discussionId + "/posts/"+ postId + ".json", {
+        fetch(`${fpsbuildsurl}/discussions/` + discussionId + "/posts/"+ postId + ".json", {
           method: "PATCH",
           body: form,
         });
@@ -26,7 +26,7 @@ function EditPost(){
      function deletePost(e) {
       const form = new FormData(document.getElementById("deleteDiscussion"));
       
-      fetch("https://fpsbuilds-back-staging.herokuapp.com/discussions/" + discussionId +"/posts/"+ postId + ".json", {
+      fetch(`${fpsbuildsurl}/discussions/` + discussionId +"/posts/"+ postId + ".json", {
         method: "DELETE",
         body: form,
       });

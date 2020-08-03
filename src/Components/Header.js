@@ -15,7 +15,7 @@ import security from "../icons/security.png"
 import axios from "axios"
 
 function Header(){
-  const{user, checkLoginStatus, handleLogoutClick,loggedInStatus, handleSuccessfulAuth} = useContext(Context)
+  const{user, checkLoginStatus, handleLogoutClick,loggedInStatus, handleSuccessfulAuth,fpsbuildsurl} = useContext(Context)
   const history = useHistory()
   const[email, setEmail] = useState("")
   const[password, setPassword] = useState("") 
@@ -26,7 +26,7 @@ function Header(){
 function handleSubmit(event) {
   axios
     .post(
-      "https://fpsbuilds-back-staging.herokuapp.com/sessions",
+      `${fpsbuildsurl}/sessions`,
       {
         user: {
           email: email,
@@ -67,7 +67,7 @@ if(loggedInStatus === "LOGGED_IN"){
                   <strong className= "app-title">FPS Builds</strong>
               <div className="pcnavbar-start" id="pc-nav">
                 <a className="pcnavbar-item">
-                    <Link to="https://fpsbuilds-back-staging.herokuapp.com/" style={{textDecoration: "none"}}>
+                    <Link to="/" style={{textDecoration: "none"}}>
                       <span className="pcnavbar-icon"><img src={home}/></span>
                       <span className="pcnavbar-text" > Home</span>
                     </Link>
@@ -98,7 +98,7 @@ if(loggedInStatus === "LOGGED_IN"){
               </a>
                     <a className="profile-div">
                     <Link to={`/profile/${user.id}`}>
-                    {user.attachment_url ? <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${user.attachment_url}`}  className="profile-avatar"/> : <Gravatar email="1000-email@example.com" className="profile-avatar" /> }
+                    {user.attachment_url ? <img src = {`${fpsbuildsurl}/${user.attachment_url}`}  className="profile-avatar"/> : <Gravatar email="1000-email@example.com" className="profile-avatar" /> }
                     <span> <em><small>{user.username}</small></em></span>
                     </Link>
                     <span className="logout-span"><Link onClick={() => handleLogoutClick()} style={{textDecoration: "none"}}><img src={logout}/> <em><small>Logout</small></em></Link></span>

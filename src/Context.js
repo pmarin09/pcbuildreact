@@ -9,7 +9,9 @@ function ContextProvider({children}){
   //LIGHT AND DARK THEME
   
   const [theme, setTheme] = useState("light")
+  const fpsbuildsurl = "https://fpsbuilds-back-staging.herokuapp.com"
 
+  
   function toggleTheme(){
       const checkBox = document.getElementById("theme-checkbox")
       const hiddenCheckBox = document.getElementById('theme-checkbox-hidden')
@@ -33,7 +35,7 @@ function ContextProvider({children}){
 
   function sendDarkTheme (){
     const form = new FormData(document.getElementById("setDarkTheme"));
-  fetch(`https://fpsbuilds-back-staging.herokuapp.com/users/${user.id}`, {
+  fetch(`${fpsbuildsurl}/users/${user.id}`, {
     method: "PATCH",
     body:form
   });
@@ -100,7 +102,7 @@ function ContextProvider({children}){
   /////
 
   const [users, setUsers]=useState([])
-  const usersUrl = "https://fpsbuilds-back-staging.herokuapp.com/users.json"
+  const usersUrl = `${fpsbuildsurl}/users.json`
   useEffect(()=>{
       fetch(usersUrl)
       .then (res => res.json())
@@ -112,13 +114,13 @@ function ContextProvider({children}){
     const [favoriteBuilds, setFavoriteBuilds] = useState([])
 
     useEffect(()=>{
-        fetch(`https://fpsbuilds-back-staging.herokuapp.com/pcbuilds.json`)
+        fetch(`${fpsbuildsurl}/pcbuilds.json`)
         .then (res => res.json())
         .then (data => setAllBuilds(data))
     },[])
 
     const [forums, setForums]=useState([])
-    const forumsUrl = "https://fpsbuilds-back-staging.herokuapp.com/forums.json"
+    const forumsUrl = `${fpsbuildsurl}/forums.json`
     useEffect(()=>{
         fetch(forumsUrl)
         .then (res => res.json())
@@ -127,7 +129,7 @@ function ContextProvider({children}){
     },[])
 
     const [discussions, setDiscussions]=useState([])
-    const disscusionsUrl = "https://fpsbuilds-back-staging.herokuapp.com/discussions.json"
+    const disscusionsUrl = `${fpsbuildsurl}/discussions.json`
     useEffect(()=>{
         fetch(disscusionsUrl)
         .then (res => res.json())
@@ -136,7 +138,7 @@ function ContextProvider({children}){
     },[])
 
     const [posts, setPosts]=useState([])
-    const postsUrl = "https://fpsbuilds-back-staging.herokuapp.com/posts.json"
+    const postsUrl = `${fpsbuildsurl}/posts.json`
     useEffect(()=>{
         fetch(postsUrl)
         .then (res => res.json())
@@ -145,7 +147,7 @@ function ContextProvider({children}){
     },[])
 
     const [buildposts, setBuildPosts]=useState([])
-    const buildpostsUrl = "https://fpsbuilds-back-staging.herokuapp.com/buildposts.json"
+    const buildpostsUrl = `${fpsbuildsurl}/buildposts.json`
     useEffect(()=>{
         fetch(buildpostsUrl)
         .then (res => res.json())
@@ -154,7 +156,7 @@ function ContextProvider({children}){
     },[])
 
     const [parts, setParts]=useState([])
-    const partsUrl = "https://fpsbuilds-back-staging.herokuapp.com/parts.json"
+    const partsUrl = `${fpsbuildsurl}/parts.json`
     useEffect(()=>{
         fetch(partsUrl)
         .then (res => res.json())
@@ -164,7 +166,7 @@ function ContextProvider({children}){
 
 
     const [likes, setLikes]=useState([])
-    const likesUrl = "https://fpsbuilds-back-staging.herokuapp.com/likes.json"
+    const likesUrl = `${fpsbuildsurl}/likes.json`
     useEffect(()=>{
         fetch(likesUrl)
         .then (res => res.json())
@@ -173,14 +175,14 @@ function ContextProvider({children}){
     },[])
 
     function updateLikes(){
-      setTimeout(() => {fetch(`https://fpsbuilds-back-staging.herokuapp.com/likes.json`)
+      setTimeout(() => {fetch(`${fpsbuildsurl}/likes.json`)
       .then (res => res.json())
       .then (data => setLikes(data))
       },50)
      }
 
     const [favorites, setFavorites]=useState([])
-    const favoritesUrl = "https://fpsbuilds-back-staging.herokuapp.com/favorites.json"
+    const favoritesUrl = `${fpsbuildsurl}/favorites.json`
     useEffect(()=>{
         fetch(favoritesUrl)
         .then (res => res.json())
@@ -189,7 +191,7 @@ function ContextProvider({children}){
     },[])
 
     function updateFavorites(){
-      setTimeout(() => {fetch(`https://fpsbuilds-back-staging.herokuapp.com/favorites.json`)
+      setTimeout(() => {fetch(`${fpsbuildsurl}/favorites.json`)
       .then (res => res.json())
       .then (data => setFavorites(data))
       },50)
@@ -204,7 +206,7 @@ function ContextProvider({children}){
   
     function checkLoginStatus() {
     axios
-      .get("https://fpsbuilds-back-staging.herokuapp.com/logged_in", { withCredentials: true })
+      .get(`${fpsbuildsurl}/logged_in`, { withCredentials: true })
       .then(response => {
         if (
           response.data.logged_in &&
@@ -242,7 +244,7 @@ function ContextProvider({children}){
 
   function handleLogoutClick() {
     axios
-      .delete("https://fpsbuilds-back-staging.herokuapp.com/logout", { withCredentials: true })
+      .delete(`${fpsbuildsurl}/logout`, { withCredentials: true })
       .then(response => {
         handleLogout();
       })
@@ -261,6 +263,7 @@ function ContextProvider({children}){
     return(
 
             <Context.Provider value = {{
+                fpsbuildsurl,
                 theme,
                 setTheme,
                 checkThemeStatus,

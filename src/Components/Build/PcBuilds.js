@@ -17,7 +17,7 @@ import Select from 'react-select'
 
   function PcBuilds(){
   
-  const{user, parts, checkLoginStatus,toggleTheme, checkThemeStatus, loggedInStatus} = useContext(Context)
+  const{user, parts, checkLoginStatus,toggleTheme, checkThemeStatus, loggedInStatus,fpsbuildsurl} = useContext(Context)
   const history = useHistory()
   const themeLabel = <form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
   <input 
@@ -52,7 +52,7 @@ import Select from 'react-select'
   function createBuild(e) {
     const form = new FormData(document.getElementById("newPcbuild"));
 
-    fetch("https://fpsbuilds-back-staging.herokuapp.com/pcbuilds.json", {
+    fetch(`${fpsbuildsurl}/pcbuilds.json`, {
       method: "POST",
       body: form,
     });

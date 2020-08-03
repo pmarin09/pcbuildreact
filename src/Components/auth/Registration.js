@@ -7,7 +7,7 @@ import pw from "../../icons/pw.png"
 import displayname from "../../icons/displayname.png"
 
 function Registration (){
-  const{handleSuccessfulAuth} = useContext(Context)
+  const{handleSuccessfulAuth,fpsbuildsurl} = useContext(Context)
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password,setPassword] = useState("")
@@ -19,7 +19,7 @@ function Registration (){
 
     axios
       .post(
-        "https://fpsbuilds-back-staging.herokuapp.com/users/",
+        `${fpsbuildsurl}/users/`,
         {
           user: {
             username: username,

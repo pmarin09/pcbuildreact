@@ -6,13 +6,13 @@ import TimeAgo from 'timeago-react';
 import Carousel from 'react-bootstrap/Carousel'
 import Pagination from '../../Pagination';
 function BuildDetail(img) {
-    const{allBuilds, user, loggedInStatus, buildposts} = useContext(Context)
+    const{fpsbuildsurl,allBuilds, user, loggedInStatus, buildposts} = useContext(Context)
     const {buildId} = useParams()
     const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
     const thisBuildImage = thisBuild.map(a => {
       return a.attachment_url.map(b =>
             <Carousel.Item>
-            <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${b}`} width=  "400px" height= "400px"></img>
+            <img src = {`${fpsbuildsurl}/${b}`} width=  "400px" height= "400px"></img>
             </Carousel.Item>
         )})
     const thisBuildParts = thisBuild.map(a => {
@@ -30,7 +30,7 @@ function BuildDetail(img) {
            <article className="media">
                <div className="media-left">
                <figure className="image is-48x48">
-               {filteredPost.user.attachment_url ? <img src = {`https://fpsbuilds-back-staging.herokuapp.com/${filteredPost.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredPost.user.email}  className = "discussion-avatar"/>}
+               {filteredPost.user.attachment_url ? <img src = {`${fpsbuildsurl}/${filteredPost.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredPost.user.email}  className = "discussion-avatar"/>}
                </figure>
                </div>
                <div className="media-content" id= "post-content">
@@ -51,7 +51,7 @@ function BuildDetail(img) {
                    </a>
                    <a className="level-item">
                        <i className="ri-delete-bin-5-fill"onClick ={ (e) => { 
-                         fetch("https://fpsbuilds-back-staging.herokuapp.com/buildposts/" + filteredPost.id + ".json", {
+                         fetch("${fpsbuildsurl}/buildposts/" + filteredPost.id + ".json", {
                            method: "DELETE",
                          })
                         e.preventDefault();
@@ -76,7 +76,7 @@ function BuildDetail(img) {
      
         const form = new FormData(document.getElementById("newBuildPost"));
         
-        fetch("https://fpsbuilds-back-staging.herokuapp.com/buildposts.json", {
+        fetch("${fpsbuildsurl}/buildposts.json", {
           method: "POST",
           body: form,
         });

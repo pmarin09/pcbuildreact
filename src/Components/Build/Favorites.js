@@ -3,14 +3,14 @@ import {Context} from "../../Context"
 import FavoriteBuild from "./FavoriteBuild"
 import Pagination from '../../Pagination';
 function Favorites() {
-    const {allBuilds,setAllBuilds,user} = useContext(Context)
+    const {allBuilds,setAllBuilds,user,fpsbuildsurl} = useContext(Context)
     const favoriteBuilds = allBuilds.filter(build => build.favorites.some(favorite => favorite.pcbuild_id === build.id && favorite.user_id === user.id)? build : "" )
     const FavoriteItemElements = favoriteBuilds.map(item => (
         <FavoriteBuild key = {item.id} item = {item} />
        ))
 
        useEffect(()=>{
-        fetch(`https://fpsbuilds-back-staging.herokuapp.com/pcbuilds.json`)
+        fetch(`${fpsbuildsurl}/pcbuilds.json`)
         .then (res => res.json())
         .then (data => setAllBuilds(data))
     },[])
