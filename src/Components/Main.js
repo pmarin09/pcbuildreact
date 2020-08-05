@@ -6,7 +6,7 @@ import Pagination from "../Pagination"
 import {Link} from "react-router-dom"
 import News from "../News"
 function Main(){
-  const{allBuilds,setUser} = useContext(Context)
+  const{allBuilds,setUser,fpsbuildsurl} = useContext(Context)
   const imageElements = allBuilds.map((img,i) => (
     <Image key = {img.id} img={img}/>
 ))
@@ -25,7 +25,7 @@ const paginate = pageNumber => setCurrentPage(pageNumber);
 useEffect(() => {
   const token = localStorage.getItem("token")
   if(token){
-    fetch(`http://localhost:3000/auto_login`, {
+    fetch(`${fpsbuildsurl}/auto_login`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
