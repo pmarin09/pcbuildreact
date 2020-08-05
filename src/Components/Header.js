@@ -15,38 +15,38 @@ import security from "../icons/security.png"
 import axios from "axios"
 
 function Header(){
-  const{user, checkLoginStatus, handleLogoutClick,loggedInStatus, handleSuccessfulAuth,fpsbuildsurl} = useContext(Context)
+  const{user, checkLoginStatus,handleSubmit, handleLogoutClick,loggedInStatus, handleSuccessfulAuth,fpsbuildsurl} = useContext(Context)
   const history = useHistory()
   const[email, setEmail] = useState("")
   const[password, setPassword] = useState("") 
-  useEffect(()=>{
- checkLoginStatus()
-},[])
+//   useEffect(()=>{
+//  checkLoginStatus()
+// },[])
 
-function handleSubmit(event) {
-  axios
-    .post(
-      `${fpsbuildsurl}/sessions`,
-      {
-        user: {
-          email: email,
-          password: password
-        }
-      },
-      { withCredentials: true }
-    )
-    .then(response => {
-      if (response.data.logged_in) {
-        handleSuccessfulAuth(response.data);
-      }
-      console.log(user)
-      history.push("/");
-    })
-    .catch(error => {
-      console.log("login error", error);
-    });
-  event.preventDefault();
-}
+// function handleSubmit(event) {
+//   axios
+//     .post(
+//       `${fpsbuildsurl}/sessions`,
+//       {
+//         user: {
+//           email: email,
+//           password: password
+//         }
+//       },
+//       { withCredentials: true }
+//     )
+//     .then(response => {
+//       if (response.data.logged_in) {
+//         handleSuccessfulAuth(response.data);
+//       }
+//       console.log(user)
+//       history.push("/");
+//     })
+//     .catch(error => {
+//       console.log("login error", error);
+//     });
+//   event.preventDefault();
+// }
 
 
 function toggleNavMenu() {

@@ -2,7 +2,7 @@
   "name": "pcbuildapp",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://fpsbuilds-back-staging.herokuapp.com",
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",

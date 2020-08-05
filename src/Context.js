@@ -204,43 +204,43 @@ function ContextProvider({children}){
     const[password, setPassword] = useState("")
     const history = useHistory()
   
-    function checkLoginStatus() {
-    axios
-      .get(`${fpsbuildsurl}/logged_in`, { withCredentials: true })
-      .then(response => {
-        if (
-          response.data.logged_in &&
-          loggedInStatus ==="NOT_LOGGED_IN"
-        ) {
-          setLoggedInStatus("LOGGED_IN")
-          setUser(response.data.user)
+  //   function checkLoginStatus() {
+  //   axios
+  //     .get(`${fpsbuildsurl}/logged_in`, { withCredentials: true })
+  //     .then(response => {
+  //       if (
+  //         response.data.logged_in &&
+  //         loggedInStatus ==="NOT_LOGGED_IN"
+  //       ) {
+  //         setLoggedInStatus("LOGGED_IN")
+  //         setUser(response.data.user)
           
-        } else if (
-          !response.data.logged_in &
-          (loggedInStatus === "LOGGED_IN")
-        ) {
-          setLoggedInStatus("NOT_LOGGED_IN")
-          setUser({})
-        }
-      })
-      .catch(error => {
-        console.log("check login error", error);
-      });
-  }
+  //       } else if (
+  //         !response.data.logged_in &
+  //         (loggedInStatus === "LOGGED_IN")
+  //       ) {
+  //         setLoggedInStatus("NOT_LOGGED_IN")
+  //         setUser({})
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.log("check login error", error);
+  //     });
+  // }
   
   function handleLogout() {
    setLoggedInStatus("NOT_LOGGED_IN")
    setUser({})
   }
   
-  function handleLogin(data) {
-    setLoggedInStatus("LOGGED_IN")
-    setUser(data.user)
-  }
+  // function handleLogin(data) {
+  //   setLoggedInStatus("LOGGED_IN")
+  //   setUser(data.user)
+  // }
   
-  useEffect(()=>{
-    checkLoginStatus()
-  },[])
+  // useEffect(()=>{
+  //   checkLoginStatus()
+  // },[])
 
   function handleLogoutClick() {
     axios
@@ -256,14 +256,62 @@ function ContextProvider({children}){
     }
 
     
-  function handleSuccessfulAuth(data) {
-        handleLogin(data);
+  // function handleSuccessfulAuth(data) {
+  //       handleLogin(data);
         
+  //     }
+
+
+
+  //JWT Token Auth
+  const [form, setForm] = useState("")
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if(token){
+      fetch(`http://localhost:3000/auto_login`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(resp => resp.json())
+      .then(data => {
+        setUser(data)
+        // console.log(data)
+      })
+      setLoggedInStatus("LOGGED_IN")
+    }else{
+    setLoggedInStatus("NOT_LOGGED_IN")
+  }}, [])
+
+  const handleLogin = (user) => {
+    setUser(user)
+  }
+
+  const handleFormSwitch = (input) => {
+    setForm(input)
+  }
+
+  const handleAuthClick = () => {
+    const token = localStorage.getItem("token")
+    fetch(`http://localhost:3000/user_is_authed`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
       }
+    })
+    .then(resp => resp.json())
+    .then(data => console.log(data))
+  }
+
+  console.log(user)
+
     return(
 
             <Context.Provider value = {{
                 fpsbuildsurl,
+                handleLogin,
+                handleFormSwitch,
+                handleAuthClick,
+                handleLogoutClick,
                 theme,
                 setTheme,
                 checkThemeStatus,
@@ -271,6 +319,7 @@ function ContextProvider({children}){
                 users,
                 setUsers,
                 user,
+                setUser,
                 allBuilds,
                 setAllBuilds,
                 favoriteBuilds,
@@ -286,12 +335,8 @@ function ContextProvider({children}){
                 favoritesUrl,
                 setFavorites,
                 updateFavorites,
-                loggedInStatus,
-                checkLoginStatus,
-                handleLogout,
-                handleLogoutClick,
-                handleLogin,
-                handleSuccessfulAuth
+                loggedInStatus
+            
             
             }}>
                 {children}

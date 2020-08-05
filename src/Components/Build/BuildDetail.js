@@ -76,7 +76,7 @@ function BuildDetail(img) {
      
         const form = new FormData(document.getElementById("newBuildPost"));
         
-        fetch("${fpsbuildsurl}/buildposts.json", {
+        fetch(`${fpsbuildsurl}/buildposts.json`, {
           method: "POST",
           body: form,
         });

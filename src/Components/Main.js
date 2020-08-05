@@ -1,4 +1,4 @@
-import React, {useContext,useState} from "react"
+import React, {useContext,useState,useEffect} from "react"
 import Image from "./Build/Image"
 import styles from "../styles.scss"
 import {Context} from "../Context"
@@ -6,7 +6,7 @@ import Pagination from "../Pagination"
 import {Link} from "react-router-dom"
 import News from "../News"
 function Main(){
-  const{allBuilds} = useContext(Context)
+  const{allBuilds,setUser} = useContext(Context)
   const imageElements = allBuilds.map((img,i) => (
     <Image key = {img.id} img={img}/>
 ))
@@ -22,7 +22,21 @@ const currentBuilds = imageElements.slice(indexOfFirstBuild, indexOfLastBuild);
 
 // Change page
 const paginate = pageNumber => setCurrentPage(pageNumber);
-
+useEffect(() => {
+  const token = localStorage.getItem("token")
+  if(token){
+    fetch(`http://localhost:3000/auto_login`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      setUser(data)
+      console.log(data)
+    })
+  }
+}, [])
 
     return (
       <>

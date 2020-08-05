@@ -5,41 +5,61 @@ import axios from "axios"
 import mail from "../../icons/mail.png"
 import pw from "../../icons/pw.png"
 function Login (props){
-  const{handleSuccessfulAuth,fpsbuildsurl} = useContext(Context)
+  const{handleSuccessfulAuth,fpsbuildsurl,handleLogin,handleAuthClick} = useContext(Context)
   const{user} = useContext(Context)
   const{loggedInStatus} = useContext(Context)
   const[email, setEmail] = useState("")
   const[password, setPassword] = useState("") 
   const history = useHistory()
- console.log(loggedInStatus)
+//  console.log(loggedInStatus)
   
- function handleSubmit(event) {
-    axios
-      .post(
-        `${fpsbuildsurl}/sessions`,
-        {
-          user: {
-            email: email,
-            password: password
-          }
-        },
-        { withCredentials: true }
-      )
-      .then(response => {
-        if (response.data.logged_in) {
-          handleSuccessfulAuth(response.data);
-        }
-        console.log(user)
-        history.push("/");
+//  function handleSubmit(event) {
+//     axios
+//       .post(
+//         `${fpsbuildsurl}/sessions`,
+//         {
+//           user: {
+//             email: email,
+//             password: password
+//           }
+//         },
+//         { withCredentials: true }
+//       )
+//       .then(response => {
+//         if (response.data.logged_in) {
+//           handleSuccessfulAuth(response.data);
+//         }
+//         console.log(user)
+        
+//       })
+//       .catch(error => {
+//         console.log("login error", error);
+//       });
+//     event.preventDefault();
+//   }
+
+  // if(loggedInStatus === "NOT_LOGGED_IN") {
+    const handleSubmit = (evt) => {
+      evt.preventDefault()
+      fetch(`${fpsbuildsurl}/login`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+          },
+          body: JSON.stringify({
+              email,
+              password
+          })
       })
-      .catch(error => {
-        console.log("login error", error);
-      });
-    event.preventDefault();
+      .then(resp => resp.json())
+      .then(data => {
+          localStorage.setItem("token", data.jwt)
+          handleLogin(data.user)
+      })
+      setEmail("")
+      setPassword("")
   }
-
-  if(loggedInStatus === "NOT_LOGGED_IN") {
-
  
   return (
 
@@ -90,21 +110,22 @@ function Login (props){
             Forgot Password?
           </Link>                                                              
     </form>
+    <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button>
     </article>
    
 
 
 </div>
     );
-  } else {
+  // } else {
 
-    return(
+  //   return(
 
-      <div>
-        You are already logged in...
-      </div>
-    )
-    }
+  //     <div>
+  //       You are already logged in...
+  //     </div>
+  //   )
+    // }
 }
 
 export default Login;

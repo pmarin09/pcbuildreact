@@ -7,7 +7,7 @@ import pw from "../../icons/pw.png"
 import displayname from "../../icons/displayname.png"
 
 function Registration (){
-  const{handleSuccessfulAuth,fpsbuildsurl} = useContext(Context)
+  const{handleSuccessfulAuth,fpsbuildsurl, handleLogin,user} = useContext(Context)
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password,setPassword] = useState("")
@@ -15,35 +15,61 @@ function Registration (){
   const history = useHistory()
   
   
-  function handleSubmit(event) {
+  // function handleSubmit(event) {
 
-    axios
-      .post(
-        `${fpsbuildsurl}/users/`,
-        {
-          user: {
-            username: username,
-            email: email,
-            password: password,
-            password_confirmation: password_confirmation,
-            first_name: null,
-            last_name: null
-          }
+  //   axios
+  //     .post(
+  //       `${fpsbuildsurl}/users/`,
+  //       {
+  //         user: {
+  //           username: username,
+  //           email: email,
+  //           password: password,
+  //           password_confirmation: password_confirmation,
+  //           first_name: null,
+  //           last_name: null
+  //         }
+  //       },
+  //       { withCredentials: true }
+  //     )
+  //     .then(response => {
+  //       if (response.data.status === "created") {
+  //         handleSuccessfulAuth(response.data);
+  //       }
+  //       history.push("/")
+  //     })
+  //     .catch(error => {
+  //       console.log("registration error", error);
+  //     });
+  //   event.preventDefault();
+  // }
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault()
+    fetch(`${fpsbuildsurl}/users`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
         },
-        { withCredentials: true }
-      )
-      .then(response => {
-        if (response.data.status === "created") {
-          handleSuccessfulAuth(response.data);
-        }
+        body: JSON.stringify({
+            username,
+            email,
+            password,
+            password_confirmation
+            
+        })
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        localStorage.setItem("token", data.jwt)
+        handleLogin(data.user)
         history.push("/")
-      })
-      .catch(error => {
-        console.log("registration error", error);
-      });
-    event.preventDefault();
-  }
-
+    })
+    
+    setUsername("")
+    setPassword("")
+}
 
     return (
   <div className="create-account">

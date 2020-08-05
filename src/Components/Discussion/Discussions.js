@@ -8,7 +8,7 @@ import Pagination from '../../Pagination';
 import comment from '../../icons/comment.png'
 
 function Discussions(){
-    const {fpsbuildsurl,forums, discussions, user, loggedInStatus,toggleTheme,checkThemeStatus} = useContext(Context)
+    const {fpsbuildsurl,forums, discussions, user,checkLoginStatus, loggedInStatus,toggleTheme,checkThemeStatus} = useContext(Context)
     const forumsData = forums.map(forum => (
         <h3 className = "forumSideBar" key={forum.id}>
             <p ><Link to={`/forum/${forum.id}`}>{forum.title}</Link></p>
@@ -57,7 +57,9 @@ function Discussions(){
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
-  console.log(user.dark_theme)
+//   useEffect(()=>{
+//     checkLoginStatus()
+//   },[])
  
 
     return(
