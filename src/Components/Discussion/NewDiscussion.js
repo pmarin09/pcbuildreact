@@ -17,9 +17,9 @@ function NewDiscussion(){
         history.push(`/discussions`)
         window.location.reload(false);
   }
-   useEffect(()=>{
-    checkLoginStatus()
-  },[])
+  //  useEffect(()=>{
+  //   checkLoginStatus()
+  // },[])
 
     return(
 <section className = "section">
