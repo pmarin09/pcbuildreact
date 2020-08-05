@@ -104,7 +104,7 @@ function ContextProvider({children}){
   const [users, setUsers]=useState([])
   const usersUrl = `${fpsbuildsurl}/users.json`
   useEffect(()=>{
-      fetch(usersUrl)
+      fetch(usersUrl,{mode: 'cors'})
       .then (res => res.json())
       .then (data => setUsers(data))
       console.log(users)
