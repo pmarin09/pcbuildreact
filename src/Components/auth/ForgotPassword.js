@@ -22,6 +22,7 @@ const [email, setEmail] = useState("")
  
 }
 
+
     return (
         <div className="forgot-pw">
       <h1 className="text-3xl mb-2 text-center font-bold">Forgot Password?</h1>
