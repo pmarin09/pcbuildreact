@@ -268,7 +268,7 @@ function ContextProvider({children}){
   useEffect(() => {
     const token = localStorage.getItem("token")
     if(token){
-      fetch(`http://localhost:3000/auto_login`, {
+      fetch(`${fpsbuildsurl}/auto_login`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -293,7 +293,7 @@ function ContextProvider({children}){
 
   const handleAuthClick = () => {
     const token = localStorage.getItem("token")
-    fetch(`http://localhost:3000/user_is_authed`, {
+    fetch(`${fpsbuildsurl}/user_is_authed`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
