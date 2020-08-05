@@ -9,7 +9,7 @@ function ContextProvider({children}){
   //LIGHT AND DARK THEME
   
   const [theme, setTheme] = useState("light")
-  const fpsbuildsurl = "http://fpsbuilds-back-staging.herokuapp.com"
+  const fpsbuildsurl = "https://fpsbuilds-back-staging.herokuapp.com"
 
   
   function toggleTheme(){
