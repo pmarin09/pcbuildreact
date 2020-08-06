@@ -19,17 +19,15 @@ function ContextProvider({children}){
     if(checkBox.checked == false){
       hiddenCheckBox.disabled = true;
       setTheme("dark")
-       checkBox.checked = true
-       addDarkTheme()
+      checkBox.checked = true
+      addDarkTheme()
       
     } else if(checkBox.checked == true){
       hiddenCheckBox.disabled = false;
       setTheme("light")
-       checkBox.checked = false 
-       removeDarkTheme()
+      checkBox.checked = false 
+      removeDarkTheme()
     }
-    
-    
       sendDarkTheme()
   }
 

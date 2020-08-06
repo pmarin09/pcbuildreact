@@ -15,7 +15,7 @@ function Main(){
  const [currentPage, setCurrentPage] = useState(1);
  const [buildsPerPage] = useState(9);
 
-// Get current posts
+// Get current builds
 const indexOfLastBuild = currentPage * buildsPerPage;
 const indexOfFirstBuild = indexOfLastBuild - buildsPerPage;
 const currentBuilds = imageElements.slice(indexOfFirstBuild, indexOfLastBuild);
@@ -37,7 +37,6 @@ useEffect(() => {
     })
   }
 }, [])
-
     return (
       <>
       <div className = "album bg-light">
@@ -52,17 +51,14 @@ useEffect(() => {
       </div>
         <div className="container">
           <div className="row">
-            
             {currentBuilds}
             {imageElements.length > 9 ? <Pagination
               elementsPerPage={buildsPerPage}
               totalElements={imageElements.length}
               paginate={paginate}
             /> : ""}
-            
           </div>  
         </div>
-        
       </div>
       {/* {News()} */}
       </>

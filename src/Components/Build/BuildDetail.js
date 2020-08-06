@@ -70,7 +70,6 @@ function BuildDetail(img) {
   const pcbuildParts = thisBuild.map(a => {return   a.pcbuild_parts.map(b=>b.price)})
   const pcbuildPrices = Object.values(pcbuildParts).reduce((acc,price) => {return  price},0)
   const pcbuildTotalCost = Object.values(pcbuildPrices).reduce((acc, price)=>{return acc + price},0)
-  
 
   function createBuildPost(e) {
      
@@ -83,7 +82,6 @@ function BuildDetail(img) {
         e.preventDefault();
         window.location.reload(false);
       }
-
 
        //PAGINATION 
     const [currentPage, setCurrentPage] = useState(1);
@@ -104,8 +102,8 @@ function BuildDetail(img) {
                 <Carousel>
                     {thisBuildImage}
                 </Carousel>
-              </div>
-          <hr></hr>
+            </div>
+            <hr></hr>
            <div className="table-wrapper">
            
             <div className="table-title">
@@ -113,8 +111,6 @@ function BuildDetail(img) {
                     <div className="col-sm-8"><h2>Total Build Price: ${pcbuildTotalCost}</h2></div>
                 </div>
             </div>
-
-       
             <table className="table table-bordered">
                 <thead>
                     <tr>
@@ -137,70 +133,60 @@ function BuildDetail(img) {
               totalElements={showBuildposts.length}
               paginate={paginate}
                         /> : ""}
+          </div>
         </div>
-        </div>
-       
-
         { (loggedInStatus === "LOGGED_IN") ?
-<div className = "container">
-<hr></hr>
-  <form className="form" onSubmit={createBuildPost} id="newBuildPost">
-  <h2 className="title is-5 has-text-grey-light">What do you think of this Build?</h2>
-    <div className="form-row mb-4">
-      <div className="textarea">
-        <textarea
-          type="text"
-          name="content"
-          className="description"
-          required
-        />
-        <div className="postButton">
-        <input
-      type="submit"
-      value="New Comment"
-      className="button is-success"
-    />
-    </div>
-      </div>
-    
-        <input
-          value= {buildId}
-          name="pcbuild_id"
-          style={{display: "none"}}
-          required
-        />
-         <input
-          type="text"
-          name="user_id"
-          value={user.id}
-          className="description"
-          required
-          style={{display: "none"}}
-        />
-        <input
-          type="text"
-          name="username"
-          value={user.username}
-          className="description"
-          required
-          style={{display: "none"}}
-        />
-         
-    </div>
-   
-  </form>
-  </div>
+
+        <div className = "container">
+        <hr></hr>
+          <form className="form" onSubmit={createBuildPost} id="newBuildPost">
+              <h2 className="title is-5 has-text-grey-light">What do you think of this Build?</h2>
+                <div className="form-row mb-4">
+                  <div className="textarea">
+                    <textarea
+                      type="text"
+                      name="content"
+                      className="description"
+                      required
+                    />
+                    <div className="postButton">
+                    <input
+                  type="submit"
+                  value="New Comment"
+                  className="button is-success"
+                />
+                </div>
+                  </div>
+                
+                    <input
+                      value= {buildId}
+                      name="pcbuild_id"
+                      style={{display: "none"}}
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="user_id"
+                      value={user.id}
+                      className="description"
+                      required
+                      style={{display: "none"}}
+                    />
+                    <input
+                      type="text"
+                      name="username"
+                      value={user.username}
+                      className="description"
+                      required
+                      style={{display: "none"}}
+                    />
+                </div>
+          </form>
+          </div>
 :
 ""}
-
-
 </>
-
-
-
-       
-
     )
 }
 
-export default BuildDetail
+export default BuildDetail;

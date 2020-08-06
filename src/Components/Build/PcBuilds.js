@@ -51,7 +51,6 @@ import Select from 'react-select'
   
   function createBuild(e) {
     const form = new FormData(document.getElementById("newPcbuild"));
-
     fetch(`${fpsbuildsurl}/pcbuilds.json`, {
       method: "POST",
       body: form,
@@ -391,6 +390,7 @@ import Select from 'react-select'
   </section>
       : 
       ""}
+      { (loggedInStatus === "LOGGED_IN") ?checkThemeStatus() :""}
       </>
     )
   }
