@@ -86,9 +86,9 @@ function updateBuild(e) {
  
   window.location.reload(false);
 }
-useEffect(()=>{
-  checkLoginStatus()
-},[])
+// useEffect(()=>{
+//   checkLoginStatus()
+// },[])
 
 return (
    
