@@ -5,9 +5,8 @@ function ForgotPassword(){
 
 const{fpsbuildsurl} = useContext(Context)
 const [email, setEmail] = useState("")
-
-  function forgotPassword(e) {
-    const form = new FormData(document.getElementById("forgotPassword"));
+function forgotPassword(e) {
+  const form = new FormData(document.getElementById("forgotPassword"));
 
     fetch(`${fpsbuildsurl}/forgot_password`, {
      credentials: "include",
@@ -19,43 +18,36 @@ const [email, setEmail] = useState("")
       alert(response.alert)
     })
     .catch(console.log)
- 
 }
-
-
-    return (
-        <div className="forgot-pw">
+  return (
+    <div className="forgot-pw">
       <h1 className="text-3xl mb-2 text-center font-bold">Forgot Password?</h1>
-        <article className="card-body mx-auto" style={{maxWidth: 350, height:150}}>
+      <article className="card-body mx-auto" style={{maxWidth: 350, height:150}}>
         <form onSubmit={forgotPassword} id= "forgotPassword">
-        <h1 className="text-3xl mb-2 text-center font-bold">Request Reset Password</h1>
-        <div className="form-group input-group">
-        
-        <div className="input-group-prepend">
-                <span className="input-group-text"> <img src ={mail}/> </span>
-        </div>
-          <input required 
-          id="forgotpasswordemail" 
-          onChange={e => setEmail(e.target.value)} 
-          name="email" 
-          placeholder="Enter your e-mail..." 
-          type="email" 
-          value={email}/>
-          
+          <h1 className="text-3xl mb-2 text-center font-bold">Request Reset Password</h1>
+          <div className="form-group input-group">
+            <div className="input-group-prepend">
+              <span className="input-group-text"> <img src ={mail}/> </span>
+            </div>
+            <input required 
+              id="forgotpasswordemail" 
+              onChange={e => setEmail(e.target.value)} 
+              name="email" 
+              placeholder="Enter your e-mail..." 
+              type="email" 
+              value={email}
+            />
           </div> 
           <div className="form-group">
-                <button 
-                type="submit" 
-                className="btn btn-primary btn-block" > 
-                Request </button>
-            </div> 
-
-            
+            <button 
+            type="submit" 
+            className="btn btn-primary btn-block" > 
+            Request 
+            </button>
+          </div> 
         </form>
-        </article>
+      </article>
     </div>
     )
-  
 }
-
 export default ForgotPassword;

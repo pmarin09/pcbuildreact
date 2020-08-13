@@ -4,17 +4,10 @@ import PropTypes from "prop-types"
 import {Link,useParams} from "react-router-dom"
 import TimeAgo from 'timeago-react';
 function MyBuilds() {
-    
-    
-    const {allBuilds,user, loggedInStatus,fpsbuildsurl} = useContext(Context)
-    const {userId} = useParams()
-    const myBuilds = allBuilds.filter(build => build.user_id.toString() === userId)
-    
-    
-
+const {allBuilds,user, loggedInStatus,fpsbuildsurl} = useContext(Context)
+const {userId} = useParams()
+const myBuilds = allBuilds.filter(build => build.user_id.toString() === userId)
     return (
-
-        
           <div className= "container">
               { myBuilds.map(filteredBuild => (
                 <div className="profile-card">
@@ -46,11 +39,9 @@ function MyBuilds() {
               ))}
            </div>    
 )}
-
 MyBuilds.propTypes = {
     item: PropTypes.shape({
         attachment_url: PropTypes.string.isRequired
     })
 }
-
-export default MyBuilds
+export default MyBuilds;

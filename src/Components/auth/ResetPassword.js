@@ -4,16 +4,13 @@ import pw from "../../icons/pw.png"
 import tokencode from "../../icons/token.png"
 import {Context} from "../../Context"
 function ResetPassword(){
-
 const{fpsbuildsurl} = useContext(Context)
 const [email, setEmail] = useState("")
 const [token, setToken] = useState("")
 const [password, setPassword] = useState("")
 const [password_confirmation, setPasswordConfirmation] = useState("")
-
-  function resetPassword(e) {
+function resetPassword(e) {
     const form = new FormData(document.getElementById("resetPassword"));
-
     fetch(`${fpsbuildsurl}/reset_password`, {
      credentials: "include",
       method: "POST",
@@ -24,34 +21,31 @@ const [password_confirmation, setPasswordConfirmation] = useState("")
       alert(response.alert)
     })
     .catch(console.log)
- 
 }
-
-    return (
-        
+return (
     <div className="top">
-     <article className="card-body mx-auto" style={{maxWidth: 400}}>
+        <article className="card-body mx-auto" style={{maxWidth: 400}}>
             <h4 className="card-title mt-3 text-center">Reset Password</h4>
-        <form onSubmit={resetPassword} id= "resetPassword">
-            <div className="form-group input-group">
-            <p><small><em>The code that was emailed to you. This is case-sensitive.</em></small></p>
+            <form onSubmit={resetPassword} id= "resetPassword">
+                <div className="form-group input-group">
+                <p><small><em>The code that was emailed to you. This is case-sensitive.</em></small></p>
                 <div className="input-group-prepend">
-                     <span className="input-group-text"> <img src ={tokencode}/> </span>
+                    <span className="input-group-text"> <img src ={tokencode}/> </span>
                 </div>
                 <input 
-                name="token" 
-                value = {token} 
-                className="form-control" 
-                placeholder="Enter token..." 
-                type="text" id="token" 
-                onChange={e => setToken(e.target.value)} 
-                required/>
-            </div>
-            
-            <div className="form-group input-group">
-            <div className="input-group-prepend">
-                <span className="input-group-text"> <img src ={mail}/> </span>
-            </div>
+                    name="token" 
+                    value = {token} 
+                    className="form-control" 
+                    placeholder="Enter token..." 
+                    type="text" id="token" 
+                    onChange={e => setToken(e.target.value)} 
+                    required
+                />
+                </div>
+                <div className="form-group input-group">
+                <div className="input-group-prepend">
+                    <span className="input-group-text"> <img src ={mail}/> </span>
+                </div>
                 <input 
                     name="email" 
                     className="form-control" 
@@ -60,13 +54,13 @@ const [password_confirmation, setPasswordConfirmation] = useState("")
                     value={email}  
                     id="userEmail"
                     onChange={e => setEmail(e.target.value)}
-                    required/>
-            </div> 
-            
-            <div className="form-group input-group">
-            <div className="input-group-prepend">
-                <span className="input-group-text"> <img src ={pw}/> </span>
-            </div>
+                    required
+                />
+                </div> 
+                <div className="form-group input-group">
+                <div className="input-group-prepend">
+                    <span className="input-group-text"> <img src ={pw}/> </span>
+                </div>
                 <input 
                     className="form-control" 
                     placeholder="Enter new password" 
@@ -75,14 +69,14 @@ const [password_confirmation, setPasswordConfirmation] = useState("")
                     value={password}
                     id="password"
                     onChange={e => setPassword(e.target.value)}
-                    required />
-            </div>
-
-            <div className="form-group input-group">
-            <div className="input-group-prepend">
-                <span className="input-group-text"> <img src ={pw}/> </span>
-            </div>
-                    <input 
+                    required
+                />
+                </div>
+                <div className="form-group input-group">
+                <div className="input-group-prepend">
+                    <span className="input-group-text"> <img src ={pw}/> </span>
+                </div>
+                <input 
                     className="form-control" 
                     placeholder="Re-enter your password" 
                     type="password" 
@@ -90,22 +84,19 @@ const [password_confirmation, setPasswordConfirmation] = useState("")
                     value={password_confirmation}
                     id="password_confirmation"
                     onChange={e => setPasswordConfirmation(e.target.value)}
-                    required/>
-            </div>
-                
-                
-            <div className="form-group">
-                <button 
-                type="submit" 
-                className="btn btn-primary btn-block" > 
-                Reset </button>
-            </div>  
-        </form>
-      </article>
+                    required
+                />
+                </div>
+                <div className="form-group">
+                    <button 
+                        type="submit" 
+                        className="btn btn-primary btn-block" > 
+                        Reset 
+                    </button>
+                </div>  
+            </form>
+        </article>
     </div>
- 
     )
-  
 }
-
 export default ResetPassword;

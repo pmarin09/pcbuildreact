@@ -8,22 +8,18 @@ function Favorites() {
     const FavoriteItemElements = favoriteBuilds.map(item => (
         <FavoriteBuild key = {item.id} item = {item} />
        ))
-
        useEffect(()=>{
         fetch(`${fpsbuildsurl}/pcbuilds.json`)
         .then (res => res.json())
         .then (data => setAllBuilds(data))
     },[])
-
-      //PAGINATION 
-      const [currentPage, setCurrentPage] = useState(1);
-      const [favoriteBuildsPerPage] = useState(10);
-   
+     //PAGINATION 
+     const [currentPage, setCurrentPage] = useState(1);
+     const [favoriteBuildsPerPage] = useState(10);
      // Get current posts
      const indexOfLastFavorite = currentPage * favoriteBuildsPerPage;
      const indexOfFirstFavorite = indexOfLastFavorite - favoriteBuildsPerPage;
      const currentFavorites = FavoriteItemElements.slice(indexOfFirstFavorite, indexOfLastFavorite);
-   
      // Change page
      const paginate = pageNumber => setCurrentPage(pageNumber);
     return (
@@ -44,5 +40,4 @@ function Favorites() {
         </main>
     )
 }
-
-export default Favorites
+export default Favorites;

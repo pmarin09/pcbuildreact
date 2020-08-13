@@ -12,7 +12,6 @@ function Login (props){
   const[password, setPassword] = useState("") 
   const history = useHistory()
 //  console.log(loggedInStatus)
-  
 //  function handleSubmit(event) {
 //     axios
 //       .post(
@@ -37,9 +36,8 @@ function Login (props){
 //       });
 //     event.preventDefault();
 //   }
-
-  // if(loggedInStatus === "NOT_LOGGED_IN") {
-    const handleSubmit = (evt) => {
+// if(loggedInStatus === "NOT_LOGGED_IN") {
+   const handleSubmit = (evt) => {
       evt.preventDefault()
       fetch(`${fpsbuildsurl}/login`, {
           method: "POST",
@@ -60,72 +58,66 @@ function Login (props){
       setEmail("")
       setPassword("")
   }
- 
-  return (
-
-<div className="top">
-      <h1 className="text-3xl mb-2 text-center font-bold">Sign In</h1>
-<article className="card-body mx-auto" style={{maxWidth: 400, height:350}}>
-	<form className="sign-in" onSubmit={handleSubmit}>
-    <div className="form-group input-group">
-    	<div className="input-group-prepend">
-		    <span className="input-group-text"> <img src ={mail}/> </span>
-		 </div>
-        <input 
-            name="userEmail" 
-            className="form-control" 
-            placeholder="Email address" 
-            type="email"  
-            value={email}  
-            id="userEmail"
-            onChange = {e => setEmail(e.target.value)}/>
-    </div> 
-    
-    <div className="form-group input-group">
-    	<div className="input-group-prepend">
-		    <span className="input-group-text"> <img src ={pw}/>  </span>
-		</div>
-        <input 
-            className="form-control" 
-            placeholder="Your password" 
-            type="password" 
-            name="userPassword"
-            value={password}
-            id="userPassword"
-            onChange = {e => setPassword(e.target.value)}/>
-    </div>
-    <div className="form-group">
-             <button 
-        type="submit" 
-        className="btn btn-primary btn-block" >
-        Sign In 
-        </button>                          
-    </div>
-    <p className="text-center">Don't have an account? 
-    <Link to="/register" className="text-blue-500 hover:text-blue-600">
-            Sign up here
-          </Link>{" "}</p>  
+return (
+ <div className="top">
+    <h1 className="text-3xl mb-2 text-center font-bold">Sign In</h1>
+    <article className="card-body mx-auto" style={{maxWidth: 400, height:350}}>
+      <form className="sign-in" onSubmit={handleSubmit}>
+          <div className="form-group input-group">
+          <div className="input-group-prepend">
+              <span className="input-group-text"> <img src ={mail}/> </span>
+          </div>
+              <input 
+                  name="userEmail" 
+                  className="form-control" 
+                  placeholder="Email address" 
+                  type="email"  
+                  value={email}  
+                  id="userEmail"
+                  onChange = {e => setEmail(e.target.value)}
+              />
+          </div> 
+          <div className="form-group input-group">
+            <div className="input-group-prepend">
+              <span className="input-group-text"> <img src ={pw}/>  </span>
+            </div>
+              <input 
+                  className="form-control" 
+                  placeholder="Your password" 
+                  type="password" 
+                  name="userPassword"
+                  value={password}
+                  id="userPassword"
+                  onChange = {e => setPassword(e.target.value)}
+              />
+          </div>
+          <div className="form-group">
+              <button 
+              type="submit" 
+              className="btn btn-primary btn-block" >
+              Sign In 
+              </button>                          
+          </div>
+          <p className="text-center">Don't have an account? 
+            <Link to="/register" className="text-blue-500 hover:text-blue-600">
+              Sign up here
+            </Link>{" "}
+          </p>  
           <br />{" "}
-          <Link to="forgotPassword" className="text-blue-500 hover:text-blue-600">
-            Forgot Password?
-          </Link>                                                              
-    </form>
-    <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button>
+            <Link to="forgotPassword" className="text-blue-500 hover:text-blue-600">
+                  Forgot Password?
+            </Link>                                                              
+      </form>
+      <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button>
     </article>
-   
-
-
-</div>
-    );
+  </div>
+);
   // } else {
-
   //   return(
-
   //     <div>
   //       You are already logged in...
   //     </div>
   //   )
-    // }
+  // }
 }
-
 export default Login;

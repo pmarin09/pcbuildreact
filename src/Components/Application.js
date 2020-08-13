@@ -22,35 +22,30 @@ import ForgotPassword from "./auth/ForgotPassword"
 import ResetPassword from "./auth/ResetPassword"
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 
-
 function Application() {
-
   return (
-     
       <Switch>
-      <Route exact path = "/"> <Main/> </Route>
-      <Route path= "/allbuilds"> <AllBuilds/></Route>
-      <Route  exact path = "/pcbuilds"> <PcBuilds/></Route>
-      <Route  path = "/pcbuilds/edit/:buildId"> <EditBuild/></Route>
-      <Route path = "/builds/:buildId"> <BuildDetail/> </Route>
-      <Route path= "/favorites"> <Favorites/></Route>
-      <Route path = "/signIn"> <Login/> </Route>
-      <Route path = "/register"> <Registration/> </Route>
-      <Route path = "/forgotPassword"> <ForgotPassword/> </Route>
-      <Route path = "/resetPassword"> <ResetPassword/> </Route>
-      <Route exact path = "/profile/:userId"> <ProfilePage/> </Route>
-      <Route path = "/profile/edit/:userId"> <EditProfile/> </Route>
-      <Route exact path = "/forum/"> <Forum/> </Route>
-      <Route path = "/forum/:forumId"> <ForumDetail/> </Route>
-      <Route exact path = "/discussions/"> <Discussions/></Route>
-      <Route  path = "/discussions/:discussionId"> <DiscussionDetail/></Route>
-      <Route  path = "/newdiscussion/"> <NewDiscussion/></Route>
-      <Route  path = "/editdiscussion/:discussionId"> <EditDiscussion/></Route>
-      <Route  path = "/:discussionId/editpost/:postId"> <EditPost/></Route>
-      <Route  path = "/editbuildpost/:buildpostId"> <EditBuildPost/></Route>
+        <Route exact path = "/"> <Main/> </Route>
+        <Route path= "/allbuilds"> <AllBuilds/></Route>
+        <Route  exact path = "/pcbuilds"> <PcBuilds/></Route>
+        <Route  path = "/pcbuilds/edit/:buildId"> <EditBuild/></Route>
+        <Route path = "/builds/:buildId"> <BuildDetail/> </Route>
+        <Route path= "/favorites"> <Favorites/></Route>
+        <Route path = "/signIn"> <Login/> </Route>
+        <Route path = "/register"> <Registration/> </Route>
+        <Route path = "/forgotPassword"> <ForgotPassword/> </Route>
+        <Route path = "/resetPassword"> <ResetPassword/> </Route>
+        <Route exact path = "/profile/:userId"> <ProfilePage/> </Route>
+        <Route path = "/profile/edit/:userId"> <EditProfile/> </Route>
+        <Route exact path = "/forum/"> <Forum/> </Route>
+        <Route path = "/forum/:forumId"> <ForumDetail/> </Route>
+        <Route exact path = "/discussions/"> <Discussions/></Route>
+        <Route  path = "/discussions/:discussionId"> <DiscussionDetail/></Route>
+        <Route  path = "/newdiscussion/"> <NewDiscussion/></Route>
+        <Route  path = "/editdiscussion/:discussionId"> <EditDiscussion/></Route>
+        <Route  path = "/:discussionId/editpost/:postId"> <EditPost/></Route>
+        <Route  path = "/editbuildpost/:buildpostId"> <EditBuildPost/></Route>
       </Switch>
-        
   );
 }
-
 export default Application;

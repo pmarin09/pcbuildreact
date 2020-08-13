@@ -37,81 +37,72 @@ function ForumDetail() {
                   <div className = "post-count"><Link to={`/discussions/${filteredDiscussion.id}`} style={{float: "left"}}><img src={comment}/> {filteredDiscussion.posts.length} </Link></div>
     </div>
    ))
-
-
-   //PAGINATION 
-   const [currentPage, setCurrentPage] = useState(1);
-   const [discussionsPerPage] = useState(10);
-
-  // Get current posts
-  const indexOfLastDiscussion = currentPage * discussionsPerPage;
-  const indexOfFirstDiscussion = indexOfLastDiscussion - discussionsPerPage;
-  const currentDiscussions = showDiscussions.slice(indexOfFirstDiscussion, indexOfLastDiscussion);
-
-  // Change page
-  const paginate = pageNumber => setCurrentPage(pageNumber);
-
-
-  useEffect(()=>{
-    checkThemeStatus()
-    },[])
-    return (
-
-
-<section className="forms text-center border border-light p-5">
-<form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
-                        <input 
-                         type="hidden"
-                         name="dark_theme"
-                         id="theme-checkbox-hidden"
-                         value={false}
-                         />
-                         <input 
-                         type="checkbox"
-                         name="dark_theme"
-                         id="theme-checkbox"
-                         value={true}
-                         />
-                        <span className="slider round"></span>
-              </form>
-          
-<table className="discussions-table" id="discussions-table">
-    <thead>
-    <tr>
-        <th className= "all-forums">All Forums</th>
-        <th className= "all-discussions">Discussions</th>
-        <th className = "all-posts">Date Posted</th>
-        <th className = "all-posts">Posts</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <ul className="allforums-box" id="allforums-box">
-        <td> { (loggedInStatus === "LOGGED_IN") ?<Link to="/newDiscussion" style={{textDecoration: "none"}}>
-                <Button color = "primary" className="new-discussion-btn" id="new-discussion-button">
-                    New Discussion
-                </Button>
-            </Link> : ""}
-            {forumsData} 
-       </td>
-    </ul>
-        <td> {showDiscussions}</td>
-        
-    </tr>
-    
-    </tbody>
-   
-    
-</table>
-            {showDiscussions.length > 10 ? 
-                <Pagination
-                    elementsPerPage={discussionsPerPage}
-                    totalElements={showDiscussions.length}
-                    paginate={paginate}
-                /> : ""}
-                {checkThemeStatus()}
-</section>
-    )
+    //PAGINATION 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [discussionsPerPage] = useState(10);
+    // Get current posts
+    const indexOfLastDiscussion = currentPage * discussionsPerPage;
+    const indexOfFirstDiscussion = indexOfLastDiscussion - discussionsPerPage;
+    const currentDiscussions = showDiscussions.slice(indexOfFirstDiscussion, indexOfLastDiscussion);
+    // Change page
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+    useEffect(()=>{
+        checkThemeStatus()
+        },[])
+ return (
+    <section className="forms text-center border border-light p-5">
+        <form className="switch" 
+        onClick={toggleTheme}
+        style={{float: "right"}} 
+        id="setDarkTheme"
+        >
+            <input 
+            type="hidden"
+            name="dark_theme"
+            id="theme-checkbox-hidden"
+            value={false}
+            />
+            <input 
+            type="checkbox"
+            name="dark_theme"
+            id="theme-checkbox"
+            value={true}
+            />
+            <span className="slider round"></span>
+        </form>
+        <table className="discussions-table" id="discussions-table">
+            <thead>
+                <tr>
+                    <th className= "all-forums">All Forums</th>
+                    <th className= "all-discussions">Discussions</th>
+                    <th className = "all-posts">Date Posted</th>
+                    <th className = "all-posts">Posts</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <ul className="allforums-box" id="allforums-box">
+                    <td> { (loggedInStatus === "LOGGED_IN") ?<Link to="/newDiscussion" style={{textDecoration: "none"}}>
+                            <Button color = "primary" className="new-discussion-btn" id="new-discussion-button">
+                                New Discussion
+                            </Button>
+                        </Link> : ""}
+                        {forumsData} 
+                    </td>
+                </ul>
+                <td> {showDiscussions}</td>
+            </tr>
+            </tbody>
+        </table>
+        {showDiscussions.length > 10 ? 
+            <Pagination
+                elementsPerPage={discussionsPerPage}
+                totalElements={showDiscussions.length}
+                paginate={paginate}
+            /> 
+        : ""}
+        {checkThemeStatus()}
+    </section>
+ )
 }
-
 export default ForumDetail;
