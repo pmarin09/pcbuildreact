@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
   //LIGHT AND DARK THEME
   const [theme, setTheme] = useState("light")
   const fpsbuildsurl = "https://fpsbuilds-back-staging.herokuapp.com"
-
+  // "http://localhost:3000"
   function toggleTheme(){
       const checkBox = document.getElementById("theme-checkbox")
       const hiddenCheckBox = document.getElementById('theme-checkbox-hidden')
@@ -172,6 +172,12 @@ import { useHistory } from 'react-router-dom';
       .then (data => setFavorites(data))
       },50)
       }
+  function updateImages(){
+    setTimeout(() => {fetch(`${fpsbuildsurl}/pcbuilds.json`)
+    .then (res => res.json())
+    .then (data => setAllBuilds(data))
+    },50)
+    }
   const[loggedInStatus, setLoggedInStatus]=useState("NOT_LOGGED_IN")
   const[user, setUser]=useState({})
   const[email, setEmail] = useState("")
@@ -291,6 +297,7 @@ import { useHistory } from 'react-router-dom';
                 favoritesUrl,
                 setFavorites,
                 updateFavorites,
+                updateImages,
                 loggedInStatus
             }}>
                 {children}

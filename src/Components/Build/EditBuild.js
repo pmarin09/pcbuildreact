@@ -18,13 +18,23 @@ import pccase from "../../icons/pccase.png"
 import Select from 'react-select'
 
 function EditBuild (){
-  const {user,parts,allBuilds,checkLoginStatus,fpsbuildsurl}=useContext(Context)
+  const {user,parts,allBuilds,checkLoginStatus,fpsbuildsurl,updateImages}=useContext(Context)
   const history = useHistory()
   const {buildId} = useParams()
   const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
+  const thisBuildAttachments = thisBuild.map(build => build.attachment)
+  const thisBuildAttachmentsId= thisBuildAttachments[0].map(attachment => attachment.id)
   const thisBuildImages = thisBuild.map(a => {
     return a.attachment_url.map(b =>
-          <td><img src = {`${fpsbuildsurl}/${b}`} className="build-edit-images"/></td>
+          <td>
+            <img src = {`${fpsbuildsurl}/${b}`} className="build-edit-images"/>
+            <div className= "removeFavoriteIcon">
+              <i className="ri-close-fill ri-2x" onClick= {() => 
+              {fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/delete_attachment/${thisBuildAttachmentsId.map(a=> {return a})}.json`, {
+        method: "DELETE",
+      }); updateImages();}}></i>
+            </div>
+          </td>
       )})
   const pcbuild_parts = (thisBuild[0].pcbuild_parts.map(pcbuild_part=>{return {id: pcbuild_part.id,description: pcbuild_part.part.description,part_type: pcbuild_part.part.part_type, price: pcbuild_part.price}}))
   const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: a.description}})
@@ -82,7 +92,8 @@ return (
       {thisBuild.map(build => 
       <div className="profile-container">
         <div className="row">
-          <div className="col-xs-3 col-sm-3" >{build.attachment_url ? <img src = {`${fpsbuildsurl}/${build.attachment_url}`}  className="build-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }</div>
+          <div className="col-xs-3 col-sm-3" >{build.attachment_url ? <img src = {`${fpsbuildsurl}/${build.attachment_url[0]}`}  className="build-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }
+          </div>
           <div className="col-sm-9"><h1 className="profile-username"><small>{build.build_name}</small></h1>
           <table className="profile-table">
           <tr className="profile-stats-row">

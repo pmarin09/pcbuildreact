@@ -14,7 +14,7 @@ const myBuilds = allBuilds.filter(build => build.user_id.toString() === userId)
                 <div className="row no-gutters">
                 <div className="col-md-4">
                 
-                <img src={`${fpsbuildsurl}/${filteredBuild.attachment_url}`} width="400px" className="profile-card-img" alt="..."/>
+                <img src={`${fpsbuildsurl}/${filteredBuild.attachment_url[0]}`} width="400px" className="profile-card-img" alt="..."/>
                 
                 </div>
                 <div className="col-md-8">

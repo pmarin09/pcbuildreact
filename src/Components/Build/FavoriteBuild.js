@@ -18,7 +18,7 @@ function FavoriteBuild({item}) {
         method: "DELETE",
       })
     ))
-      window.location.reload(false);
+    window.location.reload(false);
   }
   function removefavoriteIcon(){
     return <i className="ri-close-fill ri-2x" onClick= {() => {deleteFavorite(); updateFavorites();}}></i>
