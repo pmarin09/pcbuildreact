@@ -15,7 +15,7 @@ import security from "../icons/security.png"
 import axios from "axios"
 
 function Header(){
-  const{user, checkLoginStatus,handleSubmit, handleLogoutClick,loggedInStatus, handleSuccessfulAuth,fpsbuildsurl} = useContext(Context)
+  const{user, checkLoginStatus, handleLogin,handleLogoutClick,loggedInStatus,setLoggedInStatus, handleSuccessfulAuth,fpsbuildsurl} = useContext(Context)
   const history = useHistory()
   const[email, setEmail] = useState("")
   const[password, setPassword] = useState("") 
@@ -46,6 +46,28 @@ function Header(){
   //     });
   //   event.preventDefault();
   // }
+  const handleSubmit = (evt) => {
+    evt.preventDefault()
+    fetch(`${fpsbuildsurl}/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            email,
+            password
+        })
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        localStorage.setItem("token", data.jwt)
+        handleLogin(data.user)
+    })
+    setEmail("")
+    setPassword("")
+    setLoggedInStatus("LOGGED_IN")
+}
   function toggleNavMenu() {
     const x = document.getElementById("pc-nav");
     x.classList.toggle("responsive");

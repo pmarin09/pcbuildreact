@@ -219,15 +219,16 @@ import { useHistory } from 'react-router-dom';
   //   checkLoginStatus()
   // },[])
   function handleLogoutClick() {
-    axios
-      .delete(`${fpsbuildsurl}/logout`, { withCredentials: true })
-      .then(response => {
-        handleLogout();
-      })
-      .catch(error => {
-        console.log("logout error", error);
-      });
-      console.log(user)
+    setLoggedInStatus("NOT_LOGGED_IN")
+    // axios
+    //   .delete(`${fpsbuildsurl}/logout`, { withCredentials: true })
+    //   .then(response => {
+    //     handleLogout();
+    //   })
+    //   .catch(error => {
+    //     console.log("logout error", error);
+    //   });
+    //   console.log(user)
     }
   // function handleSuccessfulAuth(data) {
   //       handleLogin(data);
@@ -268,6 +269,7 @@ import { useHistory } from 'react-router-dom';
     .then(data => console.log(data))
   }
   console.log(user)
+  console.log(loggedInStatus)
     return(
             <Context.Provider value = {{
                 fpsbuildsurl,
@@ -275,6 +277,7 @@ import { useHistory } from 'react-router-dom';
                 handleFormSwitch,
                 handleAuthClick,
                 handleLogoutClick,
+                setLoggedInStatus,
                 theme,
                 setTheme,
                 checkThemeStatus,
