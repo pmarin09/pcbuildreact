@@ -69,7 +69,7 @@ function Image({img}) {
   return (
       <div className="col-md-4" ref = {ref}>
           <div className="card mb-4 shadow-sm">
-              <img src={`${fpsbuildsurl}/${img.attachment_url}`} className= "card-img-top"/>
+              <img src={`${fpsbuildsurl}/${img.attachment_url[0]}`} className= "card-img-top"/>
               <div>
                 <div className= "comments-icon"><Link to={`/builds/${img.id}`}><img src={buildcomments}/> </Link> <em><small>{buildpostcount}</small></em>
                   <div className= "like-icon">{ loggedInStatus === "LOGGED_IN" ? LikeIcon(): ""} 

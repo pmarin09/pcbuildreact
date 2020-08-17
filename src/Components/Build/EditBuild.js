@@ -22,20 +22,17 @@ function EditBuild (){
   const history = useHistory()
   const {buildId} = useParams()
   const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
-  const thisBuildAttachments = thisBuild.map(build => build.attachment)
-  const thisBuildAttachmentsId= thisBuildAttachments[0].map(attachment => attachment.id)
   const thisBuildImages = thisBuild.map(a => {
-    return a.attachment_url.map(b =>
-          <td>
-            <img src = {`${fpsbuildsurl}/${b}`} className="build-edit-images"/>
-            <div className= "removeFavoriteIcon">
-              <i className="ri-close-fill ri-2x" onClick= {() => 
-              {fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/delete_attachment/${thisBuildAttachmentsId.map(a=> {return a})}.json`, {
-        method: "DELETE",
-      }); updateImages();}}></i>
-            </div>
-          </td>
-      )})
+    return (a.attachment_url.map((url,i) =>
+              <div class = "col-sm-4">
+                <div className= "removeFavoriteIcon">
+                    <i className="ri-close-fill ri-2x" 
+                    onClick= {() =>{fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/delete_attachment/${a.attachment_id[i]}.json`, {method:"DELETE",}); updateImages()}}>
+                    </i>
+                </div>
+                <img src = {`${fpsbuildsurl}/${url}`} className="build-edit-images"/>
+              </div>
+          ))})
   const pcbuild_parts = (thisBuild[0].pcbuild_parts.map(pcbuild_part=>{return {id: pcbuild_part.id,description: pcbuild_part.part.description,part_type: pcbuild_part.part.part_type, price: pcbuild_part.price}}))
   const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: a.description}})
   const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: a.description}})
@@ -86,6 +83,16 @@ function EditBuild (){
     e.preventDefault();
     window.location.reload(false);
   }
+  function uploadBuildImages(e) {
+    const form = new FormData(document.getElementById("newBuildImages"));
+    fetch(`${fpsbuildsurl}/pcbuilds/${buildId}.json`, {
+      method: "PATCH",
+      body: form,
+    });
+    updateImages();
+    e.preventDefault();
+    
+  }
 return (
   <div>
       <hr></hr>
@@ -131,10 +138,12 @@ return (
               </div>
             <div className="col-sm-9">
                 <div className= "build-card-body">
+                <div className="row">
                   {thisBuildImages}
-                  </div>
-                <form className="form" onSubmit={updateBuild} id="updatePcbuild">
-                    <div className="col">
+                </div>
+                </div>
+                <form className="form" onSubmit={uploadBuildImages} id="newBuildImages">
+                <div className="col">
                                 Image:
                                 <input type="file" 
                                   className="dropzone"
@@ -143,6 +152,14 @@ return (
                                   multiple
                                   />
                     </div>
+                    <div className= "update-build"> <input
+                                type="submit"
+                                value="Upload Images"
+                                className="update-build-button"
+                              />
+                    </div>
+                </form>
+                <form className="form" onSubmit={updateBuild} id="updatePcbuild">
                                 <input
                                   type="text"
                                   name="user_id"
@@ -203,7 +220,7 @@ return (
                           )})}
                           <div className= "update-build"> <input
                                 type="submit"
-                                value="Update Build"
+                                value="Update Build Info"
                                 className="update-build-button"
                               />
                           </div>

@@ -52,7 +52,7 @@ function DiscussionDetail() {
 console.log(user.dark_theme)
     function createPost(e) {
         const form = new FormData(document.getElementById("newPost"));
-        fetch("${fpsbuildsurl}/posts.json", {
+        fetch(`${fpsbuildsurl}/posts.json`, {
           method: "POST",
           body: form,
         });
@@ -169,9 +169,9 @@ console.log(user.dark_theme)
             </div>
           </form>
         </div>
-      :
-      ""}
-      {checkThemeStatus()}
+    :
+    ""}
+    {checkThemeStatus()}
   </section>
     )
 }

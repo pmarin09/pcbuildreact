@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
   const [theme, setTheme] = useState("light")
   const fpsbuildsurl = "https://fpsbuilds-back-staging.herokuapp.com"
   // "http://localhost:3000"
+  // "https://fpsbuilds-back-staging.herokuapp.com"
   function toggleTheme(){
       const checkBox = document.getElementById("theme-checkbox")
       const hiddenCheckBox = document.getElementById('theme-checkbox-hidden')
