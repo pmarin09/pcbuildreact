@@ -111,7 +111,7 @@ function BuildDetail(img) {
    const paginate = pageNumber => setCurrentPage(pageNumber);
   return (
       <>
-        <div>
+        <div className="build-detail-main">
           <div className= "build-img">
                 <Carousel>
                     {thisBuildImage}

@@ -127,6 +127,10 @@
     font-size: 25px;
   }
 
+  .build-detail-main{
+    // background: radial-gradient(ellipse at bottom, #FFF 0%, #030617 100%);
+  }
+
   .build-detail-th{
     color:red !important;
   }
@@ -150,8 +154,14 @@
   }
 
   .specs-grid-item-key{
-    margin:auto;
-    
+    color: #929aa8;
+    margin: auto;
+    font-weight: 100;
+  }
+
+  .specs-grid-item-value{
+    font-weight: 150;
+    color: #b9bfca;
   }
   
   .build-detail-price{
