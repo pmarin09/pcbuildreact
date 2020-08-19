@@ -127,8 +127,70 @@
     color:white !important;
   }
 
+  .total-cost{
+    font-size: 25px;
+  }
+
   .build-detail-th{
     color:red !important;
+  }
+
+  .build-detail-image{
+    width: 250px;
+  }
+  .build-detail-description{
+  width: 275px;
+  font-size:13px !important;
+  }
+
+  .build-detail-specs{
+      text-align: left !important;
+      overflow-wrap: break-word;
+      width: 650px;
+  }
+  .specs-grid-container {
+    display: inline-grid;
+    grid-template-columns: 254px 481px;
+  }
+
+  .specs-grid-item-key{
+    margin:auto;
+    
+  }
+  
+  .build-detail-price{
+    width:150px;
+  }
+
+  .build-detail-container{
+    background: rgb(48, 52, 59) !important;
+    color: white;
+    border-radius: 15px;
+    flex-grow: 1;
+    margin: 0 auto;
+    position: relative;
+    width: 1500px;
+    padding: 20px;
+    max-width: auto;
+    height: auto;
+    border: 1px solid rgb(131, 11, 11);
+    margin-bottom: 40px;
+  }
+
+  .build-part-img{
+    border-radius: 10%;
+    display: inline-block;
+    width:200px;
+    height: 150px;
+    padding: 4px;
+    line-height: 1.42857143;
+    border: 2px solid rgb(204, 23, 23);
+    transition: all .2s;
+    margin-top: 2px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+
   }
 
   .build-img{
@@ -584,8 +646,10 @@ div{
 }
 
 .table td:not([align]) {
-  text-align: center !important;
-  width: auto !important;
+  text-align: center;
+  // width: auto !important;
+  vertical-align:middle;
+  font-size: 15px;
 }
 
 .create-build-price{

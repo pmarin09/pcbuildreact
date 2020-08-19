@@ -15,12 +15,45 @@ function BuildDetail(img) {
                <img src = {`${fpsbuildsurl}/${b}`} width=  "400px" height= "400px"></img>
               </Carousel.Item>
         )})
+    const thisBuildDetails = thisBuild.map(build => {
+      return build.parts.map(detail =>
+        <li>
+          {detail.series}
+
+        </li>
+        
+        )
+    })
+    function humanize(str) {
+      var i, frags = str.split('_');
+      for (i=0; i<frags.length; i++) {
+        frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
+      }
+      return frags.join(' ');
+    }
     const thisBuildParts = thisBuild.map(a => {
         return  a.parts.map(b =>
             <tr>
               <td>{b.part_type}</td>
-              <td>{b.description}</td>
-              <td>${a.pcbuild_parts.map(c => c.part_id === b.id? c.price : "")}</td>
+              <td className = "build-detail-image"><img src={b.get_imgurl} className="build-part-img"/></td>
+              <td className="build-detail-description">{b.description}</td>
+              <td className="build-detail-specs">
+                {Object.keys(b.details).slice(0, 10).map(function (key,i){
+                    if(b.details[key] === null){
+                      return false
+                    }
+                    if(key === "img_link1"|| key === "date_available"){
+                      return false
+                    }
+                    return(
+                      <div className="specs-grid-container">
+                        <div className = "specs-grid-item-key">{humanize(key)}</div> 
+                        <div className = "specs-grid-item-value">{b.details[key]}</div>
+                      </div>
+                    )
+                })}
+              </td>
+              <td className="build-detail-price">${a.pcbuild_parts.map(c => c.part_id === b.id? c.price : "")}</td>
             </tr>
             )
           })
@@ -93,17 +126,24 @@ function BuildDetail(img) {
                 </Carousel>
           </div>
             <hr></hr>
-           <div className="table-wrapper">
+           <div className="build-detail-container">
             <div className="table-title">
                 <div className="row">
-                    <div className="col-sm-8"><h2>Total Build Price: ${pcbuildTotalCost}</h2></div>
+                    <div className="col-sm-12">
+                      <h1 style={{fontSize: "30px", marginLeft:"8px"}}>{thisBuild.map(build => build.build_name)}
+                        <td style={{verticalAlign: "Middle", float:"right",marginTop: "7px"}}><h1 className="total-cost">{pcbuildTotalCost}</h1></td>
+                        <td style={{verticalAlign: "Middle", float:"right"}}><i className="ri-money-dollar-circle-line ri-3x"></i></td>
+                      </h1>
+                    </div>
                 </div>
             </div>
-            <table className="table table-bordered">
+            <table className="table">
                 <thead>
                     <tr>
-                        <th className="build-detail-th">Specs</th>
+                        <th className="build-detail-th">Component</th>
+                        <th className="build-detail-th">Image</th>
                         <th className="build-detail-th">Description</th>
+                        <th className="build-detail-th">Specs</th>
                         <th className="build-detail-th">Price</th>
                     </tr>
                 </thead>
