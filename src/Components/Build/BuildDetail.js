@@ -15,15 +15,6 @@ function BuildDetail(img) {
                <img src = {`${fpsbuildsurl}/${b}`} width=  "400px" height= "400px"></img>
               </Carousel.Item>
         )})
-    const thisBuildDetails = thisBuild.map(build => {
-      return build.parts.map(detail =>
-        <li>
-          {detail.series}
-
-        </li>
-        
-        )
-    })
     function humanize(str) {
       var i, frags = str.split('_');
       for (i=0; i<frags.length; i++) {
@@ -33,6 +24,7 @@ function BuildDetail(img) {
     }
     const thisBuildParts = thisBuild.map(a => {
         return  a.parts.map(b =>
+   
             <tr>
               <td>{b.part_type}</td>
               <td className = "build-detail-image"><img src={b.get_imgurl} className="build-part-img"/></td>
@@ -137,7 +129,7 @@ function BuildDetail(img) {
                     </div>
                 </div>
             </div>
-            <table className="table">
+            <table className="table" style={{backgroundColor:"transparent", color: "white"}}>
                 <thead>
                     <tr>
                         <th className="build-detail-th">Component</th>

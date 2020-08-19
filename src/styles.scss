@@ -122,10 +122,6 @@
       margin:auto;
   }
 
-  .table{
-    background: rgb(48, 52, 59) !important;
-    color:white !important;
-  }
 
   .total-cost{
     font-size: 25px;
@@ -163,7 +159,7 @@
   }
 
   .build-detail-container{
-    background: rgb(48, 52, 59) !important;
+    // background: rgb(48, 52, 59) !important;
     color: white;
     border-radius: 15px;
     flex-grow: 1;
@@ -175,6 +171,18 @@
     height: auto;
     border: 1px solid rgb(131, 11, 11);
     margin-bottom: 40px;
+    color:white !important;
+    $bg-color: rgb(48, 52, 59);
+    $dot-color: rgb(61, 73, 78);
+
+    // Dimensions
+    $dot-size: 1px;
+    $dot-space: 10px;
+	  background:
+		linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+    linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+		$dot-color;
+	  background-size: $dot-space $dot-space;
   }
 
   .build-part-img{
