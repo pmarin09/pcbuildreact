@@ -26,8 +26,7 @@ return (
                         <Link to={`/pcbuilds/edit/${filteredBuild.id}`} style={{textDecoration: "none"}}>
                              <span><button class="btn btn-sm btn-warning" style={{marginLeft: "20px"}}>Edit Build</button></span>
                         </Link>
-                        <button class="btn btn-sm btn-danger" style={{marginLeft: "20px"}} onClick= {() => {fetch(`${fpsbuildsurl}/pcbuilds/${filteredBuild.id}.json`, { method: "DELETE",})}}>Delete Build</button>
-    
+                        <button class="btn btn-sm btn-danger" style={{marginLeft: "20px"}} onClick= {() => {window.confirm("Are you sure you wish to delete this build?") && fetch(`${fpsbuildsurl}/pcbuilds/${filteredBuild.id}.json`, { method: "DELETE",});window.location.reload(false)}}>Delete Build</button>
                     </>
                         :
                         ""}

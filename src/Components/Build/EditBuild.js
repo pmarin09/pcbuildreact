@@ -217,15 +217,26 @@ return (
                                     />
                             </td>
                             </tr>
-                          )})}
-                          <div className= "update-build"> <input
-                                type="submit"
-                                value="Update Build Info"
-                                className="update-build-button"
-                              />
-                          </div>
+                           
+                          )})} 
                       </tbody>
                     </table>
+                    <div className="textarea"> Build Description
+                           <textarea
+                             type="textarea"
+                             name="comments"
+                             className="description"
+                             defaultValue={thisBuild[0].comments}
+                             required
+                           />
+                    </div>
+                    <div className= "update-build"> 
+                            <input
+                              type="submit"
+                              value="Update Build Info"
+                              className="update-build-button"
+                            />
+                     </div>
                 </form>
             </div>
           </div>

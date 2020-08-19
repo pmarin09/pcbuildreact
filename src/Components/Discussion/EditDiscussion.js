@@ -20,13 +20,12 @@ function EditDiscussion(){
        history.push(`/discussions`)
 
   }
-  function deleteDiscussion(e) {
+  function deleteDiscussion() {
       const form = new FormData(document.getElementById("deleteDiscussion"));
       fetch(`${fpsbuildsurl}/discussions/` + discussionId + ".json", {
         method: "DELETE",
         body: form,
       });
-     e.preventDefault();
      history.push(`/discussions`)
      window.location.reload(false);
   }
@@ -80,14 +79,14 @@ function EditDiscussion(){
                 /> 
                 </div>
               </form>
-              <form className="form" onSubmit={deleteDiscussion} id="deleteDiscussion">
+              <form className="form" id="deleteDiscussion">
               <input
                   type="submit"
                   value="Delete Discussion"
                   className="button is-danger"
                   style= {{textDecoration: "none"}}
                   onClick = {e =>
-                  window.confirm("Are you sure you wish to delete this item?") && deleteDiscussion}
+                  window.confirm("Are you sure you wish to delete this item?") && deleteDiscussion()}
                 />
                 </form>
             </section>

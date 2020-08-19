@@ -33,18 +33,18 @@ function PcBuilds(){
                             />
                             <span className="slider round"></span>
                     </form>
-  const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: a.description}})
-  const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: a.description}})
-  const CPUCooler = (parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label: a.description}})
-  const GPU = (parts.filter(part => part.part_type === "GPU")).map(a=>{return {value: a.id,label: a.description}})
-  const RAM = (parts.filter(part => part.part_type === "RAM")).map(a=>{return {value: a.id,label: a.description}})
-  const HD = (parts.filter(part => part.part_type === "HD")).map(a=>{return {value: a.id,label: a.description}})
-  const Case = (parts.filter(part => part.part_type === "Case")).map(a=>{return {value: a.id,label: a.description}})
-  const PWS = (parts.filter(part => part.part_type === "PWS")).map(a=>{return {value: a.id,label: a.description}})
-  const Monitor = (parts.filter(part => part.part_type === "Monitor")).map(a=>{return {value: a.id,label: a.description}})
-  const Keyboard = (parts.filter(part => part.part_type === "Keyboard")).map(a=>{return {value: a.id,label: a.description}})
-  const Mouse = (parts.filter(part => part.part_type === "Mouse")).map(a=>{return {value: a.id,label: a.description}})
-  const Headset = (parts.filter(part => part.part_type === "Headset")).map(a=>{return {value: a.id,label: a.description}})
+  const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const CPUCooler = (parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const GPU = (parts.filter(part => part.part_type === "GPU")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px",wordWrap: "normal"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const RAM = (parts.filter(part => part.part_type === "RAM")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const HD = (parts.filter(part => part.part_type === "HD")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const Case = (parts.filter(part => part.part_type === "Case")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const PWS = (parts.filter(part => part.part_type === "PWS")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const Monitor = (parts.filter(part => part.part_type === "Monitor")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const Keyboard = (parts.filter(part => part.part_type === "Keyboard")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const Mouse = (parts.filter(part => part.part_type === "Mouse")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const Headset = (parts.filter(part => part.part_type === "Headset")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const options = 
     {
         Mobo: Mobo,
@@ -89,6 +89,51 @@ function PcBuilds(){
     Mouse: mouse,
     Headset: headset
   }
+  const customStyles = {
+  
+    container: base => ({
+      ...base,
+      width: "100%"
+    }),
+    control: base => ({
+      ...base,
+      height: 90,
+      minHeight: 32,
+      fontSize: 14,
+      borderRadius: 5,
+      marginLeft:10,
+      width: 500,
+      textAlign: "left",
+      cursor: "pointer"
+    }),
+    option: (provided) => ({
+      ...provided,
+      borderBottom: "1px dotted pink",
+      fontSize: 14,
+      textAlign: "left",
+      cursor: "pointer",
+    }),
+    valueContainer: base => ({
+      ...base,
+     height:100,
+     fontSize: 12,
+     whiteSpace: "none",
+    }),
+    singleValue: base => ({
+      ...base,
+     whiteSpace: "none",
+    }),
+
+    }
+  const customFilter = (option, searchText) => {
+      if (
+        option.data.description.toLowerCase().includes(searchText.toLowerCase())
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+  }
   function createBuild(e) {
     const form = new FormData(document.getElementById("newPcbuild"));
     fetch(`${fpsbuildsurl}/pcbuilds.json`, {
@@ -96,10 +141,11 @@ function PcBuilds(){
       body: form,
     });
     e.preventDefault();
-    history.push(`/pcbuilds`)
+    history.push(`/`)
     window.location.reload(false);
   }
   console.log(loggedInStatus)
+
   return(
     <>
     {(loggedInStatus === "LOGGED_IN") ?
@@ -147,7 +193,7 @@ function PcBuilds(){
                   <th>Icon</th>
                   <th className = "component">Component</th>
                   <th className = "component-description">Description</th>
-                  <th className = "component-price">Price</th>
+                  <th className = "component-price">Price USD </th>
                 </tr>
               </thead>
               <tbody>
@@ -163,6 +209,8 @@ function PcBuilds(){
                         options= {options[part]}
                         className= "component-description"
                         placeholder="Select or type..."
+                        styles={customStyles}
+                        filterOption={customFilter}
                         /> 
                   </td>
                   <td className = "part-price">

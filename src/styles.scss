@@ -162,7 +162,7 @@
     margin-top: 20px !important;
     margin-bottom: 20px !important;
     margin: auto;
-
+    text-align: center;
   }
   
   .discussion-title {
@@ -366,6 +366,7 @@ input:checked + .slider:before {
   border-width: 0 0 1px;
   padding: .5em .75em;
   vertical-align: middle;
+  overflow-wrap: break-word !important;
 }
 
 
@@ -400,10 +401,11 @@ input:checked + .slider:before {
     border-width: 0 0 1px;
     padding: .5em .75em;
     vertical-align: middle;
+    overflow-wrap: break-word !important;
   }
 
-  .part-price td{
-    width:100px !important;
+  .part-price{
+    width:400px !important;
   }
 
   .new-discussion-btn{
@@ -588,7 +590,7 @@ div{
 
 .create-build-price{
     display: block;
-    width: 20%;
+    width: 30%;
     text-align:center;
     height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
@@ -601,7 +603,7 @@ div{
     border: 1px solid #ced4da;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    height: 100%;
+    height: 40px;
     margin: auto;
 }
 
@@ -1091,6 +1093,9 @@ margin-bottom: 10px;
   margin-top: 0em;
 }
 
+.component{
+  font-size:14px;
+}
 
 .component-description{
  width:400px;
@@ -1293,6 +1298,8 @@ margin-bottom: 10px;
     padding-right: 0px !important;
     padding-left: 5px !important;
   }
+
+
   .edit-build-icon{
     width:20px !important;
   }

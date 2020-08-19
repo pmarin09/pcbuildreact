@@ -28,7 +28,7 @@ function FavoriteBuild({item}) {
           <div className="favorites-card">
             <div className="row no-gutters">
                 <div className="col-md-4">
-                <img src={`${fpsbuildsurl}/${item.attachment_url}`} width="400px" className="favorites-card-img" alt="..."/>
+                <img src={`${fpsbuildsurl}/${item.attachment_url[0]}`} width="400px" className="favorites-card-img" alt="..."/>
                 </div>
                 <div className="col-md-8">
                     <div className="favorites-card-body">
