@@ -4,62 +4,51 @@ import {Context} from "../../Context"
 import axios from "axios"
 import mail from "../../icons/mail.png"
 import pw from "../../icons/pw.png"
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
 function Login (props){
-  const{handleSuccessfulAuth,fpsbuildsurl,handleLogin,handleAuthClick} = useContext(Context)
-  const{user} = useContext(Context)
-  const{loggedInStatus} = useContext(Context)
+  const{token,user, loggedInStatus,setLoggedInStatus,fpsbuildsurl,handleLogin,handleAuthClick} = useContext(Context)
   const[email, setEmail] = useState("")
   const[password, setPassword] = useState("") 
   const history = useHistory()
-//  console.log(loggedInStatus)
-//  function handleSubmit(event) {
-//     axios
-//       .post(
-//         `${fpsbuildsurl}/sessions`,
-//         {
-//           user: {
-//             email: email,
-//             password: password
-//           }
-//         },
-//         { withCredentials: true }
-//       )
-//       .then(response => {
-//         if (response.data.logged_in) {
-//           handleSuccessfulAuth(response.data);
-//         }
-//         console.log(user)
-        
-//       })
-//       .catch(error => {
-//         console.log("login error", error);
-//       });
-//     event.preventDefault();
-//   }
-// if(loggedInStatus === "NOT_LOGGED_IN") {
-   const handleSubmit = (evt) => {
-      evt.preventDefault()
-      fetch(`${fpsbuildsurl}/login`, {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-          },
-          body: JSON.stringify({
-              email,
-              password
-          })
-      })
-      .then(resp => resp.json())
-      .then(data => {
-          localStorage.setItem("token", data.jwt)
-          handleLogin(data.user)
-      })
-      setEmail("")
-      setPassword("")
-  }
+  const handleSubmit = (evt) => {
+    evt.preventDefault()
+    fetch(`${fpsbuildsurl}/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            email,
+            password
+        })
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        localStorage.setItem("token", data.jwt)
+        handleLogin(data.user)
+    });
+    if(token === null){
+      toast.error("Incorrect e-mail and/or password. Please try again", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }else if(token){
+    toast.success("Logged In!", {
+      position: toast.POSITION.TOP_CENTER
+    });
+    setLoggedInStatus("LOGGED_IN")
+    history.push("/")
+    }
+    setEmail("")
+    setPassword("")
+    
+}
+if(loggedInStatus === "NOT_LOGGED_IN"){
 return (
  <div className="top">
+   <ToastContainer/>
     <h1 className="text-3xl mb-2 text-center font-bold">Sign In</h1>
     <article className="card-body mx-auto" style={{maxWidth: 400, height:350}}>
       <form className="sign-in" onSubmit={handleSubmit}>
@@ -108,16 +97,16 @@ return (
                   Forgot Password?
             </Link>                                                              
       </form>
-      <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button>
+      {/* <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button> */}
     </article>
   </div>
 );
-  // } else {
-  //   return(
-  //     <div>
-  //       You are already logged in...
-  //     </div>
-  //   )
-  // }
+  } else {
+    return(
+      <div>
+        You are already logged in...
+      </div>
+    )
+  }
 }
 export default Login;

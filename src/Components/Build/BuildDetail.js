@@ -154,7 +154,7 @@ function BuildDetail(img) {
                         /> : ""}
           </div>
         </div>
-        { (loggedInStatus === "LOGGED_IN") ?
+        { ((loggedInStatus === "LOGGED_IN") && user) ?
           <div className = "container">
               <hr></hr>
               <form className="form" onSubmit={createBuildPost} id="newBuildPost">

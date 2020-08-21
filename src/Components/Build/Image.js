@@ -8,7 +8,7 @@ import TimeAgo from 'timeago-react';
 import buildcomments from "../../icons/buildcommentswhite.png"
 function Image({img}) {
   const [hovered, ref] = useHover()
-  const {buildposts, likes, updateLikes, favorites, updateFavorites, user, loggedInStatus,fpsbuildsurl} = useContext(Context)
+  const {buildposts, likes, updateLikes, favorites, updateFavorites, user,loggedInStatus,fpsbuildsurl} = useContext(Context)
   const history = useHistory()
   const thisBuildPosts = buildposts.filter(build => build.pcbuild_id === img.id)
   const buildpostcount = thisBuildPosts.length
@@ -72,13 +72,13 @@ function Image({img}) {
               <img src={`${fpsbuildsurl}/${img.attachment_url[0]}`} className= "card-img-top"/>
               <div>
                 <div className= "comments-icon"><Link to={`/builds/${img.id}`}><img src={buildcomments}/> </Link> <em><small>{buildpostcount}</small></em>
-                  <div className= "like-icon">{ loggedInStatus === "LOGGED_IN" ? LikeIcon(): ""} 
+                  <div className= "like-icon">{ (loggedInStatus === "LOGGED_IN" && user )? LikeIcon(): ""} 
                   <em><small> {buildlikecount} {buildlikecount === 1 ? "like" : "likes"}</small></em></div>
                 </div>
               </div>
             <div className="card-body">
               <div className="card-text">
-                <div className="favorite-icon">{ loggedInStatus === "LOGGED_IN" ? favoriteIcon(): ""} 
+                <div className="favorite-icon">{ (loggedInStatus === "LOGGED_IN" && user )? favoriteIcon(): ""} 
                   <div className= "build-cost"><i className="ri-money-dollar-circle-line ri-lg"></i> Total Cost: ${pcbuildTotalCost}</div>
                 </div>
                 <hr className="main-card-hr"></hr>
@@ -97,6 +97,8 @@ function Image({img}) {
                 </div>
             </div>
           </div>
+          {(loggedInStatus === "LOGGED_IN" && user )?
+          <>
           <form className="form" onSubmit={createLike} id="newLike" style={{display: "none"}}>
                 <input
                   value= {user.id}
@@ -113,6 +115,8 @@ function Image({img}) {
                   required
                 />
           </form>
+          </>
+          :""}
       </div>
     )
 }

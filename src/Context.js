@@ -184,57 +184,22 @@ import { useHistory } from 'react-router-dom';
   const[email, setEmail] = useState("")
   const[password, setPassword] = useState("")
   const history = useHistory()
-  //   function checkLoginStatus() {
-  //   axios
-  //     .get(`${fpsbuildsurl}/logged_in`, { withCredentials: true })
-  //     .then(response => {
-  //       if (
-  //         response.data.logged_in &&
-  //         loggedInStatus ==="NOT_LOGGED_IN"
-  //       ) {
-  //         setLoggedInStatus("LOGGED_IN")
-  //         setUser(response.data.user)
-          
-  //       } else if (
-  //         !response.data.logged_in &
-  //         (loggedInStatus === "LOGGED_IN")
-  //       ) {
-  //         setLoggedInStatus("NOT_LOGGED_IN")
-  //         setUser({})
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.log("check login error", error);
-  //     });
-  // }
   function handleLogout() {
    setLoggedInStatus("NOT_LOGGED_IN")
    setUser({})
+   localStorage.removeItem("token")
+   console.log(user)
   }
-  // function handleLogin(data) {
-  //   setLoggedInStatus("LOGGED_IN")
-  //   setUser(data.user)
-  // }
-  // useEffect(()=>{
-  //   checkLoginStatus()
-  // },[])
   function handleLogoutClick() {
     setLoggedInStatus("NOT_LOGGED_IN")
-    // axios
-    //   .delete(`${fpsbuildsurl}/logout`, { withCredentials: true })
-    //   .then(response => {
-    //     handleLogout();
-    //   })
-    //   .catch(error => {
-    //     console.log("logout error", error);
-    //   });
-    //   console.log(user)
+    setUser({})
+    localStorage.removeItem("token")
+   console.log(token)
     }
-  // function handleSuccessfulAuth(data) {
-  //       handleLogin(data);
-  //     }
   //JWT Token Auth
   const [form, setForm] = useState("")
+  const token = localStorage.getItem("token")
+  console.log(token)
   useEffect(() => {
     const token = localStorage.getItem("token")
     if(token){
@@ -246,14 +211,16 @@ import { useHistory } from 'react-router-dom';
       .then(resp => resp.json())
       .then(data => {
         setUser(data)
-        // console.log(data)
+        console.log(user)
       })
       setLoggedInStatus("LOGGED_IN")
-    }else{
+    }else if(!token){
     setLoggedInStatus("NOT_LOGGED_IN")
+    console.log(user)
   }}, [])
   const handleLogin = (user) => {
     setUser(user)
+    
   }
   const handleFormSwitch = (input) => {
     setForm(input)
@@ -268,11 +235,11 @@ import { useHistory } from 'react-router-dom';
     .then(resp => resp.json())
     .then(data => console.log(data))
   }
-  console.log(user)
-  console.log(loggedInStatus)
+
     return(
             <Context.Provider value = {{
                 fpsbuildsurl,
+                token,
                 handleLogin,
                 handleFormSwitch,
                 handleAuthClick,

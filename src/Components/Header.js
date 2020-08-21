@@ -12,40 +12,13 @@ import logout from "../icons/logout.png"
 import register from "../icons/register.png"
 import createbuild from "../icons/createbuild.png"
 import security from "../icons/security.png"
-import axios from "axios"
-
+import {ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 function Header(){
-  const{user, checkLoginStatus, handleLogin,handleLogoutClick,loggedInStatus,setLoggedInStatus, handleSuccessfulAuth,fpsbuildsurl} = useContext(Context)
+  const{user, token, loggedInStatus,setLoggedInStatus, handleLogin,handleLogoutClick,fpsbuildsurl} = useContext(Context)
   const history = useHistory()
   const[email, setEmail] = useState("")
   const[password, setPassword] = useState("") 
-  //   useEffect(()=>{
-  //  checkLoginStatus()
-  // },[])
-  // function handleSubmit(event) {
-  //   axios
-  //     .post(
-  //       `${fpsbuildsurl}/sessions`,
-  //       {
-  //         user: {
-  //           email: email,
-  //           password: password
-  //         }
-  //       },
-  //       { withCredentials: true }
-  //     )
-  //     .then(response => {
-  //       if (response.data.logged_in) {
-  //         handleSuccessfulAuth(response.data);
-  //       }
-  //       console.log(user)
-  //       history.push("/");
-  //     })
-  //     .catch(error => {
-  //       console.log("login error", error);
-  //     });
-  //   event.preventDefault();
-  // }
   const handleSubmit = (evt) => {
     evt.preventDefault()
     fetch(`${fpsbuildsurl}/login`, {
@@ -63,11 +36,23 @@ function Header(){
     .then(data => {
         localStorage.setItem("token", data.jwt)
         handleLogin(data.user)
-    })
+    });
+    if(token === null){
+      toast.error("Incorrect e-mail and/or password. Please try again", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }else if(token){
+    setLoggedInStatus("LOGGED_IN")
+    // window.location.reload();
+    toast.success("Success Notification !", {
+      position: toast.POSITION.TOP_CENTER
+    });
+    }
     setEmail("")
     setPassword("")
-    setLoggedInStatus("LOGGED_IN")
 }
+console.log(token)
+console.log(loggedInStatus)
   function toggleNavMenu() {
     const x = document.getElementById("pc-nav");
     x.classList.toggle("responsive");
@@ -79,6 +64,8 @@ function Header(){
   }))
   if(loggedInStatus === "LOGGED_IN"){
     return (
+      <>
+      <ToastContainer />
       <div className="pcbuildapp-navbar" id="pc-navbar">
                   <img className="header-icon"  src= {headerImage}/> 
                     <strong className= "app-title">FPS Builds</strong>
@@ -125,9 +112,12 @@ function Header(){
                 </a>
           </div>
       </div>
+      </>
     )
-  }else {
+  }else if(loggedInStatus === "NOT_LOGGED_IN") {
     return (
+      <>
+      <ToastContainer />
         <div className="pcbuildapp-navbar" id="pc-navbar">
           <img className="header-icon"  src= {headerImage}/> 
           <strong className= "app-title">FPS Builds</strong>
@@ -189,7 +179,8 @@ function Header(){
                   <div>
                       <button 
                       type="submit" 
-                      className="btn btn-primary btn-block" >
+                      className="btn btn-primary btn-block"
+                      >
                       Sign In 
                       </button>                          
                   </div>
@@ -202,6 +193,7 @@ function Header(){
             </a>
           </div>
         </div>
+      </>
     )
   }
 }

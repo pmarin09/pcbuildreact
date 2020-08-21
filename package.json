@@ -24,6 +24,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "react-select": "^3.1.0",
+    "react-toastify": "^6.0.8",
     "serve": "^11.3.2",
     "timeago-react": "^3.0.0"
   },
