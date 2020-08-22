@@ -15,10 +15,23 @@ import security from "../icons/security.png"
 import {ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 function Header(){
-  const{user, token, loggedInStatus,setLoggedInStatus, handleLogin,handleLogoutClick,fpsbuildsurl} = useContext(Context)
+  const{user,loggedInStatus,token,setLoggedInStatus,handleLogin,handleAuthClick,handleLogoutClick,fpsbuildsurl} = useContext(Context)
   const history = useHistory()
   const[email, setEmail] = useState("")
   const[password, setPassword] = useState("") 
+
+  function notify (token){
+    if(!token){
+      toast.error("Incorrect e-mail and/or password. Please try again", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }else if(token){
+    toast.dark("Logged In  ✔️ ", {
+      position: toast.POSITION.TOP_CENTER
+    });
+    setLoggedInStatus("LOGGED_IN")
+    }
+  }
   const handleSubmit = (evt) => {
     evt.preventDefault()
     fetch(`${fpsbuildsurl}/login`, {
@@ -34,25 +47,21 @@ function Header(){
     })
     .then(resp => resp.json())
     .then(data => {
-        localStorage.setItem("token", data.jwt)
         handleLogin(data.user)
+        localStorage.setItem("token", data.jwt)
+        console.log(data.jwt)
+        if(data.jwt){
+        const token = localStorage.getItem("token")
+        notify(token)
+        }else{
+        const token = null
+        notify(token)
+        }
     });
-    if(token === null){
-      toast.error("Incorrect e-mail and/or password. Please try again", {
-        position: toast.POSITION.TOP_CENTER
-      });
-    }else if(token){
-    setLoggedInStatus("LOGGED_IN")
-    // window.location.reload();
-    toast.success("Success Notification !", {
-      position: toast.POSITION.TOP_CENTER
-    });
-    }
     setEmail("")
     setPassword("")
 }
 console.log(token)
-console.log(loggedInStatus)
   function toggleNavMenu() {
     const x = document.getElementById("pc-nav");
     x.classList.toggle("responsive");
@@ -62,7 +71,7 @@ console.log(loggedInStatus)
         theLinks.forEach(link => link.addEventListener("click", ()=>{
         x.classList.remove("responsive");
   }))
-  if(loggedInStatus === "LOGGED_IN"){
+  if(loggedInStatus === "LOGGED_IN"  && user){
     return (
       <>
       <ToastContainer />

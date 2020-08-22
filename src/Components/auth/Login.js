@@ -8,10 +8,22 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 function Login (props){
-  const{token,user, loggedInStatus,setLoggedInStatus,fpsbuildsurl,handleLogin,handleAuthClick} = useContext(Context)
+  const{user, token,loggedInStatus,setLoggedInStatus,fpsbuildsurl,handleLogin,handleAuthClick} = useContext(Context)
   const[email, setEmail] = useState("")
   const[password, setPassword] = useState("") 
   const history = useHistory()
+  function notify (token){
+    if(!token){
+      toast.error("Incorrect e-mail and/or password. Please try again", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }else if(token){
+    toast.dark("Logged In  ✔️ ", {
+      position: toast.POSITION.TOP_CENTER
+    });
+    setLoggedInStatus("LOGGED_IN")
+    }
+  }
   const handleSubmit = (evt) => {
     evt.preventDefault()
     fetch(`${fpsbuildsurl}/login`, {
@@ -27,24 +39,22 @@ function Login (props){
     })
     .then(resp => resp.json())
     .then(data => {
-        localStorage.setItem("token", data.jwt)
         handleLogin(data.user)
+        localStorage.setItem("token", data.jwt)
+        console.log(data.jwt)
+        if(data.jwt){
+        const token = localStorage.getItem("token")
+        notify(token)
+        history.push("/")
+        }else{
+        const token = null
+        notify(token)
+        }
     });
-    if(token === null){
-      toast.error("Incorrect e-mail and/or password. Please try again", {
-        position: toast.POSITION.TOP_CENTER
-      });
-    }else if(token){
-    toast.success("Logged In!", {
-      position: toast.POSITION.TOP_CENTER
-    });
-    setLoggedInStatus("LOGGED_IN")
-    history.push("/")
-    }
     setEmail("")
     setPassword("")
-    
 }
+console.log(token)
 if(loggedInStatus === "NOT_LOGGED_IN"){
 return (
  <div className="top">

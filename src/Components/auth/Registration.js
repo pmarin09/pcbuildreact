@@ -5,42 +5,32 @@ import {Context} from "../../Context"
 import mail from "../../icons/mail.png"
 import pw from "../../icons/pw.png"
 import displayname from "../../icons/displayname.png"
+import {ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 function Registration (){
-  const{handleSuccessfulAuth,fpsbuildsurl, handleLogin,user} = useContext(Context)
+  const{setLoggedInStatus,token,fpsbuildsurl, handleLogin,user} = useContext(Context)
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password,setPassword] = useState("")
   const [password_confirmation, setPasswordConfirmation] = useState("")
   const history = useHistory()
-  // function handleSubmit(event) {
-
-  //   axios
-  //     .post(
-  //       `${fpsbuildsurl}/users/`,
-  //       {
-  //         user: {
-  //           username: username,
-  //           email: email,
-  //           password: password,
-  //           password_confirmation: password_confirmation,
-  //           first_name: null,
-  //           last_name: null
-  //         }
-  //       },
-  //       { withCredentials: true }
-  //     )
-  //     .then(response => {
-  //       if (response.data.status === "created") {
-  //         handleSuccessfulAuth(response.data);
-  //       }
-  //       history.push("/")
-  //     })
-  //     .catch(error => {
-  //       console.log("registration error", error);
-  //     });
-  //   event.preventDefault();
-  // }
+  function notify(token) {
+    if(!token){
+      toast.error("Registration error. Please try again", {
+        position: toast.POSITION.TOP_CENTER
+      });
+      setLoggedInStatus("NOT_LOGGED_IN")
+    }else if(token){
+    setUsername("")
+    setPassword("")
+     history.push("/")
+     setLoggedInStatus("LOGGED_IN")
+     toast.dark("Welcome to FPS Builds! ", {
+      position: toast.POSITION.TOP_CENTER
+    });
+    }
+  }
   const handleSubmit = (evt) => {
     evt.preventDefault()
     fetch(`${fpsbuildsurl}/users`, {
@@ -59,16 +49,22 @@ function Registration (){
     })
     .then(resp => resp.json())
     .then(data => {
-        localStorage.setItem("token", data.jwt)
         handleLogin(data.user)
+        localStorage.setItem("token", data.jwt)
+        console.log(data.jwt)
+        if(data.jwt){
+        const token = localStorage.getItem("token")
+        notify(token)
         history.push("/")
-    })
-    
-    setUsername("")
-    setPassword("")
-}
+        }else{
+        const token = null
+        notify(token)
+        }
+    });
+  }
 return (
   <div className="create-account">
+    <ToastContainer/>
     <article className="card-body mx-auto" style={{maxWidth: 400}}>
       <h4 className="card-title mt-3 text-center">Create Account</h4>
       <p className="text-center">Join our PC Build community!</p>
@@ -84,6 +80,7 @@ return (
                     placeholder="Username" 
                     type="text" id="Username" 
                     onChange={e => setUsername(e.target.value)} 
+                    required
                 />
           </div>
           <div className="form-group input-group">
@@ -98,6 +95,7 @@ return (
                 value={email}  
                 id="userEmail"
                 onChange={e => setEmail(e.target.value)}
+                required
               />
           </div> 
           <div className="form-group input-group">
@@ -112,6 +110,7 @@ return (
                 value={password}
                 id="password"
                 onChange={e => setPassword(e.target.value)}
+                required
               />
           </div>
           <div className="form-group input-group">
@@ -126,6 +125,7 @@ return (
                 value={password_confirmation}
                 id="password_confirmation"
                 onChange={e => setPasswordConfirmation(e.target.value)}
+                required
               />
           </div>
           <div className="form-group">

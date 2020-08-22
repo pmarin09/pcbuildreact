@@ -173,6 +173,11 @@ import { useHistory } from 'react-router-dom';
       .then (data => setFavorites(data))
       },50)
       }
+  function updateUsers(){
+    fetch(`${fpsbuildsurl}/users.json`)
+    .then (res => res.json())
+    .then (data => setUsers(data))
+    }
   function updateImages(){
     setTimeout(() => {fetch(`${fpsbuildsurl}/pcbuilds.json`)
     .then (res => res.json())
@@ -194,12 +199,9 @@ import { useHistory } from 'react-router-dom';
     setLoggedInStatus("NOT_LOGGED_IN")
     setUser({})
     localStorage.removeItem("token")
-   console.log(token)
     }
   //JWT Token Auth
   const [form, setForm] = useState("")
-  const token = localStorage.getItem("token")
-  console.log(token)
   useEffect(() => {
     const token = localStorage.getItem("token")
     if(token){
@@ -220,7 +222,6 @@ import { useHistory } from 'react-router-dom';
   }}, [])
   const handleLogin = (user) => {
     setUser(user)
-    
   }
   const handleFormSwitch = (input) => {
     setForm(input)
@@ -239,7 +240,6 @@ import { useHistory } from 'react-router-dom';
     return(
             <Context.Provider value = {{
                 fpsbuildsurl,
-                token,
                 handleLogin,
                 handleFormSwitch,
                 handleAuthClick,
@@ -268,6 +268,7 @@ import { useHistory } from 'react-router-dom';
                 favoritesUrl,
                 setFavorites,
                 updateFavorites,
+                updateUsers,
                 updateImages,
                 loggedInStatus
             }}>

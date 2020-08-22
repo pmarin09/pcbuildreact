@@ -5,6 +5,9 @@ import {Context} from "../Context"
 import Pagination from "../Pagination"
 import {Link} from "react-router-dom"
 import News from "../News"
+import {ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
 function Main(){
 const{allBuilds,setUser,fpsbuildsurl} = useContext(Context)
 const imageElements = allBuilds.map((img,i) => (
@@ -36,6 +39,7 @@ useEffect(() => {
 },[])
 return (
   <>
+  <ToastContainer/>
   <div className = "album bg-light">
     <div className="jumbotron">
       <div className="container">
