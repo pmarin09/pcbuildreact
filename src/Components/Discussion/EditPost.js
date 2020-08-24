@@ -32,11 +32,11 @@ function EditPost(){
       <div className = "article-container">
         <div className="box">
           <h2 className="title is-5 has-text-grey-light">Edit Post</h2>
-          <section className="forms text-center border border-light p-5">
+          <section className="forms text-center border border-light p-5" style={{width: "100%", height:"200%"}}>
             <form className="form" onSubmit={EditPost} id="editPost">
               <div className="form-row mb-4">
-                <div className="textarea">
-                  <input
+                <div className = "textarea">
+                  <textarea
                     type="textarea"
                     name="content"
                     defaultValue= {thisPostContent}

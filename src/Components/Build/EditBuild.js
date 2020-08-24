@@ -18,10 +18,11 @@ import pccase from "../../icons/pccase.png"
 import Select from 'react-select'
 
 function EditBuild (){
-  const {user,parts,allBuilds,checkLoginStatus,fpsbuildsurl,updateImages}=useContext(Context)
+  const {user,parts,allBuilds,fpsbuildsurl,updateImages}=useContext(Context)
   const history = useHistory()
   const {buildId} = useParams()
   const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
+  const pcbuild_parts = (thisBuild[0].pcbuild_parts.map(pcbuild_part=>{return {id: pcbuild_part.id,part_id: pcbuild_part.part_id, description: pcbuild_part.part.description,part_type: pcbuild_part.part.part_type, price: pcbuild_part.price}}))
   const thisBuildImages = thisBuild.map(a => {
     return (a.attachment_url.map((url,i) =>
               <div class = "col-sm-4">
@@ -33,7 +34,6 @@ function EditBuild (){
                 <img src = {`${fpsbuildsurl}/${url}`} className="build-edit-images"/>
               </div>
           ))})
-  const pcbuild_parts = (thisBuild[0].pcbuild_parts.map(pcbuild_part=>{return {id: pcbuild_part.id,description: pcbuild_part.part.description,part_type: pcbuild_part.part.part_type, price: pcbuild_part.price}}))
   const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: a.description}})
   const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: a.description}})
   const CPUCooler = (parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label: a.description}})
@@ -85,13 +85,12 @@ function EditBuild (){
   }
   function uploadBuildImages(e) {
     const form = new FormData(document.getElementById("newBuildImages"));
-    fetch(`${fpsbuildsurl}/pcbuilds/${buildId}.json`, {
+    fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/update_attachment/${buildId}.json`, {
       method: "PATCH",
       body: form,
     });
     updateImages();
     e.preventDefault();
-    
   }
 return (
   <div>
@@ -144,7 +143,7 @@ return (
                 </div>
                 <form className="form" onSubmit={uploadBuildImages} id="newBuildImages">
                 <div className="col">
-                                Image:
+                                <h3  style={{fontSize: "25px"}}>Add your build images :</h3>
                                 <input type="file" 
                                   className="dropzone"
                                   id="file_upload" 
@@ -198,7 +197,14 @@ return (
                                   options= {options[part.part_type]}
                                   placeholder={part.description}
                                   className= "component-description"
+                                  defaultValue= {{label: part.description, value: part.part_id}}
                                   /> 
+                                      {/* <input
+                                      type="hidden"
+                                      name={"pcbuildpart_id[" + part.part_type + "][part_id]"}
+                                      defaultValue= {part.part_id}
+                                      required
+                                    /> */}
                             </td>
                             <td className = "part-price">
                                     <input
@@ -212,7 +218,7 @@ return (
                                     <input
                                       type="hidden"
                                       name={"pcbuildpart_id[" + part.part_type + "][id]"}
-                                      value= {part.id}
+                                      defaultValue= {part.id}
                                       required
                                     />
                             </td>

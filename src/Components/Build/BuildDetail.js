@@ -73,7 +73,7 @@ function BuildDetail(img) {
                         </a>
                         <a className="level-item">
                             <i className="ri-delete-bin-5-fill"onClick ={ (e) => { 
-                              fetch("${fpsbuildsurl}/buildposts/" + filteredPost.id + ".json", {
+                              fetch(`${fpsbuildsurl}/buildposts/` + filteredPost.id + ".json", {
                                 method: "DELETE",
                               })
                               e.preventDefault();

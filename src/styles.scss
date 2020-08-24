@@ -521,6 +521,9 @@ input:checked + .slider:before {
    margin:auto;
    width: 165px;
   }
+  .content{
+    white-space: pre-wrap;
+  }
 
   .post-count{
     width:50px;
@@ -1304,6 +1307,9 @@ transform-origin: left;
 .Toastify__progress-bar--dark {
   background:green !important;
 }
+
+
+
 @media screen and (max-width: 768px) {
   .pcnavbar-start a:not(:first-child) {display: none;}
   .pcnavbar-start a.icon {

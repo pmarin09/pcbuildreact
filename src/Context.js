@@ -182,7 +182,7 @@ import { useHistory } from 'react-router-dom';
     setTimeout(() => {fetch(`${fpsbuildsurl}/pcbuilds.json`)
     .then (res => res.json())
     .then (data => setAllBuilds(data))
-    },50)
+    },500)
     }
   const[loggedInStatus, setLoggedInStatus]=useState("NOT_LOGGED_IN")
   const[user, setUser]=useState({})
@@ -236,7 +236,6 @@ import { useHistory } from 'react-router-dom';
     .then(resp => resp.json())
     .then(data => console.log(data))
   }
-
     return(
             <Context.Provider value = {{
                 fpsbuildsurl,
