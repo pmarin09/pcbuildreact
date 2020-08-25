@@ -1,10 +1,11 @@
-import React, {useContext,useState} from "react"
+import React, {useContext,useState, useEffect} from "react"
 import {useParams, Link} from "react-router-dom"
 import {Context} from "../../Context"
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import Carousel from 'react-bootstrap/Carousel'
 import Pagination from '../../Pagination';
+
 function BuildDetail(img) {
     const{fpsbuildsurl,allBuilds, user, loggedInStatus, buildposts} = useContext(Context)
     const {buildId} = useParams()
@@ -109,6 +110,10 @@ function BuildDetail(img) {
    const currentBuildPosts = showBuildposts.slice(indexOfFirstBuildPost, indexOfLastBuildPost);
    // Change page
    const paginate = pageNumber => setCurrentPage(pageNumber);
+
+   useEffect(() => {
+      window.scrollTo(0, 0);
+    })
   return (
       <>
         <div className="build-detail-main">

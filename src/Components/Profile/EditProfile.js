@@ -4,8 +4,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import { useHistory,useParams } from 'react-router-dom';
-
-
+import {ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+import Loader from 'react-loader-spinner'
 
 function EditProfile (){
 const {user,loggedInStatus,users,allBuilds,posts,discussions,favorites,fpsbuildsurl}=useContext(Context)
@@ -24,8 +25,11 @@ function updateProfileInfo(e) {
     body: form,
   });
   e.preventDefault();
-   window.location.reload(false);
-   history.push("/profile")
+  toast.success("Updating profile... ", {
+    position: toast.POSITION.TOP_CENTER
+  });
+  setTimeout(() =>{ window.location.reload(false);
+   history.push("/profile")},2000)
 }
 function uploadAvatar(e) {
     const form = new FormData(document.getElementById("newAvatar"));
@@ -38,13 +42,16 @@ function uploadAvatar(e) {
 }
 return (
     <>
+    <ToastContainer 
+    autoClose={2000}
+    />
     {(user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") ? 
     <div>
         <hr></hr>
         {profileUser.map(profileUserData => 
         <div className="profile-container">
           <div className="row">
-            <div className="col-xs-3 col-sm-3" >{profileUserData.attachment_url ? <img src = {`${fpsbuildsurl}/${profileUserData.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email="1000-email@example.com" className="profile-img-avatar"/> }</div>
+            <div className="col-xs-3 col-sm-3" >{profileUserData.attachment_url ? <img src = {`${fpsbuildsurl}/${profileUserData.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email={profileUserData.email} size={100} className="profile-img-avatar" default="robohash"/> }</div>
             <div className="col-sm-9"><h1 className="profile-username">{profileUserData.username}</h1>
             <table className="profile-table">
                 <tr className="profile-stats-row">
@@ -177,7 +184,17 @@ return (
         )}
       </div>
         :
-        "You are not authorized to access this page.."}
+        <div className="loading">
+          <Loader
+            type="TailSpin"
+            color="#B50000"
+            secondaryColor = "grey"
+            height={250}
+            width={250}
+            timeout={2000} //3 secs
+          /> 
+        </div>
+    }
     </>
   )}
 export default EditProfile;

@@ -16,6 +16,10 @@ import mouse from "../../icons/mouse.png"
 import headset from "../../icons/headset.png"
 import pccase from "../../icons/pccase.png"
 import Select from 'react-select'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
+import {ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 function EditBuild (){
   const {allBuilds,user,parts,fpsbuildsurl,updateImages}=useContext(Context)
@@ -69,7 +73,10 @@ function EditBuild (){
       body: form,
     });
     e.preventDefault();
-    window.location.reload(false);
+    toast.success("Updating your build... ", {
+      position: toast.POSITION.TOP_CENTER
+    });
+    setTimeout( () => window.location.reload(false),1000)
   }
   function uploadBuildImages(e) {
     const form = new FormData(document.getElementById("newBuildImages"));
@@ -82,6 +89,9 @@ function EditBuild (){
   }
 return (
   <>
+  <ToastContainer 
+    autoClose={1000}
+    />
   {thisBuild ? 
   <div>
       <hr></hr>
@@ -240,7 +250,18 @@ return (
           </div>
         </div>
   </div>
-  : "Loading" }
+  : 
+  <div className="loading">
+    <Loader
+        type="ThreeDots"
+        color="#B50000"
+        secondaryColor = "grey"
+        height={250}
+        width={250}
+        timeout={3000} //3 secs
+    /> 
+  </div>
+  }
   </>
 )}
 export default EditBuild;

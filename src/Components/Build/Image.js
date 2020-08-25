@@ -82,6 +82,7 @@ function Image({img}) {
                   <div className= "build-cost"><i className="ri-money-dollar-circle-line ri-lg"></i> Total Cost: ${pcbuildTotalCost}</div>
                 </div>
                 <hr className="main-card-hr"></hr>
+                <div className= "build-name-card">{img.build_name}</div>
                 <div><small>{CPU}</small></div>
                 <div><small>{Mobo}</small></div>
                 <div><small>{GPU}</small></div>

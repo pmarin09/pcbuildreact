@@ -1,6 +1,9 @@
 import React, {useContext,useState,useEffect} from "react"
 import {Context} from "../../Context"
 import { useHistory } from 'react-router-dom';
+import {ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
 function NewDiscussion(){
   const{forums, user, checkLoginStatus,fpsbuildsurl} = useContext(Context)
   const history = useHistory()
@@ -12,11 +15,19 @@ function NewDiscussion(){
       body: form,
     });
     e.preventDefault();
-    history.push(`/discussions`)
-    window.location.reload(false);
+    toast.info("Creating Discussion.. ", {
+      position: toast.POSITION.TOP_CENTER
+    });
+    setTimeout( () => {
+      history.push(`/discussions`)
+      window.location.reload(false)
+    },1000)
   }
   return(
     <section className = "section">
+       <ToastContainer 
+        autoClose={1500}
+      />
       <div className = "article-container">
           <div className="request">
             <h2 className="title is-5 has-text-grey-light">Create a New Discussion</h2>

@@ -3,13 +3,28 @@
   font-family: 'Open Sans';
 }
 
-.card-img-top{
-    height: 335px;
-    width: 100%;
-    display: block;
-    border-radius: 10px;;
+.loading{
+  margin:auto !important;
+  display:flex;
+  padding-left:43%;
 }
-
+.discussions-detail-loading{
+  margin:auto !important;
+  display:flex;
+  padding-left:35%;
+}
+.discussions-loading{
+  margin:auto !important;
+  display:flex;
+  padding-top:1%;
+  padding-left:50%;
+}
+.card-img-top{
+  height: 335px;
+  width: 100%;
+  display: block;
+  border-radius: 10px;;
+}
 
 .card {
   border-radius: 10px;
@@ -25,6 +40,12 @@
   background-color: rgb(32,39,45);
   color: white;
   border-radius: 10px;
+}
+
+.build-name-card{
+  color: #858585;
+  font-style: italic;
+  font-size: 15px;
 }
 
 .jumbotron{
@@ -1310,6 +1331,7 @@ transform-origin: left;
 
 
 
+
 @media screen and (max-width: 768px) {
   .pcnavbar-start a:not(:first-child) {display: none;}
   .pcnavbar-start a.icon {
@@ -1627,6 +1649,17 @@ transform-origin: left;
     background: rgb(40,42,45);
     color:grey;
   }
+
+  .loading{
+    margin:auto !important;
+    display:flex;
+    padding-left:16%;
+    }
+    .discussions-loading{
+      margin:auto !important;
+      display:flex;
+      padding-left:12%;
+      }
   
     
 }

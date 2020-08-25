@@ -17,7 +17,6 @@ import { useHistory } from 'react-router-dom';
       setTheme("dark")
       checkBox.checked = true
       addDarkTheme()
-      
     } else if(checkBox.checked == true){
       hiddenCheckBox.disabled = false;
       setTheme("light")

@@ -6,6 +6,8 @@ import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import Pagination from '../../Pagination';
 import comment from '../../icons/comment.png'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 
 function Discussions(){
     const {fpsbuildsurl,forums, discussions, user,checkLoginStatus, loggedInStatus,toggleTheme,checkThemeStatus} = useContext(Context)
@@ -16,14 +18,14 @@ function Discussions(){
         ))
     const discussionsData = discussions.map(discussion => (
         <div className= "discussions-grid">
-            <div style={{margin: "auto"}}> <Link to={`/profile/${discussion.user_id}`}>{discussion.user.attachment_url ? <img src = {`${fpsbuildsurl}/${discussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={discussion.user.email}  className = "discussion-avatar"/>} </Link></div>
+            <div style={{margin: "auto"}}> <Link to={`/profile/${discussion.user_id}`}>{discussion.user.attachment_url ? <img src = {`${fpsbuildsurl}/${discussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={discussion.user.email}  className = "discussion-avatar" size={100} default="robohash"/>} </Link></div>
             <div className= "discussions-title">
                 <Link to={`/discussions/${discussion.id}`} style={{float: "left"}}><strong style={{fontSize: "15px"}}>{discussion.title}</strong> -    {discussion.description} </Link> {(user.id === discussion.user_id && loggedInStatus === "LOGGED_IN") ? 
                 <Link to={`/editDiscussion/${discussion.id}`} style={{textDecoration: "none"}}>
                  <i className="ri-pencil-fill" style={{float: "left"}}></i>
                 </Link>
                     :
-                    ""}
+                    "" }
                 <hr className="hr-discussions-bottom"></hr> 
             </div>
             <div className= "posted">
@@ -57,6 +59,8 @@ function Discussions(){
     // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
  return(
+   <>
+     {forumsData ? 
     <section className="forms text-center border border-light p-5">
             <form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
             <input 
@@ -93,7 +97,20 @@ function Discussions(){
                                 {forumsData} 
                             </div>
                         </div>
-                        <td className= "discussions-td"> {currentDiscussions}</td>
+                        <td className= "discussions-td"> 
+                        {discussions ? currentDiscussions :
+                            <div className="discussions-loading">
+                                <Loader
+                                type="Circles"
+                                color="#B50000"
+                                secondaryColor = "grey"
+                                height={160}
+                                width={160}
+                                timeout={3000} //3 secs
+                                />
+                            </div>  
+                         }
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -106,6 +123,10 @@ function Discussions(){
             :""}
         { (loggedInStatus === "LOGGED_IN") ?checkThemeStatus() :""}
     </section>
+    :
+    ""
+    }
+    </>
  )
 }
 

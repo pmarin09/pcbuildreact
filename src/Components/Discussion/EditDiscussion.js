@@ -1,7 +1,8 @@
 import React, {useContext} from "react"
 import {Context} from "../../Context"
 import { useHistory, useParams} from 'react-router-dom';
-
+import {ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 function EditDiscussion(){
   const {fpsbuildsurl,forums, discussions} = useContext(Context)
   const history = useHistory()
@@ -17,20 +18,34 @@ function EditDiscussion(){
           body: form,
         });
        e.preventDefault();
-       history.push(`/discussions`)
-
+       toast.success("Editing Discussion.. ", {
+        position: toast.POSITION.TOP_CENTER
+      });
+      setTimeout( () => {
+        history.push(`/discussions`)
+        window.location.reload(false)
+      },1000)
   }
-  function deleteDiscussion() {
+  function deleteDiscussion(e) {
       const form = new FormData(document.getElementById("deleteDiscussion"));
       fetch(`${fpsbuildsurl}/discussions/` + discussionId + ".json", {
         method: "DELETE",
         body: form,
       });
-     history.push(`/discussions`)
-     window.location.reload(false);
+      e.preventDefault();
+      toast.error("Deleting Discussion.. ", {
+        position: toast.POSITION.TOP_CENTER
+      });
+      setTimeout( () => {
+        history.push(`/discussions`)
+        window.location.reload(false)
+      },2000)
   }
   return(
     <section className = "section">
+      <ToastContainer 
+        autoClose={1500}
+      />
           <div className = "article-container">
             <div className="box">
             <h2 className="title is-5 has-text-grey-light">Edit Discussion</h2>
@@ -49,7 +64,7 @@ function EditDiscussion(){
                   
                   <div className="textarea" rows="15">
                   Description:
-                    <input
+                    <textarea
                       type="text"
                       name="description"
                       defaultValue= {thisDiscussionDescription}
@@ -86,7 +101,7 @@ function EditDiscussion(){
                   className="button is-danger"
                   style= {{textDecoration: "none"}}
                   onClick = {e =>
-                  window.confirm("Are you sure you wish to delete this item?") && deleteDiscussion()}
+                  window.confirm("Are you sure you wish to delete this item?") && deleteDiscussion(e)}
                 />
                 </form>
             </section>

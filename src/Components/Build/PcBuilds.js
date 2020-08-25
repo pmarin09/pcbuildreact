@@ -14,6 +14,8 @@ import mouse from "../../icons/mouse.png"
 import headset from "../../icons/headset.png"
 import pccase from "../../icons/pccase.png"
 import Select from 'react-select'
+import {ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 function PcBuilds(){
   const{user, parts, checkLoginStatus,toggleTheme, checkThemeStatus, loggedInStatus,fpsbuildsurl} = useContext(Context)
@@ -141,13 +143,16 @@ function PcBuilds(){
       body: form,
     });
     e.preventDefault();
+    toast.dark("Creating your build... ", {
+      position: toast.POSITION.TOP_CENTER
+    });
     history.push(`/`)
-    window.location.reload(false);
+    setTimeout(() => window.location.reload(false),3000)
   }
   console.log(loggedInStatus)
-
   return(
     <>
+    <ToastContainer />
     {(loggedInStatus === "LOGGED_IN") ?
     <section className = "section">
       <section className="create-build-form" id="build-form">
