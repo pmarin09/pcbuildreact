@@ -18,22 +18,10 @@ import pccase from "../../icons/pccase.png"
 import Select from 'react-select'
 
 function EditBuild (){
-  const {user,parts,allBuilds,fpsbuildsurl,updateImages}=useContext(Context)
+  const {allBuilds,user,parts,fpsbuildsurl,updateImages}=useContext(Context)
   const history = useHistory()
   const {buildId} = useParams()
-  const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
-  const pcbuild_parts = (thisBuild[0].pcbuild_parts.map(pcbuild_part=>{return {id: pcbuild_part.id,part_id: pcbuild_part.part_id, description: pcbuild_part.part.description,part_type: pcbuild_part.part.part_type, price: pcbuild_part.price}}))
-  const thisBuildImages = thisBuild.map(a => {
-    return (a.attachment_url.map((url,i) =>
-              <div class = "col-sm-4">
-                <div className= "removeFavoriteIcon">
-                    <i className="ri-close-fill ri-2x" 
-                    onClick= {() =>{fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/delete_attachment/${a.attachment_id[i]}.json`, {method:"DELETE",}); updateImages()}}>
-                    </i>
-                </div>
-                <img src = {`${fpsbuildsurl}/${url}`} className="build-edit-images"/>
-              </div>
-          ))})
+  const thisBuild = allBuilds.find(build => build.id.toString() === buildId)
   const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: a.description}})
   const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: a.description}})
   const CPUCooler = (parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label: a.description}})
@@ -93,20 +81,21 @@ function EditBuild (){
     e.preventDefault();
   }
 return (
+  <>
+  {thisBuild ? 
   <div>
       <hr></hr>
-      {thisBuild.map(build => 
       <div className="profile-container">
         <div className="row">
-          <div className="col-xs-3 col-sm-3" >{build.attachment_url ? <img src = {`${fpsbuildsurl}/${build.attachment_url[0]}`}  className="build-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }
+          <div className="col-xs-3 col-sm-3" >{thisBuild.attachment_url ? <img src = {`${fpsbuildsurl}/${thisBuild.attachment_url[0]}`}  className="build-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }
           </div>
-          <div className="col-sm-9"><h1 className="profile-username"><small>{build.build_name}</small></h1>
+          <div className="col-sm-9"><h1 className="profile-username"><small>{thisBuild.build_name}</small></h1>
           <table className="profile-table">
           <tr className="profile-stats-row">
-                <div className="col-md-3"> {build.attachment_url.length} </div>
-                <div className="col-md-3"> {build.likes.length} </div>
-                <div className="col-md-3"> {build.favorites.length}</div>
-                <div className="col-md-3"> {build.buildposts.length}</div>
+                <div className="col-md-3"> {thisBuild.attachment_url.length} </div>
+                <div className="col-md-3"> {thisBuild.likes.length} </div>
+                <div className="col-md-3"> {thisBuild.favorites.length}</div>
+                <div className="col-md-3"> {thisBuild.buildposts.length}</div>
               </tr>
             <tr className="profile-statslabel-row">
                 <div className="col-md-3"> Images </div>
@@ -128,7 +117,7 @@ return (
                 year: "numeric",
                 month: "long",
                 day: "2-digit"
-              }).format(new Date(build.created_at))}</p> <i className="fa fa-link fa-1x"></i></div>
+              }).format(new Date(thisBuild.created_at))}</p> <i className="fa fa-link fa-1x"></i></div>
                 <div className="panel-body"><a href="http://bootnipets.com"></a></div>
               </div>
               <ul className="list-group">
@@ -138,7 +127,16 @@ return (
             <div className="col-sm-9">
                 <div className= "build-card-body">
                 <div className="row">
-                  {thisBuildImages}
+                  {thisBuild.attachment_url.map((url,i) =>
+              <div className = "col-sm-4">
+                <div className= "removeFavoriteIcon">
+                    <i className="ri-close-fill ri-2x" 
+                    onClick= {() =>{fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/delete_attachment/${thisBuild.attachment_id[i]}.json`, {method:"DELETE",}); updateImages()}}>
+                    </i>
+                </div>
+                <img src = {`${fpsbuildsurl}/${url}`} className="build-edit-images"/>
+              </div>
+          )}
                 </div>
                 </div>
                 <form className="form" onSubmit={uploadBuildImages} id="newBuildImages">
@@ -185,40 +183,34 @@ return (
                         </tr>
                       </thead>
                       <tbody>
-                          {pcbuild_parts.map(function(part) {
+                          {thisBuild.pcbuild_parts.map(function(pcbuild_part) {
                           return (
                             <tr>
-                            <td className = "edit-build-icon"><img src={build_icons[part.part_type]} className="build-icon"/></td>
-                            <td className = "component">{part.part_type}</td> 
+                            <td className = "edit-build-icon"><img src={build_icons[pcbuild_part.part.part_type]} className="build-icon"/></td>
+                            <td className = "component">{pcbuild_part.part.part_type}</td> 
                             <td className = "component-description">
                                   <Select 
-                                  name={"pcbuildpart_id[" + part.part_type + "][part_id]"}
+                                  name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][part_id]"}
                                   required
-                                  options= {options[part.part_type]}
-                                  placeholder={part.description}
+                                  options= {options[pcbuild_part.part.part_type]}
+                                  placeholder={pcbuild_part.part.description}
                                   className= "component-description"
-                                  defaultValue= {{label: part.description, value: part.part_id}}
+                                  defaultValue= {{label: pcbuild_part.part.description, value: pcbuild_part.part_id}}
                                   /> 
-                                      {/* <input
-                                      type="hidden"
-                                      name={"pcbuildpart_id[" + part.part_type + "][part_id]"}
-                                      defaultValue= {part.part_id}
-                                      required
-                                    /> */}
                             </td>
                             <td className = "part-price">
                                     <input
                                       type="text"
-                                      name={"pcbuildpart_id[" + part.part_type + "][price]"}
+                                      name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][price]"}
                                       className="edit-build-price"
                                       id="moboprice"
-                                      defaultValue={part.price}
+                                      defaultValue={pcbuild_part.price}
                                       required
                                     />
                                     <input
                                       type="hidden"
-                                      name={"pcbuildpart_id[" + part.part_type + "][id]"}
-                                      defaultValue= {part.id}
+                                      name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][id]"}
+                                      defaultValue= {pcbuild_part.id}
                                       required
                                     />
                             </td>
@@ -232,7 +224,7 @@ return (
                              type="textarea"
                              name="comments"
                              className="description"
-                             defaultValue={thisBuild[0].comments}
+                             defaultValue={thisBuild.comments}
                              required
                            />
                     </div>
@@ -247,7 +239,8 @@ return (
             </div>
           </div>
         </div>
-          )}
   </div>
+  : "Loading" }
+  </>
 )}
 export default EditBuild;

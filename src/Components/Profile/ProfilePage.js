@@ -19,6 +19,7 @@ const myFavorites = favorites.filter(favorite => favorite.user_id.toString() ===
 console.log(myDiscussions)
 
 return (
+  
   <div>
     <hr></hr>
     {profileUser.map(profileUserData => 

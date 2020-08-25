@@ -54,7 +54,7 @@ function Login (props){
     setEmail("")
     setPassword("")
 }
-console.log(token)
+
 if(loggedInStatus === "NOT_LOGGED_IN"){
 return (
  <div className="top">

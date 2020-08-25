@@ -12,7 +12,6 @@ import { useHistory } from 'react-router-dom';
   function toggleTheme(){
       const checkBox = document.getElementById("theme-checkbox")
       const hiddenCheckBox = document.getElementById('theme-checkbox-hidden')
-      
     if(checkBox.checked == false){
       hiddenCheckBox.disabled = true;
       setTheme("dark")
@@ -104,6 +103,7 @@ import { useHistory } from 'react-router-dom';
         fetch(`${fpsbuildsurl}/pcbuilds.json`)
         .then (res => res.json())
         .then (data => setAllBuilds(data))
+        console.log(allBuilds)
     },[])
   const [forums, setForums]=useState([])
   const forumsUrl = `${fpsbuildsurl}/forums.json`
