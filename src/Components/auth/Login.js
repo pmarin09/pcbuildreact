@@ -1,7 +1,6 @@
 import React, { useContext,useState } from "react";
 import { Link, useHistory} from "react-router-dom";
 import {Context} from "../../Context"
-import axios from "axios"
 import mail from "../../icons/mail.png"
 import pw from "../../icons/pw.png"
 import { toast, ToastContainer } from 'react-toastify';
@@ -58,7 +57,9 @@ function Login (props){
 if(loggedInStatus === "NOT_LOGGED_IN"){
 return (
  <div className="top">
-   <ToastContainer/>
+   <ToastContainer
+   autoClose={1500}
+   />
     <h1 className="text-3xl mb-2 text-center font-bold">Sign In</h1>
     <article className="card-body mx-auto" style={{maxWidth: 400, height:350}}>
       <form className="sign-in" onSubmit={handleSubmit}>

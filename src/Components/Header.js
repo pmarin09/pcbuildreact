@@ -74,7 +74,9 @@ console.log(token)
   if(loggedInStatus === "LOGGED_IN"  && user){
     return (
       <>
-      <ToastContainer />
+      <ToastContainer 
+        autoClose={1500}
+      />
       <div className="pcbuildapp-navbar" id="pc-navbar">
                   <img className="header-icon"  src= {headerImage}/> 
                     <strong className= "app-title">FPS Builds</strong>
@@ -126,7 +128,9 @@ console.log(token)
   }else if(loggedInStatus === "NOT_LOGGED_IN") {
     return (
       <>
-      <ToastContainer />
+      <ToastContainer 
+      autoClose={1700}
+      />
         <div className="pcbuildapp-navbar" id="pc-navbar">
           <img className="header-icon"  src= {headerImage}/> 
           <strong className= "app-title">FPS Builds</strong>

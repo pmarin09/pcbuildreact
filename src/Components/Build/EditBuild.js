@@ -66,32 +66,46 @@ function EditBuild (){
     Mouse: mouse,
     Headset: headset
   }
+  function handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+  }
   function updateBuild(e) {
+    e.preventDefault();
     const form = new FormData(document.getElementById("updatePcbuild"));
     fetch(`${fpsbuildsurl}/pcbuilds/${buildId}.json`, {
       method: "PATCH",
       body: form,
     });
-    e.preventDefault();
     toast.success("Updating your build... ", {
       position: toast.POSITION.TOP_CENTER
     });
     setTimeout( () => window.location.reload(false),1000)
   }
   function uploadBuildImages(e) {
+    e.preventDefault();
     const form = new FormData(document.getElementById("newBuildImages"));
     fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/update_attachment/${buildId}.json`, {
       method: "PATCH",
       body: form,
-    });
-    updateImages();
-    e.preventDefault();
+    })
+    .then(handleErrors)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Success",data)
+      updateImages();
+    })
+    .catch((error) => {
+      console.error("Error", error)
+      toast.error("Please provide a valid image file.. ", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    })
   }
 return (
   <>
-  <ToastContainer 
-    autoClose={1000}
-    />
   {thisBuild ? 
   <div>
       <hr></hr>

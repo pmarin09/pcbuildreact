@@ -14,11 +14,11 @@ import mouse from "../../icons/mouse.png"
 import headset from "../../icons/headset.png"
 import pccase from "../../icons/pccase.png"
 import Select from 'react-select'
-import {ToastContainer,toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 function PcBuilds(){
-  const{user, parts, checkLoginStatus,toggleTheme, checkThemeStatus, loggedInStatus,fpsbuildsurl} = useContext(Context)
+  const{user, parts,toggleTheme, checkThemeStatus, loggedInStatus,fpsbuildsurl} = useContext(Context)
   const history = useHistory()
   const themeLabel = <form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
                             <input 
@@ -136,23 +136,41 @@ function PcBuilds(){
         return false;
       }
   }
+  function handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+}
   function createBuild(e) {
+    e.preventDefault();
     const form = new FormData(document.getElementById("newPcbuild"));
     fetch(`${fpsbuildsurl}/pcbuilds.json`, {
       method: "POST",
       body: form,
-    });
-    e.preventDefault();
-    toast.dark("Creating your build... ", {
-      position: toast.POSITION.TOP_CENTER
-    });
-    history.push(`/`)
-    setTimeout(() => window.location.reload(false),3000)
+    })
+    .then(handleErrors)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Success",data)
+      toast.dark("Creating your build... ", {
+        position: toast.POSITION.TOP_CENTER
+      });
+      history.push(`/`)
+      setTimeout(() => window.location.reload(false),3000)
+    })
+    .catch((error) => {
+      console.error("Error", error)
+      toast.error("Please provide a valid image file.. ", {
+        position: toast.POSITION.TOP_CENTER
+      });
+      
+    })
+    
   }
   console.log(loggedInStatus)
   return(
     <>
-    <ToastContainer />
     {(loggedInStatus === "LOGGED_IN") ?
     <section className = "section">
       <section className="create-build-form" id="build-form">
