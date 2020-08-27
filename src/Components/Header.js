@@ -75,7 +75,7 @@ console.log(token)
     return (
       <>
       <ToastContainer 
-        autoClose={1500}
+        autoClose={1700}
       />
       <div className="pcbuildapp-navbar" id="pc-navbar">
                   <img className="header-icon"  src= {headerImage}/> 

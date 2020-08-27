@@ -153,10 +153,9 @@ import { useHistory } from 'react-router-dom';
         console.log(likes)
     },[])
   function updateLikes(){
-      setTimeout(() => {fetch(`${fpsbuildsurl}/likes.json`)
+      fetch(`${fpsbuildsurl}/likes.json`)
       .then (res => res.json())
       .then (data => setLikes(data))
-      },50)
      }
   const [favorites, setFavorites]=useState([])
   const favoritesUrl = `${fpsbuildsurl}/favorites.json`
@@ -167,11 +166,10 @@ import { useHistory } from 'react-router-dom';
         console.log(favorites)
     },[])
   function updateFavorites(){
-      setTimeout(() => {fetch(`${fpsbuildsurl}/favorites.json`)
+      fetch(`${fpsbuildsurl}/favorites.json`)
       .then (res => res.json())
       .then (data => setFavorites(data))
-      },50)
-      }
+  }
   function updateUsers(){
     fetch(`${fpsbuildsurl}/users.json`)
     .then (res => res.json())

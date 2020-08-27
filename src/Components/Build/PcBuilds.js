@@ -164,9 +164,7 @@ function PcBuilds(){
       toast.error("Please provide a valid image file.. ", {
         position: toast.POSITION.TOP_CENTER
       });
-      
     })
-    
   }
   console.log(loggedInStatus)
   return(
@@ -199,6 +197,7 @@ function PcBuilds(){
                   type="text"
                   name="build_name"
                   className="build-name-textbox"
+                  required
                 />
               <div>
                 <h2 className="build-images">Add build images:</h2>
@@ -231,7 +230,7 @@ function PcBuilds(){
                         required
                         options= {options[part]}
                         className= "component-description"
-                        placeholder="Select or type..."
+                        placeholder="Select or type to search..."
                         styles={customStyles}
                         filterOption={customFilter}
                         /> 
@@ -242,7 +241,6 @@ function PcBuilds(){
                             name={"part_id[" + part + "][price]"}
                             className="create-build-price"
                             id="moboprice"
-                            required
                           />
                   </td>
                 </tr>

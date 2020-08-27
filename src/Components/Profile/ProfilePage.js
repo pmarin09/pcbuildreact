@@ -29,11 +29,11 @@ return (
           <div className="col-sm-9"><h1 className="profile-username">{profileUserData.username}</h1>
           <table className="profile-table">
             <tr className="profile-stats-row">
-                  <div className="col-md-2"> {profileUserData.pcbuilds.length} </div>
-                  <div className="col-md-2"> {myLikes} </div>
-                  <div className="col-md-2"> {myFavorites.length} </div>
-                  <div className="col-md-2"> {myDiscussions.length}</div>
-                  <div className="col-md-2"> {myPosts.length} </div>
+                  <div className="col-md-2" style= {{fontWeight: "bold"}}> {profileUserData.pcbuilds.length} </div>
+                  <div className="col-md-2" style= {{fontWeight: "bold"}}> {myLikes} </div>
+                  <div className="col-md-2" style= {{fontWeight: "bold"}}> {myFavorites.length} </div>
+                  <div className="col-md-2" style= {{fontWeight: "bold"}}> {myDiscussions.length}</div>
+                  <div className="col-md-2" style= {{fontWeight: "bold"}}> {myPosts.length} </div>
             </tr>
             <tr className="profile-statslabel-row">
                   <div className="col-md-2"> {profileUserData.pcbuilds.length > 1 ? "Builds": "Build"} </div>

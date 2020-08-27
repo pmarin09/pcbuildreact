@@ -51,9 +51,9 @@ function Image({img}) {
   function favoriteIcon(){
     const alreadyInFavorites = favorites.some(favorite => favorite.user_id === user.id && favorite.pcbuild_id === img.id)
     if(alreadyInFavorites){
-        return <i className="ri-star-fill ri-lg" onClick= {() => {deleteFavorite(); updateFavorites();}}></i>
+        return <i className="ri-star-fill ri-lg" onClick= {() => {deleteFavorite(); setTimeout(() => updateFavorites(),150)}}></i>
     }else {
-        return <i className="ri-star-line ri-lg" onClick={()=> {createFavorite(); updateFavorites();}}></i>
+        return <i className="ri-star-line ri-lg" onClick={()=> {createFavorite(); setTimeout(() => updateFavorites(),150)}}></i>
 
     }
   }
@@ -61,9 +61,9 @@ function Image({img}) {
     const alreadyInLikes = likes.some(like => like.user_id === user.id && like.pcbuild_id === img.id)
     
     if(alreadyInLikes){
-        return <i className="ri-thumb-up-fill" onClick= {() => {deleteLike(); updateLikes();}}></i>
+        return <i className="ri-thumb-up-fill" onClick= {() => {deleteLike(); setTimeout(() => updateLikes(),150)}}></i>
     }else {
-        return <i className="ri-thumb-up-line" onClick={()=> {createLike(); updateLikes();}}></i>
+        return <i className="ri-thumb-up-line" onClick={()=> {createLike(); setTimeout(() =>updateLikes(),150)}}></i>
     }
   }
   return (
