@@ -252,12 +252,11 @@ function PcBuilds(){
                     )})}
               </tbody>
           </table>
-          <div className="textarea"> Build Description
+          <div className="textarea"> <h3> Build Description </h3>
                         <textarea
                           type="textarea"
                           name="comments"
                           className="description"
-                          required
                         />
           </div>
           <input

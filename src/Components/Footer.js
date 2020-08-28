@@ -10,7 +10,7 @@ return(
             <Row>
                 <Col md="6">
                     <h5 className="text mb-4 mt-3 font-weight-bold">FPS Builds</h5>
-                    <p>FPS Builds is for all pc enthusiasts who love creating new builds and sharing their experience with the rest of pc build fans..</p>
+                    <p>FPS Builds is for all pc enthusiasts who love assembling performance pc builds and sharing their experience with the rest of pc build fans...</p>
                 </Col>
                 <hr className="clearfix w-100 d-md-none" />
                 <Col md="2">

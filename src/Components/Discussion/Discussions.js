@@ -62,7 +62,7 @@ function Discussions(){
    <>
      {forumsData ? 
     <section className="forms text-center border border-light p-5">
-            <form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
+            <form className="switch" onClick={toggleTheme}style={{float: "right", marginBottom:"10px"}} id="setDarkTheme">
             <input 
                 type="hidden"
                 name="dark_theme"
