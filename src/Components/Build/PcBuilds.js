@@ -16,6 +16,7 @@ import pccase from "../../icons/pccase.png"
 import Select from 'react-select'
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import ReactTooltip from 'react-tooltip';
 
 function PcBuilds(){
   const{user, parts,toggleTheme, checkThemeStatus, loggedInStatus,fpsbuildsurl} = useContext(Context)
@@ -47,6 +48,7 @@ function PcBuilds(){
   const Keyboard = (parts.filter(part => part.part_type === "Keyboard")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Mouse = (parts.filter(part => part.part_type === "Mouse")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Headset = (parts.filter(part => part.part_type === "Headset")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const Other = {value: "other", label: "Other", description: "Other"}
   const options = 
     {
         Mobo: Mobo,
@@ -60,7 +62,7 @@ function PcBuilds(){
         Monitor: Monitor,
         Keyboard: Keyboard,
         Mouse: Mouse,
-        Headset: Headset
+        Headset: Headset,
     }
   const part_types = 
   [
@@ -75,7 +77,7 @@ function PcBuilds(){
     "Monitor",
     "Keyboard",
     "Mouse",
-    "Headset"
+    "Headset",
   ]
   const build_icons = {
     Mobo: mobo,
@@ -169,8 +171,10 @@ function PcBuilds(){
   console.log(loggedInStatus)
   return(
     <>
+    
     {(loggedInStatus === "LOGGED_IN") ?
     <section className = "section">
+      <ReactTooltip />
       <section className="create-build-form" id="build-form">
         <form className="form" onSubmit={createBuild} id="newPcbuild">
           <div className="col">
@@ -192,7 +196,7 @@ function PcBuilds(){
                   required
                   style={{display: "none"}}
                 />
-                <h2 className="build-name">Build Title:</h2>
+                <h2 className="build-name" >Build Title:</h2>
                  <input
                   type="text"
                   name="build_name"
@@ -214,7 +218,7 @@ function PcBuilds(){
                 <tr>
                   <th>Icon</th>
                   <th className = "component">Component</th>
-                  <th className = "component-description">Description</th>
+                  <th className = "component-description" data-tip="Select Other if your component does not appear on the list">Description</th>
                   <th className = "component-price">Price USD </th>
                 </tr>
               </thead>
@@ -222,7 +226,7 @@ function PcBuilds(){
               {part_types.map(function(part) {
                 return (
                 <tr>
-                  <td><img src={build_icons[part]} className="build-icon"/> </td>
+                  <td><img src={build_icons[part]} className="build-icon" /> </td>
                   <td className = "component">{part}</td> 
                   <td className = "component-description">
                         <Select 
@@ -233,6 +237,7 @@ function PcBuilds(){
                         placeholder="Select or type to search..."
                         styles={customStyles}
                         filterOption={customFilter}
+                        
                         /> 
                   </td>
                   <td className = "part-price">

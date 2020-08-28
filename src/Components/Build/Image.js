@@ -6,6 +6,7 @@ import styles from "../../styles.scss"
 import {Link,useHistory} from "react-router-dom"
 import TimeAgo from 'timeago-react';
 import buildcomments from "../../icons/buildcommentswhite.png"
+import ReactTooltip from 'react-tooltip';
 function Image({img}) {
   const [hovered, ref] = useHover()
   const {buildposts, likes, updateLikes, favorites, updateFavorites, user,loggedInStatus,fpsbuildsurl} = useContext(Context)
@@ -51,9 +52,9 @@ function Image({img}) {
   function favoriteIcon(){
     const alreadyInFavorites = favorites.some(favorite => favorite.user_id === user.id && favorite.pcbuild_id === img.id)
     if(alreadyInFavorites){
-        return <i className="ri-star-fill ri-lg" onClick= {() => {deleteFavorite(); setTimeout(() => updateFavorites(),150)}}></i>
+        return <i className="ri-star-fill ri-lg" onClick= {() => {deleteFavorite(); setTimeout(() => updateFavorites(),150)}} data-tip="Mark as Favorite"></i>
     }else {
-        return <i className="ri-star-line ri-lg" onClick={()=> {createFavorite(); setTimeout(() => updateFavorites(),150)}}></i>
+        return <i className="ri-star-line ri-lg" onClick={()=> {createFavorite(); setTimeout(() => updateFavorites(),150)}} data-tip="Mark as Favorite"></i>
 
     }
   }
@@ -68,6 +69,7 @@ function Image({img}) {
   }
   return (
       <div className="col-md-4" ref = {ref}>
+        <ReactTooltip />
           <div className="card mb-4 shadow-sm">
               <img src={`${fpsbuildsurl}/${img.attachment_url[0]}`} className= "card-img-top"/>
               <div>
@@ -78,7 +80,7 @@ function Image({img}) {
               </div>
             <div className="card-body">
               <div className="card-text">
-                <div className="favorite-icon">{ (loggedInStatus === "LOGGED_IN" && user )? favoriteIcon(): ""} 
+                  <div className="favorite-icon">{ (loggedInStatus === "LOGGED_IN" && user )? favoriteIcon(): ""} 
                   <div className= "build-cost"><i className="ri-money-dollar-circle-line ri-lg"></i> Total Cost: ${pcbuildTotalCost}</div>
                 </div>
                 <hr className="main-card-hr"></hr>
