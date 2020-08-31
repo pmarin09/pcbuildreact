@@ -38,14 +38,14 @@ function uploadAvatar(e) {
       method: "PATCH",
       body: form,
     });
-    
-    window.location.reload(false);
+    toast.success("Uploading avatar... ", {
+      position: toast.POSITION.TOP_CENTER
+    });
+    setTimeout(() =>{ window.location.reload(false);
+      history.push("/profile")},2000)
 }
 return (
     <>
-    <ToastContainer 
-    autoClose={2000}
-    />
     {(user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") || user.id === adminId ? 
     <div>
         <hr></hr>
