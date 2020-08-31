@@ -2,15 +2,15 @@ import React from "react"
 import {Link} from "react-router-dom"
 import { Col, Container, Row, Footer } from 'mdbreact';
 import '@fortawesome/fontawesome-free/css/all.min.css'; 
-
+import footerImage from "../icons/logo_simple.png"
 function Footerpc(){
 return(
     <Footer className="footer-pc">
         <Container className="text-left">
             <Row>
                 <Col md="6">
-                    <h5 className="text mb-4 mt-3 font-weight-bold">FPS Builds</h5>
-                    <p>FPS Builds is for all pc enthusiasts who love assembling performance pc builds and sharing their experience with the rest of pc build fans...</p>
+                    <td style={{width: "100px"}}><img className="header-icon"  src= {footerImage}/></td>
+                    <td style={{fontSize: "15px"}}>FPS Builds is for all pc enthusiasts who love assembling performance pc builds and sharing their experience with our pc build community..</td>
                 </Col>
                 <hr className="clearfix w-100 d-md-none" />
                 <Col md="2">

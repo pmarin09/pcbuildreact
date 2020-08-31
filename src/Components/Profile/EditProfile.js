@@ -32,12 +32,13 @@ function updateProfileInfo(e) {
    history.push("/profile")},2000)
 }
 function uploadAvatar(e) {
+    e.preventDefault();
     const form = new FormData(document.getElementById("newAvatar"));
     fetch(`${fpsbuildsurl}/users/${user.id}`, {
       method: "PATCH",
       body: form,
     });
-    e.preventDefault();
+    
     window.location.reload(false);
 }
 return (
