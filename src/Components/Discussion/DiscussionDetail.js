@@ -9,7 +9,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 
 function DiscussionDetail() {
-    const{discussions, posts, user, toggleTheme, checkThemeStatus,loggedInStatus,fpsbuildsurl} = useContext(Context)
+    const{discussions, posts, user, adminId, toggleTheme, checkThemeStatus,loggedInStatus,fpsbuildsurl} = useContext(Context)
     const {discussionId} = useParams()
     const thisDiscussion = discussions.find(discussion => discussion.id.toString() === discussionId)
     const showPosts =  posts.filter(post => post.discussion_id.toString() === discussionId).map(filteredPost => (
@@ -28,7 +28,7 @@ function DiscussionDetail() {
                       </em>
                       </p>
                 </div>
-                {(user.id === filteredPost.user_id && loggedInStatus === "LOGGED_IN") ?
+                {(user.id === filteredPost.user_id && loggedInStatus === "LOGGED_IN") || user.id === adminId ?
                 <nav className="level is-mobile">
                     <div className="level-left">
                     <a className="level-item">
@@ -96,7 +96,7 @@ function DiscussionDetail() {
                     <div className="level">
                         <div className="level-left"></div>
                         <div className="level-right">
-                            {(user.id === thisDiscussion.user_id && loggedInStatus === "LOGGED_IN") ? 
+                            {(user.id === thisDiscussion.user_id && loggedInStatus === "LOGGED_IN") || user.id === adminId ? 
                                   <div className="buttons">
                                   <Link to={`/editDiscussion/${thisDiscussion.id}`} style={{textDecoration: "none"}}>
                                     <Button color = "primary" className="button is-primary is-rounded">

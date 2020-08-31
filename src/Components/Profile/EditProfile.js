@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Loader from 'react-loader-spinner'
 
 function EditProfile (){
-const {user,loggedInStatus,users,allBuilds,posts,discussions,favorites,fpsbuildsurl}=useContext(Context)
+const {user,adminId,loggedInStatus,users,allBuilds,posts,discussions,favorites,fpsbuildsurl}=useContext(Context)
 const history = useHistory()
 const {userId} = useParams()
 const myBuilds = allBuilds.filter(build => build.user_id.toString() === userId)
@@ -45,7 +45,7 @@ return (
     <ToastContainer 
     autoClose={2000}
     />
-    {(user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") ? 
+    {(user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") || user.id === adminId ? 
     <div>
         <hr></hr>
         {profileUser.map(profileUserData => 

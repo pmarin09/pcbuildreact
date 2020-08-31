@@ -10,7 +10,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 
 function Discussions(){
-    const {fpsbuildsurl,forums, discussions, user,checkLoginStatus, loggedInStatus,toggleTheme,checkThemeStatus} = useContext(Context)
+    const {adminId,fpsbuildsurl,forums, discussions, user,checkLoginStatus, loggedInStatus,toggleTheme,checkThemeStatus} = useContext(Context)
     const forumsData = forums.map(forum => (
         <h3 className = "forumSideBar" key={forum.id}>
             <p ><Link to={`/forum/${forum.id}`}>{forum.title}</Link></p>
@@ -20,7 +20,7 @@ function Discussions(){
         <div className= "discussions-grid">
             <div style={{margin: "auto"}}> <Link to={`/profile/${discussion.user_id}`}>{discussion.user.attachment_url ? <img src = {`${fpsbuildsurl}/${discussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={discussion.user.email}  className = "discussion-avatar" size={100} default="robohash"/>} </Link></div>
             <div className= "discussions-title">
-                <Link to={`/discussions/${discussion.id}`} style={{float: "left"}}><strong style={{fontSize: "15px"}}>{discussion.title}</strong> -    {discussion.description} </Link> {(user.id === discussion.user_id && loggedInStatus === "LOGGED_IN") ? 
+                <Link to={`/discussions/${discussion.id}`} style={{float: "left"}}><strong style={{fontSize: "15px"}}>{discussion.title}</strong> -    {discussion.description} </Link> {(user.id === discussion.user_id && loggedInStatus === "LOGGED_IN") || user.id === adminId ? 
                 <Link to={`/editDiscussion/${discussion.id}`} style={{textDecoration: "none"}}>
                  <i className="ri-pencil-fill" style={{float: "left"}}></i>
                 </Link>

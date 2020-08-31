@@ -1,5 +1,5 @@
 import React,{useContext,useEffect, useState} from "react"
-import headerImage from "../icons/header.png"
+import headerImage from "../icons/logo.png"
 import {Link, useHistory} from "react-router-dom"
 import {Context} from "../Context"
 import Gravatar from 'react-gravatar'
@@ -79,7 +79,6 @@ console.log(token)
       />
       <div className="pcbuildapp-navbar" id="pc-navbar">
                   <img className="header-icon"  src= {headerImage}/> 
-                    <strong className= "app-title">FPS Builds</strong>
                 <div className="pcnavbar-start" id="pc-nav">
                   <a className="pcnavbar-item">
                       <Link to="/" style={{textDecoration: "none"}}>
@@ -133,7 +132,6 @@ console.log(token)
       />
         <div className="pcbuildapp-navbar" id="pc-navbar">
           <img className="header-icon"  src= {headerImage}/> 
-          <strong className= "app-title">FPS Builds</strong>
           <div className="pcnavbar-start" id="pc-nav">
             <a className="pcnavbar-item">
                   <Link to="/" style={{textDecoration: "none"}}>

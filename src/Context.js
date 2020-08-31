@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
   function ContextProvider({children}){
   //LIGHT AND DARK THEME
   const [theme, setTheme] = useState("light")
-  const fpsbuildsurl = "http://localhost:3000"
+  const fpsbuildsurl = "https://fpsbuilds-back-prod.herokuapp.com"
   // "http://localhost:3000"
   // "https://fpsbuilds-back-staging.herokuapp.com"
   function toggleTheme(){
@@ -88,6 +88,7 @@ import { useHistory } from 'react-router-dom';
         }},500)
       }
   /////
+  const adminId = 11
   const [users, setUsers]=useState([])
   const usersUrl = `${fpsbuildsurl}/users.json`
     useEffect(()=>{
@@ -233,7 +234,6 @@ import { useHistory } from 'react-router-dom';
     .then(resp => resp.json())
     .then(data => console.log(data))
   }
-  
     return(
             <Context.Provider value = {{
                 fpsbuildsurl,
@@ -250,6 +250,7 @@ import { useHistory } from 'react-router-dom';
                 setUsers,
                 user,
                 setUser,
+                adminId,
                 allBuilds,
                 setAllBuilds,
                 favoriteBuilds,

@@ -7,7 +7,7 @@ import { useHistory,useParams, Link } from 'react-router-dom';
 import MyBuilds from "./MyBuilds"
 function ProfilePage (){
 
-const {user,loggedInStatus,users,allBuilds,posts,discussions,favorites,fpsbuildsurl}=useContext(Context)
+const {user,adminId,loggedInStatus,users,allBuilds,posts,discussions,favorites,fpsbuildsurl}=useContext(Context)
 const history = useHistory()
 const {userId} = useParams()
 const profileUser = users.filter(user => user.id.toString() === userId)
@@ -50,7 +50,7 @@ return (
           <div className="text-center">
           </div><hr></hr>
             <div className="panel panel-default">
-              <div className="edit-div"> {(user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") ? 
+              <div className="edit-div"> {(user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") || user.id === adminId ? 
                               <Link to={`/profile/edit/${userId}`} style={{textDecoration: "none"}}>
                                   <button class="edit-button">Edit Profile</button>
                               </Link>

@@ -7,7 +7,7 @@ import Carousel from 'react-bootstrap/Carousel'
 import Pagination from '../../Pagination';
 
 function BuildDetail(img) {
-    const{fpsbuildsurl,allBuilds, user, loggedInStatus, buildposts} = useContext(Context)
+    const{fpsbuildsurl,allBuilds, user, adminId, loggedInStatus, buildposts} = useContext(Context)
     const {buildId} = useParams()
     const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
     const thisBuildImage = thisBuild.map(a => {
@@ -66,7 +66,7 @@ function BuildDetail(img) {
                       </em>
                       </p>
                 </div>
-                {(user.id === filteredPost.user_id && loggedInStatus === "LOGGED_IN") ?
+                {(user.id === filteredPost.user_id && loggedInStatus === "LOGGED_IN") || user.id === adminId?
                   <nav className="level is-mobile">
                       <div className="level-left">
                         <a className="level-item">
