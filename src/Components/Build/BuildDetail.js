@@ -7,7 +7,7 @@ import Carousel from 'react-bootstrap/Carousel'
 import Pagination from '../../Pagination';
 
 function BuildDetail(img) {
-    const{fpsbuildsurl,allBuilds, user, adminId, loggedInStatus, buildposts} = useContext(Context)
+    const{fpsbuildsurl,allBuilds, user, adminId, loggedInStatus, buildposts,updateBuildPosts} = useContext(Context)
     const {buildId} = useParams()
     const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
     const thisBuildImage = thisBuild.map(a => {
@@ -74,11 +74,15 @@ function BuildDetail(img) {
                         </a>
                         <a className="level-item">
                             <i className="ri-delete-bin-5-fill"onClick ={ (e) => { 
+                              e.preventDefault();
                               fetch(`${fpsbuildsurl}/buildposts/` + filteredPost.id + ".json", {
                                 method: "DELETE",
                               })
-                              e.preventDefault();
-                              window.location.reload();
+                              .then(response => response.json())
+                              .then(data => {
+                                console.log("Success",data)
+                                updateBuildPosts();
+                              })
                             }}></i>
                         </a>
                       </div>
@@ -93,13 +97,17 @@ function BuildDetail(img) {
     const pcbuildPrices = Object.values(pcbuildParts).reduce((acc,price) => {return  price},0)
     const pcbuildTotalCost = Object.values(pcbuildPrices).reduce((acc, price)=>{return acc + price},0)
     function createBuildPost(e) {
+        e.preventDefault();
         const form = new FormData(document.getElementById("newBuildPost"));
         fetch(`${fpsbuildsurl}/buildposts.json`, {
           method: "POST",
           body: form,
-        });
-        e.preventDefault();
-        window.location.reload(false);
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log("Success",data)
+          updateBuildPosts();
+        })
     }
     //PAGINATION 
    const [currentPage, setCurrentPage] = useState(1);
@@ -111,9 +119,9 @@ function BuildDetail(img) {
    // Change page
    const paginate = pageNumber => setCurrentPage(pageNumber);
 
-   useEffect(() => {
-      window.scrollTo(0, 0);
-    })
+  //  useEffect(() => {
+  //     window.scrollTo(0, 0);
+  //   })
   return (
       <>
         <div className="build-detail-main">

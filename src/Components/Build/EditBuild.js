@@ -22,7 +22,7 @@ import {ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 function EditBuild (){
-  const {allBuilds,user,parts,fpsbuildsurl,updateImages}=useContext(Context)
+  const {allBuilds,user,parts,fpsbuildsurl,updateImages,updateBuilds}=useContext(Context)
   const history = useHistory()
   const {buildId} = useParams()
   const thisBuild = allBuilds.find(build => build.id.toString() === buildId)
@@ -78,7 +78,13 @@ function EditBuild (){
     fetch(`${fpsbuildsurl}/pcbuilds/${buildId}.json`, {
       method: "PATCH",
       body: form,
-    });
+    })
+    .then(handleErrors)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Success",data)
+      updateBuilds();
+    })
     toast.success("Updating your build... ", {
       position: toast.POSITION.TOP_CENTER
     });
@@ -239,7 +245,6 @@ return (
                                     />
                             </td>
                             </tr>
-                           
                           )})} 
                       </tbody>
                     </table>

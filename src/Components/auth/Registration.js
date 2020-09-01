@@ -9,7 +9,7 @@ import {ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 function Registration (){
-  const{setLoggedInStatus,token,fpsbuildsurl, handleLogin,user} = useContext(Context)
+  const{setLoggedInStatus,token,fpsbuildsurl, handleLogin,user,updateUsers} = useContext(Context)
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password,setPassword] = useState("")
@@ -24,7 +24,6 @@ function Registration (){
     }else if(token){
     setUsername("")
     setPassword("")
-     history.push("/")
      setLoggedInStatus("LOGGED_IN")
      toast.dark("Welcome to FPS Builds! ", {
       position: toast.POSITION.TOP_CENTER
@@ -55,7 +54,10 @@ function Registration (){
         if(data.jwt){
         const token = localStorage.getItem("token")
         notify(token)
-        history.push("/")
+        setTimeout(() =>{ 
+          history.push("/")
+          updateUsers()
+        },1700)
         }else{
         const token = null
         notify(token)
@@ -64,7 +66,6 @@ function Registration (){
   }
 return (
   <div className="create-account">
-    <ToastContainer/>
     <article className="card-body mx-auto" style={{maxWidth: 400}}>
       <h4 className="card-title mt-3 text-center">Create Account</h4>
       <p className="text-center">Join our PC Build community!</p>

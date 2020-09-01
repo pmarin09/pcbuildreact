@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Loader from 'react-loader-spinner'
 
 function EditProfile (){
-const {user,adminId,loggedInStatus,users,allBuilds,posts,discussions,favorites,fpsbuildsurl}=useContext(Context)
+const {user,adminId,loggedInStatus,users,updateUsers,allBuilds,posts,discussions,favorites,fpsbuildsurl}=useContext(Context)
 const history = useHistory()
 const {userId} = useParams()
 const myBuilds = allBuilds.filter(build => build.user_id.toString() === userId)
@@ -20,7 +20,7 @@ const myFavorites = favorites.filter(favorite => favorite.user_id.toString() ===
 const profileUser = users.filter(user => user.id.toString() === userId)
 function updateProfileInfo(e) {
   const form = new FormData(document.getElementById("profileInfo"));
-  fetch(`${fpsbuildsurl}/users/${user.id}`, {
+  fetch(`${fpsbuildsurl}/users/${userId}`, {
     method: "PATCH",
     body: form,
   });
@@ -28,21 +28,20 @@ function updateProfileInfo(e) {
   toast.success("Updating profile... ", {
     position: toast.POSITION.TOP_CENTER
   });
-  setTimeout(() =>{ window.location.reload(false);
-   history.push("/profile")},2000)
+  updateUsers()
 }
 function uploadAvatar(e) {
     e.preventDefault();
     const form = new FormData(document.getElementById("newAvatar"));
-    fetch(`${fpsbuildsurl}/users/${user.id}`, {
+    fetch(`${fpsbuildsurl}/users/${userId}`, {
       method: "PATCH",
       body: form,
     });
     toast.success("Uploading avatar... ", {
       position: toast.POSITION.TOP_CENTER
     });
-    setTimeout(() =>{ window.location.reload(false);
-      history.push("/profile")},2000)
+    updateUsers()
+    setTimeout( () => window.location.reload(false),1500)
 }
 return (
     <>

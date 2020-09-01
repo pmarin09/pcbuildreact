@@ -3,28 +3,48 @@ import mail from "../../icons/mail.png"
 import pw from "../../icons/pw.png"
 import tokencode from "../../icons/token.png"
 import {Context} from "../../Context"
+import {toast} from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 function ResetPassword(){
 const{fpsbuildsurl} = useContext(Context)
 const [email, setEmail] = useState("")
 const [token, setToken] = useState("")
 const [password, setPassword] = useState("")
 const [password_confirmation, setPasswordConfirmation] = useState("")
+const history = useHistory()
+function handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+  }
 function resetPassword(e) {
+    e.preventDefault();
     const form = new FormData(document.getElementById("resetPassword"));
     fetch(`${fpsbuildsurl}/reset_password`, {
      credentials: "include",
       method: "POST",
       body: form,
     })
-     .then(res => res.json())
-    .then(response => {
-      alert(response.alert)
+    .then(handleErrors)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Success",data)
+      toast.info("Your password has been reset, please log in", {
+        position: toast.POSITION.TOP_CENTER
+      });
+      setTimeout( () => history.push("/signin"),1000)
     })
-    .catch(console.log)
+    .catch((error) => {
+      console.error("Error", error)
+      toast.error("Invalid token or password confirmation. Please try again..  ", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    })
 }
 return (
     <div className="top">
-        <article className="card-body mx-auto" style={{maxWidth: 400}}>
+        <article className="card-body mx-auto" style={{maxWidth: 400, margin:"20px"}}>
             <h4 className="card-title mt-3 text-center">Reset Password</h4>
             <form onSubmit={resetPassword} id= "resetPassword">
                 <div className="form-group input-group">

@@ -172,6 +172,11 @@ import { useHistory } from 'react-router-dom';
       .then (res => res.json())
       .then (data => setFavorites(data))
   }
+  function updateBuildPosts(){
+    fetch(`${fpsbuildsurl}/buildposts.json`)
+    .then (res => res.json())
+    .then (data => setBuildPosts(data))
+}
   function updateUsers(){
     fetch(`${fpsbuildsurl}/users.json`)
     .then (res => res.json())
@@ -183,6 +188,12 @@ import { useHistory } from 'react-router-dom';
     .then (data => setAllBuilds(data))
     },500)
     }
+    function updateBuilds(){
+      setTimeout(() => {fetch(`${fpsbuildsurl}/pcbuilds.json`)
+      .then (res => res.json())
+      .then (data => setAllBuilds(data))
+      },500)
+      }
   const[loggedInStatus, setLoggedInStatus]=useState("NOT_LOGGED_IN")
   const[user, setUser]=useState({})
   const[email, setEmail] = useState("")
@@ -269,6 +280,8 @@ import { useHistory } from 'react-router-dom';
                 updateFavorites,
                 updateUsers,
                 updateImages,
+                updateBuilds,
+                updateBuildPosts,
                 loggedInStatus
             }}>
                 {children}
