@@ -170,7 +170,7 @@ function EditBuild (){
       });
     })
   }
-  // console.log(thisBuild.pcbuild_parts.map(a => a.part.part_type === "Mobo"))
+  console.log(thisBuild)
 return (
   <>
   {thisBuild ? 
@@ -251,7 +251,7 @@ return (
                                 <input
                                   type="text"
                                   name="user_id"
-                                  value={user.id}
+                                  value={thisBuild.user_id}
                                   className="description"
                                   required
                                   style={{display: "none"}}
@@ -259,7 +259,7 @@ return (
                                 <input
                                   type="text"
                                   name="username"
-                                  value={user.username}
+                                  value={thisBuild.username}
                                   className="description"
                                   required
                                   style={{display: "none"}}
