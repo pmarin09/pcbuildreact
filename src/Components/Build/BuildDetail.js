@@ -157,7 +157,7 @@ function BuildDetail(img) {
                 </tbody>
             </table>
             <h2 className="title is-5 has-text-grey-light">Build Description</h2>
-            <div>{thisBuild.map(build => build.comments)}</div>
+            <div style={{whiteSpace: "break-spaces"}}>{thisBuild.map(build => build.comments)}</div>
             {currentBuildPosts}
             {showBuildposts.length > 10 ?
             <Pagination

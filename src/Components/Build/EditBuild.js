@@ -75,7 +75,7 @@ function EditBuild (){
     "RAM",
     "HD",
     "Case",
-    "P",
+    "PSU",
     "Monitor",
     "Keyboard",
     "Mouse",
@@ -290,6 +290,12 @@ return (
                                    filterOption={customFilter}
                                   // defaultValue= {{label: pcbuild_part.part.description, value: pcbuild_part.part_id}}
                                   /> 
+                                  <input
+                                      type="hidden"
+                                      name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][part_id]"}
+                                      defaultValue= {pcbuild_part.part_id}
+                                      required
+                                    />
                             </td>
                             <td className = "part-price">
                                     <input
