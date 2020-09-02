@@ -7,7 +7,7 @@ import gpu from "../../icons/gpu.png"
 import cpucooler from "../../icons/cpucooler.png"
 import ram from "../../icons/ram.png"
 import hdd from "../../icons/hdd.png"
-import pws from "../../icons/pws.png"
+import psu from "../../icons/pws.png"
 import monitor from "../../icons/monitor.png"
 import keyboard from "../../icons/keyboard.png"
 import mouse from "../../icons/mouse.png"
@@ -43,12 +43,11 @@ function PcBuilds(){
   const RAM = (parts.filter(part => part.part_type === "RAM")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const HD = (parts.filter(part => part.part_type === "HD")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Case = (parts.filter(part => part.part_type === "Case")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const PWS = (parts.filter(part => part.part_type === "PWS")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const PSU = (parts.filter(part => part.part_type === "PSU")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Monitor = (parts.filter(part => part.part_type === "Monitor")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Keyboard = (parts.filter(part => part.part_type === "Keyboard")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Mouse = (parts.filter(part => part.part_type === "Mouse")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Headset = (parts.filter(part => part.part_type === "Headset")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const Other = {value: "other", label: "Other", description: "Other"}
   const options = 
     {
         Mobo: Mobo,
@@ -58,7 +57,7 @@ function PcBuilds(){
         RAM: RAM,
         HD: HD,
         Case: Case,
-        PWS: PWS,
+        PSU: PSU,
         Monitor: Monitor,
         Keyboard: Keyboard,
         Mouse: Mouse,
@@ -73,7 +72,7 @@ function PcBuilds(){
     "RAM",
     "HD",
     "Case",
-    "PWS",
+    "PSU",
     "Monitor",
     "Keyboard",
     "Mouse",
@@ -87,7 +86,7 @@ function PcBuilds(){
     RAM: ram,
     HD: hdd,
     Case: pccase,
-    PWS: pws,
+    PSU: psu,
     Monitor: monitor,
     Keyboard: keyboard,
     Mouse: mouse,
@@ -237,7 +236,6 @@ function PcBuilds(){
                         placeholder="Select or type to search..."
                         styles={customStyles}
                         filterOption={customFilter}
-                        
                         /> 
                   </td>
                   <td className = "part-price">

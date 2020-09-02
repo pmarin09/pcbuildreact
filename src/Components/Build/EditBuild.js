@@ -26,7 +26,7 @@ function EditBuild (){
   const history = useHistory()
   const {buildId} = useParams()
   const thisBuild = allBuilds.find(build => build.id.toString() === buildId)
-  const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: a.description}})
+  const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: a.description}})
   const CPUCooler = (parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label: a.description}})
   const GPU = (parts.filter(part => part.part_type === "GPU")).map(a=>{return {value: a.id,label: a.description}})
@@ -65,6 +65,66 @@ function EditBuild (){
     Keyboard: keyboard,
     Mouse: mouse,
     Headset: headset
+  }
+  const part_types = 
+  [
+    "Mobo",
+    "CPU",
+    "CPUCooler",
+    "GPU",
+    "RAM",
+    "HD",
+    "Case",
+    "PWS",
+    "Monitor",
+    "Keyboard",
+    "Mouse",
+    "Headset",
+  ]
+  const customStyles = {
+  
+    container: base => ({
+      ...base,
+      width: "100%"
+    }),
+    control: base => ({
+      ...base,
+      height: 90,
+      minHeight: 32,
+      fontSize: 14,
+      borderRadius: 5,
+      marginLeft:10,
+      width: 500,
+      textAlign: "left",
+      cursor: "pointer"
+    }),
+    option: (provided) => ({
+      ...provided,
+      borderBottom: "1px dotted pink",
+      fontSize: 14,
+      textAlign: "left",
+      cursor: "pointer",
+    }),
+    valueContainer: base => ({
+      ...base,
+     height:100,
+     fontSize: 12,
+     whiteSpace: "none",
+    }),
+    singleValue: base => ({
+      ...base,
+     whiteSpace: "none",
+    }),
+
+    }
+  const customFilter = (option, searchText) => {
+      if (
+        option.data.description.toLowerCase().includes(searchText.toLowerCase())
+      ) {
+        return true;
+      } else {
+        return false;
+      }
   }
   function handleErrors(response) {
     if (!response.ok) {
@@ -110,6 +170,7 @@ function EditBuild (){
       });
     })
   }
+  // console.log(thisBuild.pcbuild_parts.map(a => a.part.part_type === "Mobo"))
 return (
   <>
   {thisBuild ? 
@@ -214,7 +275,7 @@ return (
                       </thead>
                       <tbody>
                           {thisBuild.pcbuild_parts.map(function(pcbuild_part) {
-                          return (
+                        return (
                             <tr>
                             <td className = "edit-build-icon"><img src={build_icons[pcbuild_part.part.part_type]} className="build-icon"/></td>
                             <td className = "component">{pcbuild_part.part.part_type}</td> 
@@ -225,6 +286,8 @@ return (
                                   options= {options[pcbuild_part.part.part_type]}
                                   placeholder={pcbuild_part.part.description}
                                   className= "component-description"
+                                  styles={customStyles}
+                                  filterOption={customFilter}
                                   defaultValue= {{label: pcbuild_part.part.description, value: pcbuild_part.part_id}}
                                   /> 
                             </td>

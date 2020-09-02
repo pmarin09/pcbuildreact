@@ -61,7 +61,7 @@ return (
    autoClose={1500}
    />
     <h1 className="text-3xl mb-2 text-center font-bold">Sign In</h1>
-    <article className="card-body mx-auto" style={{maxWidth: 400, height:350}}>
+    <article className="card-body mx-auto" style={{maxWidth: 400, height:350, margin:"20px"}}>
       <form className="sign-in" onSubmit={handleSubmit}>
           <div className="form-group input-group">
           <div className="input-group-prepend">
