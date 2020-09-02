@@ -13,7 +13,7 @@ function BuildDetail(img) {
     const thisBuildImage = thisBuild.map(a => {
       return a.attachment_url.map(b =>
               <Carousel.Item>
-               <img src = {`${fpsbuildsurl}/${b}`} width=  "400px" height= "400px"></img>
+               <img src = {`${fpsbuildsurl}/${b}`} style = {{maxWidth:  "500px", maxHeight: "700px"}}></img>
               </Carousel.Item>
         )})
     function humanize(str) {
