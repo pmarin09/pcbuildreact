@@ -43,7 +43,7 @@ function PcBuilds(){
   const RAM = (parts.filter(part => part.part_type === "RAM")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const HD = (parts.filter(part => part.part_type === "HD")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Case = (parts.filter(part => part.part_type === "Case")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const PSU = (parts.filter(part => part.part_type === "PWS")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const PSU = (parts.filter(part => part.part_type === "PSU")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Monitor = (parts.filter(part => part.part_type === "Monitor")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Keyboard = (parts.filter(part => part.part_type === "Keyboard")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Mouse = (parts.filter(part => part.part_type === "Mouse")).map(a=>{return {value: a.id,label:<div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
@@ -236,6 +236,7 @@ function PcBuilds(){
                         placeholder="Select or type to search..."
                         styles={customStyles}
                         filterOption={customFilter}
+                        defaultValue= {{label: "Select or type to search", value: (parts.filter(part => part.part_type === part.part_type && part.description === "Not Available")).map(a=>{return a.id})[0] }}
                         /> 
                   </td>
                   <td className = "part-price">

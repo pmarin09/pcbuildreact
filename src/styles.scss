@@ -248,7 +248,12 @@
       border-radius: 50%;
     }
   }
-  
+  .build-comments-area{
+    white-space: break-spaces;
+    border: solid #797474 0.25px;
+    border-radius: 10px;
+    padding: 25px;
+  }
   .notification:not(:last-child) {
     margin-bottom: 0;
   }

@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import { useHistory,useParams } from 'react-router-dom';
-import {ToastContainer,toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import Loader from 'react-loader-spinner'
 

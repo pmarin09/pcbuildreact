@@ -119,9 +119,9 @@ function BuildDetail(img) {
    // Change page
    const paginate = pageNumber => setCurrentPage(pageNumber);
 
-  //  useEffect(() => {
-  //     window.scrollTo(0, 0);
-  //   })
+   useEffect(() => {
+      window.scrollTo(0, 0);
+    })
   return (
       <>
         <div className="build-detail-main">
@@ -157,7 +157,7 @@ function BuildDetail(img) {
                 </tbody>
             </table>
             <h2 className="title is-5 has-text-grey-light">Build Description</h2>
-            <div style={{whiteSpace: "break-spaces"}}>{thisBuild.map(build => build.comments)}</div>
+            <div className= "build-comments-area">{thisBuild.map(build => build.comments)}</div>
             {currentBuildPosts}
             {showBuildposts.length > 10 ?
             <Pagination
