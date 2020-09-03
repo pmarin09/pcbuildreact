@@ -299,7 +299,6 @@ return (
                                       className="edit-build-price"
                                       id="moboprice"
                                       defaultValue={pcbuild_part.price}
-                                      required
                                     />
                                     <input
                                       type="hidden"
@@ -318,7 +317,6 @@ return (
                              name="comments"
                              className="description"
                              defaultValue={thisBuild.comments}
-                             required
                            />
                     </div>
                     <div className= "update-build"> 

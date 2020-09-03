@@ -25,7 +25,7 @@ function BuildDetail(img) {
     }
     const thisBuildParts = thisBuild.map(a => {
         return  a.parts.map(b =>
-   
+             (b.description !== "Not Available") ? 
             <tr>
               <td>{b.part_type}</td>
               <td className = "build-detail-image"><img src={b.get_imgurl} className="build-part-img"/></td>
@@ -48,7 +48,7 @@ function BuildDetail(img) {
               </td>
               <td className="build-detail-price">${a.pcbuild_parts.map(c => c.part_id === b.id? c.price : "")}</td>
             </tr>
-            )
+            : "" )
           })
     const showBuildposts =  buildposts.filter(buildpost => buildpost.pcbuild_id.toString() === buildId).map(filteredPost => (
         <div className="box">

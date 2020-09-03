@@ -15,9 +15,9 @@ function Image({img}) {
   const buildpostcount = thisBuildPosts.length
   const thisBuildLikes = likes.filter(like => like.pcbuild_id === img.id)
   const buildlikecount = thisBuildLikes.length
-  const CPU = img.parts.map(part => (part.part_type === "CPU") ? part.description: "")
-  const Mobo = img.parts.map(part => (part.part_type === "Mobo") ? part.description: "")
-  const GPU = img.parts.map(part => (part.part_type === "GPU") ? part.description: "")
+  const CPU = img.parts.map(part => (part.part_type === "CPU" && part.description !== "Not Available") ? part.description: "")
+  const Mobo = img.parts.map(part => (part.part_type === "Mobo" && part.description !== "Not Available") ? part.description: "")
+  const GPU = img.parts.map(part => (part.part_type === "GPU" && part.description !== "Not Available") ? part.description: "")
   const pcbuildParts = img.pcbuild_parts.map(b=>b.price)
   const pcbuildTotalCost = pcbuildParts.reduce((acc,price) => {return  acc + price},0)
   function createLike() {
