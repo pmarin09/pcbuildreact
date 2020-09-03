@@ -236,7 +236,7 @@ function PcBuilds(){
                         placeholder="Select or type to search..."
                         styles={customStyles}
                         filterOption={customFilter}
-                        defaultValue= {{label: "Select or type to search", value: (parts.filter(part => part.part_type === part.part_type && part.description === "Not Available")).map(a=>{return a.id})[0] }}
+                        defaultValue= {{label: "Select or type to search", value: (parts.filter(item => item.part_type === part && item.description === "Not Available")).map(a=>{return a.id})[0] }}
                         /> 
                   </td>
                   <td className = "part-price">
