@@ -20,6 +20,15 @@ function Image({img}) {
   const GPU = img.parts.map(part => (part.part_type === "GPU" && part.description !== "Not Available") ? part.description: "")
   const pcbuildParts = img.pcbuild_parts.map(b=>b.price)
   const pcbuildTotalCost = pcbuildParts.reduce((acc,price) => {return  acc + price},0)
+  const firsbuild =    
+  <div className= "main-wrapper">
+    <div className = "badge yellow">
+      <div className = "circle">
+      <i className= "fa fa-bolt"></i>
+      </div>
+      <div className = "ribbon"> First Build</div>
+    </div>
+  </div>
   function createLike() {
         const form = new FormData(document.getElementById("newLike"));
         fetch(`${fpsbuildsurl}/pcbuilds/${img.id}/likes.json`, {
@@ -71,7 +80,9 @@ function Image({img}) {
       <div className="col-md-4" ref = {ref}>
         <ReactTooltip />
           <div className="card mb-4 shadow-sm">
+              {img.id === 12 ?firsbuild : ""}
               <img src={`${fpsbuildsurl}/${img.attachment_url[0]}`} className= "card-img-top"/>
+              
               <div>
                 <div className= "comments-icon"><Link to={`/builds/${img.id}`}><img src={buildcomments}/> </Link> <em><small>{buildpostcount}</small></em>
                   <div className= "like-icon">{ (loggedInStatus === "LOGGED_IN" && user )? LikeIcon(): ""} 
@@ -79,6 +90,7 @@ function Image({img}) {
                 </div>
               </div>
             <div className="card-body">
+              
               <div className="card-text">
                   <div className="favorite-icon">{ (loggedInStatus === "LOGGED_IN" && user )? favoriteIcon(): ""} 
                   <div className= "build-cost"><i className="ri-money-dollar-circle-line ri-lg"></i> Total Cost: ${pcbuildTotalCost}</div>
@@ -89,6 +101,7 @@ function Image({img}) {
                 <div><small>{Mobo}</small></div>
                 <div><small>{GPU}</small></div>
                 <div>...</div>
+                
               </div>
                 <p className="card-text">
                   <em><small>Uploaded <TimeAgo datetime={img.created_at}/> by <Link to={`/profile/${img.user_id}`}> {img.username} </Link></small></em>
@@ -96,6 +109,7 @@ function Image({img}) {
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="btn-group">
                     <Link to={`/builds/${img.id}`}><button type="button" className="btn btn-sm btn-outline-primary">View</button></Link>
+                    
                   </div>
                 </div>
             </div>
