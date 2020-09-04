@@ -1180,18 +1180,33 @@ margin-bottom: 10px;
 .carousel-inner img {
   width: 100%;
   height: auto;
-  border-radius: 21px;
-  border: solid rgb(30,37,45);
+  // border-radius: 21px;
+  border: solid rgb(30,37,45) 1px;
   margin:auto;
+  vertical-align: middle;
 }
 
 .carousel{
-    position: relative;
-    border: solid red 4px;
-    top: 20px;
-    border-radius: 25px;
-    // height:600px;
-    // width:600px;
+  position: relative;
+  border: solid red 2px;
+  top: 20px;
+  border-radius: 25px;
+  height: 500px;
+  $bg-color: rgb(48, 52, 59);
+  $dot-color: rgb(61, 73, 78);
+
+  // Dimensions
+  $dot-size: 1px;
+  $dot-space: 10px;
+  background:
+  linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+  linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+  $dot-color;
+  background-size: $dot-space $dot-space;
+}
+
+.carousel-item{
+  top: 10% !important;
 }
 
 .create-build-form {
@@ -1747,15 +1762,42 @@ transform-origin: left;
       padding: 5px;
       width:100%;
   }
+//CAROUSEL
+.carousel-inner img {
+  width: 100%;
+  height: auto;
+  // border-radius: 21px;
+  border: solid rgb(30,37,45) 1px;
+  margin:auto;
+  vertical-align: middle;
+}
 
-  .carousel-inner img {
-    width: 100%;
-    border-radius: 21px;
-    border: solid #1e252d;
-    padding: 9px;
-    margin: auto !important;
-  }
+.carousel{
+  position: relative;
+  border: solid red 2px;
+  top: 20px;
+  border-radius: 25px;
+  height: 500px;
+  $bg-color: rgb(48, 52, 59);
+  $dot-color: rgb(61, 73, 78);
 
+  // Dimensions
+  $dot-size: 1px;
+  $dot-space: 10px;
+  background:
+  linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+  linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+  $dot-color;
+  background-size: $dot-space $dot-space;
+}
+
+.carousel-item{
+  top: 10% !important;
+}
+
+ 
+
+  ///
   .table-wrapper {
     max-width: 90%;
     margin: auto;

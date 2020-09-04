@@ -124,12 +124,12 @@ function BuildDetail(img) {
     })
   return (
       <>
+       <div className= "build-img">
+          <Carousel fade= "true">
+              {thisBuildImage}
+          </Carousel>
+        </div>
         <div className="build-detail-main">
-          <div className= "build-img">
-                <Carousel>
-                    {thisBuildImage}
-                </Carousel>
-          </div>
             <hr></hr>
            <div className="build-detail-container">
             <div className="table-title">
