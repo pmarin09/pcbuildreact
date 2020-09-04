@@ -12,9 +12,9 @@ function BuildDetail(img) {
     const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
     const thisBuildImage = thisBuild.map(a => {
       return a.attachment_url.map(b =>
-              <Carousel.Item>
+              <div className = "carousel-fade carousel-item custom">
                <img src = {`${fpsbuildsurl}/${b}`} style = {{maxWidth:  "500px"}}></img>
-              </Carousel.Item>
+              </div>
         )})
     function humanize(str) {
       var i, frags = str.split('_');
