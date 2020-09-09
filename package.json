@@ -27,6 +27,7 @@
     "react-select": "^3.1.0",
     "react-toastify": "^6.0.8",
     "react-tooltip": "^4.2.9",
+    "react-upload-gallery": "^0.1.1",
     "serve": "^11.3.2",
     "timeago-react": "^3.0.0"
   },

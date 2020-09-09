@@ -18,8 +18,9 @@ import pccase from "../../icons/pccase.png"
 import Select from 'react-select'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
-import {ToastContainer,toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+
 
 function EditBuild (){
   const {allBuilds,user,parts,fpsbuildsurl,updateImages,updateBuilds}=useContext(Context)
