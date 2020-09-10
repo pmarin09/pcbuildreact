@@ -90,6 +90,12 @@ function Discussions(){
             <span className="slider round"></span>
             </form>
     <div class="forum-flex">
+        <div className = "new-discussion-media">{ (loggedInStatus === "LOGGED_IN") ? <Link to="/newDiscussion" style={{textDecoration: "none"}}>
+                                    <Button className="new-discussion-btn dark" id="new-discussion-button">
+                                        New Discussion
+                                    </Button>
+                                </Link> :""}
+        </div>
         <div className= "allforums-box dark" id="allforums-box">
                         { (loggedInStatus === "LOGGED_IN") ? <Link to="/newDiscussion" style={{textDecoration: "none"}}>
                                     <Button className="new-discussion-btn dark" id="new-discussion-button">

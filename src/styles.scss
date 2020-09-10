@@ -279,6 +279,10 @@
     background-color:rgb(15, 23, 29);
   }
 
+  .new-discussion-media{
+    display:none;
+  }
+
   .forum-card{
     position: relative;
     display: flex;
@@ -1754,14 +1758,22 @@ transform-origin: left;
      width:75%;
    }
 
-   .discussions-td{
-     width:50%;
-   }
+    .forum-flex{
+      display:block;
+      padding:0px;
+    }
+    .new-discussion-media{
+      display:table;
+      margin:auto;
+    }
+    .textarea{
+      width:100% !important;
+    }
 
-   .table{
-     width:50%;
-   }
-
+    .col-6{
+      height:175px!important;
+    }
+  
    .date-posted{
      display:none;
    }
