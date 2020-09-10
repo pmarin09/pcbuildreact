@@ -17,8 +17,7 @@ import Select from 'react-select'
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import ReactTooltip from 'react-tooltip';
-import RUG from 'react-upload-gallery'
-import 'react-upload-gallery/dist/style.css'
+
 
 function PcBuilds(){
   const{user, parts,toggleTheme, checkThemeStatus, loggedInStatus,fpsbuildsurl} = useContext(Context)
@@ -214,10 +213,6 @@ function PcBuilds(){
                   multiple
                   />
               </div>
-              <RUG
-                action="/api/upload" // upload route
-                source={response => response.source} // response image source
-              />
           <table className="create-build-table" id="create-build-table">
               <thead>
                 <tr>

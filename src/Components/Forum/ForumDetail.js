@@ -6,7 +6,7 @@ import TimeAgo from 'timeago-react';
 import { Button } from 'react-bulma-components';
 import Pagination from '../../Pagination';
 import comment from '../../icons/comment.png'
-
+import Loader from 'react-loader-spinner'
 function ForumDetail() {
     const {forums,discussions,user, loggedInStatus,toggleTheme,checkThemeStatus,fpsbuildsurl} = useContext(Context)
     const {forumId} = useParams()
@@ -15,27 +15,35 @@ function ForumDetail() {
             <p ><Link to={`/forum/${forum.id}`}>{forum.title}</Link></p>
         </h3>
         ))
- 
     const showDiscussions =  discussions.filter(discussion => discussion.forum_id.toString() === forumId).map(filteredDiscussion => (
-        <div className= "discussions-grid">
-        <div style={{margin: "auto"}}><Link to={`/profile/${filteredDiscussion.user_id}`}> {filteredDiscussion.user.attachment_url ? <img src = {`${fpsbuildsurl}/${filteredDiscussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredDiscussion.user.email}  className = "discussion-avatar" size={100} default="robohash"/>} </Link></div>
-               <div className= "discussions-title"><Link to={`/discussions/${filteredDiscussion.id}`} style={{float: "left"}}><strong style={{fontSize: "15px"}}>{filteredDiscussion.title}</strong> - {filteredDiscussion.description} </Link> {(user.id === filteredDiscussion.user_id && loggedInStatus === "LOGGED_IN") ? 
-                     <Link to={`/editDiscussion/${filteredDiscussion.id}`} style={{textDecoration: "none"}}>
-                             <i className="ri-pencil-fill" style={{float: "left"}}></i>
-                     </Link>
-                     :
-                     ""}<hr className="hr-discussions-bottom"></hr> </div>
-                  <p className= "posted"><em><small>Posted <TimeAgo datetime={filteredDiscussion.created_at}/> by <Link to={`/profile/${filteredDiscussion.user_id}`}>{filteredDiscussion.username} </Link> on {
-                      forums.map(forum => forum.id === filteredDiscussion.forum_id ? <Link to={`/forum/${forum.id}`}>{forum.title} </Link> : "")
-                  }
-                    <hr className="hr-discussions-top"></hr> 
-                 </small>
-                  </em>
-                  
-                  </p>
+    <>
+    <Link to={`/discussions/${filteredDiscussion.id}`} style={{textDecoration: "none"}}>
+        <div className="forum-row">
+            <div className="col">
+                <div className="media col-6 align-items-center" style={{height: "75px",maxWidth:"100%"}}>
+                        <Link to={`/profile/${filteredDiscussion.user_id}`}>{filteredDiscussion.user.attachment_url ? <img src = {`${fpsbuildsurl}/${filteredDiscussion.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredDiscussion.user.email}  className = "discussion-avatar" size={100} default="robohash"/>} </Link>
+                    <div className="media-body flex-truncate ml-2"><div className="font-weight-semibold" style={{fontSize: "15px", textDecoration: "none"}}>{filteredDiscussion.title}</div> 
+                    </div>
+                </div>
+            </div>
+            <div className="d-none d-md-block col-6">
+                <div className="forum-row" >
+                    <div className="forum-col-2">
+                    <div class="text-muted small mt-1">Posted <TimeAgo datetime={filteredDiscussion.created_at}/> by<Link to={`/profile/${filteredDiscussion.user_id}`}>  {filteredDiscussion.username} </Link></div>
+                    </div>
+                    <div className="forum-col-4">
+                    <small>{forums.map(forum => forum.id === filteredDiscussion.forum_id ? <Link to={`/forum/${forum.id}`}>{forum.title} </Link> : "")}</small>
+                    </div>
+                    <div className="forum-col-2" style={{paddingLeft: "38px"}}>
+                    <a className = "post-count"><Link to={`/discussions/${filteredDiscussion.id}`}><img src={comment}/> {filteredDiscussion.posts.length} </Link></a>
+                    </div>
 
-                  <div className = "post-count"><Link to={`/discussions/${filteredDiscussion.id}`} style={{float: "left"}}><img src={comment}/> {filteredDiscussion.posts.length} </Link></div>
-    </div>
+                </div>
+            </div>
+        </div>
+        <hr className="forum-hr"></hr>
+        </Link>
+    </>
    ))
     //PAGINATION 
     const [currentPage, setCurrentPage] = useState(1);
@@ -50,59 +58,76 @@ function ForumDetail() {
         checkThemeStatus()
         },[])
  return (
-    <section className="forms text-center border border-light p-5">
-        <form className="switch" 
-        onClick={toggleTheme}
-        style={{float: "right"}} 
-        id="setDarkTheme"
-        >
-            <input 
-            type="hidden"
-            name="dark_theme"
-            id="theme-checkbox-hidden"
-            value={false}
-            />
-            <input 
-            type="checkbox"
-            name="dark_theme"
-            id="theme-checkbox"
-            value={true}
-            />
-            <span className="slider round"></span>
-        </form>
-        <table className="discussions-table" id="discussions-table">
-            <thead>
-                <tr>
-                    <th className= "all-forums">All Forums</th>
-                    <th className= "all-discussions">Discussions</th>
-                    <th className = "all-posts">Date Posted</th>
-                    <th className = "all-posts">Posts</th>
-                </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <ul className="allforums-box" id="allforums-box">
-                    <td> { (loggedInStatus === "LOGGED_IN") ?<Link to="/newDiscussion" style={{textDecoration: "none"}}>
-                            <Button color = "primary" className="new-discussion-btn" id="new-discussion-button">
+    <div>
+    <form className="switch" onClick={toggleTheme}style={{float: "right", marginBottom:"10px", display: "none"}} id="setDarkTheme">
+    <input 
+        type="hidden"
+        name="dark_theme"
+        id="theme-checkbox-hidden"
+        value={false}
+        />
+        <input 
+        type="checkbox"
+        name="dark_theme"
+        id="theme-checkbox"
+        value={true}
+        />
+    <span className="slider round"></span>
+    </form>
+    <div class="forum-flex">
+    <div className= "allforums-box dark" id="allforums-box">
+                { (loggedInStatus === "LOGGED_IN") ? <Link to="/newDiscussion" style={{textDecoration: "none"}}>
+                            <Button className="new-discussion-btn dark" id="new-discussion-button">
                                 New Discussion
                             </Button>
-                        </Link> : ""}
+                        </Link> :""}
                         {forumsData} 
-                    </td>
-                </ul>
-                <td> {showDiscussions}</td>
-            </tr>
-            </tbody>
-        </table>
-        {showDiscussions.length > 10 ? 
+    </div>
+    <div className="container-fluid mt-100">
+    <div className="row">
+    <div className="col-md-12">
+        <div className="forum-card mb-3">
+            <div className="card-header pr-0 pl-0">
+                <div className="row no-gutters align-items-center w-100">
+                    <div className="col text-muted" style={{margin:"auto", textAlign:"center", paddingRight: "none !important"} }>Discussions</div>
+                    <div className="d-none d-md-block col-6 text-muted">
+                        <div className="row no-gutters align-items-center">
+                            <div className="forum-col-2">Posted</div>
+                            <div className="forum-col-4">Forum</div>
+                            <div className="forum-col-2">Replies</div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="card-body py-3">
+            {showDiscussions ? currentDiscussions :
+                        <div className="discussions-loading">
+                            <Loader
+                            type="Circles"
+                            color="#B50000"
+                            secondaryColor = "grey"
+                            height={160}
+                            width={160}
+                            timeout={3000} //3 secs
+                            />
+                        </div>  
+                    }
+            </div>
+            </div>
+        </div>
+    </div>
+    {showDiscussions.length > 10 ? 
             <Pagination
                 elementsPerPage={discussionsPerPage}
                 totalElements={showDiscussions.length}
                 paginate={paginate}
             /> 
         : ""}
-        {checkThemeStatus()}
-    </section>
+    { (loggedInStatus === "LOGGED_IN") ?checkThemeStatus() :""}
+    </div>
+    </div>    
+    </div>
  )
 }
 export default ForumDetail;
