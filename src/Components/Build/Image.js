@@ -97,9 +97,9 @@ function Image({img}) {
                 </div>
                 <hr className="main-card-hr"></hr>
                 <div className= "build-name-card">{img.build_name}</div>
-                <div style={{fontSize: "13px"}}>{CPU}</div>
-                <div style={{fontSize: "13px"}}>{Mobo}</div>
-                <div style={{fontSize: "13px"}}>{GPU}</div>
+                <div style={{fontSize: "12px"}}>{CPU}</div>
+                <div style={{fontSize: "12px"}}>{Mobo}</div>
+                <div style={{fontSize: "12px"}}>{GPU}</div>
                 <div>...</div>
                 
               </div>
