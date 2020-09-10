@@ -885,9 +885,10 @@ background: linear-gradient(to bottom, #414345, #232526); /* W3C, IE 10+/ Edge, 
 }  
 
 footer{
-  height: 500px;
   background: rgb(40,42,45);
   color:grey;
+  bottom: 0;
+  width: 100%;
 }
 
 footer hr{
