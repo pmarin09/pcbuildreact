@@ -23,9 +23,12 @@ function Favorites() {
      // Change page
      const paginate = pageNumber => setCurrentPage(pageNumber);
     return (
-        <main className="top">
+
+
+        <div style={{backgroundColor:"#0f171d"}}>
+        <div className="top">
              {favoriteBuilds.length > 0 ? "": <p>You have not selected any favorite builds...</p> }   
-             <div className="row mb-2">
+             <div className="row" style={{backgroundColor:"#0f171d"}}>
                 {currentFavorites}
                 </div>
                 
@@ -37,7 +40,8 @@ function Favorites() {
                             className="favorites-pagination"
                         />
                 :""}
-        </main>
+        </div>
+        </div>
     )
 }
 export default Favorites;

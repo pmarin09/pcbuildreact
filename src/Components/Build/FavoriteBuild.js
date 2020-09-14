@@ -24,6 +24,7 @@ function FavoriteBuild({item}) {
     return <i className="ri-close-fill ri-2x" onClick= {() => {deleteFavorite(); updateFavorites();}}></i>
   }
   return (
+    
     <div className= "container">
           <div className="favorites-card">
             <div className="row no-gutters">
@@ -42,6 +43,7 @@ function FavoriteBuild({item}) {
             </div>
           </div>
       </div>
+      
   )
 }
 FavoriteBuild.propTypes = {

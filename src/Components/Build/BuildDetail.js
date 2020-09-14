@@ -26,30 +26,42 @@ function BuildDetail(img) {
     const thisBuildParts = thisBuild.map(a => {
         return  a.parts.map(b =>
              (b.description !== "Not Available") ? 
-            <tr>
-              <td>{b.part_type}</td>
-              <td className = "build-detail-image"><img src={b.get_imgurl} className="build-part-img"/></td>
-              <td className="build-detail-description">{b.description}</td>
-              <td className="build-detail-specs">
-                {Object.keys(b.details).slice(0, 10).map(function (key,i){
-                    if(b.details[key] === null){
-                      return false
-                    }
-                    if(key === "img_link1"|| key === "date_available"){
-                      return false
-                    }
-                    return(
-                      <div className="specs-grid-container">
-                        <div className = "specs-grid-item-key">{humanize(key)}</div> 
-                        <div className = "specs-grid-item-value">{b.details[key]}</div>
-                      </div>
-                    )
-                })}
-              </td>
-              <td className="build-detail-price">${a.pcbuild_parts.map(c => c.part_id === b.id? c.price : "")}</td>
-            </tr>
+             <>
+          <div className = "build-detail-row">
+         
+          <div className="row no-gutters align-items-center w-100">
+                          <div className = "build-detail-col-1" id="build-component">{b.part_type}</div>
+                          <div className = "build-detail-col-2" id="build-img"><img src={b.get_imgurl} className="build-part-img"/></div>
+                          <div className="build-detail-col-2" id="build-description">{b.description}</div>
+                          <div className="build-detail-col-4" id="build-specs">
+                          <div className="build-detail-col-6">
+                              {Object.keys(b.details).slice(0, 10).map(function (key,i){
+                                  if(b.details[key] === null){
+                                    return false
+                                  }
+                                  if(key === "img_link1"|| key === "date_available"){
+                                    return false
+                                  }
+                                  return(
+                                    <>
+                                      <div className = "specs-grid-item-key">{humanize(key)}</div> 
+                                      <div className="media-body flex-truncate ml-2"> <div className = "specs-grid-item-value">{b.details[key]}</div></div>
+                                  </>
+                                  )
+                              })}
+                          </div>
+                          </div>
+                          <div className="build-detail-col-2">${a.pcbuild_parts.map(c => c.part_id === b.id? c.price : "")}</div>
+          </div>
+          </div>
+          <hr className="build-detail-hr"></hr>
+            
+            
+            </>
             : "" )
           })
+
+       
     const showBuildposts =  buildposts.filter(buildpost => buildpost.pcbuild_id.toString() === buildId).map(filteredPost => (
         <div className="box">
            <article className="media">
@@ -123,49 +135,51 @@ function BuildDetail(img) {
       window.scrollTo(0, 0);
     })
   return (
-      <>
+      <div className= "build-detail-main">
        <div className= "build-img">
           <Carousel fade= "true">
               {thisBuildImage}
           </Carousel>
         </div>
-        <div className="build-detail-main">
-            <hr></hr>
-           <div className="build-detail-container">
-            <div className="table-title">
-                <div className="row">
-                    <div className="col-sm-12">
+        <div className="build-detail-container">
+        <div className="row">
+        <div className="col-sm-12">
                       <h1 style={{fontSize: "30px", marginLeft:"8px"}}>{thisBuild.map(build => build.build_name)}
-                        <td style={{verticalAlign: "Middle", float:"right",marginTop: "7px"}}><h1 className="total-cost">{pcbuildTotalCost}</h1></td>
-                        <td style={{verticalAlign: "Middle", float:"right"}}><i className="ri-money-dollar-circle-line ri-3x"></i></td>
+                        <div style={{verticalAlign: "Middle", float:"right",marginTop: "1.5px"}}><h1 className="total-cost">{pcbuildTotalCost}</h1></div>
+                        <div style={{verticalAlign: "Middle", float:"right"}}><i className="ri-money-dollar-circle-line ri-1.5x"></i></div>
                       </h1>
                     </div>
+            <div className="col-md-12">
+                <div className="build-detail-card mb-3">
+               
+                    <div className="card-header pr-0 pl-0">
+                        <div className="row no-gutters align-items-center w-100">
+                            <div className="col-1 text-muted" style={{paddingLeft: "15px",margin:"auto", textAlign:"center", paddingRight: "none !important"} } id="component-header">Component</div>
+                            <div className="d-none d-md-block col text-muted">
+                                <div className="row no-gutters align-items-center">
+                                    <div className="build-detail-col-2">Image</div>
+                                    <div className="build-detail-col-2">Description</div>
+                                    <div className="build-detail-col-4">Specs</div>
+                                    <div className="build-detail-col-2">Price</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="build-detail-card-body">
+                      {thisBuildParts}
+                    </div>
+                    <h2 className="title is-5 has-text-grey-light">Build Description</h2>
+                    <div className= "build-comments-area">{thisBuild.map(build => build.comments)}</div>
                 </div>
             </div>
-            <table className="table" style={{backgroundColor:"transparent", color: "white"}}>
-                <thead>
-                    <tr>
-                        <th className="build-detail-th">Component</th>
-                        <th className="build-detail-th">Image</th>
-                        <th className="build-detail-th">Description</th>
-                        <th className="build-detail-th">Specs</th>
-                        <th className="build-detail-th">Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  {thisBuildParts}
-                </tbody>
-            </table>
-            <h2 className="title is-5 has-text-grey-light">Build Description</h2>
-            <div className= "build-comments-area">{thisBuild.map(build => build.comments)}</div>
+        </div>
             {currentBuildPosts}
-            {showBuildposts.length > 10 ?
-            <Pagination
-              elementsPerPage={buildpostsPerPage}
-              totalElements={showBuildposts.length}
-              paginate={paginate}
+                    {showBuildposts.length > 10 ?
+                    <Pagination
+                      elementsPerPage={buildpostsPerPage}
+                      totalElements={showBuildposts.length}
+                      paginate={paginate}
                         /> : ""}
-          </div>
         </div>
         { ((loggedInStatus === "LOGGED_IN") && user) ?
           <div className = "container">
@@ -215,7 +229,7 @@ function BuildDetail(img) {
             </div>
         :
         ""}
-      </>
+      </div>
   )
 }
 export default BuildDetail;

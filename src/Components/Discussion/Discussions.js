@@ -97,12 +97,13 @@ function Discussions(){
                                 </Link> :""}
         </div>
         <div className= "allforums-box dark" id="allforums-box">
-                        { (loggedInStatus === "LOGGED_IN") ? <Link to="/newDiscussion" style={{textDecoration: "none"}}>
-                                    <Button className="new-discussion-btn dark" id="new-discussion-button">
-                                        New Discussion
-                                    </Button>
-                                </Link> :""}
-                                {forumsData} 
+            { (loggedInStatus === "LOGGED_IN") ? <Link to="/newDiscussion" style={{textDecoration: "none"}}>
+                        <Button className="new-discussion-btn dark" id="new-discussion-button">
+                            New Discussion
+                        </Button>
+                    </Link> :""
+            }
+            {forumsData} 
         </div>
         <div className="container-fluid mt-100">
         <div className="row">
@@ -116,7 +117,6 @@ function Discussions(){
                                     <div className="forum-col-2">Posted</div>
                                     <div className="forum-col-4">Forum</div>
                                     <div className="forum-col-2">Replies</div>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -135,8 +135,7 @@ function Discussions(){
                                 </div>  
                             }
                     </div>
-                    
-                    </div>
+                </div>
                    
                 </div>
             </div>
