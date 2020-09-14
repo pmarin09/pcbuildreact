@@ -262,6 +262,8 @@
     border: solid #797474 0.25px;
     border-radius: 10px;
     padding: 25px;
+    color:white;
+    background-color: #090e16;
   }
   .notification:not(:last-child) {
     margin-bottom: 0;
@@ -2025,7 +2027,6 @@ transform-origin: left;
 #component-header{
   display:none;
 }
-
 
 .build-part-img{
   border-radius: 10%;

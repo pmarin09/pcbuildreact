@@ -168,7 +168,7 @@ function BuildDetail(img) {
                     <div className="build-detail-card-body">
                       {thisBuildParts}
                     </div>
-                    <h2 className="title is-5 has-text-grey-light">Build Description</h2>
+                    <h2 className="title is-5 has-text-grey-light">  Build Description</h2>
                     <div className= "build-comments-area">{thisBuild.map(build => build.comments)}</div>
                 </div>
             </div>
