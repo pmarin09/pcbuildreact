@@ -558,16 +558,17 @@ input:checked + .slider:before {
     display: block;
     margin-top: 0em;
     background-color: rgb(48,52,59) !important;
-    color: rgb(123, 137, 144) !important;
+    color: rgb(255, 255, 255) !important;
     border-radius: 10px;
 }
 
 .create-build-table.dark {
-  color: rgb(123, 137, 144) !important;
+  color: rgb(255, 255, 255) !important;
   margin-bottom: 1.5rem;
-  background-color: rgb(57, 58, 61) !important;
+  background-color: rgb(37, 42, 51) !important;
   width: 100%;
   max-width: 100%;
+  border-radius:10px;
 }
 
 .create-build-table.dark  th{
@@ -599,28 +600,64 @@ input:checked + .slider:before {
     color: #363636;
     width: 100%;
     max-width: 100%;
+    border-radius: 15px;
+    flex-grow: 1;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    max-width: auto;
+    height: auto;
+    margin-bottom: 40px;
+    margin-top: 60px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    background-size: 10px 10px;
   }
 
-  .create-build-table th:not([align]) {
-    text-align: center !important;
-  }
-  
-  .create-build-table td:not([align]) {
-    text-align: center !important;
-  }
+  .create-build-detail-row {
+    align-items: center !important;
+    margin-right: 0;
+    margin-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    // background: linear-gradient(90deg, #30343b 9px, transparent 1%) center, linear-gradient(#30343b 9px, transparent 1%) center, #3d494e;
+    background-size: 10px 10px;
+    margin-bottom:10px;
+    margin-top:10px;
+    }
 
-  .create-build-table td, .create-build-table th {
-    border: solid #dbdbdb;
-    border-width: 0 0 1px;
-    padding: .5em .75em;
-    vertical-align: middle;
-    overflow-wrap: break-word !important;
+    .create-build-detail-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-clip: border-box;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      border-radius: 10px;
+      border-color: none;
+      // background-color: #1d2025 !important;
+      box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+      max-width: 100%;
+      margin-bottom: 1rem !important;
   }
-
+  .create-build-detail-card-body{
+    padding-bottom: 1rem !important;
+    background-color: transparent;
+    border-radius: 10px;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+  }
+    #create-build-price-header{
+      display:none;
+    }
   .part-price{
     width:400px !important;
   }
-
   .new-discussion-btn{
     background-color: #3298dc !important;
     border-color: transparent;
@@ -800,7 +837,7 @@ div{
 
 .create-build-price{
     display: block;
-    width: 30%;
+    width: 45%;
     text-align:center;
     height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
@@ -1882,7 +1919,7 @@ transform-origin: left;
     }
 
     .col-6{
-      height:175px!important;
+      // height:175px;
     }
   
    .date-posted{
@@ -2005,6 +2042,40 @@ transform-origin: left;
 }
 
 ////
+//// CREATE BUILD
+#create-build-component{
+  flex: 0 0 80.666667%;
+  max-width: 80.666667%;
+  margin:auto;
+}
+#create-build-icon{
+  flex: 0 0 20.666667%;
+  max-width: 20.666667%;
+  margin:auto;
+}
+#create-build-description{
+  margin:auto;
+  padding-top:10px;
+  flex: 0 0 100%;
+  max-width: 100%;
+  font-size: 10px;
+}
+#create-build-price{
+  padding-top:10px;
+  margin:auto;
+  flex: 0 0 60%;
+  max-width: 60%;
+  font-size: 10px;
+}
+#create-build-price-header{
+  display:block;
+  padding-top: 10px;
+  flex: 0 0 80.666667%;
+  max-width: 80.666667%;
+  margin:auto;
+}
+
+
 //// BUILD DETAIL
 #build-component{
   display:none;

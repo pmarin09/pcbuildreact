@@ -97,16 +97,15 @@ function PcBuilds(){
   
     container: base => ({
       ...base,
-      width: "100%"
+      width: "100%",
+      margin: "auto",
     }),
     control: base => ({
       ...base,
-      height: 90,
+      height: 95,
       minHeight: 32,
       fontSize: 14,
       borderRadius: 5,
-      marginLeft:10,
-      width: 500,
       textAlign: "left",
       cursor: "pointer"
     }),
@@ -116,6 +115,7 @@ function PcBuilds(){
       fontSize: 14,
       textAlign: "left",
       cursor: "pointer",
+      color: "grey",
     }),
     valueContainer: base => ({
       ...base,
@@ -168,102 +168,116 @@ function PcBuilds(){
       });
     })
   }
-  console.log(loggedInStatus)
   return(
     <>
-    
     {(loggedInStatus === "LOGGED_IN") ?
     <section className = "section">
       <ReactTooltip />
       <section className="create-build-form" id="build-form">
         <form className="form" onSubmit={createBuild} id="newPcbuild">
-          <div className="col">
-            {themeLabel}
-          </div>
-                <input
-                  type="text"
-                  name="user_id"
-                  value={user.id}
-                  className="description"
-                  required
-                  style={{display: "none"}}
-                />
-                <input
-                  type="text"
-                  name="username"
-                  value={user.username}
-                  className="description"
-                  required
-                  style={{display: "none"}}
-                />
-                <h2 className="build-name" >Build Title:</h2>
-                 <input
-                  type="text"
-                  name="build_name"
-                  className="build-name-textbox"
-                  required
-                />
-              <div>
-                <h2 className="build-images">Add build images:</h2>
-                <input type="file" 
-                  className="build-images-dropzone"
-                  id="file_upload" 
-                  name="attachment[]"
-                  required
-                  multiple
-                  />
+              <div className="col">
+                {themeLabel}
               </div>
-          <table className="create-build-table" id="create-build-table">
-              <thead>
-                <tr>
-                  <th>Icon</th>
-                  <th className = "component">Component</th>
-                  <th className = "component-description" data-tip="Select Other if your component does not appear on the list">Description</th>
-                  <th className = "component-price">Price USD </th>
-                </tr>
-              </thead>
-              <tbody>
-              {part_types.map(function(part) {
-                return (
-                <tr>
-                  <td><img src={build_icons[part]} className="build-icon" /> </td>
-                  <td className = "component">{part}</td> 
-                  <td className = "component-description">
-                        <Select 
-                        name={"part_id[" + part + "][id]"}
-                        required
-                        options= {options[part]}
-                        className= "component-description"
-                        placeholder="Select or type to search..."
-                        styles={customStyles}
-                        filterOption={customFilter}
-                        defaultValue= {{label: "Select or type to search", value: (parts.filter(item => item.part_type === part && item.description === "Not Available")).map(a=>{return a.id})[0] }}
-                        /> 
-                  </td>
-                  <td className = "part-price">
-                          <input
-                            type="text"
-                            name={"part_id[" + part + "][price]"}
-                            className="create-build-price"
-                            id="moboprice"
-                          />
-                  </td>
-                </tr>
-                    )})}
-              </tbody>
-          </table>
-          <div className="textarea"> <h3> Build Description </h3>
-                        <textarea
-                          type="textarea"
-                          name="comments"
-                          className="description"
-                        />
-          </div>
-          <input
-            type="submit"
-            value="Create Build"
-            className="button is-link"
-          />
+              <input
+                type="text"
+                name="user_id"
+                value={user.id}
+                className="description"
+                required
+                style={{display: "none"}}
+              />
+              <input
+                type="text"
+                name="username"
+                value={user.username}
+                className="description"
+                required
+                style={{display: "none"}}
+              />
+              <h2 className="build-name" >Build Title:</h2>
+                <input
+                type="text"
+                name="build_name"
+                className="build-name-textbox"
+                required
+              />
+            <div>
+              <h2 className="build-images">Add build images:</h2>
+              <input type="file" 
+                className="build-images-dropzone"
+                id="file_upload" 
+                name="attachment[]"
+                required
+                multiple
+                />
+            </div>
+            <div className="create-build-table" id="create-build-table">
+              <div className="row">
+                  <div className="col-md-12">
+                      <div className="create-build-detail-card mb-3">
+                          <div className="card-header pr-0 pl-0">
+                              <div className="row no-gutters align-items-center w-100">
+                                  <div className="col-1 text-muted" style={{paddingLeft: "15px",margin:"auto", textAlign:"center", paddingRight: "none !important"} } id="component-header">Icon</div>
+                                  <div className="d-none d-md-block col text-muted">
+                                      <div className="row no-gutters align-items-center">
+                                          <div className="build-detail-col-2">Component</div>
+                                          <div className="build-detail-col-4">Description</div>
+                                          <div className="build-detail-col-2">Price USD</div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div className="create-build-detail-card-body">
+                            {part_types.map(function(part) {
+                              return (   
+                                <>
+                                  <div className = "create-build-detail-row" >
+                                    <div className="row no-gutters align-items-center w-100"  >
+                                        <div className = "build-detail-col-1" id="create-build-icon"><img src={build_icons[part]} className="build-icon" /></div>
+                                        <div className = "build-detail-col-1" id="create-build-component">{part}</div>
+                                        <div className = "component-description col-6" id="create-build-description">
+                                            <Select 
+                                              name={"part_id[" + part + "][id]"}
+                                              required
+                                              options= {options[part]}
+                                              className= "component-description"
+                                              placeholder="Select or type to search..."
+                                              styles={customStyles}
+                                              filterOption={customFilter}
+                                              defaultValue= {{label: "Select or type to search", value: (parts.filter(item => item.part_type === part && item.description === "Not Available")).map(a=>{return a.id})[0] }}
+                                            /> 
+                                        </div>
+                                        <div className = "build-detail-col-1" id="create-build-price-header">Price</div>
+                                        <div className="build-detail-col-2" id="create-build-price">
+                                            <input
+                                              type="text"
+                                              name={"part_id[" + part + "][price]"}
+                                              className="create-build-price"
+                                              id="moboprice"
+                                            />
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <hr className="build-detail-hr"></hr>
+                                </>
+                              )})}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div className="textarea"> <h3> Build Description </h3>
+                <textarea
+                  type="textarea"
+                  name="comments"
+                  className="description"
+                />
+            </div>
+            <input
+              type="submit"
+              value="Create Build"
+              className="button is-link"
+            />
         </form>
       </section> 
     </section>

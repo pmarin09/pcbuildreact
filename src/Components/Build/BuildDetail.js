@@ -55,13 +55,9 @@ function BuildDetail(img) {
           </div>
           </div>
           <hr className="build-detail-hr"></hr>
-            
-            
             </>
             : "" )
           })
-
-       
     const showBuildposts =  buildposts.filter(buildpost => buildpost.pcbuild_id.toString() === buildId).map(filteredPost => (
         <div className="box">
            <article className="media">
