@@ -95,7 +95,6 @@ function EditBuild (){
       fontSize: 14,
       borderRadius: 5,
       marginLeft:10,
-      width: 500,
       textAlign: "left",
       cursor: "pointer"
     }),
@@ -265,53 +264,69 @@ return (
                                   required
                                   style={{display: "none"}}
                                 />
-                    <table className="create-build-table">
-                      <thead>
-                        <tr>
-                          <th>Icon</th>
-                          <th className = "component">Component</th>
-                          <th className = "component-description">Description</th>
-                          <th className = "component-price">Price</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                          {thisBuild.pcbuild_parts.map(function(pcbuild_part) {
-                        return (
-                            <tr>
-                            <td className = "edit-build-icon"><img src={build_icons[pcbuild_part.part.part_type]} className="build-icon"/></td>
-                            <td className = "component">{pcbuild_part.part.part_type}</td> 
-                            <td className = "component-description">
-                                  <Select 
-                                  name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][part_id]"}
-                                  required
-                                  options= {options[pcbuild_part.part.part_type]}
-                                  placeholder={pcbuild_part.part.description}
-                                  className= "component-description"
-                                  styles={customStyles}
-                                   filterOption={customFilter}
-                                  // defaultValue= {{label: pcbuild_part.part.description, value: pcbuild_part.part_id}}
-                                  defaultValue= {{label: pcbuild_part.part.description, value: pcbuild_part.part_id}}
-                                  /> 
-                            </td>
-                            <td className = "part-price">
-                                    <input
-                                      type="text"
-                                      name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][price]"}
-                                      className="edit-build-price"
-                                      id="moboprice"
-                                      defaultValue={pcbuild_part.price}
-                                    />
-                                    <input
-                                      type="hidden"
-                                      name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][id]"}
-                                      defaultValue= {pcbuild_part.id}
-                                      required
-                                    />
-                            </td>
-                            </tr>
-                          )})} 
-                      </tbody>
-                    </table>
+           <div className="create-build-table dark" id="create-build-table">
+              <div className="row">
+                  <div className="col-md-12">
+                      <div className="create-build-detail-card mb-3">
+                          <div className="card-header pr-0 pl-0">
+                              <div className="row no-gutters align-items-center w-100">
+                                  <div className="col-1 text-muted" style={{paddingLeft: "15px",margin:"auto", textAlign:"center", paddingRight: "none !important"} } id="component-header">Icon</div>
+                                  <div className="d-none d-md-block col text-muted">
+                                      <div className="row no-gutters align-items-center">
+                                          <div className="build-detail-col-2">Component</div>
+                                          <div className="build-detail-col-4">Description</div>
+                                          <div className="build-detail-col-2">Price USD</div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div className="create-build-detail-card-body">
+                            {thisBuild.pcbuild_parts.map(function(pcbuild_part) {
+                              return (   
+                                <>
+                                  <div className = "create-build-detail-row" >
+                                    <div className="row no-gutters align-items-center w-100"  >
+                                        <div className = "build-detail-col-1" id="create-build-icon"><img src={build_icons[pcbuild_part.part.part_type]}/></div>
+                                        <div className = "build-detail-col-1" id="create-build-component" style={{fontSize: "11px"}}>{pcbuild_part.part.part_type}</div>
+                                        <div className = "component-description col-6" id="create-build-description">
+                                        <Select 
+                                          name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][part_id]"}
+                                          required
+                                          options= {options[pcbuild_part.part.part_type]}
+                                          placeholder={pcbuild_part.part.description}
+                                          className= "component-description"
+                                          styles={customStyles}
+                                          filterOption={customFilter}
+                                          // defaultValue= {{label: pcbuild_part.part.description, value: pcbuild_part.part_id}}
+                                          defaultValue= {{label: pcbuild_part.part.description, value: pcbuild_part.part_id}}
+                                        /> 
+                                        </div>
+                                        <div className = "build-detail-col-1" id="create-build-price-header">Price</div>
+                                        <div className="build-detail-col-2" id="create-build-price">
+                                          <input
+                                            type="text"
+                                            name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][price]"}
+                                            className="edit-build-price"
+                                            id="moboprice"
+                                            defaultValue={pcbuild_part.price}
+                                          />
+                                          <input
+                                            type="hidden"
+                                            name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][id]"}
+                                            defaultValue= {pcbuild_part.id}
+                                            required
+                                          />
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <hr className="build-detail-hr"></hr>
+                                </>
+                              )})}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
                     <div className="textarea"> Build Description
                            <textarea
                              type="textarea"
