@@ -36,10 +36,10 @@ function DiscussionDetail() {
                     </a>
                     <a className="level-item">
                         <i className="ri-delete-bin-5-fill"onClick ={ (e) => { 
+                          e.preventDefault();
                           fetch(`${fpsbuildsurl}/discussions/` + discussionId +"/posts/"+ filteredPost.id + ".json", {
                             method: "DELETE",
                           })
-                        e.preventDefault();
                         window.location.reload();
                         }}></i>
                     </a>

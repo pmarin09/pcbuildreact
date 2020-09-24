@@ -8,15 +8,21 @@ import Pagination from '../../Pagination';
 import comment from '../../icons/comment.png'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
+import SearchBox from '../SearchBox/SearchBox'
 
 function Discussions(){
-    const {adminId,fpsbuildsurl,forums, discussions, user,checkLoginStatus, loggedInStatus,toggleTheme,checkThemeStatus} = useContext(Context)
+    const {adminId,fpsbuildsurl,forums, discussions,loggedInStatus} = useContext(Context)
+    const [searchField, setSearchField] = useState("")
+    const filteredDiscussions = discussions.filter(discussion => 
+        (discussion.title.toLowerCase().includes(searchField.toLowerCase()) || 
+        discussion.description.toLowerCase().includes(searchField.toLowerCase()))
+    )
     const forumsData = forums.map(forum => (
         <h3 className = "forumSideBar" key={forum.id}>
             <p ><Link to={`/forum/${forum.id}`}>{forum.title}</Link></p>
         </h3>
         ))
-    const discussionsData = discussions.map(discussion => (
+    const discussionsData = filteredDiscussions.map(discussion => (
         <>
         <Link to={`/discussions/${discussion.id}`} style={{textDecoration: "none"}}>
             <div className="forum-row">
@@ -61,6 +67,7 @@ function Discussions(){
         e.preventDefault();
         alert("A new Forum has been created");
     }
+ 
     //PAGINATION 
     const [currentPage, setCurrentPage] = useState(1);
     const [discussionsPerPage] = useState(12);
@@ -70,11 +77,14 @@ function Discussions(){
     const currentDiscussions = discussionsData.slice(indexOfFirstDiscussion, indexOfLastDiscussion);
     // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
+    function  handleChange(e){
+        setSearchField(e.target.value)
+      }
  return(
    <>
      {forumsData ? 
     <div>
-            <form className="switch" onClick={toggleTheme}style={{float: "right", marginBottom:"10px", display: "none"}} id="setDarkTheme">
+            <form className="switch"style={{float: "right", marginBottom:"10px", display: "none"}} id="setDarkTheme">
             <input 
                 type="hidden"
                 name="dark_theme"
@@ -89,7 +99,7 @@ function Discussions(){
                 />
             <span className="slider round"></span>
             </form>
-    <div class="forum-flex">
+    <div className="forum-flex">
         <div className = "new-discussion-media">{ (loggedInStatus === "LOGGED_IN") ? <Link to="/newDiscussion" style={{textDecoration: "none"}}>
                                     <Button className="new-discussion-btn dark" id="new-discussion-button">
                                         New Discussion
@@ -97,6 +107,7 @@ function Discussions(){
                                 </Link> :""}
         </div>
         <div className= "allforums-box dark" id="allforums-box">
+        <SearchBox placeholder="Search discussions ..." handleChange={handleChange}/>
             { (loggedInStatus === "LOGGED_IN") ? <Link to="/newDiscussion" style={{textDecoration: "none"}}>
                         <Button className="new-discussion-btn dark" id="new-discussion-button">
                             New Discussion
@@ -134,6 +145,7 @@ function Discussions(){
                                     />
                                 </div>  
                             }
+                            
                     </div>
                 </div>
                    
@@ -145,7 +157,7 @@ function Discussions(){
                                 totalElements={discussionsData.length}
                                 paginate={paginate}/> 
                                 :""}
-                            { (loggedInStatus === "LOGGED_IN") ?checkThemeStatus() :""}
+                            
         </div>
         </div>    
     </div>
