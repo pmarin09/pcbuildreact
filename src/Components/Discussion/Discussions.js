@@ -100,6 +100,7 @@ function Discussions(){
             <span className="slider round"></span>
             </form>
     <div className="forum-flex">
+    <div className = "search-mobile"><SearchBox placeholder="Search discussions ..." handleChange={handleChange}/></div>
         <div className = "new-discussion-media">{ (loggedInStatus === "LOGGED_IN") ? <Link to="/newDiscussion" style={{textDecoration: "none"}}>
                                     <Button className="new-discussion-btn dark" id="new-discussion-button">
                                         New Discussion

@@ -404,6 +404,9 @@
   }
 
   // SEARCH BOX
+  .search-mobile{
+    display:none;
+  }
   .search-box {
     margin-top:15px;
     position: relative;
@@ -1974,7 +1977,9 @@ transform-origin: left;
     }
 
     .col-6{
-      // height:175px;
+    height:auto !important;
+    margin-top:3px;
+    margin-bottom:3px;
     }
   
    .date-posted{
@@ -2242,6 +2247,90 @@ transform-origin: left;
       display:flex;
       padding-left:12%;
       }
+
+        // SEARCH BOX
+  .search-mobile{
+    display:flex;
+  }
+  .search-box {
+    margin-top:15px;
+    position: relative;
+    display:flex;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #2f3640;
+    height: 58px;
+    width:auto;
+    border-radius: 40px;
+    padding: 10px;
+   }
+   
+   .search-box:hover > .search-txt {
+    width: 165px;
+     padding: 0 6px;
+   }
+   
+   .search-box:hover > .search-btn {
+    color: rgb(32, 34, 37);
+   }
+   
+   .search-btn {
+    color:rgb(192,9,9) !important;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    color: white;
+    cursor: pointer;
+   }
+   
+   .search-btn > i {
+    font-size: 20px;
+   }
+   
+   .search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: white;
+    font-size: 14px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+    font-weight: bold;
+   }
+
+   .new-discussion-btn.dark {
+    background-color: #c00909 !important;
+    border-color: transparent;
+    color: #fff !important;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 2.5em;
+    justify-content: flex-start;
+    line-height: 1.5;
+    padding: calc(.5em - 1px) calc(.75em - 1px);
+    position: relative;
+    vertical-align: top;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    margin-top: 10px;
+   }
+  //
     
 }
 
