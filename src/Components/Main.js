@@ -45,7 +45,8 @@ return (
   <div className = "album bg-light">
     <div className="jumbotron">
       <div className="container">
-        <p className="lead text-muted">Welcome to FPS Builds! For all PC Build enthusiasts... </p>
+        <p className = "lead" style={{color: "white"}}>Welcome to FPS Builds! For all PC Build enthusiasts... </p>
+        <p className="lead" style={{color: "white"}}>Sign Up to create and share your build! </p>
         <p>
         <Link to="/allbuilds" style={{textDecoration: "none"}}> <div className="btn btn-primary my-2">View All Builds</div></Link>
         </p>

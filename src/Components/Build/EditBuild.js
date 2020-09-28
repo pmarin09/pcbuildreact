@@ -108,6 +108,7 @@ function EditBuild (){
     valueContainer: base => ({
       ...base,
      height:100,
+     color: "grey",
      fontSize: 12,
      whiteSpace: "none",
     }),
@@ -287,7 +288,7 @@ return (
                                   <div className = "create-build-detail-row" >
                                     <div className="row no-gutters align-items-center w-100"  >
                                         <div className = "build-detail-col-1" id="create-build-icon"><img src={build_icons[pcbuild_part.part.part_type]}/></div>
-                                        <div className = "build-detail-col-1" id="create-build-component" style={{fontSize: "11px"}}>{pcbuild_part.part.part_type}</div>
+                                        <div className = "build-detail-col-1" id="create-build-component" style={{fontSize: "11px", color: "white"}}>{pcbuild_part.part.part_type}</div>
                                         <div className = "component-description col-6" id="create-build-description">
                                         <Select 
                                           name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][part_id]"}
@@ -301,7 +302,7 @@ return (
                                           defaultValue= {{label: pcbuild_part.part.description, value: pcbuild_part.part_id}}
                                         /> 
                                         </div>
-                                        <div className = "build-detail-col-1" id="create-build-price-header">Price</div>
+                                        <div className = "build-detail-col-1" id="create-build-price-header" style={{color: "white"}}>Price</div>
                                         <div className="build-detail-col-2" id="create-build-price">
                                           <input
                                             type="text"

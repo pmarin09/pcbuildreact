@@ -99,7 +99,7 @@ function Image({img}) {
                 <div className= "build-name-card">{img.build_name}</div>
                 <div style={{fontSize: "12px"}}>{CPU}</div>
                 <div style={{fontSize: "12px"}}>{Mobo}</div>
-                <div style={{fontSize: "12px"}}>{GPU}</div>
+                <div style={{fontSize: "11.5px"}}>{GPU}</div>
                 <div>...</div>
                 
               </div>
