@@ -10,7 +10,8 @@ import create from "../icons/create.png"
 import favorite from "../icons/favorite.png"
 import logout from "../icons/logout.png"
 import register from "../icons/register.png"
-import createbuild from "../icons/createbuild.png"
+import newbuild from "../icons/newbuild.png"
+import managebuild from "../icons/createbuild.png"
 import security from "../icons/security.png"
 import {ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
@@ -106,8 +107,14 @@ console.log(token)
                 </a>
                 <a className="pcnavbar-item">
                       <Link to="/pcbuilds" style={{textDecoration: "none"}}>
-                        <span className="pcnavbar-icon"><img src={createbuild}/></span>
-                        <span className="pcnavbar-text"> Create Build</span>
+                        <span className="pcnavbar-icon"><img src={newbuild}/></span>
+                        <span className="pcnavbar-text"> New Build</span>
+                      </Link>
+                </a>
+                <a className="pcnavbar-item">
+                      <Link to={`/profile/${user.id}`} style={{textDecoration: "none"}}>
+                        <span className="pcnavbar-icon"><img src={managebuild}/></span>
+                        <span className="pcnavbar-text"> Manage My Builds</span>
                       </Link>
                 </a>
                       <a className="profile-div">
