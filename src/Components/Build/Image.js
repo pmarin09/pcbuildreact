@@ -29,6 +29,15 @@ function Image({img}) {
       <div className = "ribbon"> First Build</div>
     </div>
   </div>
+  const bestgpu =    
+  <div className= "main-wrapper">
+    <div className = "badge blue-dark">
+      <div className = "circle">
+      <i className= "fa fa-rocket"></i>
+      </div>
+      <div className = "ribbon"> Best GPU</div>
+    </div>
+  </div>
   function createLike() {
         const form = new FormData(document.getElementById("newLike"));
         fetch(`${fpsbuildsurl}/pcbuilds/${img.id}/likes.json`, {
@@ -81,6 +90,7 @@ function Image({img}) {
         <ReactTooltip />
           <div className="card mb-4 shadow-sm">
               {img.id === 12 ?firsbuild : ""}
+              {img.id === 51 ?bestgpu : ""}
               <img src={`${fpsbuildsurl}/${img.attachment_url[0]}`} className= "card-img-top"/>
               
               <div>
