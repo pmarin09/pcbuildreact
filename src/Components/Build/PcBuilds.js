@@ -194,7 +194,7 @@ function PcBuilds(){
                 required
                 style={{display: "none"}}
               />
-              <h2 className="build-name" >Build Title:</h2>
+              <h2 className="build-name" >Build Name:</h2>
                 <input
                 type="text"
                 name="build_name"

@@ -181,7 +181,7 @@ return (
         <div className="row">
           <div className="col-xs-3 col-sm-3" >{thisBuild.attachment_url ? <img src = {`${fpsbuildsurl}/${thisBuild.attachment_url[0]}`}  className="build-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }
           </div>
-          <div className="col-sm-9"><h1 className="profile-username"><small>{thisBuild.build_name}</small></h1>
+          <div className="col-sm-9">
           <table className="profile-table">
           <tr className="profile-stats-row">
                 <div className="col-md-3"> {thisBuild.attachment_url.length} </div>
@@ -265,7 +265,14 @@ return (
                                   required
                                   style={{display: "none"}}
                                 />
-           <div className="create-build-table dark" id="create-build-table">
+                      <div className="profile-username" style={{textAlign: "center", marginTop: "20px"}}> Build Name: </div>
+                      <input
+                             type="text"
+                             name="build_name"
+                             className="profile-username" style={{textAlign: "center", marginLeft: "185px", borderRadius: "15px"}}
+                             defaultValue={thisBuild.build_name}
+                      />
+           <div className="create-build-table dark" style={{marginTop: "30px"}} id="create-build-table">
               <div className="row">
                   <div className="col-md-12">
                       <div className="create-build-detail-card mb-3">
