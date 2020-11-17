@@ -46,9 +46,11 @@ function EditBuild (){
     GPU: GPU,
     RAM: RAM,
     HD: HD,
+    HD2: HD,
     Case: Case,
     PWS: PSU,
     Monitor: Monitor,
+    Monitor2: Monitor,
     Keyboard: Keyboard,
     Mouse: Mouse,
     Headset: Headset
@@ -60,9 +62,11 @@ function EditBuild (){
     GPU: gpu,
     RAM: ram,
     HD: hdd,
+    HD2: hdd,
     Case: pccase,
     PWS: psu,
     Monitor: monitor,
+    Monitor2: monitor,
     Keyboard: keyboard,
     Mouse: mouse,
     Headset: headset
@@ -75,9 +79,11 @@ function EditBuild (){
     "GPU",
     "RAM",
     "HD",
+    "HD2",
     "Case",
     "PSU",
     "Monitor",
+    "Monitor2",
     "Keyboard",
     "Mouse",
     "Headset",
@@ -298,14 +304,13 @@ return (
                                         <div className = "build-detail-col-1" id="create-build-component" style={{fontSize: "11px", color: "white"}}>{pcbuild_part.part.part_type}</div>
                                         <div className = "component-description col-6" id="create-build-description">
                                         <Select 
-                                          name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][part_id]"}
+                                          name={"pcbuildpart_id[" + pcbuild_part.id + "][part_id]"}
                                           required
                                           options= {options[pcbuild_part.part.part_type]}
                                           placeholder={pcbuild_part.part.description}
                                           className= "component-description"
                                           styles={customStyles}
                                           filterOption={customFilter}
-                                          // defaultValue= {{label: pcbuild_part.part.description, value: pcbuild_part.part_id}}
                                           defaultValue= {{label: pcbuild_part.part.description, value: pcbuild_part.part_id}}
                                         /> 
                                         </div>
@@ -313,14 +318,14 @@ return (
                                         <div className="build-detail-col-2" id="create-build-price">
                                           <input
                                             type="text"
-                                            name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][price]"}
+                                            name={"pcbuildpart_id[" + pcbuild_part.id + "][price]"}
                                             className="edit-build-price"
                                             id="moboprice"
                                             defaultValue={pcbuild_part.price}
                                           />
                                           <input
                                             type="hidden"
-                                            name={"pcbuildpart_id[" + pcbuild_part.part.part_type + "][id]"}
+                                            name={"pcbuildpart_id[" + pcbuild_part.id + "][id]"}
                                             defaultValue= {pcbuild_part.id}
                                             required
                                           />
