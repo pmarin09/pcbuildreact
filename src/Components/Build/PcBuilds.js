@@ -57,11 +57,11 @@ function PcBuilds(){
         GPU: GPU,
         RAM: RAM,
         HD: HD,
-        HD2: HD,
+        ExtraHD: HD,
         Case: Case,
         PWS: PSU,
         Monitor: Monitor,
-        Monitor2: Monitor,
+        ExtraMonitor: Monitor,
         Keyboard: Keyboard,
         Mouse: Mouse,
         Headset: Headset,
@@ -74,11 +74,11 @@ function PcBuilds(){
     "GPU",
     "RAM",
     "HD",
-    "HD2",
+    "ExtraHD",
     "Case",
     "PWS",
     "Monitor",
-    "Monitor2",
+    "ExtraMonitor",
     "Keyboard",
     "Mouse",
     "Headset",
@@ -90,11 +90,11 @@ function PcBuilds(){
     GPU: gpu,
     RAM: ram,
     HD: hdd,
-    HD2: hdd,
+    ExtraHD: hdd,
     Case: pccase,
     PWS: psu,
     Monitor: monitor,
-    Monitor2: monitor,
+    ExtraMonitor: monitor,
     Keyboard: keyboard,
     Mouse: mouse,
     Headset: headset
@@ -177,9 +177,9 @@ function PcBuilds(){
   return(
     <>
     {(loggedInStatus === "LOGGED_IN") ?
-    <section className = "section">
+    <section className = "section" id="build-section">
       <ReactTooltip />
-      <section className="create-build-form" id="build-form">
+      <section className="create-build-form" id="build-form" style={{borderColor: "grey"}}>
         <form className="form" onSubmit={createBuild} id="newPcbuild">
               <div className="col">
                 {themeLabel}
@@ -240,7 +240,7 @@ function PcBuilds(){
                                   <div className = "create-build-detail-row" >
                                     <div className="row no-gutters align-items-center w-100"  >
                                         <div className = "build-detail-col-1" id="create-build-icon"><img src={build_icons[part]} className="build-icon" /></div>
-                                        <div className = "build-detail-col-1" id="create-build-component">{part}</div>
+                                        <div className = "build-detail-col-1" id="create-build-component" style={{fontSize: "15px"}}>{part}</div>
                                         <div className = "component-description col-6" id="create-build-description">
                                             <Select 
                                               name={"part_id[" + part + "][id]"}
@@ -250,10 +250,11 @@ function PcBuilds(){
                                               placeholder="Select or type to search..."
                                               styles={customStyles}
                                               filterOption={customFilter}
-                                              defaultValue= {{label: "Select or type to search", value: (parts.filter(item => item.part_type === part && item.description === "Not Available")).map(a=>{return a.id})[0] }}
+                                              defaultValue= {{label: "Select or type to search"}}
+                                              //value: (parts.filter(item => item.part_type === part && item.description === "Not Available")).map(a=>{return a.id})[0] 
                                             /> 
                                         </div>
-                                        <div className = "build-detail-col-1" id="create-build-price-header">Price</div>
+                                        <div className = "build-detail-col-1" id="create-build-price-header" style={{fontSize: "13px"}}>Price</div>
                                         <div className="build-detail-col-2" id="create-build-price">
                                             <input
                                               type="text"
@@ -264,7 +265,7 @@ function PcBuilds(){
                                         </div>
                                     </div>
                                   </div>
-                                  <hr className="build-detail-hr"></hr>
+                                  {/* <hr className="build-detail-hr" id="build-detail-hr"></hr> */}
                                 </>
                               )})}
                           </div>

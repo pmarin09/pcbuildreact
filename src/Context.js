@@ -39,6 +39,7 @@ import { useHistory } from 'react-router-dom';
     const p = document.getElementById("posts-container")
     const b = document.getElementById("build-form")
     const f = document.getElementById("create-build-table")
+    const g = document.getElementById("build-section")
     if (x && loggedInStatus === "LOGGED_IN") {
       x.classList.add("dark");
       y.classList.add("dark");
@@ -48,9 +49,10 @@ import { useHistory } from 'react-router-dom';
       y.classList.add("dark");
     } else if(p){
       p.classList.add("dark")
-    }else if(f){
+    }else if(b){
       b.classList.add("dark")
       f.classList.add("dark")
+      g.classList.add("dark")
     }
   }
   function removeDarkTheme() {
@@ -60,6 +62,7 @@ import { useHistory } from 'react-router-dom';
     const p = document.getElementById("posts-container")
     const b = document.getElementById("build-form")
     const f = document.getElementById("create-build-table")
+    const g = document.getElementById("build-section")
     if (x && loggedInStatus === "LOGGED_IN") {
       x.classList.remove("dark");
       y.classList.remove("dark");
@@ -73,6 +76,7 @@ import { useHistory } from 'react-router-dom';
     }else if(b){
       b.classList.remove("dark")
       f.classList.remove("dark")
+      g.classList.remove("dark")
     }
   }
   function checkThemeStatus(){
@@ -187,6 +191,12 @@ import { useHistory } from 'react-router-dom';
     .then (data => setAllBuilds(data))
     },500)
     }
+  function updateParts(){
+    setTimeout(() => {fetch(`${fpsbuildsurl}/pcbuilds.json`)
+    .then (res => res.json())
+    .then (data => setAllBuilds(data))
+    },500)
+    }
     function updateBuilds(){
       setTimeout(() => {fetch(`${fpsbuildsurl}/pcbuilds.json`)
       .then (res => res.json())
@@ -279,6 +289,7 @@ import { useHistory } from 'react-router-dom';
                 updateFavorites,
                 updateUsers,
                 updateImages,
+                updateParts,
                 updateBuilds,
                 updateBuildPosts,
                 loggedInStatus

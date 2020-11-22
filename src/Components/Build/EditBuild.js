@@ -23,22 +23,22 @@ import 'react-toastify/dist/ReactToastify.css'
 
 
 function EditBuild (){
-  const {allBuilds,user,parts,fpsbuildsurl,updateImages,updateBuilds}=useContext(Context)
+  const {allBuilds,user,parts,fpsbuildsurl,updateImages,updateParts,updateBuilds}=useContext(Context)
   const history = useHistory()
   const {buildId} = useParams()
   const thisBuild = allBuilds.find(build => build.id.toString() === buildId)
-  const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const CPUCooler = (parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const GPU = (parts.filter(part => part.part_type === "GPU")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const RAM = (parts.filter(part => part.part_type === "RAM")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const HD = (parts.filter(part => part.part_type === "HD")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const Case = (parts.filter(part => part.part_type === "Case")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const PSU = (parts.filter(part => part.part_type === "PWS")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const Monitor = (parts.filter(part => part.part_type === "Monitor")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const Keyboard = (parts.filter(part => part.part_type === "Keyboard")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const Mouse = (parts.filter(part => part.part_type === "Mouse")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const Headset = (parts.filter(part => part.part_type === "Headset")).map(a=>{return {value: a.id,label: <div><td style={{width: "350px",fontSize:"14px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const CPUCooler = (parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const GPU = (parts.filter(part => part.part_type === "GPU")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const RAM = (parts.filter(part => part.part_type === "RAM")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const HD = (parts.filter(part => part.part_type === "HD")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const Case = (parts.filter(part => part.part_type === "Case")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const PSU = (parts.filter(part => part.part_type === "PWS")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const Monitor = (parts.filter(part => part.part_type === "Monitor")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const Keyboard = (parts.filter(part => part.part_type === "Keyboard")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const Mouse = (parts.filter(part => part.part_type === "Mouse")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const Headset = (parts.filter(part => part.part_type === "Headset")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const options = {
     Mobo: Mobo,
     CPU: CPU,
@@ -46,11 +46,11 @@ function EditBuild (){
     GPU: GPU,
     RAM: RAM,
     HD: HD,
-    HD2: HD,
+    ExtraHD: HD,
     Case: Case,
     PWS: PSU,
     Monitor: Monitor,
-    Monitor2: Monitor,
+    ExtraMonitor: Monitor,
     Keyboard: Keyboard,
     Mouse: Mouse,
     Headset: Headset
@@ -62,11 +62,11 @@ function EditBuild (){
     GPU: gpu,
     RAM: ram,
     HD: hdd,
-    HD2: hdd,
+    ExtraHD: hdd,
     Case: pccase,
     PWS: psu,
     Monitor: monitor,
-    Monitor2: monitor,
+    ExtraMonitor: monitor,
     Keyboard: keyboard,
     Mouse: mouse,
     Headset: headset
@@ -79,15 +79,20 @@ function EditBuild (){
     "GPU",
     "RAM",
     "HD",
-    "HD2",
+    "ExtraHD",
     "Case",
-    "PSU",
+    "PWS",
     "Monitor",
-    "Monitor2",
+    "ExtraMonitor",
     "Keyboard",
     "Mouse",
     "Headset",
   ]
+const thisBuild_part_types = `${thisBuild ? thisBuild.pcbuild_parts.map(pcbuild_part => pcbuild_part.part.part_type) : ""}`
+const missing_parts = part_types.filter(part => !thisBuild_part_types.includes(part))
+console.log(thisBuild_part_types)
+console.log(thisBuild)
+console.log(missing_parts)
   const customStyles = {
   
     container: base => ({
@@ -107,13 +112,14 @@ function EditBuild (){
     option: (provided) => ({
       ...provided,
       borderBottom: "1px dotted pink",
-      fontSize: 14,
+      fontSize: 13,
       textAlign: "left",
       cursor: "pointer",
+      color: "black",
     }),
     valueContainer: base => ({
       ...base,
-     height:100,
+     height:93,
      color: "grey",
      fontSize: 12,
      whiteSpace: "none",
@@ -177,7 +183,24 @@ function EditBuild (){
       });
     })
   }
-  console.log(thisBuild)
+  function addParts(e) {
+    e.preventDefault();
+    const form = new FormData(document.getElementById("addParts"));
+    fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/add_parts/${buildId}.json`, {
+      method: "PATCH",
+      body: form,
+    })
+    .then(handleErrors)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Success",data)
+      updateParts();
+    })
+    toast.success("Adding new parts to your build.. ", {
+      position: toast.POSITION.TOP_CENTER
+    });
+    setTimeout( () => window.location.reload(false),1000)
+  }
 return (
   <>
   {thisBuild ? 
@@ -250,7 +273,7 @@ return (
                     <div className= "update-build"> <input
                                 type="submit"
                                 value="Upload Images"
-                                className="update-build-button"
+                                className="add-images-button"
                               />
                     </div>
                 </form>
@@ -271,11 +294,11 @@ return (
                                   required
                                   style={{display: "none"}}
                                 />
-                      <div className="profile-username" style={{textAlign: "center", marginTop: "20px"}}> Build Name: </div>
+                      <div className="build-name"> Build Name: </div>
                       <input
                              type="text"
                              name="build_name"
-                             className="profile-username" style={{textAlign: "center", marginLeft: "185px", borderRadius: "15px"}}
+                             className="build-name-box"
                              defaultValue={thisBuild.build_name}
                       />
            <div className="create-build-table dark" style={{marginTop: "30px"}} id="create-build-table">
@@ -314,7 +337,7 @@ return (
                                           defaultValue= {{label: pcbuild_part.part.description, value: pcbuild_part.part_id}}
                                         /> 
                                         </div>
-                                        <div className = "build-detail-col-1" id="create-build-price-header" style={{color: "white"}}>Price</div>
+                                        <div className = "build-detail-col-1" id="create-build-price-header" style={{fontSize: "11px",color: "white"}}>Price</div>
                                         <div className="build-detail-col-2" id="create-build-price">
                                           <input
                                             type="text"
@@ -332,7 +355,7 @@ return (
                                         </div>
                                     </div>
                                   </div>
-                                  <hr className="build-detail-hr"></hr>
+                                  <hr className="build-detail-hr" style={{backgroundColor: "grey"}}></hr>
                                 </>
                               )})}
                           </div>
@@ -351,11 +374,54 @@ return (
                     <div className= "update-build"> 
                             <input
                               type="submit"
-                              value="Update Build Info"
+                              value="Update My Build"
                               className="update-build-button"
                             />
                      </div>
                 </form>
+                <form className="form" onSubmit={addParts} id="addParts">
+                  <hr style={{backgroundColor: "darkgrey"}}></hr>
+                  <div style={{fontSize: "25px", marginTop: "10px", textAlign: "Center", fontWeight:"350"}}> Add Parts To My Build</div>
+                {missing_parts.map(function(part) {
+                              return (   
+                                <>
+                                  <div className = "create-build-detail-row" >
+                                    <div className="row no-gutters align-items-center w-100"  >
+                                        <div className = "build-detail-col-1" id="create-build-icon"><img src={build_icons[part]} className="build-icon" /></div>
+                                        <div className = "build-detail-col-1" id="create-build-component" style={{fontSize:"11px"}} >{part}</div>
+                                        <div className = "component-description col-6" id="create-build-description">
+                                            <Select 
+                                              name={"part_id[" + part + "][id]"}
+                                              required
+                                              options= {options[part]}
+                                              className= "component-description"
+                                              placeholder="Select or type to search..."
+                                              styles={customStyles}
+                                              filterOption={customFilter}
+                                              defaultValue= {{label: "Select or type to search", value: (parts.filter(item => item.part_type === part && item.description === "Not Available")).map(a=>{return a.id})[0] }}
+                                            /> 
+                                        </div>
+                                        <div className = "build-detail-col-1" id="create-build-price-header">Price</div>
+                                        <div className="build-detail-col-2" id="create-build-price">
+                                            <input
+                                              type="text"
+                                              name={"part_id[" + part + "][price]"}
+                                              className="create-build-price"
+                                              id="moboprice"
+                                            />
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <hr className="build-detail-hr"></hr>
+                                </>
+                                    )})}
+                              <div className= "update-build"> <input
+                                  type="submit"
+                                  value="Add Parts"
+                                  className="add-parts-button"
+                                />
+                              </div>
+                  </form>
             </div>
           </div>
         </div>
