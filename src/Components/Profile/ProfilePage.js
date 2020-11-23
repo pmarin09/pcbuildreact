@@ -36,11 +36,11 @@ return (
                   <div className="col-md-2" style= {{fontWeight: "bold"}}> {myPosts.length} </div>
             </tr>
             <tr className="profile-statslabel-row">
-                  <div className="col-md-2"> {profileUserData.pcbuilds.length > 1 ? "Builds": "Build"} </div>
-                  <div className="col-md-2"> {myLikes > 1 || myLikes === 0? "Likes": "Like"} </div>
-                  <div className="col-md-2"> {myFavorites.length > 1 || myFavorites.length === 0 ? "Favorites" : "Favorite"}  </div>
-                  <div className="col-md-2"> {myDiscussions.length > 1 || myDiscussions.length === 0? "Discussions" : "Discussion"} </div>
-                  <div className="col-md-2"> {myPosts.length > 1 || myPosts.length === 0 ? "Posts" : "Post"} </div>
+                  <div className="col-md-2" style= {{fontWeight: "285"}}> {profileUserData.pcbuilds.length > 1 ? "Builds": "Build"} </div>
+                  <div className="col-md-2" style= {{fontWeight: "285"}}> {myLikes > 1 || myLikes === 0? "Likes": "Like"} </div>
+                  <div className="col-md-2" style= {{fontWeight: "285"}}> {myFavorites.length > 1 || myFavorites.length === 0 ? "Favorites" : "Favorite"}  </div>
+                  <div className="col-md-2" style= {{fontWeight: "285"}}> {myDiscussions.length > 1 || myDiscussions.length === 0? "Discussions" : "Discussion"} </div>
+                  <div className="col-md-2" style= {{fontWeight: "285"}}> {myPosts.length > 1 || myPosts.length === 0 ? "Posts" : "Post"} </div>
             </tr>
             </table>
           </div>
