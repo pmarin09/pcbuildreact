@@ -1,4 +1,4 @@
-import React, { useContext, useEffect} from "react";
+import React, {useContext,useState} from "react";
 import { Context } from "../../Context";
 import 'bootstrap/dist/css/bootstrap.css';
 import Gravatar from 'react-gravatar'
@@ -23,10 +23,14 @@ import 'react-toastify/dist/ReactToastify.css'
 
 
 function EditBuild (){
-  const {allBuilds,user,parts,fpsbuildsurl,updateImages,updateParts,updateBuilds}=useContext(Context)
+  const {allBuilds,user,parts,fpsbuildsurl,updateImages,updateBuilds}=useContext(Context)
   const history = useHistory()
   const {buildId} = useParams()
   const thisBuild = allBuilds.find(build => build.id.toString() === buildId)
+  // console.log(x)
+  // const [thisBuild, setThisBuild] = useState(() => {allBuilds.find(build => build.id.toString() === buildId)})
+  // const thisBuild = allBuilds.find(build => build.id.toString() === buildId)
+  console.log(thisBuild)
   const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const CPUCooler = (parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
@@ -90,9 +94,7 @@ function EditBuild (){
   ]
 const thisBuild_part_types = `${thisBuild ? thisBuild.pcbuild_parts.map(pcbuild_part => pcbuild_part.part.part_type) : ""}`
 const missing_parts = part_types.filter(part => !thisBuild_part_types.includes(part))
-console.log(thisBuild_part_types)
-console.log(thisBuild)
-console.log(missing_parts)
+
   const customStyles = {
   
     container: base => ({
@@ -194,18 +196,18 @@ console.log(missing_parts)
     .then(response => response.json())
     .then(data => {
       console.log("Success",data)
-      updateParts();
+      updateBuilds();
     })
     toast.success("Adding new parts to your build.. ", {
       position: toast.POSITION.TOP_CENTER
     });
     setTimeout( () => window.location.reload(false),1000)
   }
+console.log(thisBuild)
+
 return (
-  <>
-  {thisBuild ? 
   <div>
-      <hr></hr>
+  {thisBuild ? 
       <div className="profile-container">
         <div className="row">
           <div className="col-xs-3 col-sm-3" >{thisBuild.attachment_url ? <img src = {`${fpsbuildsurl}/${thisBuild.attachment_url[0]}`}  className="build-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }
@@ -251,7 +253,7 @@ return (
                   {thisBuild.attachment_url.map((url,i) =>
               <div className = "col-sm-4">
                 <div className= "removeFavoriteIcon">
-                    <i className="ri-close-fill ri-2x" 
+                    <i className="fas fa-minus-circle" style={{fontSize: "25px",color: "#dc3545"}}
                     onClick= {() =>{fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/delete_attachment/${thisBuild.attachment_id[i]}.json`, {method:"DELETE",}); updateImages()}}>
                     </i>
                 </div>
@@ -307,7 +309,6 @@ return (
                       <div className="create-build-detail-card mb-3">
                           <div className="card-header pr-0 pl-0">
                               <div className="row no-gutters align-items-center w-100">
-                                  <div className="col-1 text-muted" style={{paddingLeft: "15px",margin:"auto", textAlign:"center", paddingRight: "none !important"} } id="component-header">Icon</div>
                                   <div className="d-none d-md-block col text-muted">
                                       <div className="row no-gutters align-items-center">
                                           <div className="build-detail-col-2">Component</div>
@@ -324,7 +325,7 @@ return (
                                   <div className = "create-build-detail-row" >
                                     <div className="row no-gutters align-items-center w-100"  >
                                         <div className = "build-detail-col-1" id="create-build-icon"><img src={build_icons[pcbuild_part.part.part_type]}/></div>
-                                        <div className = "build-detail-col-1" id="create-build-component" style={{fontSize: "11px", color: "white"}}>{pcbuild_part.part.part_type}</div>
+                                        <div className = "build-detail-col-1" id="create-build-component" style={{fontSize: "13px", fontWeight: "200px", color: "white"}}>{pcbuild_part.part.part_type}</div>
                                         <div className = "component-description col-6" id="create-build-description">
                                         <Select 
                                           name={"pcbuildpart_id[" + pcbuild_part.id + "][part_id]"}
@@ -352,7 +353,36 @@ return (
                                             defaultValue= {pcbuild_part.id}
                                             required
                                           />
+                                          <form className="form" id="removeParts">
+                                            <input
+                                              type="text"
+                                              name="pcbuildpart_id"
+                                              value={pcbuild_part.id}
+                                              className="description"
+                                              required
+                                              style={{display: "none"}}
+                                            />
+                                            </form>
                                         </div>
+                                        <i className="fas fa-trash-alt" style={{fontSize: "25px",color: "#dc3545"}} onClick ={ (e) => { 
+                                              e.preventDefault();
+                                              const form = new FormData(document.getElementById("removeParts"));
+                                              fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/remove_parts/${buildId}.json`, {
+                                                method: "DELETE",
+                                                body:form ,
+                                              })
+                                              .then(handleErrors)
+                                              .then(response => response.json())
+                                              .then(data => {
+                                                console.log("Success",data)
+                                                updateBuilds();
+                                              })
+                                              toast.error(`Removing  ${pcbuild_part.part.part_type} from your build.. `, {
+                                                position: toast.POSITION.TOP_CENTER
+                                              });
+                                              setTimeout( () => window.location.reload(false),1000)
+                                              }}>
+                                          </i>
                                     </div>
                                   </div>
                                   <hr className="build-detail-hr" style={{backgroundColor: "grey"}}></hr>
@@ -380,51 +410,80 @@ return (
                      </div>
                 </form>
                 <form className="form" onSubmit={addParts} id="addParts">
-                  <hr style={{backgroundColor: "darkgrey"}}></hr>
-                  <div style={{fontSize: "25px", marginTop: "10px", textAlign: "Center", fontWeight:"350"}}> Add Parts To My Build</div>
-                {missing_parts.map(function(part) {
-                              return (   
-                                <>
-                                  <div className = "create-build-detail-row" >
-                                    <div className="row no-gutters align-items-center w-100"  >
-                                        <div className = "build-detail-col-1" id="create-build-icon"><img src={build_icons[part]} className="build-icon" /></div>
-                                        <div className = "build-detail-col-1" id="create-build-component" style={{fontSize:"11px"}} >{part}</div>
-                                        <div className = "component-description col-6" id="create-build-description">
-                                            <Select 
-                                              name={"part_id[" + part + "][id]"}
-                                              required
-                                              options= {options[part]}
-                                              className= "component-description"
-                                              placeholder="Select or type to search..."
-                                              styles={customStyles}
-                                              filterOption={customFilter}
-                                              defaultValue= {{label: "Select or type to search", value: (parts.filter(item => item.part_type === part && item.description === "Not Available")).map(a=>{return a.id})[0] }}
-                                            /> 
+                  <div className="create-build-detail-card mb-3">
+                    <div style={{fontSize: "25px", marginTop: "10px", textAlign: "Center", fontWeight:"350"}}> Add Parts To My Build</div>
+                    <div className="d-none d-md-block col text-muted">
+                      <div className="row no-gutters align-items-center" style={{marginTop: "15px "}}>
+                                              <div className="build-detail-col-2">Component</div>
+                                              <div className="build-detail-col-4">Description</div>
+                                              <div className="build-detail-col-2">Price</div>
+                      </div>
+                    </div>
+                    <div className="create-build-detail-card-body">
+                        {missing_parts.map(function(part) {
+                                  return (   
+                                    <>
+                                      <div className = "create-build-detail-row" >
+                                        <div className="row no-gutters align-items-center w-100"  >
+                                            <div className = "build-detail-col-1" id="create-build-icon"><img src={build_icons[part]} className="build-icon" /></div>
+                                            <div className = "build-detail-col-2" id="create-build-component" style={{fontSize: "14px", fontWeight: "200px",}} >{part}</div>
+                                            <div className = "component-description col-6" id="create-build-description">
+                                                <Select 
+                                                  name={"part_id[" + part + "][id]"}
+                                                  required
+                                                  options= {options[part]}
+                                                  className= "component-description"
+                                                  placeholder="Select or type to search..."
+                                                  styles={customStyles}
+                                                  filterOption={customFilter}
+                                                  defaultValue= {{label: "Select or type to search"}}
+                                                /> 
+                                            </div>
+                                            <div className = "build-detail-col-1" id="create-build-price-header">Price</div>
+                                            <div className="build-detail-col-2" id="create-build-price">
+                                                <input
+                                                  type="text"
+                                                  name={"part_id[" + part + "][price]"}
+                                                  className="edit-build-price"
+                                                  id="moboprice"
+                                                />
+                                            </div>
+                                            <i className="fas fa-plus-circle" style={{fontSize: "25px",color: "#f0cc02", marginRight: "40px"}} onClick ={ (e) => {
+                                                  e.preventDefault();
+                                                  const form = new FormData(document.getElementById("addParts"));
+                                                  fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/add_parts/${buildId}.json`, {
+                                                    method: "PATCH",
+                                                    body: form,
+                                                  })
+                                                  .then(handleErrors)
+                                                  .then(response => response.json())
+                                                  .then(data => {
+                                                    console.log("Success",data)
+                                                    updateBuilds();
+                                                  })
+                                                  toast.success(`Adding a ${part} to your build.. `, {
+                                                    position: toast.POSITION.TOP_CENTER
+                                                  });
+                                                  setTimeout( () => window.location.reload(false),1000)
+                                                }}>
+                                                </i>
                                         </div>
-                                        <div className = "build-detail-col-1" id="create-build-price-header">Price</div>
-                                        <div className="build-detail-col-2" id="create-build-price">
-                                            <input
-                                              type="text"
-                                              name={"part_id[" + part + "][price]"}
-                                              className="create-build-price"
-                                              id="moboprice"
-                                            />
-                                        </div>
-                                    </div>
-                                  </div>
-                                  <hr className="build-detail-hr"></hr>
-                                </>
-                                    )})}
-                              <div className= "update-build"> <input
-                                  type="submit"
-                                  value="Add Parts"
-                                  className="add-parts-button"
-                                />
-                              </div>
-                  </form>
+                                      </div>
+                                      <hr className="build-detail-hr"></hr>
+                                    </>
+                          )})}
+                      </div>
+                        <div className= "update-build"> 
+                          <input
+                            type="submit"
+                            value="Add All Parts"
+                            className="add-parts-button"
+                          />
+                      </div>
+                  </div>
+                </form>
             </div>
           </div>
-        </div>
   </div>
   : 
   <div className="loading">
@@ -434,10 +493,10 @@ return (
         secondaryColor = "grey"
         height={250}
         width={250}
-        timeout={3000} //3 secs
+        timeout={1500} //2 secs
     /> 
   </div>
   }
-  </>
+  </div>
 )}
 export default EditBuild;
