@@ -353,34 +353,23 @@ return (
                                             defaultValue= {pcbuild_part.id}
                                             required
                                           />
-                                          <form className="form" id="removeParts">
-                                            <input
-                                              type="text"
-                                              name="pcbuildpart_id"
-                                              value={pcbuild_part.id}
-                                              className="description"
-                                              required
-                                              style={{display: "none"}}
-                                            />
-                                            </form>
+                                         
                                         </div>
                                         <i className="fas fa-trash-alt" style={{fontSize: "25px",color: "#dc3545"}} onClick ={ (e) => { 
                                               e.preventDefault();
-                                              const form = new FormData(document.getElementById("removeParts"));
-                                              fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/remove_parts/${buildId}.json`, {
+                                              fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/remove_parts/pcbuild_parts/${pcbuild_part.id}.json`, {
                                                 method: "DELETE",
-                                                body:form ,
                                               })
                                               .then(handleErrors)
                                               .then(response => response.json())
                                               .then(data => {
-                                                console.log("Success",data)
+                                               console.log("Success",data)
                                                 updateBuilds();
                                               })
                                               toast.error(`Removing  ${pcbuild_part.part.part_type} from your build.. `, {
                                                 position: toast.POSITION.TOP_CENTER
                                               });
-                                              setTimeout( () => window.location.reload(false),1000)
+                                              setTimeout(() => window.location.reload(false),1000)
                                               }}>
                                           </i>
                                     </div>
