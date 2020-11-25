@@ -231,7 +231,7 @@ return (
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-3">
+          <div className="col-sm-3" style={{backgroundColor: "#232831", borderRadius:"10px"}}>
           <div className="text-center">
           </div><hr></hr>
               <div className="panel panel-default">
@@ -253,12 +253,12 @@ return (
                 <div className="row">
                   {thisBuild.attachment_url.map((url,i) =>
               <div className = "col-sm-4">
-                <div className= "removeFavoriteIcon">
-                    <i className="fas fa-minus-circle" style={{fontSize: "25px",color: "#dc3545"}}
+                <div>
+                    <i className="fas fa-minus-circle"
                     onClick= {() =>{fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/delete_attachment/${thisBuild.attachment_id[i]}.json`, {method:"DELETE",}); updateImages()}}>
                     </i>
-                </div>
                 <img src = {`${fpsbuildsurl}/${url}`} className="build-edit-images"/>
+                </div>
               </div>
           )}
                 </div>
@@ -307,7 +307,7 @@ return (
            <div className="create-build-table dark" style={{marginTop: "30px"}} id="create-build-table">
               <div className="row">
                   <div className="col-md-12">
-                      <div className="create-build-detail-card mb-3">
+                      <div className="edit-build-detail-card mb-3">
                           <div className="card-header pr-0 pl-0">
                               <div className="row no-gutters align-items-center w-100">
                                   <div className="d-none d-md-block col text-muted">
@@ -356,7 +356,7 @@ return (
                                           />
                                          
                                         </div>
-                                        <i className="fas fa-trash-alt" style={{fontSize: "25px",color: "#dc3545"}} onClick ={ (e) => { 
+                                        <i className="fas fa-trash-alt" onClick ={ (e) => { 
                                               e.preventDefault();
                                               fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/remove_parts/pcbuild_parts/${pcbuild_part.id}.json`, {
                                                 method: "DELETE",
@@ -383,11 +383,11 @@ return (
                   </div>
               </div>
             </div>
-                    <div className="textarea"> Build Description
+                    <div className="edit-textarea"> Build Description
                            <textarea
                              type="textarea"
                              name="comments"
-                             className="description"
+                             className="edit-description"
                              defaultValue={thisBuild.comments}
                            />
                     </div>
@@ -400,13 +400,16 @@ return (
                      </div>
                 </form>
                 <form className="form" onSubmit={addParts} id="addParts">
-                  <div className="create-build-detail-card mb-3">
-                    <div style={{fontSize: "25px", marginTop: "10px", textAlign: "Center", fontWeight:"350"}}> Add Parts To My Build</div>
-                    <div className="d-none d-md-block col text-muted">
-                      <div className="row no-gutters align-items-center" style={{marginTop: "15px "}}>
-                                              <div className="build-detail-col-2">Component</div>
-                                              <div className="build-detail-col-4">Description</div>
-                                              <div className="build-detail-col-2">Price</div>
+                  <div className="edit-build-detail-card mb-3">
+                    <div style={{fontSize: "25px", marginTop: "10px", textAlign: "Center", fontWeight:"350", color:"rgb(192, 189, 189)"}}> Add Parts To My Build</div>
+                                   
+                    <div className="card-header pr-0 pl-0">
+                      <div className="d-none d-md-block col text-muted">
+                        <div className="row no-gutters align-items-center">
+                                                <div className="build-detail-col-2">Component</div>
+                                                <div className="build-detail-col-4">Description</div>
+                                                <div className="build-detail-col-2">Price</div>
+                        </div>
                       </div>
                     </div>
                     <div className="create-build-detail-card-body">
@@ -438,7 +441,7 @@ return (
                                                   id="moboprice"
                                                 />
                                             </div>
-                                            <i className="fas fa-plus-circle" style={{fontSize: "25px",color: "#f0cc02", marginRight: "40px"}} onClick ={ (e) => {
+                                            <i className="fas fa-plus-circle" onClick ={ (e) => {
                                                   e.preventDefault();
                                                   const form = new FormData(document.getElementById("addParts"));
                                                   fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/add_parts/${buildId}.json`, {
@@ -466,7 +469,7 @@ return (
                         <div className= "update-build"> 
                           <input
                             type="submit"
-                            value="Add All Parts"
+                            value="Add Multiple Parts"
                             className="add-parts-button"
                           />
                       </div>

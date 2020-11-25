@@ -21,7 +21,6 @@ console.log(myDiscussions)
 return (
   
   <div>
-    <hr></hr>
     {profileUser.map(profileUserData => 
     <div className="profile-container">
         <div className="row">

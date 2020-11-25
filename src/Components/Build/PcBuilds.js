@@ -240,7 +240,7 @@ function PcBuilds(){
                                   <div className = "create-build-detail-row" >
                                     <div className="row no-gutters align-items-center w-100"  >
                                         <div className = "build-detail-col-1" id="create-build-icon"><img src={build_icons[part]} className="build-icon" /></div>
-                                        <div className = "build-detail-col-1" id="create-build-component" style={{fontWeight: "250",fontSize: "15px"}}>{part}</div>
+                                        <div className = "build-detail-col-1" id="create-build-component" style={{fontWeight: "350",fontSize: "15px"}}>{part}</div>
                                         <div className = "component-description col-6" id="create-build-description">
                                             <Select 
                                               name={"part_id[" + part + "][id]"}

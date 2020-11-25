@@ -28,7 +28,7 @@ function Favorites() {
         <div style={{backgroundColor:"#0f171d"}}>
         <div className="top">
              {favoriteBuilds.length > 0 ? "": <p>You have not selected any favorite builds...</p> }   
-             <div className="row" style={{backgroundColor:"#0f171d"}}>
+             <div className="row" style={{backgroundColor:"#1c222a"}}>
                 {currentFavorites}
                 </div>
                 
