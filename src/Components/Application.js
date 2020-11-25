@@ -53,12 +53,13 @@ function Application() {
         location="bottom"
         buttonText="I Understand"
         cookieName="FPSBuilds"
-        style={{ background: "#021b27" }}
-        buttonStyle={{ color: "#0b1e27", fontSize: "15px", fontWeight: "450", height:"40px", width:"125px",borderRadius: "10px"}}
+        style={{ background: "#1c222a" }}
+        buttonStyle={{ color: "#0b1e27", fontSize: "13px", fontWeight: "450", height:"40px", width:"125px",borderRadius: "10px"}}
         buttonClasses="accept-cookie-button"
         expires={150}
+        debug={true}
         >
-        <div style={{ fontSize: "16px" }}> Our website uses cookies to help enhance user experience and optimize performance.</div>
+        <div style={{ fontSize: "15px" }}> Our website uses cookies to help enhance user experience and optimize performance.</div>
       </CookieConsent>
       </>
   );

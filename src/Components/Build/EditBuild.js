@@ -27,10 +27,6 @@ function EditBuild (){
   const history = useHistory()
   const {buildId} = useParams()
   const thisBuild = allBuilds.find(build => build.id.toString() === buildId)
-  // console.log(x)
-  // const [thisBuild, setThisBuild] = useState(() => {allBuilds.find(build => build.id.toString() === buildId)})
-  // const thisBuild = allBuilds.find(build => build.id.toString() === buildId)
-  console.log(thisBuild)
   const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const CPUCooler = (parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
@@ -94,7 +90,6 @@ function EditBuild (){
   ]
 const thisBuild_part_types = `${thisBuild ? thisBuild.parts.map(part => part.part_type) : ""}`
 const missing_parts = part_types.filter(part => thisBuild_part_types.split(",").indexOf(part) === -1)
-console.log(missing_parts)
 
   const customStyles = {
   
@@ -204,7 +199,6 @@ console.log(missing_parts)
     });
     setTimeout( () => window.location.reload(false),1000)
   }
-console.log(thisBuild)
 
 return (
   <div>
