@@ -41,10 +41,11 @@
   padding-left:50%;
 }
 .card-img-top{
-  height: 335px;
-  width: 100%;
   display: block;
   border-radius: 10px;;
+  width: 100%;
+  height: 16.5vw;
+  object-fit: cover;
 }
 
 .card {
@@ -53,8 +54,11 @@
   background-color: rgb(29,32,37) !important;
   box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.02);
   color: #4a4a4a;
-  max-width: 100%;
+  // max-width: 100%;
   position: relative;
+  width: 100%;
+  height: 32vw;
+  object-fit: cover;
 }
 
 .card-body {
@@ -2058,6 +2062,9 @@ transform-origin: left;
 }
 
 @media screen and (max-width: 768px) {
+  .jumbotron{
+    background-position-y: 0px;
+  }
   .pcnavbar-start.responsive {
     position: relative;
     display: block;
@@ -2364,6 +2371,19 @@ transform-origin: left;
       margin: auto;
       padding: 5px;
       width:100%;
+  }
+
+  .card {
+    max-width: 100%;
+    height: 160vw;
+    object-fit: cover;
+  }
+  .card-img-top {
+    display: block;
+    border-radius: 10px;
+    width: 100%;
+    height: 75vw;
+    object-fit: cover;
   }
 //CAROUSEL
 .carousel-inner img {
