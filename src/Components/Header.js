@@ -1,5 +1,5 @@
 import React,{useContext,useEffect, useState} from "react"
-import headerImage from "../icons/logo.png"
+import headerImage from "../icons/logo.webp"
 import {Link, useHistory} from "react-router-dom"
 import {Context} from "../Context"
 import Gravatar from 'react-gravatar'

@@ -2,7 +2,7 @@ import React from "react"
 import {Link} from "react-router-dom"
 import { Col, Container, Row, Footer } from 'mdbreact';
 import '@fortawesome/fontawesome-free/css/all.min.css'; 
-import footerImage from "../icons/logo_simple.png"
+import footerImage from "../icons/logo_simple.webp"
 function Footerpc(){
 return(
     <Footer className="footer-pc">
