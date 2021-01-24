@@ -40,11 +40,11 @@ function Image({img}) {
   </div>
   const watercooled =    
   <div className= "main-wrapper">
-    <div className = "badge purple" style={{color: "Mediumslateblue"}}>
+    <div className = "badge purple">
       <div className = "circle">
       <i className= "fa fa-water"></i>
       </div>
-      <div className = "ribbon"> WaterCooled</div>
+      <div className = "ribbon" style={{fontSize: "9px"}}>WaterCooled</div>
     </div>
   </div>
   function createLike() {
