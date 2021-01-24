@@ -38,6 +38,15 @@ function Image({img}) {
       <div className = "ribbon"> Best GPU</div>
     </div>
   </div>
+  const watercooled =    
+  <div className= "main-wrapper">
+    <div className = "badge purple" style={{color: "Mediumslateblue"}}>
+      <div className = "circle">
+      <i className= "fa fa-water"></i>
+      </div>
+      <div className = "ribbon"> WaterCooled</div>
+    </div>
+  </div>
   function createLike() {
         const form = new FormData(document.getElementById("newLike"));
         fetch(`${fpsbuildsurl}/pcbuilds/${img.id}/likes.json`, {
@@ -91,6 +100,7 @@ function Image({img}) {
           <div className="card mb-4 shadow-sm">
               {img.id === 12 ?firsbuild : ""}
               {img.id === 51 ?bestgpu : ""}
+              {img.id === 56 ?watercooled : ""}
               <img src={`${fpsbuildsurl}/${img.attachment_url[0]}`} className= "card-img-top"/>
               
               <div>
