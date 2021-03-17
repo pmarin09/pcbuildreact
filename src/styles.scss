@@ -2064,6 +2064,11 @@ transform-origin: left;
 @media screen and (max-width: 768px) {
   .jumbotron{
     // background-position-y: 0px;
+    background-size: cover;
+    background-position: top center;
+    background-attachment: inherit !important;
+    height: auto;
+    width:100%;
   }
   .pcnavbar-start.responsive {
     position: relative;
