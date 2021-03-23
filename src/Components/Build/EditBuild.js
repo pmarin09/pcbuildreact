@@ -45,6 +45,7 @@ function EditBuild (){
     CPUCooler: CPUCooler,
     GPU: GPU,
     RAM: RAM,
+    ExtraRAM: RAM,
     HD: HD,
     ExtraHD: HD,
     Case: Case,
@@ -61,6 +62,7 @@ function EditBuild (){
     CPUCooler: cpucooler,
     GPU: gpu,
     RAM: ram,
+    ExtraRAM: ram,
     HD: hdd,
     ExtraHD: hdd,
     Case: pccase,
@@ -78,6 +80,7 @@ function EditBuild (){
     "CPUCooler",
     "GPU",
     "RAM",
+    "ExtraRAM",
     "HD",
     "ExtraHD",
     "Case",
@@ -315,6 +318,7 @@ return (
                           </div>
                           <div className="create-build-detail-card-body">
                             {thisBuild.pcbuild_parts.map(function(pcbuild_part) {
+                              console.log(pcbuild_part)
                               return (   
                                 <>
                                   <div className = "create-build-detail-row" >

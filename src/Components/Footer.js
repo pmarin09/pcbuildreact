@@ -3,6 +3,8 @@ import {Link} from "react-router-dom"
 import { Col, Container, Row, Footer } from 'mdbreact';
 import '@fortawesome/fontawesome-free/css/all.min.css'; 
 import footerImage from "../icons/logo_simple.webp"
+import CookieConsent from "react-cookie-consent";
+
 function Footerpc(){
 return(
     <Footer className="footer-pc">
@@ -57,6 +59,18 @@ return(
                 &copy; {(new Date().getFullYear())}<a href="#"> FPS Builds </a>
             </Container>
         </div>
+        <CookieConsent
+        location="bottom"
+        buttonText="I Understand"
+        cookieName="FPSBuilds"
+        style={{ background: "#1c222a" }}
+        buttonStyle={{ color: "#0b1e27", fontSize: "13px", fontWeight: "450", height:"40px", width:"125px",borderRadius: "10px"}}
+        buttonClasses="accept-cookie-button"
+        expires={365}
+        >
+        <div style={{ fontSize: "15px" }}> Our website uses cookies to help enhance user experience and optimize performance.</div>
+      </CookieConsent>
+
     </Footer>
     )
 }
