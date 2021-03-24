@@ -21,7 +21,6 @@ import Registration from "./auth/Registration"
 import ForgotPassword from "./auth/ForgotPassword"
 import ResetPassword from "./auth/ResetPassword"
 import 'react-bulma-components/dist/react-bulma-components.min.css';
-import CookieConsent from "react-cookie-consent";
 
 
 function Application() {
@@ -49,18 +48,8 @@ function Application() {
         <Route  path = "/:discussionId/editpost/:postId"> <EditPost/></Route>
         <Route  path = "/editbuildpost/:buildpostId"> <EditBuildPost/></Route>
       </Switch>
-      <CookieConsent
-        location="bottom"
-        buttonText="I Understand"
-        cookieName="FPSBuilds"
-        style={{ background: "#1c222a" }}
-        buttonStyle={{ color: "#0b1e27", fontSize: "13px", fontWeight: "450", height:"40px", width:"125px",borderRadius: "10px"}}
-        buttonClasses="accept-cookie-button"
-        expires={150}
-        debug={true}
-        >
-        <div style={{ fontSize: "15px" }}> Our website uses cookies to help enhance user experience and optimize performance.</div>
-      </CookieConsent>
+      
+      
       </>
   );
 }

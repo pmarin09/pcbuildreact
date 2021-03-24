@@ -91,7 +91,7 @@ function EditBuild (){
     "Mouse",
     "Headset",
   ]
-const thisBuild_part_types = `${thisBuild ? thisBuild.parts.map(part => part.part_type) : ""}`
+const thisBuild_part_types = `${thisBuild ? thisBuild.pcbuild_parts.map(pcbuild_part => pcbuild_part.part.part_type) : ""}`
 const missing_parts = part_types.filter(part => thisBuild_part_types.split(",").indexOf(part) === -1)
 
   const customStyles = {

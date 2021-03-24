@@ -24,19 +24,19 @@ function BuildDetail(img) {
       return frags.join(' ');
     }
     const thisBuildParts = thisBuild.map(a => {
-        return  a.parts.map(b =>
-             (b.description !== "Not Available") ? 
+        return  a.pcbuild_parts.map(b =>
+             (b.part.description !== "Not Available") ? 
              <>
           <div className = "build-detail-row">
          
           <div className="row no-gutters align-items-center w-100">
-                          <div className = "build-detail-col-1" id="build-component">{b.part_type}</div>
-                          <div className = "build-detail-col-2" id="build-img"><img src={b.get_imgurl} className="build-part-img"/></div>
-                          <div className="build-detail-col-2" id="build-description">{b.description}</div>
+                          <div className = "build-detail-col-1" id="build-component">{b.part.part_type}</div>
+                          <div className = "build-detail-col-2" id="build-img"><img src={b.part.get_imgurl} className="build-part-img"/></div>
+                          <div className="build-detail-col-2" id="build-description">{b.part.description}</div>
                           <div className="build-detail-col-4" id="build-specs">
                           <div className="build-detail-col-6">
-                              {Object.keys(b.details).slice(0, 10).map(function (key,i){
-                                  if(b.details[key] === null){
+                              {Object.keys(b.part.details).slice(0, 10).map(function (key,i){
+                                  if(b.part.details[key] === null){
                                     return false
                                   }
                                   if(key === "img_link1"|| key === "date_available"){
@@ -45,19 +45,22 @@ function BuildDetail(img) {
                                   return(
                                     <>
                                       <div className = "specs-grid-item-key">{humanize(key)}</div> 
-                                      <div className="media-body flex-truncate ml-2"> <div className = "specs-grid-item-value">{b.details[key]}</div></div>
+                                      <div className="media-body flex-truncate ml-2"> <div className = "specs-grid-item-value">{b.part.details[key]}</div></div>
                                   </>
                                   )
                               })}
                           </div>
                           </div>
-                          <div className="build-detail-col-2">${a.pcbuild_parts.map(c => c.part_id === b.id? c.price : "")}</div>
+                          <div className="build-detail-col-2">${b.price}</div>
+                         
+                          {/* ${a.pcbuild_parts.map(c => c.part_id === b.id? c.price : "")} */}
           </div>
           </div>
           <hr className="build-detail-hr"></hr>
             </>
             : "" )
           })
+          console.log(thisBuild)
     const showBuildposts =  buildposts.filter(buildpost => buildpost.pcbuild_id.toString() === buildId).map(filteredPost => (
         <div className="box">
            <article className="media">
