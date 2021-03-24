@@ -30,7 +30,7 @@ function EditPost(){
   return(
     <section className = "section">
       <div className = "article-container">
-        <div className="box">
+        <div className="box" id="edit-post-box">
           <h2 className="title is-5 has-text-grey-light">Edit Post</h2>
           <section className="forms text-center border border-light p-5" style={{width: "100%", height:"200%"}}>
             <form className="form" onSubmit={EditPost} id="editPost">

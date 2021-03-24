@@ -6,10 +6,10 @@ import {Link} from "react-router-dom"
 import TimeAgo from 'timeago-react';
 function FavoriteBuild({item}) {
   const {loggedInStatus,user,favorites,updateFavorites,fpsbuildsurl} = useContext(Context)
-  const favoriteBuildParts = item.parts.map(b =>
+  const favoriteBuildParts = item.pcbuild_parts.map(b =>
           <tr>
-            <td className="fav-td">{b.part_type}</td>
-            <td>{b.description}</td>
+            <td className="fav-td">{b.part.part_type}</td>
+            <td>{b.part.description}</td>
           </tr>
           )
   function deleteFavorite() {
