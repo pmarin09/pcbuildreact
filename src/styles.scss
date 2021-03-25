@@ -77,13 +77,13 @@ html{
 }
 
 .jumbotron{
-  background: #343a40;
-  background-image: url(/static/media/jumbotron.8d499f6c.webp);
-  background-repeat: no-repeat, repeat;
-  text-align: center;
-  border-radius: 0px !important;
-  background-position-y: center;
-  background-size: cover;
+      background: #343a40;
+    background-image: url("icons/jumbotron.webp");
+    background-repeat: no-repeat, repeat;
+    text-align: center;
+    border-radius: 0px !important;
+    background-position-y: center;
+    background-size: cover;
 }
 
 .jumbotron-heading{
