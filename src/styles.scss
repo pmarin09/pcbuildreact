@@ -77,14 +77,13 @@ html{
 }
 
 .jumbotron{
-  background: rgb(255, 255, 255) ;
-  background-image: url("icons/jumbotron.webp");
+  background: #343a40;
+  background-image: url(/static/media/jumbotron.8d499f6c.webp);
   background-repeat: no-repeat, repeat;
-  text-align:center;
+  text-align: center;
   border-radius: 0px !important;
-  background-attachment: fixed;
-  background-position-y: -348px;
-  background-size:cover;
+  background-position-y: center;
+  background-size: cover;
 }
 
 .jumbotron-heading{
@@ -306,7 +305,8 @@ html{
     margin-bottom: 20px !important;
     margin: auto;
     text-align: center;
-    background-color: #242932;
+    border-color: #343a40 !important;
+    background-color: #242932 !important;
   }
   .edit-textarea {
     outline:none;
@@ -886,10 +886,10 @@ input:checked + .slider:before {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
+    color: #aaafb4;
+    background-color: #242932;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
+    border: 1px solid #343a40;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     height: 85%;
@@ -941,6 +941,7 @@ input:checked + .slider:before {
   max-width: 100%;
   width: 75% !important;
   min-width: 75% !important;
+  background-color: #242932;
 }
 
 .forumSideBar {
@@ -2309,7 +2310,7 @@ transform-origin: left;
     }
     .textarea{
       width:100% !important;
-      background-color: #242932;
+      background-color: #242932 !important;
     }
 
     .col-6{
