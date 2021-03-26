@@ -13,7 +13,7 @@ function BuildDetail(img) {
     const thisBuildImage = thisBuild.map(a => {
       return a.attachment_url.map(b =>
               <div className = "carousel-fade carousel-item custom">
-               <img src = {`${fpsbuildsurl}/${b}`} style = {{maxWidth:  "500px"}}></img>
+               <img src = {`${fpsbuildsurl}/${b}`} style = {{maxWidth:  "775px", maxHeight: "790px", borderRadius: "15px", borderColor:"#1f237"}}></img>
               </div>
         )})
     function humanize(str) {
