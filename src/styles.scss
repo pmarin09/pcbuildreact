@@ -284,11 +284,10 @@ html{
   }
   .build-comments-area{
     white-space: break-spaces;
-    // border: solid #797474 0.25px;
-    // border-radius: 10px;
     padding: 25px;
-    color:white;
-    background-color: #090e16;
+    color: white;
+    background-color: #343a40;
+    margin: 10px;
   }
   .notification:not(:last-child) {
     margin-bottom: 0;
@@ -323,6 +322,36 @@ html{
     font-size: 19px;
     border-radius:10px;
   }
+
+    //BUILD-PICS
+
+    .build-pics{
+      border: solid rgb(35, 41, 48) 1px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-clip: border-box;
+      border: 1px solid rgba(104, 101, 101, 0.125);
+      // border-radius: 10px;
+      border-color: none;
+      background-color: #2e3136 !important;
+      box-shadow: 0 0.5em 1em -0.125em rgba(107, 107, 107, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+      color: #4a4a4a;
+      max-width: 100%;
+      height: 850px;
+  
+    }
+
+    .build-posts-column{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 850px;
+      font-size: 12px;
+      flex: 1 0 25% !important;
+    }
   
   //MAIN FORUM
   .forum-flex{
@@ -1643,8 +1672,8 @@ margin-bottom: 10px;
 
 .carousel{
   position: relative;
-  border: solid red 2px;
-  top: 20px;
+  // border: solid red 2px;
+  // top: 20px;
   border-radius: 25px;
   height: 850px;
   $bg-color: rgb(48, 52, 59);
@@ -2413,6 +2442,8 @@ transform-origin: left;
     height: 75vw;
     object-fit: cover;
   }
+
+
 //CAROUSEL
 .carousel-inner img {
   width: 100%;
@@ -2426,21 +2457,21 @@ transform-origin: left;
 
 .carousel{
   position: relative;
-  border: solid red 2px;
+  // border: solid red 2px;
   top: 20px;
   border-radius: 25px;
   height: 650px;
-  $bg-color: rgb(48, 52, 59);
-  $dot-color: rgb(61, 73, 78);
+  // $bg-color: rgb(48, 52, 59);
+  // $dot-color: rgb(61, 73, 78);
 
-  // Dimensions
-  $dot-size: 1px;
-  $dot-space: 10px;
-  background:
-  linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
-  linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
-  $dot-color;
-  background-size: $dot-space $dot-space;
+  // // Dimensions
+  // $dot-size: 1px;
+  // $dot-space: 10px;
+  // background:
+  // linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+  // linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+  // $dot-color;
+  // background-size: $dot-space $dot-space;
 }
 
 .carousel-fade .carousel-item.active{

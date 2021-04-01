@@ -62,7 +62,7 @@ function BuildDetail(img) {
           })
           console.log(thisBuild)
     const showBuildposts =  buildposts.filter(buildpost => buildpost.pcbuild_id.toString() === buildId).map(filteredPost => (
-        <div className="box">
+        <div className="box" style={{fontSize: "12px"}}>
            <article className="media">
                <div className="media-left">
                <figure className="image is-48x48">
@@ -122,7 +122,7 @@ function BuildDetail(img) {
     }
     //PAGINATION 
    const [currentPage, setCurrentPage] = useState(1);
-   const [buildpostsPerPage] = useState(10);
+   const [buildpostsPerPage] = useState(3);
    // Get current posts
    const indexOfLastBuildPost = currentPage * buildpostsPerPage;
    const indexOfFirstBuildPost = indexOfLastBuildPost - buildpostsPerPage;
@@ -135,19 +135,94 @@ function BuildDetail(img) {
     })
   return (
       <div className= "build-detail-main">
-       <div className= "build-img">
-          <Carousel fade= "true">
-              {thisBuildImage}
-          </Carousel>
+        <div className = "container" style={{maxWidth: "3000px"}}>
+        <div className= "col-md-12">
+        <div className="row no-gutters align-items-center w-100">
+            <div className=" build-pics col-3" style={{flexGrow: "0.5"}}>
+                    <h2 className="title is-5 has-text-grey-light"> Built by: {thisBuild.map(build => build.username)}</h2>
+                    <hr></hr>
+                    <h2 className="title is-5 has-text-grey-light"> Build Description</h2>
+        <div className= "build-comments-area" style={{fontSize:"13px"}}>{thisBuild.map(build => build.comments)}</div>
+        <div className= "build-comments-area"> { ((loggedInStatus === "LOGGED_IN") && user) ?
+              <>
+                  <form className="form" onSubmit={createBuildPost} id="newBuildPost">
+                        <h2 className="title is-5 has-text-grey-light">Post a Comment:</h2>
+                          
+                            <div className="textarea" style={{height:"185px",width:"100% !important"}}>
+                                  <textarea
+                                    type="text"
+                                    name="content"
+                                    className="description"
+                                    style={{height:"182px",width:"100% !important"}}
+                                    required
+                                  />
+                                <div className="postButton">
+                                  <input
+                                    type="submit"
+                                    value="New Comment"
+                                    style={{fontSize:"12px", marginTop:"10px"}}
+                                    className="button is-success"
+                                  />
+                              </div>
+                            </div>
+                                  <input
+                                    value= {buildId}
+                                    name="pcbuild_id"
+                                    style={{display: "none"}}
+                                    required
+                                  />
+                                  <input
+                                    type="text"
+                                    name="user_id"
+                                    value={user.id}
+                                    className="description"
+                                    required
+                                    style={{display: "none"}}
+                                  />
+                                  <input
+                                    type="text"
+                                    name="username"
+                                    value={user.username}
+                                    className="description"
+                                    required
+                                    style={{display: "none"}}
+                                  />
+                          
+                  </form>
+                </>
+                :
+              ""}
+              </div>
         </div>
+        <div className="build-pics col-5" style={{margin:"20px"}}>
+              <Carousel fade= "true">
+                  {thisBuildImage}
+              </Carousel>
+        </div>
+        <div className="build-posts-column col-3">
+                  <div>
+                    {currentBuildPosts}
+
+                    {showBuildposts.length > 3 ?
+                    <Pagination
+                      elementsPerPage={buildpostsPerPage}
+                      totalElements={showBuildposts.length}
+                      paginate={paginate}
+                        /> : ""}
+                    
+                </div>
+        </div>
+      </div>
+    </div>
+      </div>
         <div className="build-detail-container">
         <div className="row">
-        <div className="col-sm-12">
-                      <h1 style={{fontSize: "30px", marginLeft:"8px"}}>{thisBuild.map(build => build.build_name)}
-                        <div style={{verticalAlign: "Middle", float:"right",marginTop: "1.5px"}}><h1 className="total-cost">{pcbuildTotalCost}</h1></div>
-                        <div style={{verticalAlign: "Middle", float:"right"}}><i className="ri-money-dollar-circle-line ri-1.5x"></i></div>
-                      </h1>
-                    </div>
+            <div className="col-sm-12">
+                          <h1 style={{fontSize: "30px", marginLeft:"8px"}}>{thisBuild.map(build => build.build_name)}
+                            <div style={{verticalAlign: "Middle", float:"right",marginTop: "1.5px"}}><h1 className="total-cost">{pcbuildTotalCost}</h1></div>
+                            <div style={{verticalAlign: "Middle", float:"right"}}><i className="ri-money-dollar-circle-line ri-1.5x"></i></div>
+                          </h1>
+            </div>
             <div className="col-md-12">
                 <div className="build-detail-card mb-3">
                
@@ -173,7 +248,7 @@ function BuildDetail(img) {
             </div>
         </div>
             {currentBuildPosts}
-                    {showBuildposts.length > 10 ?
+                    {showBuildposts.length > 3 ?
                     <Pagination
                       elementsPerPage={buildpostsPerPage}
                       totalElements={showBuildposts.length}
