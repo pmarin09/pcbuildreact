@@ -74,9 +74,9 @@ function BuildDetail(img) {
               <div className="media-content" id= "post-content">
                 <div className="content">
                   {filteredPost.content}
-                  <hr style={{backgroundColor: "#636161", height:"1px"}}></hr>
+                  <hr style={{backgroundColor: "#636161", height:"1px", margin: "4px "}}></hr>
                   <p style={{marginBottom:"1px !important"}}><em><small>Posted <TimeAgo datetime={filteredPost.created_at}/> by {filteredPost.username}  
-                  <span style={{fontSize: "10px",fontWeight:"400"}}>   | Last updated: {moment(filteredPost.updated_at).format("MMMM Do YYYY, h:mm:ss a")}{" "} </span> 
+                  <span style={{fontSize: "9px",fontWeight:"400"}}>   | Last updated: {moment(filteredPost.updated_at).format("MMMM Do YYYY, h:mm:ss a")}{" "} </span> 
                   </small></em></p>
 
                   

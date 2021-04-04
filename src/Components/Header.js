@@ -84,7 +84,7 @@ console.log(token)
                   <a className="pcnavbar-item">
                       <Link to="/" style={{textDecoration: "none"}}>
                         <span className="pcnavbar-icon"><img src={home}/></span>
-                        <span className="pcnavbar-text" > Home</span>
+                        <span className="pcnavbar-text"> Home</span>
                       </Link>
                 </a>
                 <a className="pcnavbar-item">

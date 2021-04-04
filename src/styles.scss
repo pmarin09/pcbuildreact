@@ -2,10 +2,14 @@ html{
   background-color: #282a2d !important;
 }
 .body{
-  font-family: 'Open Sans';
+  font-family: 'Viga';
 }
+
 #root{
   background-color: #0f171d;
+}
+.pcnavbar-text{
+  font-family: 'Viga';
 }
 .accept-cookie-button {
   border-color: transparent;
@@ -418,7 +422,7 @@ html{
   .forum-flex{
     display:flex;
     padding:85px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    // font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     background-color: #1c222a;
   }
 
@@ -693,7 +697,7 @@ input:checked + .slider:before {
     display: block;
     padding: 1.25rem;
     width: 306px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    // font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 14px;
   }
 
@@ -1527,7 +1531,7 @@ margin-bottom: 10px;
   padding: 20px;
   max-width: auto;
   height: auto;
-  border: 1px solid rgb(131, 11, 11);
+  border: 1px solid #343a40;
   margin-bottom: 40px;
   margin-top: 40px;
 }
@@ -1546,6 +1550,7 @@ margin-bottom: 10px;
   flex-wrap: wrap;
   margin:auto;
   justify-content:center;
+  font-family:"Viga";
 }
 
 .profile-statslabel-row{
@@ -1557,6 +1562,7 @@ margin-bottom: 10px;
   flex-wrap: wrap;
   margin:auto;
   justify-content:center;
+  font-family:"Viga";
 }
 
 .profile-username{
@@ -2681,6 +2687,7 @@ transform-origin: left;
       display: flex;
       flex-wrap: wrap;
       margin: 0 !important;
+      font-family:"Viga";
     }
     .profile-stats-row {
       font-size: 28px;
@@ -2692,6 +2699,7 @@ transform-origin: left;
       flex-wrap: wrap;
       margin: auto;
       justify-content: center;
+      font-family:"Viga";
   }
 
   footer{

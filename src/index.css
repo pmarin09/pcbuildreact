@@ -1,13 +1,16 @@
 body {
   margin: 0;
-  font-family:  'Roboto', 'Oxygen',
+  font-family:  'Roboto', 'Oxygen','Viga'
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Open Sans' 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+   
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+

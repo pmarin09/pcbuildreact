@@ -25,21 +25,21 @@ return (
     <div className="profile-container">
         <div className="row">
           <div className="col-xs-3 col-sm-3" >{profileUserData.attachment_url ? <img src = {`${fpsbuildsurl}/${profileUserData.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email={profileUserData.email} size={100} className="profile-img-avatar" default="robohash" /> }</div>
-          <div className="col-sm-9"><h1 className="profile-username">{profileUserData.username}</h1>
+          <div className="col-sm-9"><h1 className="profile-username" style={{fontFamily: "Viga"}}>{profileUserData.username}</h1>
           <table className="profile-table">
             <tr className="profile-stats-row">
-                  <div className="col-md-2" style= {{fontWeight: "bold"}}> {profileUserData.pcbuilds.length} </div>
-                  <div className="col-md-2" style= {{fontWeight: "bold"}}> {myLikes} </div>
-                  <div className="col-md-2" style= {{fontWeight: "bold"}}> {myFavorites.length} </div>
-                  <div className="col-md-2" style= {{fontWeight: "bold"}}> {myDiscussions.length}</div>
-                  <div className="col-md-2" style= {{fontWeight: "bold"}}> {myPosts.length} </div>
+                  <div className="col-md-2" > {profileUserData.pcbuilds.length} </div>
+                  <div className="col-md-2" > {myLikes} </div>
+                  <div className="col-md-2" > {myFavorites.length} </div>
+                  <div className="col-md-2" > {myDiscussions.length}</div>
+                  <div className="col-md-2" > {myPosts.length} </div>
             </tr>
             <tr className="profile-statslabel-row">
-                  <div className="col-md-2" style= {{fontWeight: "285"}}> {profileUserData.pcbuilds.length > 1 ? "Builds": "Build"} </div>
-                  <div className="col-md-2" style= {{fontWeight: "285"}}> {myLikes > 1 || myLikes === 0? "Likes": "Like"} </div>
-                  <div className="col-md-2" style= {{fontWeight: "285"}}> {myFavorites.length > 1 || myFavorites.length === 0 ? "Favorites" : "Favorite"}  </div>
-                  <div className="col-md-2" style= {{fontWeight: "285"}}> {myDiscussions.length > 1 || myDiscussions.length === 0? "Discussions" : "Discussion"} </div>
-                  <div className="col-md-2" style= {{fontWeight: "285"}}> {myPosts.length > 1 || myPosts.length === 0 ? "Posts" : "Post"} </div>
+                  <div className="col-md-2" > {profileUserData.pcbuilds.length > 1 ? "Builds": "Build"} </div>
+                  <div className="col-md-2" > {myLikes > 1 || myLikes === 0? "Likes": "Like"} </div>
+                  <div className="col-md-2" > {myFavorites.length > 1 || myFavorites.length === 0 ? "Favorites" : "Favorite"}  </div>
+                  <div className="col-md-2" > {myDiscussions.length > 1 || myDiscussions.length === 0? "Discussions" : "Discussion"} </div>
+                  <div className="col-md-2" > {myPosts.length > 1 || myPosts.length === 0 ? "Posts" : "Post"} </div>
             </tr>
             </table>
           </div>
