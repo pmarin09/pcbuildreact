@@ -113,7 +113,7 @@ function Image({img}) {
               
               <div className="card-text">
                   <div className="favorite-icon">{ (loggedInStatus === "LOGGED_IN" && user )? favoriteIcon(): ""} 
-                  <div className= "build-cost"><i className="ri-money-dollar-circle-line ri-lg"></i> Total Cost: ${pcbuildTotalCost}</div>
+                  <div className= "build-cost" style={{fontFamily: "Viga"}}><i className="ri-money-dollar-circle-line ri-lg" ></i> Total Cost: ${pcbuildTotalCost}</div>
                 </div>
                 <hr className="main-card-hr"></hr>
                 <div className= "build-name-card">{img.build_name}</div>

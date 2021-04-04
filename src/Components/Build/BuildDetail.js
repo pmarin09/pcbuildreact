@@ -32,7 +32,7 @@ function BuildDetail(img) {
           <div className = "build-detail-row">
          
           <div className="row no-gutters align-items-center w-100">
-                          <div className = "build-detail-col-1" id="build-component">{b.part.part_type}</div>
+                          <div className = "build-detail-col-1" id="build-component" style={{fontFamily: "Viga"}}>{b.part.part_type}</div>
                           <div className = "build-detail-col-2" id="build-img"><img src={b.part.get_imgurl} className="build-part-img"/></div>
                           <div className="build-detail-col-2" id="build-description">{b.part.description}</div>
                           <div className="build-detail-col-4" id="build-specs">
@@ -143,24 +143,24 @@ function BuildDetail(img) {
         <div className= "col-md-12">
             <div className="row no-gutters align-items-center w-100">
                 <div className=" build-pics col-3" style={{flexGrow: "0.5"}}>
-                        <h2 className="build-owner"> 
+                        <h2 className="build-owner" style={{fontFamily: "Viga"}}> 
                         
                           <Link to={`/profile/${thisBuild.map(build => build.user_id)}`}>
                           {thisBuild.map(build => build.user.attachment_url).toString() ? <img src = {`${fpsbuildsurl}/${thisBuild.map(build => build.user.attachment_url)}`}  className="profile-avatar"/> 
                           : 
                           <Gravatar email= {thisBuild.map(build => build.user.email).toString()} className="profile-avatar" size={100} default="robohash"/> }
-                          <span> <em><small>{thisBuild.map(build => build.username)}</small></em></span>
+                          <span className= "build-owner-name"> {thisBuild.map(build => build.username)}</span>
                           </Link>
                         </h2>
                         
                     
-                        <h3 className="title is-6 has-text-grey-light" style={{marginLeft: "8px",marginBottom: "1px",padding:"5px"}}> Build Description</h3>
+                        <h3 className="title is-6 has-text-grey-light" style={{marginLeft: "8px",marginBottom: "1px",padding:"5px",fontFamily: "Viga"}}> Build Description</h3>
             <div className= "build-comments-area" style={{fontSize:"13px"}}>{thisBuild.map(build => build.comments)}</div>
       
             <div className= "build-comments-area"> { ((loggedInStatus === "LOGGED_IN") && user) ?
                   <>
                       <form className="form" onSubmit={createBuildPost} id="newBuildPost">
-                            <h2 className="title is-6 has-text-grey-light">Post a Comment:</h2>
+                            <h2 className="title is-6 has-text-grey-light" style={{fontFamily: "Viga"}}>Post a Comment:</h2>
                               
                                 <div className="post-textarea" style={{height:"185px",width:"100% !important"}}>
                                       <textarea
@@ -174,7 +174,7 @@ function BuildDetail(img) {
                                       <input
                                         type="submit"
                                         value="New Comment"
-                                        style={{fontSize:"12px", marginTop:"10px"}}
+                                        style={{fontFamily: "Viga", fontSize:"12px", marginTop:"10px"}}
                                         className="button is-success"
                                       />
                                   </div>
@@ -239,7 +239,7 @@ function BuildDetail(img) {
                               {thisBuild.map(build => build.user.attachment_url).toString() ? <img src = {`${fpsbuildsurl}/${thisBuild.map(build => build.user.attachment_url)}`}  className="profile-avatar"/> 
                               : 
                               <Gravatar email= {thisBuild.map(build => build.user.email).toString()} className="profile-avatar" size={100} default="robohash"/> }
-                              <span> <em><small>{thisBuild.map(build => build.username)}</small></em></span>
+                              <span className= "build-owner-name"> <em><small>{thisBuild.map(build => build.username)}</small></em></span>
                               </Link>
                             </h2>
                             
@@ -258,7 +258,7 @@ function BuildDetail(img) {
         <div className="build-detail-container">
         <div className="row">
             <div className="col-sm-12">
-                          <h1 style={{fontSize: "30px", marginLeft:"8px"}}>{thisBuild.map(build => build.build_name)}
+                          <h1 style={{fontSize: "30px", marginLeft:"10px", fontFamily: "Viga"}}>{thisBuild.map(build => build.build_name)}
                             <div style={{verticalAlign: "Middle", float:"right",marginTop: "1.5px"}}><h1 className="total-cost">{pcbuildTotalCost}</h1></div>
                             <div style={{verticalAlign: "Middle", float:"right"}}><i className="ri-money-dollar-circle-line ri-1.5x"></i></div>
                           </h1>
@@ -267,7 +267,7 @@ function BuildDetail(img) {
                 <div className="build-detail-card mb-3">
                
                     <div className="card-header pr-0 pl-0">
-                        <div className="row no-gutters align-items-center w-100">
+                        <div className="row no-gutters align-items-center w-100" style={{fontFamily: "Viga"}}>
                             <div className="col-1 text-muted" style={{paddingLeft: "15px",margin:"auto", textAlign:"center", paddingRight: "none !important"} } id="component-header">Component</div>
                             <div className="d-none d-md-block col text-muted">
                                 <div className="row no-gutters align-items-center">
@@ -301,7 +301,7 @@ function BuildDetail(img) {
           <div className = "container">
               <hr></hr>
               <form className="form" onSubmit={createBuildPost} id="newBuildPost">
-                    <h2 className="title is-5 has-text-grey-light">Post a comment:</h2>
+                    <h2 className="title is-5 has-text-grey-light" style={{fontFamily: "Viga"}}>Post a comment:</h2>
                       <div className="form-row mb-4">
                         <div className="textarea">
                               <textarea
@@ -315,6 +315,7 @@ function BuildDetail(img) {
                                 type="submit"
                                 value="New Comment"
                                 className="button is-success"
+                                style={{fontFamily: "Viga"}}
                               />
                           </div>
                         </div>
