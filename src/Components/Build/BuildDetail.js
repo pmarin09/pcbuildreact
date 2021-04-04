@@ -5,6 +5,8 @@ import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import Carousel from 'react-bootstrap/Carousel'
 import Pagination from '../../Pagination';
+import Moment from 'moment';
+import moment from "moment";
 
 function BuildDetail(img) {
     const{fpsbuildsurl,allBuilds, user, adminId, loggedInStatus, buildposts,updateBuildPosts} = useContext(Context)
@@ -60,9 +62,7 @@ function BuildDetail(img) {
             </>
             : "" )
           })
-          console.log(thisBuild)
-          console.log(thisBuild.map(build => build.user.email).toString())
-          
+        
     const showBuildposts =  buildposts.filter(buildpost => buildpost.pcbuild_id.toString() === buildId).map(filteredPost => (
         <div className="build-detail-box" style={{fontSize: "12px"}}>
            <article className="media">
@@ -75,9 +75,11 @@ function BuildDetail(img) {
                 <div className="content">
                   {filteredPost.content}
                   <hr style={{backgroundColor: "#636161", height:"1px"}}></hr>
-                  <p><em><small>Posted <TimeAgo datetime={filteredPost.updated_at}/>  by {filteredPost.username}</small>
-                      </em>
-                      </p>
+                  <p style={{marginBottom:"1px !important"}}><em><small>Posted <TimeAgo datetime={filteredPost.created_at}/> by {filteredPost.username}  
+                  <span style={{fontSize: "10px",fontWeight:"400"}}>   | Last updated: {moment(filteredPost.updated_at).format("MMMM Do YYYY, h:mm:ss a")}{" "} </span> 
+                  </small></em></p>
+
+                  
                 </div>
                 {(user.id === filteredPost.user_id && loggedInStatus === "LOGGED_IN") || user.id === adminId?
                   <nav className="level is-mobile">
