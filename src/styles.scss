@@ -5,7 +5,7 @@ html{
   font-family: 'Open Sans';
 }
 #root{
-  background-color: #1c222a;
+  background-color: #0f171d;
 }
 .accept-cookie-button {
   border-color: transparent;
@@ -216,6 +216,18 @@ html{
     width:150px;
   }
 
+
+  .build-intro-container{
+    flex-grow: 1;
+    margin: 0 auto;
+    position: relative;
+    width: auto;
+    padding: 20px;
+
+  }
+  .build-intro-mobile-container{
+    display: none;
+  }
   .build-detail-container{
     // background: rgb(48, 52, 59) !important;
     color: white;
@@ -292,8 +304,27 @@ html{
   .notification:not(:last-child) {
     margin-bottom: 0;
   }
+
+  .build-owner{
+
+    padding:10px;
+  }
   
   .textarea {
+    outline:none;
+    wrap: on;
+    height: 250px !important;
+    // font-family: Monaco, san-serif;
+    font-size: .7rem;
+    padding: 1rem;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    margin: auto;
+    text-align: center;
+    border-color: #343a40 !important;
+    background-color: #242932 !important;
+  }
+  .post-textarea {
     outline:none;
     wrap: on;
     height: 250px !important;
@@ -322,6 +353,21 @@ html{
     font-size: 19px;
     border-radius:10px;
   }
+  .build-detail-box{
+    background-color: #343a40;
+    border-radius: 6px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+    color: #dbdbdb;
+    display: block;
+    padding: 10px;
+    margin:10px
+  }
+  .current-build-posts-mobile{
+    display:none;
+  }
+  .post-comments-mobile{
+    display:none;
+  }
 
     //BUILD-PICS
 
@@ -340,17 +386,32 @@ html{
       box-shadow: 0 0.5em 1em -0.125em rgba(107, 107, 107, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
       color: #4a4a4a;
       max-width: 100%;
-      height: 850px;
-  
+      align-self: flex-start;
+      // height: 850px;
+    }
+    .build-pics-carousel{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-clip: border-box;
+      // border-radius: 10px;
+      border-color: none;
+      color: #4a4a4a;
+      max-width: 100%;
+      align-self: flex-start;
+      // height: 850px;
     }
 
     .build-posts-column{
       position: relative;
       display: flex;
       flex-direction: column;
-      height: 850px;
+      // height: 850px;
       font-size: 12px;
       flex: 1 0 25% !important;
+      align-self: flex-start;
     }
   
   //MAIN FORUM
@@ -1674,7 +1735,7 @@ margin-bottom: 10px;
   position: relative;
   // border: solid red 2px;
   // top: 20px;
-  border-radius: 25px;
+  // border-radius: 25px;
   height: 850px;
   $bg-color: rgb(48, 52, 59);
   $dot-color: rgb(61, 73, 78);
@@ -2110,6 +2171,21 @@ transform-origin: left;
     float: right;
     display: block;
   }
+
+  .build-intro-container{
+    display:none;
+  }
+  .build-intro-mobile-container{
+    display:flex;
+  }
+  .current-build-posts-mobile{
+    display:flex;
+    flex-direction:column;
+  }
+  .post-comments-mobile{
+    display:flex;
+    flex-direction:column;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -2338,6 +2414,10 @@ transform-origin: left;
       margin:auto;
     }
     .textarea{
+      width:100% !important;
+      background-color: #242932 !important;
+    }
+    .post-textarea{
       width:100% !important;
       background-color: #242932 !important;
     }

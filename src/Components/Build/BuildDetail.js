@@ -13,7 +13,7 @@ function BuildDetail(img) {
     const thisBuildImage = thisBuild.map(a => {
       return a.attachment_url.map(b =>
               <div className = "carousel-fade carousel-item custom">
-               <img src = {`${fpsbuildsurl}/${b}`} style = {{maxWidth:  "770px", maxHeight: "790px", borderRadius: "15px", borderColor:"#1f237"}}></img>
+               <img src = {`${fpsbuildsurl}/${b}`} style = {{maxWidth:  "700px", maxHeight: "720px", borderRadius: "15px", borderColor:"#1f237"}}></img>
               </div>
         )})
     function humanize(str) {
@@ -61,8 +61,10 @@ function BuildDetail(img) {
             : "" )
           })
           console.log(thisBuild)
+          console.log(thisBuild.map(build => build.user.email).toString())
+          
     const showBuildposts =  buildposts.filter(buildpost => buildpost.pcbuild_id.toString() === buildId).map(filteredPost => (
-        <div className="box" style={{fontSize: "12px"}}>
+        <div className="build-detail-box" style={{fontSize: "12px"}}>
            <article className="media">
                <div className="media-left">
                <figure className="image is-48x48">
@@ -72,7 +74,7 @@ function BuildDetail(img) {
               <div className="media-content" id= "post-content">
                 <div className="content">
                   {filteredPost.content}
-                  <hr></hr>
+                  <hr style={{backgroundColor: "#636161", height:"1px"}}></hr>
                   <p><em><small>Posted <TimeAgo datetime={filteredPost.updated_at}/>  by {filteredPost.username}</small>
                       </em>
                       </p>
@@ -122,7 +124,7 @@ function BuildDetail(img) {
     }
     //PAGINATION 
    const [currentPage, setCurrentPage] = useState(1);
-   const [buildpostsPerPage] = useState(3);
+   const [buildpostsPerPage] = useState(4);
    // Get current posts
    const indexOfLastBuildPost = currentPage * buildpostsPerPage;
    const indexOfFirstBuildPost = indexOfLastBuildPost - buildpostsPerPage;
@@ -135,86 +137,122 @@ function BuildDetail(img) {
     })
   return (
       <div className= "build-detail-main">
-        <div className = "container" style={{maxWidth: "3000px"}}>
+        <div className = "build-intro-container" style={{maxWidth: "3000px"}}>
         <div className= "col-md-12">
-        <div className="row no-gutters align-items-center w-100">
-            <div className=" build-pics col-3" style={{flexGrow: "0.5"}}>
-                    <h2 className="title is-5 has-text-grey-light"> Built by: {thisBuild.map(build => build.username)}</h2>
-                    <hr></hr>
-                    <h2 className="title is-5 has-text-grey-light"> Build Description</h2>
-        <div className= "build-comments-area" style={{fontSize:"13px"}}>{thisBuild.map(build => build.comments)}</div>
-        <div className= "build-comments-area"> { ((loggedInStatus === "LOGGED_IN") && user) ?
-              <>
-                  <form className="form" onSubmit={createBuildPost} id="newBuildPost">
-                        <h2 className="title is-5 has-text-grey-light">Post a Comment:</h2>
-                          
-                            <div className="textarea" style={{height:"185px",width:"100% !important"}}>
-                                  <textarea
-                                    type="text"
-                                    name="content"
-                                    className="description"
-                                    style={{height:"182px",width:"100% !important"}}
-                                    required
-                                  />
-                                <div className="postButton">
-                                  <input
-                                    type="submit"
-                                    value="New Comment"
-                                    style={{fontSize:"12px", marginTop:"10px"}}
-                                    className="button is-success"
-                                  />
-                              </div>
-                            </div>
-                                  <input
-                                    value= {buildId}
-                                    name="pcbuild_id"
-                                    style={{display: "none"}}
-                                    required
-                                  />
-                                  <input
-                                    type="text"
-                                    name="user_id"
-                                    value={user.id}
-                                    className="description"
-                                    required
-                                    style={{display: "none"}}
-                                  />
-                                  <input
-                                    type="text"
-                                    name="username"
-                                    value={user.username}
-                                    className="description"
-                                    required
-                                    style={{display: "none"}}
-                                  />
-                          
-                  </form>
-                </>
-                :
-              ""}
-              </div>
-        </div>
-        <div className="build-pics col-5" style={{margin:"20px"}}>
-              <Carousel fade= "true">
-                  {thisBuildImage}
-              </Carousel>
-        </div>
-        <div className="build-posts-column col-3">
-                  <div>
-                    {currentBuildPosts}
-
-                    {showBuildposts.length > 3 ?
-                    <Pagination
-                      elementsPerPage={buildpostsPerPage}
-                      totalElements={showBuildposts.length}
-                      paginate={paginate}
-                        /> : ""}
+            <div className="row no-gutters align-items-center w-100">
+                <div className=" build-pics col-3" style={{flexGrow: "0.5"}}>
+                        <h2 className="build-owner"> 
+                        
+                          <Link to={`/profile/${thisBuild.map(build => build.user_id)}`}>
+                          {thisBuild.map(build => build.user.attachment_url).toString() ? <img src = {`${fpsbuildsurl}/${thisBuild.map(build => build.user.attachment_url)}`}  className="profile-avatar"/> 
+                          : 
+                          <Gravatar email= {thisBuild.map(build => build.user.email).toString()} className="profile-avatar" size={100} default="robohash"/> }
+                          <span> <em><small>{thisBuild.map(build => build.username)}</small></em></span>
+                          </Link>
+                        </h2>
+                        
                     
-                </div>
+                        <h3 className="title is-6 has-text-grey-light" style={{marginLeft: "8px",marginBottom: "1px",padding:"5px"}}> Build Description</h3>
+            <div className= "build-comments-area" style={{fontSize:"13px"}}>{thisBuild.map(build => build.comments)}</div>
+      
+            <div className= "build-comments-area"> { ((loggedInStatus === "LOGGED_IN") && user) ?
+                  <>
+                      <form className="form" onSubmit={createBuildPost} id="newBuildPost">
+                            <h2 className="title is-6 has-text-grey-light">Post a Comment:</h2>
+                              
+                                <div className="post-textarea" style={{height:"185px",width:"100% !important"}}>
+                                      <textarea
+                                        type="text"
+                                        name="content"
+                                        className="description"
+                                        style={{height:"182px",fontSize: "14px"}}
+                                        required
+                                      />
+                                    <div className="postButton">
+                                      <input
+                                        type="submit"
+                                        value="New Comment"
+                                        style={{fontSize:"12px", marginTop:"10px"}}
+                                        className="button is-success"
+                                      />
+                                  </div>
+                                </div>
+                                      <input
+                                        value= {buildId}
+                                        name="pcbuild_id"
+                                        style={{display: "none"}}
+                                        required
+                                      />
+                                      <input
+                                        type="text"
+                                        name="user_id"
+                                        value={user.id}
+                                        className="description"
+                                        required
+                                        style={{display: "none"}}
+                                      />
+                                      <input
+                                        type="text"
+                                        name="username"
+                                        value={user.username}
+                                        className="description"
+                                        required
+                                        style={{display: "none"}}
+                                      />
+                              
+                      </form>
+                    </>
+                    :
+                  ""}
+                  </div>
+            </div>
+            <div className="build-pics col-5" style={{marginLeft:"20px", marginRight:"20px"}}>
+                  <Carousel fade= "true">
+                      {thisBuildImage}
+                  </Carousel>
+            </div>
+            <div className="build-posts-column col-3" style={{maxWidth:"25.5%"}}>
+                      <div>
+                        {currentBuildPosts}
+
+                        {showBuildposts.length > 4 ?
+                        <Pagination
+                          elementsPerPage={buildpostsPerPage}
+                          totalElements={showBuildposts.length}
+                          paginate={paginate}
+                            /> : ""}
+                        
+                    </div>
+            </div>
+          </div>
+         </div>
         </div>
-      </div>
-    </div>
-      </div>
+        <div className = "build-intro-mobile-container" style={{maxWidth: "3000px"}}>
+            <div className= "col-xl-12">
+                <div className="row no-gutters align-items-center w-100">
+                    <div className=" build-pics col-12" style={{marginTop:"10px"}}>
+                            <h2 className="build-owner"> 
+                            
+                              <Link to={`/profile/${thisBuild.map(build => build.user_id)}`}>
+                              {thisBuild.map(build => build.user.attachment_url).toString() ? <img src = {`${fpsbuildsurl}/${thisBuild.map(build => build.user.attachment_url)}`}  className="profile-avatar"/> 
+                              : 
+                              <Gravatar email= {thisBuild.map(build => build.user.email).toString()} className="profile-avatar" size={100} default="robohash"/> }
+                              <span> <em><small>{thisBuild.map(build => build.username)}</small></em></span>
+                              </Link>
+                            </h2>
+                            
+                        
+                            <h3 className="title is-6 has-text-grey-light" style={{marginLeft: "8px",marginBottom: "1px",padding:"5px"}}> Build Description</h3>
+                <div className= "build-comments-area" style={{fontSize:"13px"}}>{thisBuild.map(build => build.comments)}</div>
+                </div>
+                <div className="build-pics-carousel col-12" style={{marginTop:"10px"}}>
+                      <Carousel fade= "true">
+                          {thisBuildImage}
+                      </Carousel>
+                </div>
+              </div>
+          </div>
+        </div>
         <div className="build-detail-container">
         <div className="row">
             <div className="col-sm-12">
@@ -242,11 +280,11 @@ function BuildDetail(img) {
                     <div className="build-detail-card-body">
                       {thisBuildParts}
                     </div>
-                    <h2 className="title is-5 has-text-grey-light">  Build Description</h2>
-                    <div className= "build-comments-area">{thisBuild.map(build => build.comments)}</div>
                 </div>
             </div>
         </div>
+
+        <div className= "current-build-posts-mobile">
             {currentBuildPosts}
                     {showBuildposts.length > 3 ?
                     <Pagination
@@ -255,11 +293,13 @@ function BuildDetail(img) {
                       paginate={paginate}
                         /> : ""}
         </div>
+        </div>
+        <div className= "post-comments-mobile">
         { ((loggedInStatus === "LOGGED_IN") && user) ?
           <div className = "container">
               <hr></hr>
               <form className="form" onSubmit={createBuildPost} id="newBuildPost">
-                    <h2 className="title is-5 has-text-grey-light">What do you think of this Build?</h2>
+                    <h2 className="title is-5 has-text-grey-light">Post a comment:</h2>
                       <div className="form-row mb-4">
                         <div className="textarea">
                               <textarea
@@ -303,6 +343,7 @@ function BuildDetail(img) {
             </div>
         :
         ""}
+        </div>
       </div>
   )
 }
