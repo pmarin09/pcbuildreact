@@ -12,6 +12,7 @@ function BuildDetail(img) {
     const{fpsbuildsurl,allBuilds, user, adminId, loggedInStatus, buildposts,updateBuildPosts} = useContext(Context)
     const {buildId} = useParams()
     const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
+    const [text,setText] = useState()
     const thisBuildImage = thisBuild.map(a => {
       return a.attachment_url.map(b =>
               <div className = "carousel-fade carousel-item custom">
@@ -64,7 +65,7 @@ function BuildDetail(img) {
           })
         
     const showBuildposts =  buildposts.filter(buildpost => buildpost.pcbuild_id.toString() === buildId).map(filteredPost => (
-        <div className="build-detail-box" style={{fontSize: "12px"}}>
+        <div className="build-detail-box" style={{fontSize: "13px"}}>
            <article className="media">
                <div className="media-left">
                <figure className="image is-48x48">
@@ -122,6 +123,7 @@ function BuildDetail(img) {
         .then(data => {
           console.log("Success",data)
           updateBuildPosts();
+          setText("")
         })
     }
     //PAGINATION 
@@ -168,6 +170,8 @@ function BuildDetail(img) {
                                         name="content"
                                         className="description"
                                         style={{height:"182px",fontSize: "14px"}}
+                                        value= {text}
+                                        onChange={e => setText(e.target.value)}
                                         required
                                       />
                                     <div className="postButton">
@@ -201,7 +205,6 @@ function BuildDetail(img) {
                                         required
                                         style={{display: "none"}}
                                       />
-                              
                       </form>
                     </>
                     :
@@ -239,7 +242,7 @@ function BuildDetail(img) {
                               {thisBuild.map(build => build.user.attachment_url).toString() ? <img src = {`${fpsbuildsurl}/${thisBuild.map(build => build.user.attachment_url)}`}  className="profile-avatar"/> 
                               : 
                               <Gravatar email= {thisBuild.map(build => build.user.email).toString()} className="profile-avatar" size={100} default="robohash"/> }
-                              <span className= "build-owner-name"> <em><small>{thisBuild.map(build => build.username)}</small></em></span>
+                              <span className= "build-owner-name"> {thisBuild.map(build => build.username)}</span>
                               </Link>
                             </h2>
                             

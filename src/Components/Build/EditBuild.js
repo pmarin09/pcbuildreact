@@ -262,9 +262,9 @@ return (
                 </div>
                 <form className="form" onSubmit={uploadBuildImages} id="newBuildImages">
                 <div className="col">
-                                <h3  style={{fontSize: "25px"}}>Add your build images :</h3>
+                                <h3  style={{fontSize: "25px",fontFamily: "Viga", marginTop:"10px",marginBottom: "10px" }}>Add your build images :</h3>
                                 <input type="file" 
-                                  className="dropzone"
+                                  style={{fontFamily: "Viga"}}
                                   id="file_upload" 
                                   name="attachment[]"
                                   multiple
@@ -308,7 +308,7 @@ return (
                           <div className="card-header pr-0 pl-0">
                               <div className="row no-gutters align-items-center w-100">
                                   <div className="d-none d-md-block col text-muted">
-                                      <div className="row no-gutters align-items-center">
+                                      <div className="row no-gutters align-items-center" style={{fontFamily: "Viga"}}>
                                           <div className="build-detail-col-2">Component</div>
                                           <div className="build-detail-col-4">Description</div>
                                           <div className="build-detail-col-2">Price USD</div>
@@ -324,7 +324,7 @@ return (
                                   <div className = "create-build-detail-row" >
                                     <div className="row no-gutters align-items-center w-100"  >
                                         <div className = "build-detail-col-1" id="create-build-icon"><img src={build_icons[pcbuild_part.part.part_type]}/></div>
-                                        <div className = "build-detail-col-1" id="create-build-component" style={{fontSize: "13px", fontWeight: "200px", color: "white"}}>{pcbuild_part.part.part_type}</div>
+                                        <div className = "build-detail-col-1" id="create-build-component" style={{fontSize: "13px", fontWeight: "200px", color: "white", fontFamily: "Viga"}}>{pcbuild_part.part.part_type}</div>
                                         <div className = "component-description col-6" id="create-build-description">
                                         <Select 
                                           name={"pcbuildpart_id[" + pcbuild_part.id + "][part_id]"}
@@ -337,7 +337,7 @@ return (
                                           defaultValue= {{label: pcbuild_part.part.description, value: pcbuild_part.part_id}}
                                         /> 
                                         </div>
-                                        <div className = "build-detail-col-1" id="create-build-price-header" style={{fontSize: "11px",color: "white"}}>Price</div>
+                                        <div className = "build-detail-col-1" id="create-build-price-header" style={{fontSize: "11px",color: "white", fontFamily:"Viga"}}>Price</div>
                                         <div className="build-detail-col-2" id="create-build-price">
                                           <input
                                             type="text"
@@ -381,7 +381,7 @@ return (
                   </div>
               </div>
             </div>
-                    <div className="edit-textarea"> Build Description
+                    <div className="edit-textarea" style={{fontFamily: "Viga"}}> Build Description
                            <textarea
                              type="textarea"
                              name="comments"
@@ -399,11 +399,11 @@ return (
                 </form>
                 <form className="form" onSubmit={addParts} id="addParts">
                   <div className="edit-build-detail-card mb-3">
-                    <div style={{fontSize: "25px", marginTop: "10px", textAlign: "Center", fontWeight:"350", color:"rgb(192, 189, 189)"}}> Add Parts To My Build</div>
+                    <div style={{ fontFamily: "Viga", fontSize: "25px", marginTop: "10px", textAlign: "Center", fontWeight:"350", color:"rgb(192, 189, 189)"}}> Add Parts To My Build</div>
                                    
                     <div className="card-header pr-0 pl-0">
                       <div className="d-none d-md-block col text-muted">
-                        <div className="row no-gutters align-items-center">
+                        <div className="row no-gutters align-items-center" style={{fontFamily: "Viga"}}>
                                                 <div className="build-detail-col-2">Component</div>
                                                 <div className="build-detail-col-4">Description</div>
                                                 <div className="build-detail-col-2">Price</div>
@@ -417,7 +417,7 @@ return (
                                       <div className = "create-build-detail-row" >
                                         <div className="row no-gutters align-items-center w-100"  >
                                             <div className = "build-detail-col-1" id="create-build-icon"><img src={build_icons[part]} className="build-icon" /></div>
-                                            <div className = "build-detail-col-2" id="create-build-component" style={{fontSize: "14px", fontWeight: "200px",}} >{part}</div>
+                                            <div className = "build-detail-col-2" id="create-build-component" style={{fontFamily: "Viga",fontSize: "14px", fontWeight: "200px",}} >{part}</div>
                                             <div className = "component-description col-6" id="create-build-description">
                                                 <Select 
                                                   name={"part_id[" + part + "][id]"}
@@ -430,7 +430,7 @@ return (
                                                   defaultValue= {{label: "Select or type to search"}}
                                                 /> 
                                             </div>
-                                            <div className = "build-detail-col-1" id="create-build-price-header">Price</div>
+                                            <div className = "build-detail-col-1" id="create-build-price-header" style={{fontFamily: "Viga"}}>Price</div>
                                             <div className="build-detail-col-2" id="create-build-price">
                                                 <input
                                                   type="text"
@@ -467,7 +467,7 @@ return (
                         <div className= "update-build"> 
                           <input
                             type="submit"
-                            value="Add Multiple Parts"
+                            value="Add All"
                             className="add-parts-button"
                           />
                       </div>

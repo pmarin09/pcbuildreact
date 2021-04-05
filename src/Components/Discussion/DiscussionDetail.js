@@ -108,6 +108,7 @@ function DiscussionDetail() {
                             ""}
                         </div>
                     </div>
+                    <hr className= "posts-hr"></hr>
                     <div className="posts-content-box" id="posts-content-box">
                     {currentPosts}
                     </div>
@@ -138,7 +139,7 @@ function DiscussionDetail() {
     <hr></hr>
     { (loggedInStatus === "LOGGED_IN") ?
       <div className = "container">
-        <h2 className="title is-5 has-text-grey-light">Create a New Post</h2>
+        <h2 className="title is-5 has-text-grey-light" style={{fontFamily: "Viga"}}>Create a New Post</h2>
           <form className="form" onSubmit={createPost} id="newPost">
             <div className="form-row mb-4">
               <div className="textarea">
@@ -153,6 +154,7 @@ function DiscussionDetail() {
               type="submit"
               value="New Post"
               className="button is-success"
+              style={{fontFamily: "Viga"}}
             />
             </div>
               </div>

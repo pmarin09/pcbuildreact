@@ -234,7 +234,7 @@ html{
 }
   .build-owner-name:hover{
       
-      color: red;
+      color:#09cae7;
   }
   .build-intro-mobile-container{
     display: none;
@@ -307,7 +307,7 @@ html{
   }
   .build-comments-area{
     white-space: break-spaces;
-    padding: 25px;
+    padding: 10px;
     color: white;
     background-color: #343a40;
     margin: 10px;
@@ -740,13 +740,13 @@ input:checked + .slider:before {
     color: rgb(123, 137, 144) !important;
     border-radius: 10px;
     flex: none;
-    width: 75%;
+    width: 85%;
     padding: .75rem;
     box-sizing: inherit;
     margin:auto;
   }
   .posts-content-box.dark{
-    background-color: rgb(37, 41, 47) !important;
+    background-color: rgb(44, 48, 54) !important;
     color: rgb(123, 137, 144) !important;
     border-radius: 10px;
     box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
@@ -754,6 +754,9 @@ input:checked + .slider:before {
     display: block;
     padding: 1.25rem;
     margin-top: 20px;
+    margin-bottom:10px;
+    width:85%;
+    margin:auto;
   }
   .section{
     background-color: #1c222a;
@@ -1014,6 +1017,14 @@ input:checked + .slider:before {
     color: rgb(192, 189, 189);
   }
 
+  .posts-hr{
+    border: none;
+    display: block;
+    height: 1px;
+    margin: 1.5rem 0;
+    background-color:rgb(199, 199, 199);
+  }
+
   .posts-box {
     // background-color: #28292a;
     border-radius: 6px;
@@ -1023,11 +1034,14 @@ input:checked + .slider:before {
     display: block;
     padding: 1.25rem;
     margin-top: 20px;
+    width:85%;
+    margin:auto;
+    margin-bottom:20px;
 }
 
 .column.is-9 {
   flex: none;
-  width: 85%;
+  width: 85% !important;
 }
 
 .postForm {
@@ -1210,7 +1224,7 @@ div{
   padding: calc(.5em - 1px) calc(.75em - 1px);
   position: relative;
   vertical-align: top;
-
+  font-family: "Viga";
 }
 .add-images-button:hover{
   background-position: 100% 0;
@@ -1222,6 +1236,7 @@ div{
   background-image: linear-gradient(to right, #1b59cc, #1b59cc, #1b59cc, #1b59cc);
   box-shadow: 0 1px 12px 0 rgba(49, 100, 196, 0.75);
 }
+
 
 .update-build-button {
   background-color: #06af2b !important;
@@ -1248,6 +1263,7 @@ div{
   padding: calc(.5em - 1px) calc(.75em - 1px);
   position: relative;
   vertical-align: top;
+  font-family: "Viga";
 }
 .update-build-button:hover{
   background-position: 100% 0;
@@ -1285,6 +1301,7 @@ div{
   padding: calc(.5em - 1px) calc(.75em - 1px);
   position: relative;
   vertical-align: top;
+  font-family:"Viga";
 }
 .add-parts-button:hover{
   background-position: 100% 0;
@@ -1991,9 +2008,22 @@ margin-bottom: 10px;
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: red !important;
-  background-color: rgb(36,38,39);
-  border: 1px solid #393a3b;
+  color: #af0000!important;
+  background-color: #232526;
+  border: 1px solid #474747;
+  font-family:"Viga";
+}
+
+.page-link:hover {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #d10303 !important;
+  background-color: #313435;
+  border: 1px solid #474747;
+  font-family:"Viga";
 }
 
 //Notifications
@@ -2356,6 +2386,36 @@ transform-origin: left;
     padding: calc(.5em - 1px) calc(.75em - 1px);
     position: relative;
     vertical-align: top;
+    font-family: "Viga";
+  }
+
+  .file-upload-button{
+    background-color: #0658c3 !important;
+    border-color: transparent;
+    color: #fff;
+    margin-left: 103px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-width: 1px;
+    cursor: pointer;
+    justify-content: center;
+    padding: calc(.5em - 1px) 1em;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-appearance: none;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 2.5em;
+    justify-content: flex-start;
+    line-height: 1.5;
+    padding: calc(.5em - 1px) calc(.75em - 1px);
+    position: relative;
+    vertical-align: top;
+    font-family: "Viga";
   }
   
   .update-build-button {
@@ -2384,6 +2444,7 @@ transform-origin: left;
     padding: calc(.5em - 1px) calc(.75em - 1px);
     position: relative;
     vertical-align: top;
+    font-family: "Viga";
   }
   .add-parts-button {
     background-color: #f0cc02 !important;
@@ -2411,7 +2472,7 @@ transform-origin: left;
     padding: calc(.5em - 1px) calc(.75em - 1px);
     position: relative;
     vertical-align: top;
-
+    font-family:"Viga";
   }
 
    .price{

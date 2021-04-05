@@ -8,8 +8,8 @@ const Pagination = ({ elementsPerPage, totalElements, paginate }) => {
   }
 
   return (
-    <nav>
-      <ul className='pagination'>
+    <nav style={{margin:"auto"}}>
+      <ul className='pagination' style={{fontSize: "11px"}}>
         {pageNumbers.map(number => (
           <li key={number} className='page-item'>
             <a onClick={() => paginate(number)} href='#' className='page-link'>
