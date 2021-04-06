@@ -156,9 +156,9 @@ function BuildDetail(img) {
                         <h2 className="build-owner" style={{fontFamily: "Viga"}}> 
                         
                           <Link to={`/profile/${thisBuild.user_id}`}>
-                          {thisBuild.user.attachment_url.toString() ? <img src = {`${fpsbuildsurl}/${thisBuild.user.attachment_url}`}  className="profile-avatar"/> 
+                          {thisBuild.user.attachment_url ? <img src = {`${fpsbuildsurl}/${thisBuild.user.attachment_url}`}  className="profile-avatar"/> 
                           : 
-                          <Gravatar email= {thisBuild.map(build => build.user.email).toString()} className="profile-avatar" size={100} default="robohash"/> }
+                          <Gravatar email= {thisBuild.user.email.toString()} className="profile-avatar" size={100} default="robohash"/> }
                           <span className= "build-owner-name"> {thisBuild.username}</span>
                           </Link>
                         </h2>
@@ -247,7 +247,7 @@ function BuildDetail(img) {
                             <h2 className="build-owner"> 
                             
                               <Link to={`/profile/${thisBuild.user_id}`}>
-                              {thisBuild.user.attachment_url.toString() ? <img src = {`${fpsbuildsurl}/${thisBuild.user.attachment_url}`}  className="profile-avatar"/> 
+                              {thisBuild.user.attachment_url ? <img src = {`${fpsbuildsurl}/${thisBuild.user.attachment_url}`}  className="profile-avatar"/> 
                               : 
                               <Gravatar email= {thisBuild.user.email.toString()} className="profile-avatar" size={100} default="robohash"/> }
                               <span className= "build-owner-name"> {thisBuild.username}</span>
