@@ -268,7 +268,7 @@ return (
                 className="build-edit-images"
                 // style={{ border: selectedImg === url ? "4px solid teal" : "" }}
                 key={i}
-                src={url}
+                // src={url}
                 // onClick={() => setSelectedImg(url)}
                 />
                 </div>
