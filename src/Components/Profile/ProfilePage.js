@@ -16,7 +16,6 @@ const myPosts = posts.filter(post => post.user_id.toString() === userId)
 const myLikes = myBuilds.map(build => build.likes).reduce((acc, likes) => acc +likes.length,0)
 const myDiscussions = discussions.filter(discussion => discussion.user_id.toString() === userId)
 const myFavorites = favorites.filter(favorite => favorite.user_id.toString() === userId)
-console.log(myDiscussions)
 
 return (
   

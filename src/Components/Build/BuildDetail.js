@@ -7,18 +7,20 @@ import Carousel from 'react-bootstrap/Carousel'
 import Pagination from '../../Pagination';
 import Moment from 'moment';
 import moment from "moment";
+import Loader from 'react-loader-spinner';
 
 function BuildDetail(img) {
-    const{fpsbuildsurl,allBuilds, user, adminId, loggedInStatus, buildposts,updateBuildPosts} = useContext(Context)
+    const{fpsbuildsurl, user, adminId, loggedInStatus, buildposts,updateBuildPosts} = useContext(Context)
     const {buildId} = useParams()
-    const thisBuild = allBuilds.filter(build => build.id.toString() === buildId)
+    const [thisBuild, SetThisBuild] = useState()
     const [text,setText] = useState()
-    const thisBuildImage = thisBuild.map(a => {
-      return a.attachment_url.map(b =>
+    
+    function thisBuildImage(){
+      return thisBuild.attachment_url.map( b => 
               <div className = "carousel-fade carousel-item custom">
                <img src = {`${fpsbuildsurl}/${b}`} style = {{maxWidth:  "700px", maxHeight: "720px", borderRadius: "15px", borderColor:"#1f237"}}></img>
               </div>
-        )})
+    )}
     function humanize(str) {
       var i, frags = str.split('_');
       for (i=0; i<frags.length; i++) {
@@ -26,8 +28,7 @@ function BuildDetail(img) {
       }
       return frags.join(' ');
     }
-    const thisBuildParts = thisBuild.map(a => {
-        return  a.pcbuild_parts.map(b =>
+    function thisBuildParts(){ return thisBuild.pcbuild_parts.map( b =>
              (b.part.description !== "Not Available") ? 
              <>
           <div className = "build-detail-row">
@@ -62,7 +63,7 @@ function BuildDetail(img) {
           <hr className="build-detail-hr"></hr>
             </>
             : "" )
-          })
+          }
         
     const showBuildposts =  buildposts.filter(buildpost => buildpost.pcbuild_id.toString() === buildId).map(filteredPost => (
         <div className="build-detail-box" style={{fontSize: "13px"}}>
@@ -109,9 +110,9 @@ function BuildDetail(img) {
             </article>
           </div>
         ))
-    const pcbuildParts = thisBuild.map(a => {return   a.pcbuild_parts.map(b=>b.price)})
-    const pcbuildPrices = Object.values(pcbuildParts).reduce((acc,price) => {return  price},0)
-    const pcbuildTotalCost = Object.values(pcbuildPrices).reduce((acc, price)=>{return acc + price},0)
+    function pcbuildTotalCost(){
+    return Object.values(thisBuild.pcbuild_parts.map(pcbuildpart => pcbuildpart.price)).reduce((acc,price) => {return  acc + price},0)
+                          }
     function createBuildPost(e) {
         e.preventDefault();
         const form = new FormData(document.getElementById("newBuildPost"));
@@ -136,10 +137,17 @@ function BuildDetail(img) {
    // Change page
    const paginate = pageNumber => setCurrentPage(pageNumber);
 
-   useEffect(() => {
+
+    useEffect (() => {
       window.scrollTo(0, 0);
-    })
+      fetch(`${fpsbuildsurl}/pcbuilds/${buildId}.json`)
+      .then (res => res.json())
+      .then (data => SetThisBuild(data))
+      console.log(thisBuild)
+    },[])
   return (
+    <div>
+    {thisBuild  ? 
       <div className= "build-detail-main">
         <div className = "build-intro-container" style={{maxWidth: "3000px"}}>
         <div className= "col-md-12">
@@ -147,17 +155,17 @@ function BuildDetail(img) {
                 <div className=" build-pics col-3" style={{flexGrow: "0.5"}}>
                         <h2 className="build-owner" style={{fontFamily: "Viga"}}> 
                         
-                          <Link to={`/profile/${thisBuild.map(build => build.user_id)}`}>
-                          {thisBuild.map(build => build.user.attachment_url).toString() ? <img src = {`${fpsbuildsurl}/${thisBuild.map(build => build.user.attachment_url)}`}  className="profile-avatar"/> 
+                          <Link to={`/profile/${thisBuild.user_id}`}>
+                          {thisBuild.user.attachment_url.toString() ? <img src = {`${fpsbuildsurl}/${thisBuild.user.attachment_url}`}  className="profile-avatar"/> 
                           : 
                           <Gravatar email= {thisBuild.map(build => build.user.email).toString()} className="profile-avatar" size={100} default="robohash"/> }
-                          <span className= "build-owner-name"> {thisBuild.map(build => build.username)}</span>
+                          <span className= "build-owner-name"> {thisBuild.username}</span>
                           </Link>
                         </h2>
                         
                     
                         <h3 className="title is-6 has-text-grey-light" style={{marginLeft: "8px",marginBottom: "1px",padding:"5px",fontFamily: "Viga"}}> Build Description</h3>
-            <div className= "build-comments-area" style={{fontSize:"13px"}}>{thisBuild.map(build => build.comments)}</div>
+            <div className= "build-comments-area" style={{fontSize:"13px"}}>{thisBuild.comments}</div>
       
             <div className= "build-comments-area"> { ((loggedInStatus === "LOGGED_IN") && user) ?
                   <>
@@ -213,7 +221,7 @@ function BuildDetail(img) {
             </div>
             <div className="build-pics col-5" style={{marginLeft:"20px", marginRight:"20px"}}>
                   <Carousel fade= "true">
-                      {thisBuildImage}
+                      {thisBuildImage()}
                   </Carousel>
             </div>
             <div className="build-posts-column col-3" style={{maxWidth:"25.5%"}}>
@@ -238,21 +246,21 @@ function BuildDetail(img) {
                     <div className=" build-pics col-12" style={{marginTop:"10px"}}>
                             <h2 className="build-owner"> 
                             
-                              <Link to={`/profile/${thisBuild.map(build => build.user_id)}`}>
-                              {thisBuild.map(build => build.user.attachment_url).toString() ? <img src = {`${fpsbuildsurl}/${thisBuild.map(build => build.user.attachment_url)}`}  className="profile-avatar"/> 
+                              <Link to={`/profile/${thisBuild.user_id}`}>
+                              {thisBuild.user.attachment_url.toString() ? <img src = {`${fpsbuildsurl}/${thisBuild.user.attachment_url}`}  className="profile-avatar"/> 
                               : 
-                              <Gravatar email= {thisBuild.map(build => build.user.email).toString()} className="profile-avatar" size={100} default="robohash"/> }
-                              <span className= "build-owner-name"> {thisBuild.map(build => build.username)}</span>
+                              <Gravatar email= {thisBuild.user.email.toString()} className="profile-avatar" size={100} default="robohash"/> }
+                              <span className= "build-owner-name"> {thisBuild.username}</span>
                               </Link>
                             </h2>
                             
                         
                             <h3 className="title is-6 has-text-grey-light" style={{marginLeft: "8px",marginBottom: "1px",padding:"5px"}}> Build Description</h3>
-                <div className= "build-comments-area" style={{fontSize:"13px"}}>{thisBuild.map(build => build.comments)}</div>
+                <div className= "build-comments-area" style={{fontSize:"13px"}}>{thisBuild.comments}</div>
                 </div>
                 <div className="build-pics-carousel col-12" style={{marginTop:"10px"}}>
                       <Carousel fade= "true">
-                          {thisBuildImage}
+                          {thisBuildImage()}
                       </Carousel>
                 </div>
               </div>
@@ -261,8 +269,8 @@ function BuildDetail(img) {
         <div className="build-detail-container">
         <div className="row">
             <div className="col-sm-12">
-                          <h1 style={{fontSize: "30px", marginLeft:"10px", fontFamily: "Viga"}}>{thisBuild.map(build => build.build_name)}
-                            <div style={{verticalAlign: "Middle", float:"right",marginTop: "1.5px"}}><h1 className="total-cost">{pcbuildTotalCost}</h1></div>
+                          <h1 style={{fontSize: "30px", marginLeft:"10px", fontFamily: "Viga"}}>{thisBuild.build_name}
+                            <div style={{verticalAlign: "Middle", float:"right",marginTop: "1.5px"}}><h1 className="total-cost">{pcbuildTotalCost()}</h1></div>
                             <div style={{verticalAlign: "Middle", float:"right"}}><i className="ri-money-dollar-circle-line ri-1.5x"></i></div>
                           </h1>
             </div>
@@ -283,7 +291,7 @@ function BuildDetail(img) {
                         </div>
                     </div>
                     <div className="build-detail-card-body">
-                      {thisBuildParts}
+                      {thisBuildParts()}
                     </div>
                 </div>
             </div>
@@ -350,6 +358,18 @@ function BuildDetail(img) {
         :
         ""}
         </div>
+      </div>
+      :
+      <div className="loading">
+    <Loader
+        type="ThreeDots"
+        color="#B50000"
+        secondaryColor = "grey"
+        height={250}
+        width={250}
+        timeout={4000} //2 secs
+    /> 
+  </div>}
       </div>
   )
 }

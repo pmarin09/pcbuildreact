@@ -1,4 +1,4 @@
-import React, {useContext,useState} from "react";
+import React, {useContext,useEffect,useState} from "react";
 import { Context } from "../../Context";
 import 'bootstrap/dist/css/bootstrap.css';
 import Gravatar from 'react-gravatar'
@@ -23,10 +23,10 @@ import 'react-toastify/dist/ReactToastify.css'
 
 
 function EditBuild (){
-  const {allBuilds,user,parts,fpsbuildsurl,updateImages,updateBuilds}=useContext(Context)
+  const {user,parts,fpsbuildsurl,updateImages,updateBuilds,selectedImg,setSelectedImg}=useContext(Context)
   const history = useHistory()
   const {buildId} = useParams()
-  const thisBuild = allBuilds.find(build => build.id.toString() === buildId)
+  const [thisBuild, SetThisBuild] = useState()
   const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const CPUCooler = (parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
@@ -91,9 +91,10 @@ function EditBuild (){
     "Mouse",
     "Headset",
   ]
-const thisBuild_part_types = `${thisBuild ? thisBuild.pcbuild_parts.map(pcbuild_part => pcbuild_part.part.part_type) : ""}`
-const missing_parts = part_types.filter(part => thisBuild_part_types.split(",").indexOf(part) === -1)
 
+  function missing_parts() {
+    return  part_types.filter(part => `${thisBuild ? thisBuild.pcbuild_parts.map(pcbuild_part => pcbuild_part.part.part_type) : ""}`.split(",").indexOf(part) === -1)
+  }
   const customStyles = {
   
     container: base => ({
@@ -203,7 +204,16 @@ const missing_parts = part_types.filter(part => thisBuild_part_types.split(",").
     setTimeout( () => window.location.reload(false),1000)
   }
 
+  useEffect (() => {
+    fetch(`${fpsbuildsurl}/pcbuilds/${buildId}.json`)
+    .then (res => res.json())
+    .then (data => SetThisBuild(data))
+    console.log(thisBuild)
+  },[])
+
+
 return (
+  
   <div>
   {thisBuild ? 
       <div className="profile-container">
@@ -254,15 +264,22 @@ return (
                     <i className="fas fa-minus-circle"
                     onClick= {() =>{fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/delete_attachment/${thisBuild.attachment_id[i]}.json`, {method:"DELETE",}); updateImages()}}>
                     </i>
-                <img src = {`${fpsbuildsurl}/${url}`} className="build-edit-images"/>
+                <img src = {`${fpsbuildsurl}/${url}`} 
+                className="build-edit-images"
+                // style={{ border: selectedImg === url ? "4px solid teal" : "" }}
+                key={i}
+                src={url}
+                // onClick={() => setSelectedImg(url)}
+                />
                 </div>
               </div>
           )}
+
                 </div>
                 </div>
                 <form className="form" onSubmit={uploadBuildImages} id="newBuildImages">
                 <div className="col">
-                                <h3  style={{fontSize: "25px",fontFamily: "Viga", marginTop:"10px",marginBottom: "10px" }}>Add your build images :</h3>
+                                <h3  style={{fontSize: "25px",fontFamily: "Viga", marginTop:"10px", marginBottom: "10px" }}>Add your build images :</h3>
                                 <input type="file" 
                                   style={{fontFamily: "Viga"}}
                                   id="file_upload" 
@@ -318,7 +335,6 @@ return (
                           </div>
                           <div className="create-build-detail-card-body">
                             {thisBuild.pcbuild_parts.map(function(pcbuild_part) {
-                              console.log(pcbuild_part)
                               return (   
                                 <>
                                   <div className = "create-build-detail-row" >
@@ -411,7 +427,7 @@ return (
                       </div>
                     </div>
                     <div className="create-build-detail-card-body">
-                        {missing_parts.map(function(part) {
+                        {missing_parts().map(function(part) {
                                   return (   
                                     <>
                                       <div className = "create-build-detail-row" >
@@ -489,5 +505,6 @@ return (
   </div>
   }
   </div>
+ 
 )}
 export default EditBuild;

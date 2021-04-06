@@ -94,6 +94,7 @@ import { useHistory } from 'react-router-dom';
   /////
   const adminId = 9
   const [users, setUsers]=useState([])
+  const [selectedImg, setSelectedImg]=useState()
   const usersUrl = `${fpsbuildsurl}/users.json`
     useEffect(()=>{
           fetch(usersUrl)
@@ -285,7 +286,9 @@ import { useHistory } from 'react-router-dom';
                 updateImages,
                 updateBuilds,
                 updateBuildPosts,
-                loggedInStatus
+                loggedInStatus,
+                selectedImg,
+                setSelectedImg
             }}>
                 {children}
             </Context.Provider>
