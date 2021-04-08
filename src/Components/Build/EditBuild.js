@@ -23,10 +23,11 @@ import 'react-toastify/dist/ReactToastify.css'
 
 
 function EditBuild (){
-  const {user,parts,fpsbuildsurl,updateImages,updateBuilds,selectedImg,setSelectedImg}=useContext(Context)
+  const {user,parts,fpsbuildsurl}=useContext(Context)
   const history = useHistory()
   const {buildId} = useParams()
   const [thisBuild, SetThisBuild] = useState()
+  const [mainImage,SetMainImage]=useState(0)
   const Mobo = (parts.filter(part => part.part_type === "Mobo")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const CPU = (parts.filter(part => part.part_type === "CPU")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const CPUCooler = (parts.filter(part => part.part_type === "CPUCooler")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
@@ -158,7 +159,7 @@ function EditBuild (){
     .then(response => response.json())
     .then(data => {
       console.log("Success",data)
-      updateBuilds();
+      updateThisBuild();
     })
     toast.success("Updating your build... ", {
       position: toast.POSITION.TOP_CENTER
@@ -176,7 +177,7 @@ function EditBuild (){
     .then(response => response.json())
     .then(data => {
       console.log("Success",data)
-      updateImages();
+      updateThisBuild();
     })
     .catch((error) => {
       console.error("Error", error)
@@ -196,13 +197,35 @@ function EditBuild (){
     .then(response => response.json())
     .then(data => {
       console.log("Success",data)
-      updateBuilds();
+      updateThisBuild();
     })
     toast.success("Adding new parts to your build.. ", {
       position: toast.POSITION.TOP_CENTER
     });
     setTimeout( () => window.location.reload(false),1000)
   }
+
+  function assignMainImage(e){
+    e.preventDefault();
+    const form = new FormData(document.getElementById("assignMainImage"));
+      fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/assign_image/${buildId}.json`, {
+        method: "PATCH",
+        body: form,
+      })
+      .then(handleErrors)
+      .then(response => response.json())
+      .then(data => {
+        console.log("Success",data)
+        updateThisBuild();
+      })
+      setTimeout( () => window.location.reload(false),1000)
+    }
+  
+    function updateThisBuild(){
+      setTimeout( () => fetch(`${fpsbuildsurl}/pcbuilds/${buildId}.json`)
+    .then (res => res.json())
+    .then (data => SetThisBuild(data)),500)
+    }
 
   useEffect (() => {
     fetch(`${fpsbuildsurl}/pcbuilds/${buildId}.json`)
@@ -211,14 +234,13 @@ function EditBuild (){
     console.log(thisBuild)
   },[])
 
-
 return (
   
   <div>
   {thisBuild ? 
       <div className="profile-container">
         <div className="row">
-          <div className="col-xs-3 col-sm-3" >{thisBuild.attachment_url ? <img src = {`${fpsbuildsurl}/${thisBuild.attachment_url[0]}`}  className="build-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }
+          <div className="col-xs-3 col-sm-3" >{thisBuild.attachment_url ? <img src = {`${fpsbuildsurl}/${thisBuild.attachment_url[thisBuild.main_image ? thisBuild.main_image : 0]}`}  className="build-img-avatar"/> : <Gravatar email="1000-email@example.com" /> }
           </div>
           <div className="col-sm-9">
           <table className="profile-table">
@@ -257,25 +279,50 @@ return (
               </div>
             <div className="col-sm-9">
                 <div className= "build-card-body">
+                <form className="form" onSubmit={assignMainImage} id="assignMainImage">
+                               
                 <div className="row">
                   {thisBuild.attachment_url.map((url,i) =>
               <div className = "col-sm-4">
                 <div>
                     <i className="fas fa-minus-circle"
-                    onClick= {() =>{fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/delete_attachment/${thisBuild.attachment_id[i]}.json`, {method:"DELETE",}); updateImages()}}>
+                    onClick= {() =>{fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/delete_attachment/${thisBuild.attachment_id[i]}.json`, {method:"DELETE",}); updateThisBuild()}}>
                     </i>
+                    <input
+                             type="text"
+                             name="main_image"
+                             style={{display: "none"}}
+                             value={mainImage}
+                           />
                 <img src = {`${fpsbuildsurl}/${url}`} 
                 className="build-edit-images"
-                // style={{ border: selectedImg === url ? "4px solid teal" : "" }}
+                style={{ border: i === mainImage ? "4px solid rgb(29 188 141)" : "" }}
                 key={i}
-                // src={url}
-                // onClick={() => setSelectedImg(url)}
+                name="main_image"
+                onMouseEnter={() => SetMainImage(i)}
+                onClick={(e)=>{
+                  e.preventDefault();
+                  const form = new FormData(document.getElementById("assignMainImage"));
+                  fetch(`${fpsbuildsurl}/pcbuilds/${buildId}/assign_image/${buildId}.json`, {
+                      method: "PATCH",
+                      body: form,
+                    })
+                    .then(handleErrors)
+                    .then(response => response.json())
+                    .then(data => {
+                      console.log("Success",data)
+
+                        fetch(`${fpsbuildsurl}/pcbuilds/${buildId}.json`)
+                        .then (res => res.json())
+                        .then (data => SetThisBuild(data))
+                    })
+                }}
                 />
                 </div>
               </div>
-          )}
-
+                 )}
                 </div>
+                </form>
                 </div>
                 <form className="form" onSubmit={uploadBuildImages} id="newBuildImages">
                 <div className="col">
@@ -379,7 +426,7 @@ return (
                                               .then(response => response.json())
                                               .then(data => {
                                                console.log("Success",data)
-                                                updateBuilds();
+                                                updateThisBuild();
                                               })
                                               toast.error(`Removing  ${pcbuild_part.part.part_type} from your build.. `, {
                                                 position: toast.POSITION.TOP_CENTER
@@ -466,7 +513,7 @@ return (
                                                   .then(response => response.json())
                                                   .then(data => {
                                                     console.log("Success",data)
-                                                    updateBuilds();
+                                                    updateThisBuild();
                                                   })
                                                   toast.success(`Adding a ${part} to your build.. `, {
                                                     position: toast.POSITION.TOP_CENTER

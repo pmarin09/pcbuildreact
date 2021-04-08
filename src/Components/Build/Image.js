@@ -102,7 +102,7 @@ function Image({img}) {
               {img.id === 12 ?firsbuild : ""}
               {img.id === 51 ?bestgpu : ""}
               {img.id === 56 ?watercooled : ""}
-              <Link to={`/builds/${img.id}`}><img src={`${fpsbuildsurl}/${img.attachment_url[0]}`} className= "card-img-top"/></Link>
+              <Link to={`/builds/${img.id}`}><img src={`${fpsbuildsurl}/${img.attachment_url[img.main_image  ? img.main_image : 0]}`} className= "card-img-top"/></Link>
               
               <div>
                 <div className= "comments-icon"><Link to={`/builds/${img.id}`}><img src={buildcomments}/> </Link> <em><small>{buildpostcount}</small></em>

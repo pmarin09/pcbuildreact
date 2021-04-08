@@ -8,7 +8,7 @@ import News from "../News"
 
 
 function Main(){
-const{allBuilds,setUser,fpsbuildsurl} = useContext(Context)
+const{allBuilds,setUser,updateBuilds,fpsbuildsurl} = useContext(Context)
 const imageElements = allBuilds.map((img,i) => (
     <Image key = {img.id} img={img}/>
 ))
@@ -38,8 +38,9 @@ useEffect(() => {
 },[])
 
 useEffect(() => {
+  updateBuilds()
   window.scrollTo(0, 0);
-})
+},[])
 return (
   <>
   <div className = "album bg-light">

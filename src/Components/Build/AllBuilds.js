@@ -1,10 +1,10 @@
-import React, {useContext,useState} from "react"
+import React, {useContext,useEffect,useState} from "react"
 import Image from "./Image"
 import styles from "../../styles.scss"
 import {Context} from "../../Context"
 import Pagination from "../../Pagination"
 function AllBuilds(){
-  const{allBuilds} = useContext(Context)
+  const{allBuilds,updateBuilds} = useContext(Context)
   const imageElements = allBuilds.map((img,i) => (
     <Image key = {img.id} img={img}/>
 ))
@@ -17,6 +17,8 @@ const indexOfFirstBuild = indexOfLastBuild - buildsPerPage;
 const currentBuilds = imageElements.slice(indexOfFirstBuild, indexOfLastBuild);
 // Change page
 const paginate = pageNumber => setCurrentPage(pageNumber);
+
+useEffect(() => updateBuilds(),[])
     return (
     <main role="main">
       <div className = "album py-5 bg-light">

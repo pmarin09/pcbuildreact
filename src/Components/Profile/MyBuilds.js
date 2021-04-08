@@ -9,13 +9,15 @@ function MyBuilds() {
 const {allBuilds,user, adminId,updateBuilds,loggedInStatus,fpsbuildsurl} = useContext(Context)
 const {userId} = useParams()
 const myBuilds = allBuilds.filter(build => build.user_id.toString() === userId)
+
+
 return (
           <div className= "container">
               { myBuilds.map(filteredBuild => (
                 <div className="profile-card">
                 <div className="row no-gutters">
                 <div className="col-md-4">
-                <img src={`${fpsbuildsurl}/${filteredBuild.attachment_url[0]}`} width="400px" className="profile-card-img" alt="..."/>
+                <img src={`${fpsbuildsurl}/${filteredBuild.attachment_url[filteredBuild.main_image ==! null ? filteredBuild.main_image : 0]}`} width="400px" className="profile-card-img" alt="..."/>
                 </div>
                 <div className="col-md-8">
                     <div className="profile-card-body">
