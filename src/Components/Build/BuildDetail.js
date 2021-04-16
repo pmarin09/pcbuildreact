@@ -8,13 +8,15 @@ import Pagination from '../../Pagination';
 import Moment from 'moment';
 import moment from "moment";
 import Loader from 'react-loader-spinner';
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
 
 function BuildDetail(img) {
     const{fpsbuildsurl, user, adminId, loggedInStatus, buildposts,updateBuildPosts} = useContext(Context)
     const {buildId} = useParams()
     const [thisBuild, SetThisBuild] = useState()
-    const [text,setText] = useState()
-    
+    const [emojiPickerState, SetEmojiPicker] = useState(false);
+    const [message, SetMessage] = useState("");
     function thisBuildImage(){
       return thisBuild.attachment_url.map( b => 
               <div className = "carousel-fade carousel-item custom">
@@ -124,7 +126,7 @@ function BuildDetail(img) {
         .then(data => {
           console.log("Success",data)
           updateBuildPosts();
-          setText("")
+          SetMessage("")
         })
     }
     //PAGINATION 
@@ -137,6 +139,24 @@ function BuildDetail(img) {
    // Change page
    const paginate = pageNumber => setCurrentPage(pageNumber);
 
+
+   let emojiPicker;
+   if (emojiPickerState) {
+     emojiPicker = (
+       <Picker
+         title="Pick your emoji…"
+         emoji="point_up"
+         onSelect={emoji => SetMessage(message + emoji.native)}
+         theme ="dark"
+         style={{ margin: "10px",  backgroundColor: "#242932 !important"}}
+       />
+     );
+   }
+ 
+   function triggerPicker(event) {
+     event.preventDefault();
+     SetEmojiPicker(!emojiPickerState);
+   }
 
     useEffect (() => {
       window.scrollTo(0, 0);
@@ -178,8 +198,8 @@ function BuildDetail(img) {
                                         name="content"
                                         className="description"
                                         style={{height:"182px",fontSize: "14px"}}
-                                        value= {text}
-                                        onChange={e => setText(e.target.value)}
+                                        value= {message}
+                                        onChange={e => SetMessage(e.target.value)}
                                         required
                                       />
                                     <div className="postButton">
@@ -189,8 +209,15 @@ function BuildDetail(img) {
                                         style={{fontFamily: "Viga", fontSize:"12px", marginTop:"10px"}}
                                         className="button is-success"
                                       />
+                                        <i className="far fa-grin"
+                                        onClick={triggerPicker}
+                                        id="emoji-button">
+                                        </i>
+                                        {emojiPicker}
+                                        
+                                    </div>
+                                   
                                   </div>
-                                </div>
                                       <input
                                         value= {buildId}
                                         name="pcbuild_id"

@@ -21,7 +21,7 @@ function Image({img}) {
   const GPU = img.pcbuild_parts.map(pcbuild_part => (pcbuild_part.part.part_type === "GPU" && pcbuild_part.part.description !== "Not Available") ? pcbuild_part.part.description.substring(0, 66): "")
   const pcbuildParts = img.pcbuild_parts.map(b=>b.price)
   const pcbuildTotalCost = pcbuildParts.reduce((acc,price) => {return  acc + price},0)
-  const firsbuild =    
+  const firstbuild =    
   <div className= "main-wrapper">
     <div className = "badge yellow">
       <div className = "circle">
@@ -99,7 +99,7 @@ function Image({img}) {
       <div className="col-md-4" ref = {ref}>
         <ReactTooltip />
           <div className="card mb-4 shadow-sm">
-              {img.id === 12 ?firsbuild : ""}
+              {img.id === 12 ?firstbuild : ""}
               {img.id === 51 ?bestgpu : ""}
               {img.id === 56 ?watercooled : ""}
               <Link to={`/builds/${img.id}`}><img src={`${fpsbuildsurl}/${img.attachment_url[img.main_image  ? img.main_image : 0]}`} className= "card-img-top"/></Link>

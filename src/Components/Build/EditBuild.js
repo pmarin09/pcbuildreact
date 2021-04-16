@@ -57,6 +57,7 @@ function EditBuild (){
     Mouse: Mouse,
     Headset: Headset
   }
+  
   const build_icons = {
     Mobo: mobo,
     CPU: cpu,
@@ -227,6 +228,23 @@ function EditBuild (){
     .then (data => SetThisBuild(data)),500)
     }
 
+    function dynamicSort(property) {
+      var sortOrder = 1;
+  
+      if(property[0] === "-") {
+          sortOrder = -1;
+          property = property.substr(1);
+      }
+  
+      return function (a,b) {
+          if(sortOrder == -1){
+              return b[property].localeCompare(a[property]);
+          }else{
+              return a[property].localeCompare(b[property]);
+          }        
+      }
+  }
+
   useEffect (() => {
     fetch(`${fpsbuildsurl}/pcbuilds/${buildId}.json`)
     .then (res => res.json())
@@ -381,7 +399,8 @@ return (
                               </div>
                           </div>
                           <div className="create-build-detail-card-body">
-                            {thisBuild.pcbuild_parts.map(function(pcbuild_part) {
+                            {thisBuild.pcbuild_parts.map(pcbuild_part => {
+                               
                               return (   
                                 <>
                                   <div className = "create-build-detail-row" >
