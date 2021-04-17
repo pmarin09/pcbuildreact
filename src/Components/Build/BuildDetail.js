@@ -148,7 +148,10 @@ function BuildDetail(img) {
          emoji="point_up"
          onSelect={emoji => SetMessage(message + emoji.native)}
          theme ="dark"
-         style={{ margin: "10px",  backgroundColor: "#242932 !important"}}
+         style={{ margin: "8px",position: "relative", zIndex:"1",width: "100%"}}
+         color= "#0f171d"
+         perline= "13"
+         sheetSize="64"
        />
      );
    }
@@ -213,9 +216,8 @@ function BuildDetail(img) {
                                         onClick={triggerPicker}
                                         id="emoji-button">
                                         </i>
-                                        {emojiPicker}
-                                        
                                     </div>
+                                   {emojiPicker}
                                    
                                   </div>
                                       <input
@@ -240,6 +242,7 @@ function BuildDetail(img) {
                                         required
                                         style={{display: "none"}}
                                       />
+                                      
                       </form>
                     </>
                     :
