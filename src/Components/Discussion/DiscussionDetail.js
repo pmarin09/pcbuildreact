@@ -7,11 +7,15 @@ import { Button } from 'react-bulma-components';
 import Pagination from '../../Pagination';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
 
 function DiscussionDetail() {
     const{discussions, posts, user, adminId, toggleTheme, checkThemeStatus,loggedInStatus,fpsbuildsurl} = useContext(Context)
     const {discussionId} = useParams()
     const thisDiscussion = discussions.find(discussion => discussion.id.toString() === discussionId)
+    const [emojiPickerState, SetEmojiPicker] = useState(false);
+    const [message, SetMessage] = useState("");
     const showPosts =  posts.filter(post => post.discussion_id.toString() === discussionId).map(filteredPost => (
       <div className="posts-box">
           <article className="media">
@@ -60,9 +64,32 @@ function DiscussionDetail() {
         e.preventDefault();
         window.location.reload(false);
       }
+
+      let emojiPicker;
+      if (emojiPickerState) {
+        emojiPicker = (
+          <Picker
+            title="Pick your emoji…"
+            emoji="point_up"
+            onSelect={emoji => SetMessage(message + emoji.native)}
+            theme ="dark"
+            style={{ margin: "8px",position: "relative", zIndex:"1",width: "100%"}}
+            color= "#0f171d"
+            perline= "10"
+            sheetSize="64"
+          />
+        );
+      }
+    
+      function triggerPicker(event) {
+        event.preventDefault();
+        SetEmojiPicker(!emojiPickerState);
+      }
+
+
    //PAGINATION 
    const [currentPage, setCurrentPage] = useState(1);
-   const [postsPerPage] = useState(20);
+   const [postsPerPage] = useState(10);
    // Get current posts
    const indexOfLastPost = currentPage * postsPerPage;
    const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -73,8 +100,8 @@ function DiscussionDetail() {
 <section className = "section">
     <div className = "container">
         <div className = "columns">
-            <div className = "column is-9" id ="posts-container">
-            <form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
+            <div className = "column is-9 dark" id ="posts-container">
+            {/* <form className="switch" onClick={toggleTheme}style={{float: "right"}} id="setDarkTheme">
                         <input 
                          type="hidden"
                          name="dark_theme"
@@ -88,7 +115,7 @@ function DiscussionDetail() {
                          value={true}
                          />
                         <span className="slider round"></span>
-              </form>
+              </form> */}
                 {thisDiscussion ? 
                 <>
                     <h1 className="title is-2 has-text-grey discussion-title">{thisDiscussion.title}</h1>
@@ -112,13 +139,13 @@ function DiscussionDetail() {
                     <div className="posts-content-box" id="posts-content-box">
                     {currentPosts}
                     </div>
-                    {showPosts.length > 20 ? 
+                    {showPosts.length > 10 ? 
                           <Pagination
                             elementsPerPage={postsPerPage}
                             totalElements={showPosts.length}
                             paginate={paginate}
                         /> : ""}
-                        {checkThemeStatus()}
+                        {/* {checkThemeStatus()} */}
                 </>
                 : 
               <div className="discussions-detail-loading">
@@ -147,8 +174,14 @@ function DiscussionDetail() {
                   type="text"
                   name="content"
                   className="description"
+                  value= {message}
+                  onChange={e => SetMessage(e.target.value)}
                   required
                 />
+                <i className="far fa-grin"
+                                        onClick={triggerPicker}
+                                        id="emoji-button">
+                                        </i>
                 <div className="postButton">
                 <input
               type="submit"
@@ -180,12 +213,14 @@ function DiscussionDetail() {
                   required
                   style={{display: "none"}}
                 />
+                
             </div>
+            {emojiPicker}
           </form>
         </div>
     :
     ""}
-    {checkThemeStatus()}
+    {/* {checkThemeStatus()} */}
   </section>
     )
 }

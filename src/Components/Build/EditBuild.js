@@ -314,7 +314,7 @@ return (
                            />
                 <img src = {`${fpsbuildsurl}/${url}`} 
                 className="build-edit-images"
-                style={{ border: i === mainImage ? "4px solid rgb(29 188 141)" : "" }}
+                style={{ border: i === mainImage ? "4px solid white" : "" }}
                 key={i}
                 name="main_image"
                 onMouseEnter={() => SetMainImage(i)}
