@@ -129,6 +129,20 @@ function BuildDetail(img) {
           SetMessage("")
         })
     }
+    function createBuildPostMobile(e) {
+      e.preventDefault();
+      const form = new FormData(document.getElementById("newBuildPost-mobile"));
+      fetch(`${fpsbuildsurl}/buildposts.json`, {
+        method: "POST",
+        body: form,
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Success",data)
+        updateBuildPosts();
+        SetMessage("")
+      })
+  }
     //PAGINATION 
    const [currentPage, setCurrentPage] = useState(1);
    const [buildpostsPerPage] = useState(4);
@@ -341,7 +355,7 @@ function BuildDetail(img) {
         { ((loggedInStatus === "LOGGED_IN") && user) ?
           <div className = "container">
               <hr></hr>
-              <form className="form" onSubmit={createBuildPost} id="newBuildPost">
+              <form className="form" onSubmit={createBuildPostMobile} id="newBuildPost-mobile">
                     <h2 className="title is-5 has-text-grey-light" style={{fontFamily: "Viga"}}>Post a comment:</h2>
                       <div className="form-row mb-4">
                         <div className="textarea">
