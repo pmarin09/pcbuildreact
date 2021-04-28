@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
   function ContextProvider({children}){
   //LIGHT AND DARK THEME
   const [theme, setTheme] = useState("light")
-  const fpsbuildsurl = "https://fpsbuilds-back-prod.herokuapp.com"
+  const fpsbuildsurl = "http://localhost:3000"
 
   // "http://localhost:3000"
   // "https://fpsbuilds-back-staging.herokuapp.com"
@@ -127,14 +127,14 @@ import { useHistory } from 'react-router-dom';
         .then (data => setDiscussions(data))
         console.log(discussions)
     },[])
-  const [posts, setPosts]=useState([])
-  const postsUrl = `${fpsbuildsurl}/posts.json`
-    useEffect(()=>{
-        fetch(postsUrl)
-        .then (res => res.json())
-        .then (data => setPosts(data))
-        console.log(posts)
-    },[])
+  // const [posts, setPosts]=useState([])
+  // const postsUrl = `${fpsbuildsurl}/posts.json`
+  //   useEffect(()=>{
+  //       fetch(postsUrl)
+  //       .then (res => res.json())
+  //       .then (data => setPosts(data))
+  //       console.log(posts)
+  //   },[])
   const [buildposts, setBuildPosts]=useState([])
   const buildpostsUrl = `${fpsbuildsurl}/buildposts.json`
     useEffect(()=>{
@@ -273,7 +273,6 @@ import { useHistory } from 'react-router-dom';
                 favoriteBuilds,
                 forums, 
                 discussions,
-                posts,
                 buildposts,
                 parts,
                 likes,

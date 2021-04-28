@@ -11,37 +11,80 @@ import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
 
 function DiscussionDetail() {
-    const{discussions, posts, user, adminId, toggleTheme, checkThemeStatus,loggedInStatus,fpsbuildsurl} = useContext(Context)
+    const{discussions, user, adminId, toggleTheme, checkThemeStatus,loggedInStatus,fpsbuildsurl} = useContext(Context)
     const {discussionId} = useParams()
     const thisDiscussion = discussions.find(discussion => discussion.id.toString() === discussionId)
     const [emojiPickerState, SetEmojiPicker] = useState(false);
     const [message, SetMessage] = useState("");
-    const showPosts =  posts.filter(post => post.discussion_id.toString() === discussionId).map(filteredPost => (
+    function showPosts(){ 
+      return(      posts.map(post => (
       <div className="posts-box">
           <article className="media">
               <div className="media-left">
                 <figure className="image is-48x48">
-                {filteredPost.user.attachment_url ? <img src = {`${fpsbuildsurl}/${filteredPost.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredPost.user.email}  className = "discussion-avatar" size={100} default="robohash"/>}
+                {post.user.attachment_url ? <img src = {`${fpsbuildsurl}/${post.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={post.user.email}  className = "discussion-avatar" size={100} default="robohash"/>}
                 </figure>
               </div>
               <div className="media-content" id= "post-content">
                 <div className="content">
-                {filteredPost.content}
+                {post.content}
                 <hr></hr>
-                <p><em><small>Posted <TimeAgo datetime={filteredPost.created_at}/>  by {filteredPost.username}</small>
+                <p><em><small>Posted <TimeAgo datetime={post.created_at}/>  by {post.username}</small>
                       </em>
                       </p>
                 </div>
-                {(user.id === filteredPost.user_id && loggedInStatus === "LOGGED_IN") || user.id === adminId ?
+                {(user.id === post.user_id && loggedInStatus === "LOGGED_IN") || user.id === adminId ?
                 <nav className="level is-mobile">
                     <div className="level-left">
                     <a className="level-item">
-                        <Link to={`/${filteredPost.discussion_id}/editPost/${filteredPost.id}`} style={{textDecoration: "none"}}> <i className="ri-edit-box-fill"></i></Link>
+                        <Link to={`/${post.discussion_id}/editPost/${post.id}`} style={{textDecoration: "none"}}> <i className="ri-edit-box-fill"></i></Link>
                     </a>
                     <a className="level-item">
                         <i className="ri-delete-bin-5-fill"onClick ={ (e) => { 
                           e.preventDefault();
-                          fetch(`${fpsbuildsurl}/discussions/` + discussionId +"/posts/"+ filteredPost.id + ".json", {
+                          fetch(`${fpsbuildsurl}/discussions/` + discussionId +"/posts/"+ post.id + ".json", {
+                            method: "DELETE",
+                          })
+                        window.location.reload();
+                        }}></i>
+                    </a>
+                    <a className="level-item">
+                    <Link to={`/${post.discussion_id}/replyPost/${post.id}`} style={{textDecoration: "none"}}><span>Reply</span></Link>
+                    </a>
+                    
+                    </div>
+                </nav>
+                :
+                ""}
+              </div>
+          </article>
+                {post.replies.map(reply => {
+                  return(
+                    <div className="posts-box" style={{width: "85%"}}>
+                    <article className="media">
+                        <div className="media-left">
+                          <figure className="image is-48x48">
+                          {post.user.attachment_url ? <img src = {`${fpsbuildsurl}/${post.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={post.user.email}  className = "discussion-avatar" size={100} default="robohash"/>}
+                          </figure>
+                        </div>
+                        <div className="media-content" id= "post-content">
+                          <div className="content">
+                  {reply.content}
+                  <hr></hr>
+                <p><em><small>Posted <TimeAgo datetime={post.created_at}/>  by {post.username}</small>
+                      </em>
+                      </p>
+                </div>
+                {(user.id === post.user_id && loggedInStatus === "LOGGED_IN") || user.id === adminId ?
+                <nav className="level is-mobile">
+                    <div className="level-left">
+                    <a className="level-item">
+                        <Link to={`/${post.discussion_id}/editPost/${post.id}`} style={{textDecoration: "none"}}> <i className="ri-edit-box-fill"></i></Link>
+                    </a>
+                    <a className="level-item">
+                        <i className="ri-delete-bin-5-fill"onClick ={ (e) => { 
+                          e.preventDefault();
+                          fetch(`${fpsbuildsurl}/discussions/` + discussionId +"/posts/"+ post.id + ".json", {
                             method: "DELETE",
                           })
                         window.location.reload();
@@ -53,16 +96,19 @@ function DiscussionDetail() {
                 ""}
               </div>
           </article>
+          </div>  
+                )})}
         </div>
-   ))
+   )))}
+   
     function createPost(e) {
         const form = new FormData(document.getElementById("newPost"));
-        fetch(`${fpsbuildsurl}/posts.json`, {
+        fetch(`${fpsbuildsurl}/discussions/${discussionId}/posts.json`, {
           method: "POST",
           body: form,
         });
         e.preventDefault();
-        window.location.reload(false);
+        // window.location.reload(false);
       }
 
       let emojiPicker;
@@ -80,11 +126,36 @@ function DiscussionDetail() {
           />
         );
       }
-    
+      // function createReply(e) {
+      //   const form = new FormData(document.getElementById("newReply"));
+      //   fetch(`${fpsbuildsurl}/discussions/${discussionId}/posts/${post.id}/replies.json`, {
+      //     method: "POST",
+      //     body: form,
+      //   });
+      //   e.preventDefault();
+      //   window.location.reload(false);
+      // }
+
       function triggerPicker(event) {
         event.preventDefault();
         SetEmojiPicker(!emojiPickerState);
       }
+
+  const [posts, setPosts]=useState([])
+  const [replies, setReplies]= useState([])
+  
+    useEffect(()=>{
+        fetch(`${fpsbuildsurl}/discussions/${discussionId}/posts.json`)
+        .then (res => res.json())
+        .then (data => setPosts(data))
+        console.log(posts)
+    },[])
+  //   useEffect(()=>{
+  //     fetch(`${fpsbuildsurl}/discussions/${discussionId}/posts/${posts.id}/replies.json`)
+  //     .then (res => res.json())
+  //     .then (data => setReplies(data))
+  //     console.log(replies)
+  // },[])
 
 
    //PAGINATION 
@@ -93,7 +164,7 @@ function DiscussionDetail() {
    // Get current posts
    const indexOfLastPost = currentPage * postsPerPage;
    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-   const currentPosts = showPosts.slice(indexOfFirstPost, indexOfLastPost);
+   const currentPosts = showPosts().slice(indexOfFirstPost, indexOfLastPost);
    // Change page
    const paginate = pageNumber => setCurrentPage(pageNumber);
     return (
@@ -136,13 +207,68 @@ function DiscussionDetail() {
                         </div>
                     </div>
                     <hr className= "posts-hr"></hr>
+                    { (loggedInStatus === "LOGGED_IN") ?
+                      <div className = "container" style={{padding: "0px"}}>
+                          <form className="form" onSubmit={createPost} id="newPost">
+                            <div className="form-row mb-4">
+                              <div className="textarea">
+                                <textarea
+                                  type="text"
+                                  name="content"
+                                  className="description"
+                                  value= {message}
+                                  onChange={e => SetMessage(e.target.value)}
+                                  required
+                                />
+                                <i className="far fa-grin"
+                                                        onClick={triggerPicker}
+                                                        id="emoji-button">
+                                                        </i>
+                                <div className="postButton">
+                                <input
+                              type="submit"
+                              value="Post Comment"
+                              className="button is-success"
+                              style={{fontFamily: "Viga"}}
+                            />
+                            </div>
+                              </div>
+                                <input
+                                  value= {discussionId}
+                                  name="discussion_id"
+                                  style={{display: "none"}}
+                                  required
+                                />
+                                <input
+                                  type="text"
+                                  name="user_id"
+                                  value={user.id}
+                                  className="description"
+                                  required
+                                  style={{display: "none"}}
+                                />
+                                <input
+                                  type="text"
+                                  name="username"
+                                  value={user.username}
+                                  className="description"
+                                  required
+                                  style={{display: "none"}}
+                                />
+                                
+                            </div>
+                            {emojiPicker}
+                          </form>
+                        </div>
+                    :
+                    ""}
                     <div className="posts-content-box" id="posts-content-box">
                     {currentPosts}
                     </div>
-                    {showPosts.length > 10 ? 
+                    {showPosts().length > 10 ? 
                           <Pagination
                             elementsPerPage={postsPerPage}
-                            totalElements={showPosts.length}
+                            totalElements={showPosts().length}
                             paginate={paginate}
                         /> : ""}
                         {/* {checkThemeStatus()} */}
@@ -163,63 +289,7 @@ function DiscussionDetail() {
             <hr />
         </div>
     </div>
-    <hr></hr>
-    { (loggedInStatus === "LOGGED_IN") ?
-      <div className = "container">
-        <h2 className="title is-5 has-text-grey-light" style={{fontFamily: "Viga"}}>Create a New Post</h2>
-          <form className="form" onSubmit={createPost} id="newPost">
-            <div className="form-row mb-4">
-              <div className="textarea">
-                <textarea
-                  type="text"
-                  name="content"
-                  className="description"
-                  value= {message}
-                  onChange={e => SetMessage(e.target.value)}
-                  required
-                />
-                <i className="far fa-grin"
-                                        onClick={triggerPicker}
-                                        id="emoji-button">
-                                        </i>
-                <div className="postButton">
-                <input
-              type="submit"
-              value="New Post"
-              className="button is-success"
-              style={{fontFamily: "Viga"}}
-            />
-            </div>
-              </div>
-                <input
-                  value= {discussionId}
-                  name="discussion_id"
-                  style={{display: "none"}}
-                  required
-                />
-                 <input
-                  type="text"
-                  name="user_id"
-                  value={user.id}
-                  className="description"
-                  required
-                  style={{display: "none"}}
-                />
-                <input
-                  type="text"
-                  name="username"
-                  value={user.username}
-                  className="description"
-                  required
-                  style={{display: "none"}}
-                />
-                
-            </div>
-            {emojiPicker}
-          </form>
-        </div>
-    :
-    ""}
+   
     {/* {checkThemeStatus()} */}
   </section>
     )
