@@ -5,7 +5,6 @@ import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
 import Carousel from 'react-bootstrap/Carousel'
 import Pagination from '../../Pagination';
-import Moment from 'moment';
 import moment from "moment";
 import Loader from 'react-loader-spinner';
 import 'emoji-mart/css/emoji-mart.css'

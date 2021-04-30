@@ -1,4 +1,4 @@
-import React, { useContext, useEffect} from "react";
+import React, {useContext, useState,useEffect} from "react";
 import { Context } from "../../Context";
 import 'bootstrap/dist/css/bootstrap.css';
 import Gravatar from 'react-gravatar'
@@ -9,15 +9,16 @@ import 'react-toastify/dist/ReactToastify.css'
 import Loader from 'react-loader-spinner'
 
 function EditProfile (){
-const {user,adminId,loggedInStatus,users,updateUsers,allBuilds,posts,discussions,favorites,fpsbuildsurl}=useContext(Context)
+const {user,adminId,loggedInStatus,updateUsers,fpsbuildsurl}=useContext(Context)
 const history = useHistory()
 const {userId} = useParams()
-const myBuilds = allBuilds.filter(build => build.user_id.toString() === userId)
-const myPosts = posts.filter(post => post.user_id.toString() === userId)
-const myLikes = myBuilds.map(build => build.likes).reduce((acc, likes) => acc +likes.length,0)
-const myDiscussions = discussions.filter(discussion => discussion.user_id.toString() === userId)
-const myFavorites = favorites.filter(favorite => favorite.user_id.toString() === userId)
-const profileUser = users.filter(user => user.id.toString() === userId)
+const [profileUser, setProfileUser]  = useState([])
+useEffect(()=>{
+  fetch(`${fpsbuildsurl}/users/` + userId + ".json")
+  .then (res => res.json())
+  .then (data => setProfileUser(data))
+  console.log(profileUser)
+},[])
 function updateProfileInfo(e) {
   const form = new FormData(document.getElementById("profileInfo"));
   fetch(`${fpsbuildsurl}/users/${userId}`, {
@@ -43,30 +44,33 @@ function uploadAvatar(e) {
     updateUsers()
     setTimeout( () => window.location.reload(false),1500)
 }
+
 return (
+    <>
+    {profileUser ? 
     <>
     {(user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") || user.id === adminId ? 
     <div>
         <hr></hr>
-        {profileUser.map(profileUserData => 
+        
         <div className="profile-container">
           <div className="row">
-            <div className="col-xs-3 col-sm-3" >{profileUserData.attachment_url ? <img src = {`${fpsbuildsurl}/${profileUserData.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email={profileUserData.email} size={100} className="profile-img-avatar" default="robohash"/> }</div>
-            <div className="col-sm-9"><h1 className="profile-username">{profileUserData.username}</h1>
+            <div className="col-xs-3 col-sm-3" >{profileUser.attachment_url ? <img src = {`${fpsbuildsurl}/${profileUser.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email={profileUser.email} size={100} className="profile-img-avatar" default="robohash"/> }</div>
+            <div className="col-sm-9"><h1 className="profile-username">{profileUser.username}</h1>
             <table className="profile-table">
                 <tr className="profile-stats-row">
-                        <div className="col-md-2" style= {{fontWeight: "bold"}}> {profileUserData.pcbuilds.length} </div>
-                        <div className="col-md-2" style= {{fontWeight: "bold"}}> {myLikes} </div>
-                        <div className="col-md-2" style= {{fontWeight: "bold"}}> {myFavorites.length} </div>
-                        <div className="col-md-2" style= {{fontWeight: "bold"}}> {myDiscussions.length}</div>
-                        <div className="col-md-2" style= {{fontWeight: "bold"}}> {myPosts.length} </div>
+                        <div className="col-md-2" style= {{fontWeight: "bold"}}> {profileUser.pcbuilds.length} </div>
+                        <div className="col-md-2" style= {{fontWeight: "bold"}}> {profileUser.likes.length} </div>
+                        <div className="col-md-2" style= {{fontWeight: "bold"}}> {profileUser.favorites.length} </div>
+                        <div className="col-md-2" style= {{fontWeight: "bold"}}> {profileUser.discussions.length}</div>
+                        <div className="col-md-2" style= {{fontWeight: "bold"}}> {profileUser.posts.length} </div>
                 </tr>
                 <tr className="profile-statslabel-row">
-                        <div className="col-md-2"> {profileUserData.pcbuilds.length > 1 ? "Builds": "Build"} </div>
-                        <div className="col-md-2"> {myLikes > 1 || myLikes === 0? "Likes": "Like"} </div>
-                        <div className="col-md-2"> {myFavorites.length > 1 || myFavorites.length === 0 ? "Favorites" : "Favorite"}  </div>
-                        <div className="col-md-2"> {myDiscussions.length > 1 || myDiscussions.length === 0? "Discussions" : "Discussion"} </div>
-                        <div className="col-md-2"> {myPosts.length > 1 || myPosts.length === 0 ? "Posts" : "Post"} </div>
+                        <div className="col-md-2"> {profileUser.pcbuilds.length > 1 ? "Builds": "Build"} </div>
+                        <div className="col-md-2"> {profileUser.likes.length > 1 || profileUser.likes.length === 0? "Likes": "Like"} </div>
+                        <div className="col-md-2"> {profileUser.favorites.length > 1 || profileUser.favorites.length === 0 ? "Favorites" : "Favorite"}  </div>
+                        <div className="col-md-2"> {profileUser.discussions.length > 1 || profileUser.discussions.length === 0? "Discussions" : "Discussion"} </div>
+                        <div className="col-md-2"> {profileUser.posts.length > 1 || profileUser.posts.length === 0 ? "Posts" : "Post"} </div>
                 </tr>
             </table>
             </div>
@@ -95,7 +99,7 @@ return (
                         year: "numeric",
                         month: "long",
                         day: "2-digit"
-                      }).format(new Date(profileUserData.created_at))}
+                      }).format(new Date(profileUser.created_at))}
                   </p> 
                   <i className="fa fa-link fa-1x"></i></div>
                   <div className="panel-body"><a href="http://bootnipets.com"></a></div>
@@ -115,8 +119,8 @@ return (
                           className="form-control" 
                           name="first_name" 
                           id="first_name" 
-                          defaultValue={profileUserData.first_name}
-                          placeholder={profileUserData.first_name} 
+                          defaultValue={profileUser.first_name}
+                          placeholder={profileUser.first_name} 
                           title="enter your first name..."/>
                       </div>
                   </div>
@@ -128,8 +132,8 @@ return (
                           className="form-control" 
                           name="last_name" 
                           id="last_name" 
-                          defaultValue={profileUserData.last_name}
-                          placeholder={profileUserData.last_name} 
+                          defaultValue={profileUser.last_name}
+                          placeholder={profileUser.last_name} 
                           title="enter your last name if any..."/>
                       </div>
                   </div>
@@ -141,8 +145,8 @@ return (
                           className="form-control" 
                           name="email" 
                           id="email" 
-                          defaultValue= {profileUserData.email}
-                          placeholder={profileUserData.email} 
+                          defaultValue= {profileUser.email}
+                          placeholder={profileUser.email} 
                           title="enter your email."/>
                       </div>
                   </div>
@@ -181,7 +185,6 @@ return (
               </div>
             </div>
           </div>
-        )}
       </div>
         :
         <div className="loading">
@@ -195,6 +198,10 @@ return (
           /> 
         </div>
     }
+    </>
+    :
+    ""
+  }
     </>
   )}
 export default EditProfile;

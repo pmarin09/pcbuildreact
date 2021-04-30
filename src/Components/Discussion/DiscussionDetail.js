@@ -33,6 +33,7 @@ function DiscussionDetail() {
                       </em>
                       </p>
                 </div>
+               
                 {(user.id === post.user_id && loggedInStatus === "LOGGED_IN") || user.id === adminId ?
                 <nav className="level is-mobile">
                     <div className="level-left">
@@ -48,14 +49,16 @@ function DiscussionDetail() {
                         window.location.reload();
                         }}></i>
                     </a>
-                    <a className="level-item">
-                    <Link to={`/${post.discussion_id}/replyPost/${post.id}`} style={{textDecoration: "none"}}><span>Reply</span></Link>
-                    </a>
-                    
                     </div>
                 </nav>
                 :
                 ""}
+                {loggedInStatus === "LOGGED_IN" || user.id === adminId ?
+                  <a className="level-item" style={{float: "right"}}>
+                    <Link to={`/${post.discussion_id}/replyPost/${post.id}`} style={{textDecoration: "none"}}><span>Reply</span></Link>
+                    </a>
+                    :
+                    ""}
               </div>
           </article>
                 {post.replies.map(reply => {
@@ -64,27 +67,27 @@ function DiscussionDetail() {
                     <article className="media">
                         <div className="media-left">
                           <figure className="image is-48x48">
-                          {post.user.attachment_url ? <img src = {`${fpsbuildsurl}/${post.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={post.user.email}  className = "discussion-avatar" size={100} default="robohash"/>}
+                          {reply.user.attachment_url ? <img src = {`${fpsbuildsurl}/${reply.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={reply.user.email}  className = "discussion-avatar" size={100} default="robohash"/>}
                           </figure>
                         </div>
                         <div className="media-content" id= "post-content">
                           <div className="content">
                   {reply.content}
                   <hr></hr>
-                <p><em><small>Posted <TimeAgo datetime={post.created_at}/>  by {post.username}</small>
+                <p><em><small>Posted <TimeAgo datetime={reply.created_at}/>  by {reply.user.username}</small>
                       </em>
                       </p>
                 </div>
-                {(user.id === post.user_id && loggedInStatus === "LOGGED_IN") || user.id === adminId ?
+                {(user.id === reply.user_id && loggedInStatus === "LOGGED_IN") || user.id === adminId ?
                 <nav className="level is-mobile">
                     <div className="level-left">
                     <a className="level-item">
-                        <Link to={`/${post.discussion_id}/editPost/${post.id}`} style={{textDecoration: "none"}}> <i className="ri-edit-box-fill"></i></Link>
+                        <Link to={`/${post.discussion_id}/${post.id}/editReply/${reply.id}`} style={{textDecoration: "none"}}> <i className="ri-edit-box-fill"></i></Link>
                     </a>
                     <a className="level-item">
                         <i className="ri-delete-bin-5-fill"onClick ={ (e) => { 
                           e.preventDefault();
-                          fetch(`${fpsbuildsurl}/discussions/` + discussionId +"/posts/"+ post.id + ".json", {
+                          fetch(`${fpsbuildsurl}/discussions/` + discussionId +"/posts/"+ post.id + "/replies/" +reply.id+ ".json", {
                             method: "DELETE",
                           })
                         window.location.reload();
@@ -102,13 +105,18 @@ function DiscussionDetail() {
    )))}
    
     function createPost(e) {
+        e.preventDefault();
         const form = new FormData(document.getElementById("newPost"));
         fetch(`${fpsbuildsurl}/discussions/${discussionId}/posts.json`, {
           method: "POST",
           body: form,
-        });
-        e.preventDefault();
-        // window.location.reload(false);
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log("Success",data)
+          updatePosts()
+          SetMessage("")
+        })
       }
 
       let emojiPicker;
@@ -126,23 +134,17 @@ function DiscussionDetail() {
           />
         );
       }
-      // function createReply(e) {
-      //   const form = new FormData(document.getElementById("newReply"));
-      //   fetch(`${fpsbuildsurl}/discussions/${discussionId}/posts/${post.id}/replies.json`, {
-      //     method: "POST",
-      //     body: form,
-      //   });
-      //   e.preventDefault();
-      //   window.location.reload(false);
-      // }
-
       function triggerPicker(event) {
         event.preventDefault();
         SetEmojiPicker(!emojiPickerState);
       }
 
   const [posts, setPosts]=useState([])
-  const [replies, setReplies]= useState([])
+  function updatePosts(){
+    fetch(`${fpsbuildsurl}/discussions/${discussionId}/posts.json`)
+        .then (res => res.json())
+        .then (data => setPosts(data))
+  }
   
     useEffect(()=>{
         fetch(`${fpsbuildsurl}/discussions/${discussionId}/posts.json`)
@@ -150,14 +152,7 @@ function DiscussionDetail() {
         .then (data => setPosts(data))
         console.log(posts)
     },[])
-  //   useEffect(()=>{
-  //     fetch(`${fpsbuildsurl}/discussions/${discussionId}/posts/${posts.id}/replies.json`)
-  //     .then (res => res.json())
-  //     .then (data => setReplies(data))
-  //     console.log(replies)
-  // },[])
-
-
+ 
    //PAGINATION 
    const [currentPage, setCurrentPage] = useState(1);
    const [postsPerPage] = useState(10);

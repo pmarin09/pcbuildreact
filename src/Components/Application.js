@@ -14,6 +14,7 @@ import NewDiscussion from "./Discussion/NewDiscussion"
 import EditDiscussion from "./Discussion/EditDiscussion"
 import EditPost from "./Discussion/EditPost"
 import ReplyPost from "./Discussion/ReplyPost"
+import EditReply from "./Discussion/EditReply"
 import EditBuildPost from "./Build/EditBuildPost"
 import Forum from "./Forum/Forum"
 import ForumDetail from "./Forum/ForumDetail"
@@ -48,6 +49,7 @@ function Application() {
         <Route  path = "/editdiscussion/:discussionId"> <EditDiscussion/></Route>
         <Route  path = "/:discussionId/editpost/:postId"> <EditPost/></Route>
         <Route  path = "/:discussionId/replypost/:postId"> <ReplyPost/></Route>
+        <Route  path = "/:discussionId/:postId/editReply/:replyId"><EditReply/></Route>
         <Route  path = "/editbuildpost/:buildpostId"> <EditBuildPost/></Route>
       </Switch>
       

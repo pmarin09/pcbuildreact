@@ -1,4 +1,4 @@
-import React, {useContext} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import {Context} from "../../Context"
 import PropTypes from "prop-types"
 import {Link,useParams} from "react-router-dom"
@@ -6,14 +6,22 @@ import TimeAgo from 'timeago-react';
 import { Button } from 'react-bulma-components';
 import {toast } from 'react-toastify';
 function MyBuilds() {
-const {allBuilds,user, adminId,updateBuilds,loggedInStatus,fpsbuildsurl} = useContext(Context)
+const {user, adminId,updateBuilds,loggedInStatus,fpsbuildsurl} = useContext(Context)
 const {userId} = useParams()
-const myBuilds = allBuilds.filter(build => build.user_id.toString() === userId)
+const [myBuilds, setMyBuilds] = useState()
 
+useEffect(()=>{
+    fetch(`${fpsbuildsurl}`+ "/mybuilds/ "+ userId + ".json")
+    .then (res => res.json())
+    .then (data => setMyBuilds(data))
+    console.log(myBuilds)
+  },[])
 
 return (
+    <>
+    {myBuilds ? 
           <div className= "container">
-              { myBuilds.map(filteredBuild => (
+              { myBuilds.pcbuilds.map(filteredBuild => (
                 <div className="profile-card">
                 <div className="row no-gutters">
                 <div className="col-md-4">
@@ -49,6 +57,11 @@ return (
                 </div>
               ))}
            </div>    
+           :
+              ""     
+                    
+                    }
+           </>
 )}
 MyBuilds.propTypes = {
     item: PropTypes.shape({

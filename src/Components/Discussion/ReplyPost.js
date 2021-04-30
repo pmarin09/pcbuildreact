@@ -2,7 +2,7 @@ import React, {useEffect, useState,useContext} from "react"
 import {Context} from "../../Context"
 import { useHistory, useParams} from 'react-router-dom';
 function ReplyPost(){
-  const {discussions} = useContext(Context)
+  const {user} = useContext(Context)
   const history = useHistory()
   const{fpsbuildsurl} = useContext(Context)
   const {discussionId} = useParams()
@@ -14,17 +14,28 @@ function ReplyPost(){
     .then (res => res.json())
     .then (data => setThisPost(data))
 },[])
+
+function updateReplies(){
+  fetch(`${fpsbuildsurl}/discussions/`+ discussionId +"/posts/"+ postId + ".json")
+    .then (res => res.json())
+    .then (data => setThisPost(data))
+}
   function ReplyPost(e) {
+      e.preventDefault();
       const form = new FormData(document.getElementById("editPost"));
       fetch(`${fpsbuildsurl}/discussions/` + discussionId +"/posts/"+ postId + "/replies.json",{
         method: "POST",
         body: form,
-      });
-      e.preventDefault();
-      history.push(`/discussions/`+discussionId)
+      })
+      .then(response => response.json())
+        .then(data => {
+          console.log("Success",data)
+          updateReplies()
+        })
+        
+      history.push(`/discussions/`+ discussionId)
   }
 
-  console.log(thisPost)
   return(
     <section className = "section">
       <div className = "article-container">
@@ -41,7 +52,14 @@ function ReplyPost(){
                     className="description"
                     required
                   />
-
+                  <input
+                                  type="text"
+                                  name="user_id"
+                                  value={user.id}
+                                  className="description"
+                                  required
+                                  style={{display: "none"}}
+                                />
                 </div>
               </div>
               <div>
