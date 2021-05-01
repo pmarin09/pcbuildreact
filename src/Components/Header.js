@@ -118,7 +118,7 @@ console.log(token)
                       </Link>
                 </a>
                       <a className="profile-div">
-                      <Link to={`/profile/${user.id}`}>
+                      <Link to={`/profile/edit/${user.id}`}>
                       {user.attachment_url ? <img src = {`${fpsbuildsurl}/${user.attachment_url}`}  className="profile-avatar"/> : <Gravatar email={user.email}className="profile-avatar" size={100} default="robohash"/> }
                       <span> <em><small>{user.username}</small></em></span>
                       </Link>

@@ -7,18 +7,20 @@ import { useHistory,useParams } from 'react-router-dom';
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import Loader from 'react-loader-spinner'
+import ProfilePage from './ProfilePage'
 
 function EditProfile (){
-const {user,adminId,loggedInStatus,updateUsers,fpsbuildsurl}=useContext(Context)
+const {adminId,loggedInStatus,updateUsers,fpsbuildsurl,user}=useContext(Context)
 const history = useHistory()
 const {userId} = useParams()
-const [profileUser, setProfileUser]  = useState([])
+const [profileUser, setProfileUser]  = useState()
 useEffect(()=>{
   fetch(`${fpsbuildsurl}/users/` + userId + ".json")
   .then (res => res.json())
   .then (data => setProfileUser(data))
   console.log(profileUser)
 },[])
+
 function updateProfileInfo(e) {
   const form = new FormData(document.getElementById("profileInfo"));
   fetch(`${fpsbuildsurl}/users/${userId}`, {
@@ -44,15 +46,13 @@ function uploadAvatar(e) {
     updateUsers()
     setTimeout( () => window.location.reload(false),1500)
 }
-
+console.log(profileUser)
 return (
+ 
     <>
-    {profileUser ? 
-    <>
-    {(user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") || user.id === adminId ? 
+    {( user && profileUser && user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") || user.id === adminId  ? 
     <div>
         <hr></hr>
-        
         <div className="profile-container">
           <div className="row">
             <div className="col-xs-3 col-sm-3" >{profileUser.attachment_url ? <img src = {`${fpsbuildsurl}/${profileUser.attachment_url}`}  className="profile-img-avatar"/> : <Gravatar email={profileUser.email} size={100} className="profile-img-avatar" default="robohash"/> }</div>
@@ -188,20 +188,17 @@ return (
       </div>
         :
         <div className="loading">
-          <Loader
-            type="TailSpin"
-            color="#B50000"
-            secondaryColor = "grey"
-            height={250}
-            width={250}
-            timeout={2000} //3 secs
-          /> 
-        </div>
+        <Loader
+          type="TailSpin"
+          color="#B50000"
+          secondaryColor = "grey"
+          height={250}
+          width={250}
+          timeout={2000} //3 secs
+        /> 
+      </div>
     }
     </>
-    :
-    ""
-  }
-    </>
+
   )}
 export default EditProfile;

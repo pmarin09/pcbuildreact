@@ -1,6 +1,9 @@
 import React, {useEffect, useState,useContext} from "react"
 import {Context} from "../../Context"
 import { useHistory, useParams} from 'react-router-dom';
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
+
 function EditReply(){
   const {discussions} = useContext(Context)
   const history = useHistory()
@@ -9,7 +12,8 @@ function EditReply(){
   const {postId} = useParams()
   const {replyId} = useParams()
   const [thisReply, setThisReply]=useState([])
-  
+  const [emojiPickerState, SetEmojiPicker] = useState(false);
+  const [message, SetMessage] = useState("");
   useEffect(()=>{
     fetch(`${fpsbuildsurl}/discussions/`+ discussionId +"/posts/"+ postId + "/replies/" +replyId+ ".json")
     .then (res => res.json())
@@ -32,8 +36,31 @@ function EditReply(){
     history.push(`/discussions/`+discussionId)
   }
   console.log(thisReply)
+
+  let emojiPicker;
+  if (emojiPickerState) {
+    emojiPicker = (
+      <Picker
+        title="Pick your emoji…"
+        emoji="point_up"
+        onSelect={emoji => SetMessage(message + emoji.native)}
+        theme ="dark"
+        style={{ margin: "8px",position: "relative", zIndex:"1",width: "100%"}}
+        color= "#0f171d"
+        perline= "10"
+        sheetSize="64"
+      />
+    );
+  }
+  function triggerPicker(event) {
+    event.preventDefault();
+    SetEmojiPicker(!emojiPickerState);
+  }
+ 
   return(
-    <section className = "section">
+    <>
+    {thisReply ? 
+    <section className = "section" onMouseEnter= {e=> SetMessage(thisReply.content)}>
       <div className = "article-container">
         <div className="box" id="edit-post-box" style={{width: "75%", margin:"auto"}}>
           <h2 className="title is-5 has-text-grey-light">Edit Reply</h2>
@@ -44,10 +71,15 @@ function EditReply(){
                   <textarea
                     type="textarea"
                     name="content"
-                    defaultValue= {thisReply.content}
+                    onChange={e => SetMessage(e.target.value)}
+                    defaultValue= {message}
                     className="description"
                     required
                   />
+                  <i className="far fa-grin"
+                    onClick={triggerPicker}
+                     id="emoji-button">
+                  </i>
                 </div>
               </div>
               <div>
@@ -58,6 +90,7 @@ function EditReply(){
                   style= {{textDecoration: "none", marginBottom:"10px"}}
                 /> 
               </div>
+              {emojiPicker}
             </form>
             <form className="form" onSubmit={deleteReply} id="deletePost">
               <input
@@ -73,6 +106,10 @@ function EditReply(){
          </div>
       </div>
     </section>
+    :
+    ""
+    }
+    </>
   )
 }
 export default EditReply;

@@ -3,13 +3,12 @@ import { Context } from "../../Context";
 import 'bootstrap/dist/css/bootstrap.css';
 import Gravatar from 'react-gravatar'
 import TimeAgo from 'timeago-react';
-import { useHistory,useParams, Link } from 'react-router-dom';
+import {useParams, Link } from 'react-router-dom';
 import MyBuilds from "./MyBuilds"
 import Loader from 'react-loader-spinner'
 function ProfilePage (){
 
-const {user,adminId,loggedInStatus,favorites,fpsbuildsurl}=useContext(Context)
-const history = useHistory()
+const {user,adminId,loggedInStatus,fpsbuildsurl}=useContext(Context)
 const {userId} = useParams()
 const [profileUser, setProfileUser]  = useState()
 useEffect(()=>{
@@ -53,7 +52,7 @@ return (
             <div className="panel panel-default">
               <div className="edit-div"> {(user.id === parseInt(userId) && loggedInStatus === "LOGGED_IN") || user.id === adminId ? 
                               <Link to={`/profile/edit/${userId}`} style={{textDecoration: "none"}}>
-                                  <button class="edit-button">Edit Profile</button>
+                                  <button className="edit-button">Edit Profile</button>
                               </Link>
                               :
                               ""}
