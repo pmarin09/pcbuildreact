@@ -14,11 +14,12 @@ function leave(){
         ref.current.addEventListener("mouseenter", enter)
         ref.current.addEventListener("mouseleave", leave)
 
-        return () => {
+        return () => {if(ref.current) {
+
             ref.current.removeEventListener("mouseenter", enter)
             ref.current.removeEventListener("mouseleave", leave)
 
-        }
+        }}
     }, [])
     return [hovered,ref]
 }

@@ -50,6 +50,7 @@ return (
         <p className="lead" style={{color: "white"}}>Sign Up to create and share your build! </p>
         <p>
         <Link to="/allbuilds" style={{textDecoration: "none"}}> <div className="btn btn-primary my-2" style={{fontFamily: "Viga"}}>View All Builds</div></Link>
+        
         </p>
       </div>
     </div>

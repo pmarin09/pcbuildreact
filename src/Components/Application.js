@@ -22,6 +22,8 @@ import Login from "./auth/Login"
 import Registration from "./auth/Registration"
 import ForgotPassword from "./auth/ForgotPassword"
 import ResetPassword from "./auth/ResetPassword"
+import Privacy from "./Policies/Privacy"
+import Tos from "./Policies/Tos"
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 
 
@@ -51,6 +53,8 @@ function Application() {
         <Route  path = "/:discussionId/replypost/:postId"> <ReplyPost/></Route>
         <Route  path = "/:discussionId/:postId/editReply/:replyId"><EditReply/></Route>
         <Route  path = "/editbuildpost/:buildpostId"> <EditBuildPost/></Route>
+        <Route path = "/privacy"> <Privacy/></Route>
+        <Route path = "/tos"> <Tos/></Route>
       </Switch>
       
       

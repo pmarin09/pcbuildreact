@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {BrowserRouter as Router} from "react-router-dom"
+import {BrowserRouter} from "react-router-dom"
 import {ContextProvider} from "./Context"
 
 
@@ -9,7 +9,7 @@ import {ContextProvider} from "./Context"
 ReactDOM.render(
   
   <ContextProvider>
-    <Router>
-        <App/>
-    </Router>
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>
   </ContextProvider>, document.getElementById("root"))

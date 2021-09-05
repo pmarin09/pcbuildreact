@@ -9,6 +9,7 @@ import comment from '../../icons/comment.png'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import SearchBox from '../SearchBox/SearchBox'
+import Privacy from "../Policies/Privacy";
 
 function Discussions(){
     const {adminId,fpsbuildsurl,forums, discussions,loggedInStatus} = useContext(Context)
@@ -82,6 +83,7 @@ function Discussions(){
       }
  return(
    <>
+   
      {forumsData ? 
     <div>
             <form className="switch"style={{float: "right", marginBottom:"10px", display: "none"}} id="setDarkTheme">
@@ -146,7 +148,6 @@ function Discussions(){
                                     />
                                 </div>  
                             }
-                            
                     </div>
                 </div>
                    
