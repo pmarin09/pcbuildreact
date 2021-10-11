@@ -74,6 +74,64 @@ html{
   border-radius: 10px;
 }
 
+//POLICY Pages
+
+.policy{
+
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding-right: 100px;
+  padding-left: 100px;
+  color: #f1ede8;
+  font-family: sans-serif;
+  background-color: #18212a;
+  max-width: 85%;
+  border-radius: 40px;
+}
+.policy h3{
+  color: lightgray;
+  font-family: Viga;
+  font-weight: 100;
+}
+
+.policy h1{
+  color: lightgray;
+  font-family: Viga;
+  font-size: 20px; 
+  font-weight: 100;
+}
+
+.content h2{
+  color: lightgray !important;
+  font-family: Viga;
+  font-weight: 100;
+}
+.content h3{
+  color: lightgray !important;
+  font-family: Viga;
+  font-weight: 100;
+}
+.content p {
+  line-height: 2 ;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  text-indent: 10px;
+  
+}
+
+.content strong{
+  font-size: "22px" !important;
+  color:white;
+}
+
+.policy h1{
+  margin-bottom: 0px !important;
+  color:white !important;
+  margin-top: 0px !important;
+}
+
+
 .build-name-card{
   color: #858585;
   font-style: italic;
