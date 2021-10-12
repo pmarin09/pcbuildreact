@@ -24,5 +24,9 @@ export default (
           <Route  path = "/editdiscussion/:discussionId"></Route>
           <Route  path = "/:discussionId/editpost/:postId"></Route>
           <Route  path = "/editbuildpost/:buildpostId"></Route>
+          <Route path = "/privacy"> <Privacy/></Route>
+          <Route path = "/tos"> <Tos/></Route>
+          <Route path = "/contact"> <Contact/></Route>
+          <Route path = "/about"> <About/></Route>
         </Route>
     );
