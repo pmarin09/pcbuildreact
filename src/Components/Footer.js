@@ -22,7 +22,7 @@ return(
                         <li><Link to="/allbuilds" style={{textDecoration: "none"}}>All Builds</Link></li>
                         <li><Link to="/discussions" style={{textDecoration: "none"}}>Forum</Link></li>
                         <li><Link to="/" style={{textDecoration: "none"}}>Latest News</Link></li>
-                        <li><Link to="/" style={{textDecoration: "none"}}>About Us</Link></li>
+                        <li><Link to="/about" style={{textDecoration: "none"}}>About Us</Link></li>
                     </ul>
                 </Col>
                 <hr className="clearfix w-100 d-md-none" />
@@ -32,7 +32,7 @@ return(
                         <li><Link to="/privacy" style={{textDecoration: "none"}}>Privacy Policy</Link></li>
                         <li><Link to="/tos" style={{textDecoration: "none"}}>Terms of Service</Link></li>
                         <li><Link to="/" style={{textDecoration: "none"}}>Affiliate Disclosure</Link></li>
-                        <li><Link to="/" style={{textDecoration: "none"}}>Contact</Link></li>
+                        <li><Link to="/contact" style={{textDecoration: "none"}}>Contact</Link></li>
                     </ul>
                 </Col>
                 <hr className="clearfix w-100 d-md-none"></hr>

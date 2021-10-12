@@ -1,10 +1,13 @@
-import React from "react"
+import {React,useEffect} from "react"
 
 function Privacy() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      },[]);
     return(
         <div className = "content" style={{marginTop: "30px"}}>
         <div className = "policy">
-        <h1 style={{fontFamily:"Viga", fontSize:"28px", padding: "25px"}}>Privacy Policy</h1>
+        <h1 style={{fontFamily:"Viga", fontSize:"28px", padding: "25px", alignSelf: "center"}}>Privacy Policy</h1>
             <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
             <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.</p>
             <h2>Interpretation and Definitions</h2>

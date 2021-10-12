@@ -24,6 +24,8 @@ import ForgotPassword from "./auth/ForgotPassword"
 import ResetPassword from "./auth/ResetPassword"
 import Privacy from "./Policies/Privacy"
 import Tos from "./Policies/Tos"
+import Contact from "./Policies/Contact"
+import About from "./Policies/About"
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 
 
@@ -55,6 +57,8 @@ function Application() {
         <Route  path = "/editbuildpost/:buildpostId"> <EditBuildPost/></Route>
         <Route path = "/privacy"> <Privacy/></Route>
         <Route path = "/tos"> <Tos/></Route>
+        <Route path = "/contact"> <Contact/></Route>
+        <Route path = "/about"> <About/></Route>
       </Switch>
       
       
