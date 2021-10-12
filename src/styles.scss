@@ -3,6 +3,7 @@ html{
 }
 .body{
   font-family: 'Viga';
+  display:flex;
 }
 
 #root{
@@ -2306,6 +2307,22 @@ transform-origin: left;
   .post-comments-mobile{
     display:flex;
     flex-direction:column;
+  }
+  .policy {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    color: #f1ede8;
+    font-family: sans-serif;
+    background-color: #18212a;
+    max-width: 85%;
+    border-radius: 40px;
+    font-size: smaller;
+  }
+  .policy a{
+    overflow-wrap: anywhere;
   }
 }
 
