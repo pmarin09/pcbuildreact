@@ -9,7 +9,7 @@ import gpu from "../../icons/gpu.png"
 import cpucooler from "../../icons/cpucooler.png"
 import ram from "../../icons/ram.png"
 import hdd from "../../icons/hdd.png"
-import psu from "../../icons/pws.png"
+import psu from "../../icons/psu.png"
 import monitor from "../../icons/monitor.png"
 import keyboard from "../../icons/keyboard.png"
 import mouse from "../../icons/mouse.png"
@@ -35,7 +35,7 @@ function EditBuild (){
   const RAM = (parts.filter(part => part.part_type === "RAM")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const HD = (parts.filter(part => part.part_type === "HD")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Case = (parts.filter(part => part.part_type === "Case")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
-  const PSU = (parts.filter(part => part.part_type === "PWS")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
+  const PSU = (parts.filter(part => part.part_type === "PSU")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Monitor = (parts.filter(part => part.part_type === "Monitor")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Keyboard = (parts.filter(part => part.part_type === "Keyboard")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
   const Mouse = (parts.filter(part => part.part_type === "Mouse")).map(a=>{return {value: a.id,label: <div><td style={{width: "355px",fontSize:"13px",textAlign:"center",marginRight:"5px"}}>{a.description}</td><td style={{width: "280px"}}><img src ={a.get_imgurl} style={{height: "80px", borderRadius:"5px", marginBottom:"10px"}}/></td></div>, description: a.description}})
@@ -50,7 +50,7 @@ function EditBuild (){
     HD: HD,
     ExtraHD: HD,
     Case: Case,
-    PWS: PSU,
+    PSU: PSU,
     Monitor: Monitor,
     ExtraMonitor: Monitor,
     Keyboard: Keyboard,
@@ -68,7 +68,7 @@ function EditBuild (){
     HD: hdd,
     ExtraHD: hdd,
     Case: pccase,
-    PWS: psu,
+    PSU: psu,
     Monitor: monitor,
     ExtraMonitor: monitor,
     Keyboard: keyboard,
@@ -86,7 +86,7 @@ function EditBuild (){
     "HD",
     "ExtraHD",
     "Case",
-    "PWS",
+    "PSU",
     "Monitor",
     "ExtraMonitor",
     "Keyboard",
