@@ -71,7 +71,7 @@ function BuildDetail(img) {
            <article className="media">
                <div className="media-left">
                <figure className="image is-48x48">
-               {filteredPost.user.attachment_url ? <img src = {`${fpsbuildsurl}/${filteredPost.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredPost.user.email}  className = "discussion-avatar"/>}
+               {filteredPost.user.attachment_url ? <img src = {`${fpsbuildsurl}/${filteredPost.user.attachment_url}`} className="discussion-avatar" /> : <Gravatar email={filteredPost.user.email} className = "discussion-avatar" default="robohash"/>}
                </figure>
                </div>
               <div className="media-content" id= "post-content">
@@ -110,7 +110,9 @@ function BuildDetail(img) {
               </div>
             </article>
           </div>
+          
         ))
+        
     function pcbuildTotalCost(){
     return Object.values(thisBuild.pcbuild_parts.map(pcbuildpart => pcbuildpart.price)).reduce((acc,price) => {return  acc + price},0)
                           }

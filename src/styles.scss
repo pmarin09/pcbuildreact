@@ -1733,7 +1733,8 @@ margin-bottom: 10px;
   font-size: 30px;
   padding-bottom: 10px;
   text-align: center;
-  margin-left: 260px;
+  margin:auto;
+  display:flex;
   border-radius: 10px;
   margin-top: 20px;
   background-color: #252a33;
@@ -2434,6 +2435,7 @@ transform-origin: left;
     text-align: center;
     border-radius: 15px;
     margin: auto;
+    display:flex;
   }
 
   .edit-build-icon{
