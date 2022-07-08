@@ -1,5 +1,4 @@
 import React, { useState,useContext} from "react";
-import axios from "axios";
 import { Link, useHistory} from "react-router-dom";
 import {Context} from "../../Context"
 import mail from "../../icons/mail.png"

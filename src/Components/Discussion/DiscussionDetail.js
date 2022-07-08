@@ -212,7 +212,7 @@ function DiscussionDetail() {
                                   name="content"
                                   className="description"
                                   value= {message}
-                                  onChange={e => SetMessage(e.target.value)}
+                                  onChange={e => SetMessage(e.target.value)}  
                                   required
                                 />
                                 <i className="far fa-grin"

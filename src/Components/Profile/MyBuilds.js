@@ -14,7 +14,6 @@ useEffect(()=>{
     fetch(`${fpsbuildsurl}`+ "/mybuilds/ "+ userId + ".json")
     .then (res => res.json())
     .then (data => setMyBuilds(data))
-    console.log(myBuilds)
   },[])
 
 return (
