@@ -106,10 +106,15 @@ import { useHistory } from 'react-router-dom';
   const [allBuilds, setAllBuilds] = useState([])
   const [favoriteBuilds, setFavoriteBuilds] = useState([])
     useEffect(()=>{
+      try {
         fetch(`${fpsbuildsurl}/pcbuilds.json`)
         .then (res => res.json())
         .then (data => setAllBuilds(data))
         console.log(allBuilds)
+      } catch (error) {
+        console.log(error)
+      }
+        
     },[])
   const [forums, setForums]=useState([])
   const forumsUrl = `${fpsbuildsurl}/forums.json`
