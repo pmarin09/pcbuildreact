@@ -62,7 +62,7 @@ function Header(){
     setEmail("")
     setPassword("")
 }
-console.log(token)
+console.log(user)
   function toggleNavMenu() {
     const x = document.getElementById("pc-nav");
     x.classList.toggle("responsive");

@@ -194,7 +194,7 @@ return (
           secondaryColor = "grey"
           height={250}
           width={250}
-          timeout={2000} //3 secs
+          timeout={4000} //4 secs
         /> 
       </div>
     }

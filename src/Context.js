@@ -236,9 +236,10 @@ import { useHistory } from 'react-router-dom';
         console.log(user)
       })
       setLoggedInStatus("LOGGED_IN")
+      console.log("Logged In")
     }else if(!token){
     setLoggedInStatus("NOT_LOGGED_IN")
-    console.log(user)
+    console.log("Not Logged In")
   }}, [])
   const handleLogin = (user) => {
     setUser(user)

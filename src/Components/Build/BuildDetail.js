@@ -154,6 +154,7 @@ function BuildDetail(img) {
    // Change page
    const paginate = pageNumber => setCurrentPage(pageNumber);
 
+   console.log(thisBuild)
 
    let emojiPicker;
    if (emojiPickerState) {
